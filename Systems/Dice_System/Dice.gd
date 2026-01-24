@@ -40,13 +40,6 @@ func _ready() -> void:
 
 func use():
 	
-	for x in Global.grid.all_cells:
-		if x.occupant == null:
-			continue
-		
-		if x.occupant.slot_value == current_face.pips:
-			x.occupant.damage()
-	
 	used_this_turn = true
 	grey_out = true
 

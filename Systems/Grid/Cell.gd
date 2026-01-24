@@ -5,7 +5,7 @@ class_name Cell
 @onready var cell_color : ColorRect = $Cell_Color
 @onready var cell_area: Area2D = $Cell_Area
 
-var occupant : Card = null
+var occupant : Unit = null
 var cell_vector: Vector2i   # Position in grid coordinates (x,y)
 
 func _ready() -> void:
@@ -13,45 +13,45 @@ func _ready() -> void:
 	cell_area.connect("mouse_exited", _on_mouse_exited)
 
 
-func spawn_card(card : Card):
-	
-	var card_path : PackedScene = preload("res://Systems/Card_System/Card.tscn")
-	var new_card = card_path.instantiate()
-	
-	#if name_pick == "":
-		#name_pick = Cards.card_data_dictionary.keys().pick_random()
-	
-	#print ("name pick for new card is", name_pick)
-	#new_card.card_name = name_pick
-	Global.world.card_layer.add_child(new_card)
-	await fill_with_card(new_card)
+func spawn_unit(new_unit : Unit):
+
+	Global.world.unit_layer.add_child(new_unit)
+	await fill_with_unit(new_unit)
 
 func clear_cell():
 	
 	occupant = null
 
-func fill_with_card(card : Card):
-	occupant = card
-	card.current_cell = self
-	card.global_position = global_position
+func fill_with_unit(unit : Unit):
+	occupant = unit
+	unit.current_cell = self
+	unit.global_position = global_position
 
-func insert_dice(dice : Dice):
+func move_hero(dice : Dice):
 	
-	print ("cell received dice")
-	var adjacent_cells = Global.grid.get_adjacent_cells(self)
-	for cell in adjacent_cells:
-		if not cell.is_empty():
-			cell.occupant.apply_value(dice.dice_color,dice.current_face.pips)
+	Global.hero_unit.current_cell.clear_cell()
+	fill_with_unit(Global.hero_unit)
 
 func _on_mouse_entered():
 	
 	print("cell hovered, occupant is ", occupant)
 	InputManager.hovered_cell = self
 
+	if not InputManager.dragging_dice == null:
+		if not occupant == null:
+			if occupant is Enemy:
+				if not occupant.highlight:
+					occupant.toggle_highlight()
+
 func _on_mouse_exited():
+	
 	if InputManager.hovered_cell == self:
 		InputManager.hovered_cell = null
-
+	
+	if not occupant == null:
+		if occupant.highlight:
+			occupant.toggle_highlight()
+				
 func is_empty() -> bool:
 	
 	var is_empty : bool

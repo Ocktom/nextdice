@@ -2,8 +2,8 @@ extends Node
 
 var data = {
   "Generator": {
-	"card_name": "Generator",
-	"card_type": "APPLIANCE",
+	"unit_name": "Generator",
+	"unit_type": "APPLIANCE",
 	"base_value": 5,
 	"slot_set": "",
 	"destroy_effect_1": "",

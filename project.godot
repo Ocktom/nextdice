@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 Global="*res://Scripts/Autoloads/Global.gd"
 Enums="*res://Scripts/Autoloads/Enums.gd"
 InputManager="*res://Scripts/Autoloads/InputManager.gd"
-Cards="*res://Scripts/card_manager.gd"
+Units="*res://Scripts/unit_manager.gd"
 
 [display]
 

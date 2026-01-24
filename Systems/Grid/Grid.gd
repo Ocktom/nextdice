@@ -3,7 +3,7 @@ extends Node2D
 const GRID_WIDTH = 4
 const GRID_HEIGHT = 4
 const CELL_SIZE = Vector2(210, 210)
-var CELL_SPACING = Vector2(15, 15)
+var CELL_SPACING = Vector2(6, 6)
 var CellScene = preload("res://Systems/Grid/Cell.tscn")
 
 @onready var units_node: Node2D = $Units
@@ -14,12 +14,12 @@ var all_cells: Array[Cell]
 
 func _ready():
 	
-	var start_pos = grid_marker.position
-	await create_grid(start_pos)
 	Global.grid = self
+	await create_grid()
 
-func create_grid(start_pos: Vector2):
-
+func create_grid():
+	var start_pos = grid_marker.position
+	
 	grid.clear()
 	all_cells.clear()
 
