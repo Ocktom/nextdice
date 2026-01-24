@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4jl4tqsmhoi"]
+
+[ext_resource type="Script" uid="uid://dh8w4r6sh3hcd" path="res://Systems/Float_Text/float_text.gd" id="1_jmaov"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jmaov"]
+font_size = 56
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_offset = Vector2(3, 3)
+
+[node name="FloatText" type="Node2D"]
+script = ExtResource("1_jmaov")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -38.5
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+label_settings = SubResource("LabelSettings_jmaov")

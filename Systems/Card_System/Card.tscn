@@ -1,0 +1,118 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxtiwr8dj6nji"]
+
+[ext_resource type="Script" uid="uid://bjndjqq3i8qmi" path="res://Systems/Card_System/Card.gd" id="1_88r3e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jr58p"]
+size = Vector2(210, 210)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1xpod"]
+font_size = 21
+
+[sub_resource type="LabelSettings" id="LabelSettings_4im1a"]
+font_size = 31
+font_color = Color(1, 0.13333334, 0.27058825, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_erawd"]
+font_size = 31
+font_color = Color(0.17961243, 0.5402363, 0.99999994, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_evnpq"]
+font_size = 31
+font_color = Color(0, 0.6348537, 0.60967207, 1)
+
+[node name="Card_Node" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_88r3e")
+
+[node name="Border_texture_rect" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.5
+offset_top = -105.0
+offset_right = 104.5
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.79503334, 0.3311633, 0.6643504, 0.41960785)
+offset_left = -159.0
+offset_top = -165.0
+offset_right = 166.0
+offset_bottom = 160.0
+
+[node name="border_rect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -105.0
+offset_right = 105.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="card_rect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -101.0
+offset_right = 98.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Card_Area" type="Area2D" parent="."]
+position = Vector2(-22, -23)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Card_Area"]
+position = Vector2(22, 23)
+shape = SubResource("RectangleShape2D_jr58p")
+
+[node name="Card_Name_Label" type="Label" parent="."]
+offset_left = -87.0
+offset_top = -92.0
+offset_right = 36.0
+offset_bottom = -62.0
+text = "CARD NAME"
+label_settings = SubResource("LabelSettings_1xpod")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 53.0
+offset_top = -95.0
+offset_right = 93.0
+offset_bottom = -51.0
+
+[node name="Card_red_value" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "12"
+label_settings = SubResource("LabelSettings_4im1a")
+horizontal_alignment = 1
+
+[node name="Card_blue_value2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "12"
+label_settings = SubResource("LabelSettings_erawd")
+horizontal_alignment = 1
+
+[node name="Card_blue_value3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "5"
+label_settings = SubResource("LabelSettings_evnpq")
+horizontal_alignment = 1

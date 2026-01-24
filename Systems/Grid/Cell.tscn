@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://chix8pomfhr04"]
+
+[ext_resource type="Script" uid="uid://de8jygopjlgu0" path="res://Systems/Grid/Cell.gd" id="1_hyvek"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m1m28"]
+font_size = 61
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1m28"]
+size = Vector2(203, 203)
+
+[node name="GridCell" type="Node2D"]
+script = ExtResource("1_hyvek")
+
+[node name="Cell_Color" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.5183813, 0.42700657, 0.5606931, 1)
+
+[node name="Value_Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -151.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_m1m28")
+
+[node name="Cell_Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cell_Area"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_m1m28")

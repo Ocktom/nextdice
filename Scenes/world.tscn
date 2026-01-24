@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgc5u58x43q3q"]
+
+[ext_resource type="Script" uid="uid://go0f4eo80y6" path="res://Scenes/world.gd" id="1_8j60k"]
+[ext_resource type="PackedScene" uid="uid://bwe77gb3gfi0o" path="res://Systems/Audio_Bus/Audio.tscn" id="1_a02cp"]
+[ext_resource type="PackedScene" uid="uid://cx1ojiejwf35o" path="res://Systems/Dice_System/Dice.tscn" id="2_go701"]
+[ext_resource type="PackedScene" uid="uid://d013w2ydl1xat" path="res://Systems/Grid/Grid.tscn" id="3_5a7ea"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_8j60k")
+
+[node name="Grid" parent="." instance=ExtResource("3_5a7ea")]
+position = Vector2(606, 205)
+
+[node name="Card_Layer" type="Node2D" parent="."]
+
+[node name="DiceLayer" type="Node2D" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DiceLayer"]
+offset_left = 116.0
+offset_top = 99.0
+offset_right = 156.0
+offset_bottom = 307.0
+theme_override_constants/separation = 104
+
+[node name="Dice" parent="DiceLayer/VBoxContainer" instance=ExtResource("2_go701")]
+layout_mode = 2
+
+[node name="Dice2" parent="DiceLayer/VBoxContainer" instance=ExtResource("2_go701")]
+layout_mode = 2
+
+[node name="Dice3" parent="DiceLayer/VBoxContainer" instance=ExtResource("2_go701")]
+layout_mode = 2
+
+[node name="Audio" parent="." instance=ExtResource("1_a02cp")]
