@@ -54,20 +54,28 @@ func _input(event):
 
 
 		if event.is_action_released("space"):
-			var dice_used := 0
-			for x in Global.player_dice:
-				if x.used_this_turn: dice_used += 1
 			
-			if Global.player_dice.size() == dice_used:
-				Global.main_scene.end_turn()
+			print ("space pressed")
+			
+			var used_count := 0
+			for x in Global.player_dice:
+				if x.used_this_turn: used_count += 1
+			
+			if Global.player_dice.size() == used_count:
+				await Global.world.end_turn()
 				return
 			
-			await Global.main_scene.reroll()
+			await Global.world.reroll()
 
 
 		if event.is_action_released("right_mouse"):
 			if hovered_dice is Dice:
-				await hovered_dice.return_dice()
+				
+				if hovered_dice.used_this_turn:
+					Global.float_text("already used this turn",hovered_dice.global_position,Color.WHITE)
+					return
+				
+				hovered_dice.use()
 
 
 		elif event.is_action_released("left_mouse"):
@@ -84,8 +92,6 @@ func _input(event):
 			if dragging_dice != null:
 				dragging_dice.face_node.global_position = dragging_dice.global_position
 				dragging_dice = null
-
-
 		
 		elif event.is_action_pressed("left_mouse"):
 

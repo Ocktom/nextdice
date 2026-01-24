@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxtiwr8dj6nji"]
+[gd_scene load_steps=6 format=3 uid="uid://bxtiwr8dj6nji"]
 
 [ext_resource type="Script" uid="uid://bjndjqq3i8qmi" path="res://Systems/Card_System/Card.gd" id="1_88r3e"]
 
@@ -13,12 +13,7 @@ font_size = 31
 font_color = Color(1, 0.13333334, 0.27058825, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_erawd"]
-font_size = 31
-font_color = Color(0.17961243, 0.5402363, 0.99999994, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_evnpq"]
-font_size = 31
-font_color = Color(0, 0.6348537, 0.60967207, 1)
+font_size = 66
 
 [node name="Card_Node" type="Node2D"]
 texture_filter = 1
@@ -45,22 +40,6 @@ offset_top = -165.0
 offset_right = 166.0
 offset_bottom = 160.0
 
-[node name="border_rect" type="ColorRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -105.0
-offset_top = -105.0
-offset_right = 105.0
-offset_bottom = 105.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-
 [node name="card_rect" type="ColorRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -77,6 +56,24 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="border_rect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -105.0
+offset_right = 105.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0.67673594, 0.53392845, 0.23370892, 1)
 
 [node name="Card_Area" type="Area2D" parent="."]
 position = Vector2(-22, -23)
@@ -99,20 +96,23 @@ offset_top = -95.0
 offset_right = 93.0
 offset_bottom = -51.0
 
-[node name="Card_red_value" type="Label" parent="VBoxContainer"]
+[node name="HP_Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "12"
 label_settings = SubResource("LabelSettings_4im1a")
 horizontal_alignment = 1
 
-[node name="Card_blue_value2" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "12"
+[node name="Slot_Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -45.5
+offset_right = 20.0
+offset_bottom = 45.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "6"
 label_settings = SubResource("LabelSettings_erawd")
-horizontal_alignment = 1
-
-[node name="Card_blue_value3" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "5"
-label_settings = SubResource("LabelSettings_evnpq")
-horizontal_alignment = 1

@@ -21,10 +21,6 @@ var current_face : Face
 
 func _ready() -> void:
 	
-	print ("new dice ready")
-	
-	dice_color = Enums.DiceColor.values().pick_random()
-	
 	print ("dice color set to ", dice_color)
 	
 	Global.player_dice.append(self)
@@ -41,7 +37,18 @@ func _ready() -> void:
 	
 	print ("dice faces are", faces)
 	roll()
-	setup_visuals()
+
+func use():
+	
+	for x in Global.grid.all_cells:
+		if x.occupant == null:
+			continue
+		
+		if x.occupant.slot_value == current_face.pips:
+			x.occupant.damage()
+	
+	used_this_turn = true
+	grey_out = true
 
 func roll():
 	
@@ -51,22 +58,14 @@ func roll():
 	await update_visuals()
 
 func setup_visuals():
-	update_visuals()
-	
-	var real_color : Color
-	match dice_color:
-		Enums.DiceColor.RED: real_color = Color.RED
-		Enums.DiceColor.BLUE: real_color = Color.BLUE
-		Enums.DiceColor.GREEN: real_color = Color.GREEN
-	
-	dice_color_rect.color = real_color
-	
+	pass
 	
 func update_visuals():
 	face_node.face_sprite.frame = current_face.pips-1
 		
 func highlight():
 	face_node.modulate = Color(1.0, 0.663, 1.0)
+
 
 func return_dice():
 	
@@ -85,9 +84,12 @@ func destroy():
 func _on_mouse_entered():
 	
 	InputManager.hovered_dice = self
+	Global.world.hover_dice(self)
+	
 	#Global.animate(self,Enums.Anim.POP)
 	#Global.animate(self,Enums.Anim.FLASH,Color.GREEN)
 	
 func _on_mouse_exited():
 	if InputManager.hovered_dice == self:
 		InputManager.hovered_dice = null
+	Global.world.unhover_dice()

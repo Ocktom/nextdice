@@ -6,6 +6,8 @@ var audio_node : Node
 var grid : Node
 var world: Node
 
+var player_ui: Control
+
 var player_dice : Array
 
 var all_cards : Array [Card]
@@ -13,11 +15,16 @@ var game_speed := 1
 
 var starting_enemy_count := 4
 
+var player_hp := 10
+var rolls := 3
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
+	game_state = Enums.GameState.PLAYER_TURN
+	
 	await timer(.01)
-	for x in starting_enemy_count:
+	for x in Global.grid.get_empty_cells().size():
 		var card_path : PackedScene = preload("res://Systems/Card_System/Card.tscn")
 		var cell_pick = Global.grid.get_empty_cells().pick_random()
 		var card_inst = card_path.instantiate()

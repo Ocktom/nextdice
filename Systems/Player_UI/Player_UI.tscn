@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgc3x1l871e0"]
+
+[ext_resource type="Script" uid="uid://nwyhk811gfhs" path="res://Systems/Player_UI/Player_UI.gd" id="1_7fohd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8j60k"]
+font_size = 111
+
+[sub_resource type="LabelSettings" id="LabelSettings_7fohd"]
+font_size = 91
+
+[node name="Player_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_7fohd")
+
+[node name="HP_Label" type="Label" parent="."]
+layout_mode = 1
+offset_right = 409.1579
+offset_bottom = 184.0
+text = "HP: 10"
+label_settings = SubResource("LabelSettings_8j60k")
+
+[node name="Rolls_Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -125.0
+offset_right = 379.0
+grow_vertical = 0
+text = "ROLLS: 0"
+label_settings = SubResource("LabelSettings_7fohd")

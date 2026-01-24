@@ -5,11 +5,10 @@ var current_cell: Cell
 var card_value : int = 10
 var card_name : String = "Card"
 
-var red_value := 12
-var blue_value := 10
-var green_value := 8
+var highlight := false
+var slot_value : int
 
-var heat : int = 0
+var hp := 12
 
 var sprite_path : String
 
@@ -32,17 +31,18 @@ var damage_amount := 0
 
 @onready var card_area : Area2D = $Card_Area
 
-@onready var red_value_label : Label = $VBoxContainer/Card_red_value
-@onready var blue_value_label : Label = $VBoxContainer/Card_blue_value2
-@onready var green_value_label : Label = $VBoxContainer/Card_blue_value3
-
-
-@onready var card_color_rect : ColorRect = $card_rect
-@onready var card_border_rect : ColorRect = $border_rect
 @onready var card_name_label : Label = $Card_Name_Label
+@onready var hp_label : Label = $VBoxContainer/HP_Label
+@onready var slot_label: Label = $Slot_Label
 
+@onready var card_rect: ColorRect = $card_rect
+@onready var border_rect: ColorRect = $border_rect
 
 func _ready():
+	
+	hp = randi_range(1,3)
+	
+	slot_value = randi_range(1,7)
 	
 	Global.all_cards.append(self)
 	card_value = randi_range(5,15)
@@ -68,20 +68,12 @@ func discard():
 	
 	queue_free()
 	
-func apply_value(color : Enums.DiceColor, amount : int):
+func activate_slot(color : Enums.DiceColor, amount : int):
 	
 	var color_label : Label
 	
-	match color:
-		Enums.DiceColor.RED:
-			color_label = red_value_label
-			red_value = max(0,red_value-amount)
-		Enums.DiceColor.BLUE:
-			color_label = blue_value_label
-			blue_value = max(0,blue_value-amount)
-		Enums.DiceColor.GREEN:
-			color_label = green_value_label
-			green_value = max(0,green_value-amount)
+	color_label = hp_label
+	hp = max(0,hp-amount)
 	
 	Global.animate(color_label,Enums.Anim.FLASH,Color.WHITE)
 	Global.animate(color_label,Enums.Anim.POP)
@@ -98,14 +90,17 @@ func damage():
 	print ("was damaged")
 	Global.animate(self,Enums.Anim.SHAKE)
 	await Global.animate(self,Enums.Anim.FLASH,Color.RED)
-	visible = false
-	await Global.float_text("BREAK!",global_position,Color.RED)
+	await Global.float_text("Damage",global_position,Color.RED)
 	await Global.timer(.1)
 	
-	Global.all_cards.erase(self)
-	await current_cell.clear_cell()
-	queue_free()
-
+	hp = max(0,hp-1)
+	
+	if hp < 1:
+		
+		destroy()
+	
+	update_visuals()
+	
 func assign_to_cell(cell: Cell) -> void:
 	
 	if current_cell != null:
@@ -120,9 +115,8 @@ func check_spawn_effects():
 	pass
 	
 func update_visuals():
-	red_value_label.text = str(red_value)
-	blue_value_label.text = str(blue_value)
-	green_value_label.text = str(green_value)
+	hp_label.text = str(hp)
+	slot_label.text = str(slot_value)
 	
 func get_grid_position() -> Vector2i:
 	
@@ -136,3 +130,11 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	if InputManager.hovered_card == self:
 		InputManager.hovered_card = null
+	
+func toggle_highlight():
+	if highlight:
+		highlight = false
+		border_rect.visible = false
+	else:
+		highlight = true
+		border_rect.visible = true

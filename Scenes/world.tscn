@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgc5u58x43q3q"]
+[gd_scene load_steps=6 format=3 uid="uid://bgc5u58x43q3q"]
 
 [ext_resource type="Script" uid="uid://go0f4eo80y6" path="res://Scenes/world.gd" id="1_8j60k"]
 [ext_resource type="PackedScene" uid="uid://bwe77gb3gfi0o" path="res://Systems/Audio_Bus/Audio.tscn" id="1_a02cp"]
 [ext_resource type="PackedScene" uid="uid://cx1ojiejwf35o" path="res://Systems/Dice_System/Dice.tscn" id="2_go701"]
 [ext_resource type="PackedScene" uid="uid://d013w2ydl1xat" path="res://Systems/Grid/Grid.tscn" id="3_5a7ea"]
+[ext_resource type="PackedScene" uid="uid://bgc3x1l871e0" path="res://Systems/Player_UI/Player_UI.tscn" id="5_fo5ed"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_8j60k")
@@ -32,3 +33,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Audio" parent="." instance=ExtResource("1_a02cp")]
+
+[node name="Player_UI" parent="." instance=ExtResource("5_fo5ed")]
+offset_left = 101.0
+offset_top = 810.0
+offset_right = 101.0
+offset_bottom = 810.0

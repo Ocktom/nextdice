@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyrqj22i7s5jg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4im1a"]
+font_size = 31
+font_color = Color(1, 0.13333334, 0.27058825, 1)
+
+[node name="VBoxContainer" type="VBoxContainer"]
+offset_left = 53.0
+offset_top = -95.0
+offset_right = 93.0
+offset_bottom = -51.0
+
+[node name="HP_Label" type="Label" parent="."]
+layout_mode = 2
+text = "12"
+label_settings = SubResource("LabelSettings_4im1a")
+horizontal_alignment = 1
