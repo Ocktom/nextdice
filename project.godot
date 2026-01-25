@@ -22,6 +22,7 @@ InputManager="*res://Scripts/Autoloads/InputManager.gd"
 UnitManager="*res://Scripts/unit_manager.gd"
 ActionManager="*res://Scripts/Autoloads/action_manager.gd"
 SpellManager="*res://Scripts/Autoloads/spell_manager.gd"
+ItemManager="*res://Systems/Item System/item_manager.gd"
 
 [display]
 

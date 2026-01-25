@@ -38,24 +38,17 @@ func move_hero(dice : Dice):
 
 func _on_mouse_entered():
 	
-	print("cell hovered, occupant is ", occupant)
-	InputManager.hovered_cell = self
-
-	if not InputManager.dragging_dice == null:
-		if not occupant == null:
-			if occupant is Enemy:
-				if not occupant.highlight:
-					occupant.toggle_highlight()
+	if Global.game_state == Enums.GameState.PLAYER_TURN:
+		print("cell hovered, occupant is ", occupant)
+		InputManager.hovered_cell = self
 
 func _on_mouse_exited():
-	
-	if InputManager.hovered_cell == self:
-		InputManager.hovered_cell = null
-	
-	if not occupant == null:
-		if occupant.highlight:
-			occupant.toggle_highlight()
-				
+	if Global.game_state == Enums.GameState.PLAYER_TURN:
+		
+		InputManager.hovered_cell = self
+		if InputManager.hovered_cell == self:
+			InputManager.hovered_cell = null
+			
 func is_empty() -> bool:
 	
 	var is_empty : bool
@@ -64,8 +57,8 @@ func is_empty() -> bool:
 	
 	return is_empty
 
-func is_adjacent(cell : Cell) -> bool:
-	var adjacents = Global.grid.get_adjacent_cells(self)
+func is_adjacent(cell : Cell, include_diagonal := false) -> bool:
+	var adjacents = Global.grid.get_adjacent_cells(self, include_diagonal)
 	if adjacents.has(cell):
 		return true
 	else:

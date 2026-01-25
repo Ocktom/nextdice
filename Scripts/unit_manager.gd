@@ -35,17 +35,31 @@ func spawn_new_enemy(name_string: String, cell : Cell):
 	var data = enemy_data_dictionary[name_string]
 	unit.unit_name = name_string
 	unit.hp = data["hp"]
+	unit.max_hp = unit.hp
 	unit.atk = data["atk"]
 	unit.atk_range = data["atk_range"]
 	unit.movement = data["movement"]
+	unit.range_type = data["range_type"]
+	
+	print ("for ", unit.unit_name, " data[action_1] is ", data["action_1"])
+	
+	if data["action_1"] == "":
+		unit.action_1 = Enums.EnemyAction.NONE
+	else:
+		print ("setting unit.action_1 in ", unit.unit_name, " for ", data["action_1"])
+		unit.action_1 = Enums.EnemyAction[data["action_1"]]
+		print ("it is now ", unit.action_1)
+		
+	if data["action_2"] == "":
+		unit.action_2 = Enums.EnemyAction.NONE
+	else:
+		unit.action_2 = Enums.EnemyAction[data["action_2"]]
 	
 	#APPLY ROUND DIFFICULTY STATS
 	
 	if Global.round_number > 1: 
 		unit.atk += Global.round_number
 		unit.hp += Global.round_number * 2
-	
-	
 	
 	var sprite_path = str("res://Art/Enemy_Sprites/", name_string, ".png")
 	#SPAWN PREPARED UNIT INTO CELL

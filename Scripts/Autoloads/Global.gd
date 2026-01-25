@@ -17,6 +17,8 @@ var game_speed := 1
 
 var starting_enemy_count := 6
 
+var relics_owned : Array[Item]
+
 var mana := 0
 var max_mana := 10
 var max_hp := 10
@@ -43,7 +45,7 @@ func float_text(message: String, position: Vector2, color := Color.WHITE):
 	floating_text.show_text(message, color)
 	await timer(.2)
 
-func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE):
+func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE, target_node: Node = null):
 	
 	print ("animating...")
 	
@@ -97,3 +99,38 @@ func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE):
 			var squish_scale = original_scale * 0.85
 			tween.tween_property(node, "scale", squish_scale, 0.1)
 			tween.tween_property(self, "scale", original_scale, 0.15)
+		
+		Enums.Anim.DART:
+
+			if target_node == null:
+				return
+
+			var original = node.position
+			var distance = 16
+			var duration_out = 0.06
+			var duration_back = 0.08
+
+			# Direction in global space
+			var dir = (target_node.global_position - node.global_position).normalized()
+
+			# Convert to local-space offset
+			var offset = dir * distance
+
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.set_ease(Tween.EASE_OUT)
+
+			tween.tween_property(
+				node,
+				"position",
+				original + offset,
+				duration_out
+			)
+
+			tween.set_ease(Tween.EASE_IN)
+
+			tween.tween_property(
+				node,
+				"position",
+				original,
+				duration_back
+			)

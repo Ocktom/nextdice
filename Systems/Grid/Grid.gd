@@ -60,25 +60,30 @@ func get_all_enemies() -> Array[Enemy]:
 	print ("returning all enemies from grid...", enemies)
 	return enemies
 	
-func get_adjacent_cells(cell: Cell, diagnol := false) -> Array[Cell]:
-
-	var adjacent_cells: Array[Cell] = []
+func get_adjacent_cells(cell: Cell, include_diagonal : bool = false) -> Array[Cell]:
+	var adjacent_cells :Array[Cell] = []
 	var cell_pos = cell.cell_vector
 
 	var directions = [
-		Vector2i(0, -1),  # Up
-		Vector2i(0, 1),   # Down
-		Vector2i(-1, 0),  # Left
-		Vector2i(1, 0)    # Right
+		Vector2i(0, -1),	# Up
+		Vector2i(0, 1),		# Down
+		Vector2i(-1, 0),	# Left
+		Vector2i(1, 0)		# Right
 	]
+
+	if include_diagonal:
+		directions.append(Vector2i(-1, -1))
+		directions.append(Vector2i(1, -1))
+		directions.append(Vector2i(-1, 1))
+		directions.append(Vector2i(1, 1))
 
 	for d in directions:
 		var p = cell_pos + d
-
 		if is_in_bounds(p):
 			adjacent_cells.append(grid[p.x][p.y])
 
 	return adjacent_cells
+
 
 func get_row(cell: Cell) -> Array[Cell]:
 	var y = cell.cell_vector.y

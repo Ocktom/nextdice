@@ -4,6 +4,8 @@ extends Node2D
 @onready var spell_ui: Node2D = $Spell_UI
 @onready var player_ui: Control = $Player_UI
 @onready var sum_label: Label = $DiceLayer/Sum_label
+@onready var shop_screen: Node2D = $Shop_Screen
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -140,7 +142,13 @@ func victory():
 	Global.game_state = Enums.GameState.ROUND_END
 	print ("ROUND OVER, VICTORY!!!")
 	Global.round_number += 1
-	new_round()
+	
+	enter_shop()
+		
+func enter_shop():
+	Global.game_state = Enums.GameState.SHOP
+	shop_screen.visible = true
+	shop_screen.get_new_items()
 
 func hover_dice(dice : Dice):
 	
@@ -163,7 +171,6 @@ func kill_all_enemies():
 		if x.occupant != null:
 			if x.occupant is Enemy:
 				x.occupant.destroy()
-	victory_check()
 
 func update_sum():
 	var new_sum = 0

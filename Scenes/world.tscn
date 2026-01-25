@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgc5u58x43q3q"]
+[gd_scene load_steps=12 format=3 uid="uid://bgc5u58x43q3q"]
 
 [ext_resource type="Script" uid="uid://go0f4eo80y6" path="res://Scenes/world.gd" id="1_8j60k"]
 [ext_resource type="PackedScene" uid="uid://bwe77gb3gfi0o" path="res://Systems/Audio_Bus/Audio.tscn" id="1_a02cp"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://c7vn0i6aaeqys" path="res://Systems/Spell System/spell_slots.gd" id="3_o06y3"]
 [ext_resource type="PackedScene" uid="uid://bgc3x1l871e0" path="res://Systems/Player_UI/Player_UI.tscn" id="5_fo5ed"]
 [ext_resource type="PackedScene" uid="uid://dmb5i6rmsrgme" path="res://Systems/Spell System/Spell_Slot.tscn" id="6_5ukr8"]
+[ext_resource type="PackedScene" uid="uid://dr1kdty3xqiul" path="res://Systems/Item System/Shop_Screen.tscn" id="8_k7acu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_o06y3"]
 font_size = 96
@@ -98,3 +99,6 @@ offset_left = 101.0
 offset_top = 810.0
 offset_right = 101.0
 offset_bottom = 810.0
+
+[node name="Shop_Screen" parent="." instance=ExtResource("8_k7acu")]
+visible = false

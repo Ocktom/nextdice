@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr1kdty3xqiul"]
+
+[ext_resource type="Script" uid="uid://cnr5h0sragvqx" path="res://Scenes/Shop_Screen.gd" id="1_cb6ln"]
+[ext_resource type="PackedScene" uid="uid://g3dp16v3wnq0" path="res://Systems/Item System/Item_Slot.tscn" id="1_p5thw"]
+
+[node name="Shop_Screen" type="Node2D"]
+script = ExtResource("1_cb6ln")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_top = -6.0
+offset_right = 1940.0
+offset_bottom = 1091.0
+color = Color(0.13319641, 0.13319641, 0.13319638, 1)
+
+[node name="Slots_Node" type="Node2D" parent="."]
+position = Vector2(721, 518)
+
+[node name="Shop_Slot" parent="Slots_Node" instance=ExtResource("1_p5thw")]
+
+[node name="Shop_Slot2" parent="Slots_Node" instance=ExtResource("1_p5thw")]
+position = Vector2(234, 0)
+
+[node name="Shop_Slot3" parent="Slots_Node" instance=ExtResource("1_p5thw")]
+position = Vector2(470, 0)
+
+[node name="Item_Layer" type="Node2D" parent="."]

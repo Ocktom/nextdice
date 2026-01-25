@@ -6,6 +6,8 @@ var unit_name : String = "Unit"
 
 var highlight := false
 var sprite_path : String
+var range_type : Enums.RangeType
+
 
 var border_color : Color = Color.WHITE
 var normal_color : Color = Color.BLACK

@@ -3,6 +3,7 @@ extends Node
 var hovered_dice: Dice = null
 var hovered_cell : Cell = null
 var hovered_spell_slot : Spell_Slot = null
+var hovered_item_slot : Item_Slot = null
 
 var mana_area_hovered := false
 
@@ -95,7 +96,7 @@ func _input(event):
 				elif not hovered_cell == null:
 					if not hovered_cell.occupant == null:
 						if hovered_cell.occupant is Enemy:
-							if hovered_cell.is_adjacent(Global.hero_unit.current_cell):
+							if hovered_cell.is_adjacent(Global.hero_unit.current_cell, true):
 								print ("dice dropped on enemy")
 								dragging_dice.use()
 								hovered_cell.occupant.take_attack(dragging_dice.current_face.pips)
@@ -162,7 +163,14 @@ func _input(event):
 		if event.is_action_pressed("left_mouse"):
 			if hovered_cell != null:
 				cell_selected.emit(hovered_cell)
-
+	
+	if Global.game_state == Enums.GameState.SHOP:
+		if event.is_action_pressed("left_mouse"):
+			if hovered_item_slot != null:
+				if hovered_item_slot.occupant != null:
+					print ("PURCHASED ITEM IS ", hovered_item_slot.occupant)
+					hovered_item_slot.clear_slot()
+	
 #region spell selection controls
 
 
