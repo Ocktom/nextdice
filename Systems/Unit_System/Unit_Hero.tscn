@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://jgbr0k23t5ri"]
+[gd_scene load_steps=5 format=3 uid="uid://jgbr0k23t5ri"]
 
 [ext_resource type="Script" uid="uid://rus3e1v7bhtv" path="res://Systems/Unit_System/Unit_Hero.gd" id="1_a2152"]
+[ext_resource type="Texture2D" uid="uid://dou2oh6gaev1f" path="res://Art/Enemy_Sprites/Gnome.png" id="2_h5gbh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1xpod"]
 font_size = 21
@@ -26,14 +27,6 @@ offset_bottom = 105.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-modulate = Color(0.79503334, 0.3311633, 0.6643504, 0.41960785)
-offset_left = -159.0
-offset_top = -165.0
-offset_right = 166.0
-offset_bottom = 160.0
-
 [node name="Background_Rect" type="ColorRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -50,6 +43,13 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 color = Color(0.35735375, 0.54627967, 0.3398197, 1)
+
+[node name="Unit_Sprite" type="TextureRect" parent="."]
+offset_left = -93.0
+offset_top = -94.0
+offset_right = 95.0
+offset_bottom = 94.0
+texture = ExtResource("2_h5gbh")
 
 [node name="border_rect" type="ColorRect" parent="."]
 visible = false

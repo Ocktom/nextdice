@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bgc5u58x43q3q"]
+[gd_scene load_steps=11 format=3 uid="uid://bgc5u58x43q3q"]
 
 [ext_resource type="Script" uid="uid://go0f4eo80y6" path="res://Scenes/world.gd" id="1_8j60k"]
 [ext_resource type="PackedScene" uid="uid://bwe77gb3gfi0o" path="res://Systems/Audio_Bus/Audio.tscn" id="1_a02cp"]
@@ -8,20 +8,60 @@
 [ext_resource type="PackedScene" uid="uid://bgc3x1l871e0" path="res://Systems/Player_UI/Player_UI.tscn" id="5_fo5ed"]
 [ext_resource type="PackedScene" uid="uid://dmb5i6rmsrgme" path="res://Systems/Spell System/Spell_Slot.tscn" id="6_5ukr8"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_o06y3"]
+font_size = 96
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7acu"]
+size = Vector2(227.5, 223.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_k7acu"]
+font_size = 106
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_8j60k")
 
 [node name="Grid" parent="." instance=ExtResource("3_5a7ea")]
 position = Vector2(606, 205)
 
-[node name="Spell_Slots" type="Node2D" parent="."]
+[node name="Spell_UI" type="Node2D" parent="."]
 position = Vector2(1748, 653)
 script = ExtResource("3_o06y3")
 
-[node name="Spell_Slot" parent="Spell_Slots" instance=ExtResource("6_5ukr8")]
+[node name="Spell_Slots" type="Node2D" parent="Spell_UI"]
 
-[node name="Spell_Slot2" parent="Spell_Slots" instance=ExtResource("6_5ukr8")]
-position = Vector2(0, 238)
+[node name="Spell_Slot" parent="Spell_UI/Spell_Slots" instance=ExtResource("6_5ukr8")]
+position = Vector2(-95, -140)
+
+[node name="Spell_Slot2" parent="Spell_UI/Spell_Slots" instance=ExtResource("6_5ukr8")]
+position = Vector2(-95, -409)
+
+[node name="Spell_Slot3" parent="Spell_UI/Spell_Slots" instance=ExtResource("6_5ukr8")]
+position = Vector2(-95, 127)
+
+[node name="Mana" type="Node2D" parent="Spell_UI"]
+position = Vector2(-1280, -312)
+
+[node name="ColorRect" type="ColorRect" parent="Spell_UI/Mana"]
+offset_left = -362.0
+offset_top = 101.0
+offset_right = -137.0
+offset_bottom = 324.0
+mouse_filter = 2
+color = Color(0.17590174, 0.51103765, 0.72578615, 1)
+
+[node name="Mana_Label" type="Label" parent="Spell_UI/Mana"]
+offset_left = -298.0
+offset_top = 148.0
+offset_right = -188.0
+offset_bottom = 280.0
+text = "13"
+label_settings = SubResource("LabelSettings_o06y3")
+
+[node name="Mana_Area" type="Area2D" parent="Spell_UI/Mana"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spell_UI/Mana/Mana_Area"]
+position = Vector2(-249.75, 215.75)
+shape = SubResource("RectangleShape2D_k7acu")
 
 [node name="Unit_Layer" type="Node2D" parent="."]
 
@@ -42,6 +82,14 @@ layout_mode = 2
 
 [node name="Dice3" parent="DiceLayer/VBoxContainer" instance=ExtResource("2_go701")]
 layout_mode = 2
+
+[node name="Sum_label" type="Label" parent="DiceLayer"]
+offset_left = 222.0
+offset_top = 202.0
+offset_right = 343.0
+offset_bottom = 348.0
+text = "13"
+label_settings = SubResource("LabelSettings_k7acu")
 
 [node name="Audio" parent="." instance=ExtResource("1_a02cp")]
 

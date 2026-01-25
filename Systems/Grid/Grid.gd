@@ -46,9 +46,21 @@ func get_empty_cells(cell_pool : Array[Cell] = all_cells):
 	for x in cell_array:
 		if x.occupant == null:
 			empty_cells.append(x)
+			
+	print ("returning empty cells from grid...", empty_cells)
 	return empty_cells
 
-func get_adjacent_cells(cell: Cell) -> Array[Cell]:
+func get_all_enemies() -> Array[Enemy]:
+	var enemies : Array[Enemy]
+	for x in all_cells:
+		if x.occupant != null:
+			if x.occupant is Enemy:
+				enemies.append(x.occupant)
+	
+	print ("returning all enemies from grid...", enemies)
+	return enemies
+	
+func get_adjacent_cells(cell: Cell, diagnol := false) -> Array[Cell]:
 
 	var adjacent_cells: Array[Cell] = []
 	var cell_pos = cell.cell_vector

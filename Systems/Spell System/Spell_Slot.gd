@@ -10,11 +10,6 @@ func _ready() -> void:
 	slot_area.connect("mouse_entered", _on_mouse_entered)
 	slot_area.connect("mouse_exited", _on_mouse_exited)
 
-func spawn_unit(new_spell : Spell):
-
-	Global.world.unit_layer.add_child(new_spell)
-	await fill_with_spell(new_spell)
-
 func clear_cell():
 	
 	occupant = null

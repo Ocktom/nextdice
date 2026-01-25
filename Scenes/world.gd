@@ -1,8 +1,9 @@
 extends Node2D
 
 @onready var unit_layer : Node2D = $Unit_Layer
-@onready var spell_slots: Node2D = $Spell_Slots
+@onready var spell_ui: Node2D = $Spell_UI
 @onready var player_ui: Control = $Player_UI
+@onready var sum_label: Label = $DiceLayer/Sum_label
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,9 +11,20 @@ func _ready() -> void:
 	Global.world = self
 	Global.player_ui = $Player_UI
 	Global.player_ui.update()
-	call_deferred("new_round")
+	call_deferred("game_start")
+
+func game_start():
+	await spawn_hero()
+	await spawn_spells()
+	await new_round()
 
 func new_round():
+	
+	print ("new round started, round number is ", Global.round_number)
+	await spawn_round_enemies()
+	start_turn()
+
+func spawn_hero():
 	
 	var starting_cell = Global.grid.all_cells.pick_random()
 	var hero_scene : PackedScene = preload("res://Systems/Unit_System/Unit_Hero.tscn")
@@ -20,15 +32,41 @@ func new_round():
 	hero_inst.unit_name = "HERO"
 	Global.hero_unit = hero_inst
 	starting_cell.spawn_unit(hero_inst)
-	spell_slots.create_new_spells()
-	
-	for x in Global.starting_enemy_count:
-		var unit_path : PackedScene = preload("res://Systems/Unit_System/Unit_Enemy.tscn")
-		var cell_pick = Global.grid.get_empty_cells().pick_random()
-		var unit_inst = unit_path.instantiate()
-		cell_pick.spawn_unit(unit_inst)
+	spell_ui.create_new_spells()
 
-func reroll():
+func spawn_spells():
+	for x in spell_ui.spell_slots:
+		var spell_choice = SpellManager.spell_names.pick_random()
+		SpellManager.insert_spell(spell_choice,x)
+
+func spawn_round_enemies():
+	
+	var enemy_count = Global.starting_enemy_count
+	if Global.round_number > 1:
+		enemy_count += Global.round_number
+	
+	var hero_cell = Global.hero_unit.current_cell
+	var forbidden_cells = Global.grid.get_adjacent_cells(hero_cell)
+	forbidden_cells.append(hero_cell)
+	
+	for x in enemy_count:
+		
+		var valid_cells = []
+
+		for cell in Global.grid.get_empty_cells():
+			if not forbidden_cells.has(cell):
+				valid_cells.append(cell)
+
+		if valid_cells.is_empty():
+			print ("no valid cells to spawn enemy to")
+			return
+
+		var cell_pick = valid_cells.pick_random()
+		
+		var enemy_name = UnitManager.enemy_names.pick_random()
+		UnitManager.spawn_new_enemy(enemy_name,cell_pick)
+		
+func roll_dice():
 	if Global.rolls == 0:
 		print ("no rolls left")
 		return
@@ -39,16 +77,70 @@ func reroll():
 	
 	Global.rolls -= 1
 	Global.player_ui.update()
+	update_sum()
 
 func start_turn():
+	
+	Global.game_state = Enums.GameState.PLAYER_TURN
+	
 	for x in Global.player_dice:
 		x.used_this_turn = false
-		x.greyed_out = false
+		x.grey_out = false
 		
 	Global.rolls = Global.max_rolls
-	
+	roll_dice()
+
 func end_turn():
+	
+	for x in Global.player_dice:
+		if not x.used_this_turn:
+			spell_ui.add_mana(x.current_face.pips)
+	
+	Global.game_state = Enums.GameState.ENEMY_TURN
 	print ("TURN ENDED")
+	enemy_turn()
+
+func enemy_turn():
+	
+	print ("enemy turn started")
+	
+	var enemies = Global.grid.get_all_enemies().duplicate()
+	print ("enemies to act are", enemies)
+	
+	for x in enemies:
+		print ("checking enemy ", x, " for taking turn...")
+		if not is_instance_valid(x):
+			print ("enemy instance invalid, continuing")
+			continue
+		if x == null:
+			print ("enemy instance null, continuing")
+			continue
+		await x.plan_action()
+	
+	start_turn()
+
+func victory_check():
+	print ("running victory check...")
+	var enemy_present := false
+	for x in Global.grid.all_cells:
+		if x.occupant != null:
+			if x.occupant is Enemy:
+				enemy_present = true
+	
+	print ("enemy present is ", enemy_present)
+	if not enemy_present:
+		print ("no enemy present, victory")
+		victory()
+
+func defeat():
+	Global.game_state = Enums.GameState.ROUND_END
+	print ("GAME OVER, DEFEAT!!!")
+
+func victory():
+	Global.game_state = Enums.GameState.ROUND_END
+	print ("ROUND OVER, VICTORY!!!")
+	Global.round_number += 1
+	new_round()
 
 func hover_dice(dice : Dice):
 	
@@ -65,3 +157,19 @@ func unhover_dice():
 		if x.occupant == null: 
 			continue
 		if x.occupant.highlight: x.occupant.toggle_highlight()
+
+func kill_all_enemies():
+	for x in Global.grid.all_cells:
+		if x.occupant != null:
+			if x.occupant is Enemy:
+				x.occupant.destroy()
+	victory_check()
+
+func update_sum():
+	var new_sum = 0
+	for x in Global.player_dice:
+		if not x.used_this_turn:
+			new_sum += x.current_face.pips
+	Global.current_sum = new_sum
+	sum_label.text = str(Global.current_sum)
+	

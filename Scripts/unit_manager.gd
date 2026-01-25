@@ -1,13 +1,15 @@
 extends Node
 
-var unit_data_dictionary : Dictionary
-var basic_unit_names : Array
+var enemy_data_dictionary : Dictionary
+var enemy_data
+var starting_enemy_count := 4
+var enemy_names : Array
 
 func _ready() -> void:
 	
-	pass
-	#var unit_data_script = load("res://Scripts/unit_data_dictionary.gd").new()
-	#unit_data_dictionary = unit_data_script.data
+	var unit_data_script = load("res://Systems/Unit_System/enemy_data_dictionary.gd").new()
+	enemy_data_dictionary = unit_data_script.data
+	enemy_names = enemy_data_dictionary.keys()
 	
 func deal_unit_to_cell(name_string : String, cell : Cell):
 	
@@ -16,18 +18,39 @@ func deal_unit_to_cell(name_string : String, cell : Cell):
 	var unit_path : PackedScene = preload("res://Systems/Unit_System/Unit.tscn")
 	var new_unit = unit_path.instantiate()
 	
-	new_unit.unit_name = name_string
-	
 	Global.main_scene.unit_layer.add_child(new_unit)
 	
 	await cell.fill_with_unit(new_unit)
 	await Global.animate(new_unit,Enums.Anim.POP)
 	
-func fill_unit_from_data(unit: Unit, name_string: String):
+func spawn_new_enemy(name_string: String, cell : Cell):
 	
-	var data = Units.unit_data_dictionary[name_string]
+	#PRERPARE NEW UNIT TO BE FILLED WITH DATA
+	
+	var unit_path = preload("res://Systems/Unit_System/Unit_Enemy.tscn")
+	var unit = unit_path.instantiate()
+	
+	#ALL DATA FILL FROM DICTIONARY GOES HERE
+	
+	var data = enemy_data_dictionary[name_string]
+	unit.unit_name = name_string
+	unit.hp = data["hp"]
+	unit.atk = data["atk"]
+	unit.atk_range = data["atk_range"]
+	unit.movement = data["movement"]
+	
+	#APPLY ROUND DIFFICULTY STATS
+	
+	if Global.round_number > 1: 
+		unit.atk += Global.round_number
+		unit.hp += Global.round_number * 2
 	
 	
-	unit.passive_effects = [unit.passive_effect_1, unit.passive_effect_2]
 	
-	await unit.update_visual()
+	var sprite_path = str("res://Art/Enemy_Sprites/", name_string, ".png")
+	#SPAWN PREPARED UNIT INTO CELL
+	
+	await cell.fill_with_unit(unit)
+	Global.world.unit_layer.add_child(unit)
+	unit.unit_sprite.texture = load(sprite_path)
+	

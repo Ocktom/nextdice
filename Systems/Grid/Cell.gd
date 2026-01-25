@@ -1,18 +1,22 @@
 extends Node2D
 class_name Cell
 
-@onready var value_label : Label = $Value_Label
 @onready var cell_color : ColorRect = $Cell_Color
 @onready var cell_area: Area2D = $Cell_Area
 
+var poison := false : 
+	set(new_value):
+		poison = new_value
+		if poison:
+			cell_color.color = Color.SEA_GREEN
+			
 var occupant : Unit = null
 var cell_vector: Vector2i   # Position in grid coordinates (x,y)
 
 func _ready() -> void:
 	cell_area.connect("mouse_entered", _on_mouse_entered)
 	cell_area.connect("mouse_exited", _on_mouse_exited)
-
-
+	
 func spawn_unit(new_unit : Unit):
 
 	Global.world.unit_layer.add_child(new_unit)
@@ -59,3 +63,10 @@ func is_empty() -> bool:
 	else: is_empty = false
 	
 	return is_empty
+
+func is_adjacent(cell : Cell) -> bool:
+	var adjacents = Global.grid.get_adjacent_cells(self)
+	if adjacents.has(cell):
+		return true
+	else:
+		return false

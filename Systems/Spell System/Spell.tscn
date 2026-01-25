@@ -68,7 +68,7 @@ size_flags_vertical = 4
 mouse_filter = 2
 color = Color(0.67673594, 0.53392845, 0.23370892, 1)
 
-[node name="Unit_Name_Label" type="Label" parent="."]
+[node name="Spell_Name_Label" type="Label" parent="."]
 offset_left = -64.0
 offset_top = -92.0
 offset_right = 59.0

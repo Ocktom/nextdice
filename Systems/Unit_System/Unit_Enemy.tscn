@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ftjtt0qa83u7"]
+[gd_scene load_steps=5 format=3 uid="uid://ftjtt0qa83u7"]
 
 [ext_resource type="Script" uid="uid://cp2heh7xwpfq0" path="res://Systems/Unit_System/Unit_Enemy.gd" id="1_y87hi"]
+[ext_resource type="Texture2D" uid="uid://b8of4vq6d1us3" path="res://Art/Enemy_Sprites/Bat.png" id="2_t6kcj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1xpod"]
 font_size = 21
@@ -26,15 +27,22 @@ offset_bottom = 105.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-modulate = Color(0.79503334, 0.3311633, 0.6643504, 0.41960785)
-offset_left = -159.0
-offset_top = -165.0
-offset_right = 166.0
-offset_bottom = 160.0
+[node name="Unit_Sprite" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_t6kcj")
 
 [node name="Background_Rect" type="ColorRect" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

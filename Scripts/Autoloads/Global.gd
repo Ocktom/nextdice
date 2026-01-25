@@ -7,8 +7,9 @@ var grid : Node
 var world: Node
 var hero_unit : Unit
 
-var player_ui: Control
+var round_number := 1
 
+var player_ui: Control
 var player_dice : Array
 
 var all_units : Array [Unit]
@@ -16,9 +17,15 @@ var game_speed := 1
 
 var starting_enemy_count := 6
 
+var mana := 0
+var max_mana := 10
+var max_hp := 10
 var player_hp := 10
+
 var max_rolls := 3
 var rolls := 3
+
+var current_sum := 0
 
 func timer(time : float):
 

@@ -4,7 +4,12 @@ class_name Dice
 var dice_color : Enums.DiceColor
 
 var faces : Array [Face]
-var used_this_turn := false
+var used_this_turn : bool :
+	set(new_value):
+		if used_this_turn != new_value: used_this_turn = new_value
+		if used_this_turn:
+			Global.world.update_sum()
+
 var grey_out := false :
 	set (new_value):
 		if grey_out != new_value: grey_out = new_value
@@ -36,7 +41,6 @@ func _ready() -> void:
 		faces.append(y)
 	
 	print ("dice faces are", faces)
-	roll()
 
 func use():
 	

@@ -4,6 +4,8 @@ var hovered_dice: Dice = null
 var hovered_cell : Cell = null
 var hovered_spell_slot : Spell_Slot = null
 
+var mana_area_hovered := false
+
 # Drag state
 var dragging_dice: Dice = null
 var drag_offset: Vector2
@@ -24,6 +26,9 @@ var input_paused :
 		
 		reset_all_hovered_variables()
 
+signal unit_selected
+signal cell_selected
+
 func _input(event):
 	
 	if input_paused:
@@ -41,11 +46,12 @@ func _input(event):
 			if dragging_unit != null:
 				dragging_unit.global_position = event.position + unit_drag_offset
 
-
 		if event.is_action_released("enter"):
 			await reset_all_hovered_variables()
 			await Global.world.end_turn()
-
+		
+		if event.is_action_released("f"):
+			Global.world.kill_all_enemies()
 
 		if event.is_action_released("space"):
 			
@@ -59,8 +65,7 @@ func _input(event):
 				await Global.world.end_turn()
 				return
 			
-			await Global.world.reroll()
-
+			await Global.world.roll_dice()
 
 		if event.is_action_released("right_mouse"):
 			if hovered_dice is Dice:
@@ -71,34 +76,55 @@ func _input(event):
 				
 				hovered_dice.use()
 
-
 		elif event.is_action_released("left_mouse"):
 
 			# Dice drop
 			if dragging_dice is Dice:
 				print ("dragging dice was dropped")
 				
-				if not hovered_cell == null:
+				if mana_area_hovered:
+					Global.world.spell_ui.add_mana(dragging_dice.current_face.pips)
+					dragging_dice.use()
+				
+				elif hovered_spell_slot != null:
+					if hovered_spell_slot.occupant != null:
+						if dragging_dice.current_face.pips >= hovered_spell_slot.occupant.mana_cost:
+							hovered_spell_slot.occupant.use_spell()
+							dragging_dice.use()
+				
+				elif not hovered_cell == null:
 					if not hovered_cell.occupant == null:
 						if hovered_cell.occupant is Enemy:
-							print ("dice dropped on enemy")
-							dragging_dice.use()
-							hovered_cell.occupant.damage(dragging_dice.current_face.pips)
+							if hovered_cell.is_adjacent(Global.hero_unit.current_cell):
+								print ("dice dropped on enemy")
+								dragging_dice.use()
+								hovered_cell.occupant.take_attack(dragging_dice.current_face.pips)
+								Global.world.call_deferred("victory_check")
+							else:
+								Global.float_text("Out of Range", Global.hero_unit.global_position)
+								
 							
 						else:
 							print ("dice dropped on non enemy unit")
-	
-					elif hovered_cell.is_empty(): 
-						print ("dragging dice is dropped on empty cell")
-						hovered_cell.move_hero(dragging_dice)
-						dragging_dice.use()
-				
-				elif not hovered_spell_slot == null:
-					if not hovered_spell_slot.occupant == null:
-						hovered_spell_slot.occupant.pay_cost(dragging_dice.current_face.pips)
-						dragging_dice.use()
-					
 
+					elif hovered_cell.is_empty():
+						var hero_cell = Global.hero_unit.current_cell
+						var max_move = dragging_dice.current_face.pips
+
+						var dx = abs(hovered_cell.cell_vector.x - hero_cell.cell_vector.x)
+						var dy = abs(hovered_cell.cell_vector.y - hero_cell.cell_vector.y)
+						var dist = dx + dy
+
+						if dist > max_move:
+							print ("can't move, out of range")
+							Global.float_text("Out of Range", Global.hero_unit.global_position)
+							
+						else:
+							print("dragging dice is dropped on empty cell")
+							hovered_cell.move_hero(dragging_dice)
+							dragging_dice.use()
+
+			
 			# Reset dice drag
 			if dragging_dice != null:
 				dragging_dice.face_node.global_position = dragging_dice.global_position
@@ -114,11 +140,32 @@ func _input(event):
 				dragging_dice = hovered_dice
 				drag_offset = dragging_dice.global_position - event.position
 				return
+		
+			if hovered_spell_slot != null:
+				if hovered_spell_slot.occupant != null:
+					if Global.mana >= hovered_spell_slot.occupant.mana_cost:
+						hovered_spell_slot.occupant.use_spell()
+		
 		#RIGHT MOUSE
 		
 		elif event.is_action_released("right_mouse"):
 			print ("right mosue")
-		
+#endregion
+	
+	if Global.game_state == Enums.GameState.SELECT_TARGET_UNIT:
+		if event.is_action_pressed("left_mouse"):
+			if hovered_cell != null:
+				if hovered_cell.occupant != null:
+					unit_selected.emit(hovered_cell.occupant)
+			
+	if Global.game_state == Enums.GameState.SELECT_TARGET_CELL:
+		if event.is_action_pressed("left_mouse"):
+			if hovered_cell != null:
+				cell_selected.emit(hovered_cell)
+
+#region spell selection controls
+
+
 #endregion
 
 func reset_drag():
