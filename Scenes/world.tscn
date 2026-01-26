@@ -40,7 +40,7 @@ position = Vector2(-95, -409)
 position = Vector2(-95, 127)
 
 [node name="Mana" type="Node2D" parent="Spell_UI"]
-position = Vector2(-1280, -312)
+position = Vector2(-1317, -160)
 
 [node name="ColorRect" type="ColorRect" parent="Spell_UI/Mana"]
 offset_left = -362.0
@@ -95,10 +95,11 @@ label_settings = SubResource("LabelSettings_k7acu")
 [node name="Audio" parent="." instance=ExtResource("1_a02cp")]
 
 [node name="Player_UI" parent="." instance=ExtResource("5_fo5ed")]
-offset_left = 101.0
-offset_top = 810.0
-offset_right = 101.0
-offset_bottom = 810.0
+offset_left = 255.0
+offset_top = 916.0
+offset_right = 255.0
+offset_bottom = 916.0
+mouse_filter = 2
 
 [node name="Shop_Screen" parent="." instance=ExtResource("8_k7acu")]
 visible = false

@@ -41,6 +41,7 @@ func _input(event):
 
 		# ---------- DRAGGING MOVEMENT ----------
 		if event is InputEventMouseMotion:
+			
 			if dragging_dice != null:
 				dragging_dice.face_node.global_position = event.position + drag_offset
 			
@@ -81,9 +82,11 @@ func _input(event):
 
 			# Dice drop
 			if dragging_dice is Dice:
-				print ("dragging dice was dropped")
+				print ("dragging dice was dropped, hovered cell is ", hovered_cell)
+				
 				
 				if mana_area_hovered:
+					print ("using dice for mana")
 					Global.world.spell_ui.add_mana(dragging_dice.current_face.pips)
 					dragging_dice.use()
 				
@@ -94,6 +97,8 @@ func _input(event):
 							dragging_dice.use()
 				
 				elif not hovered_cell == null:
+					print ("hovered cell not null")
+					
 					if not hovered_cell.occupant == null:
 						if hovered_cell.occupant is Enemy:
 							if hovered_cell.is_adjacent(Global.hero_unit.current_cell, true):
@@ -107,8 +112,11 @@ func _input(event):
 							
 						else:
 							print ("dice dropped on non enemy unit")
-
+					
 					elif hovered_cell.is_empty():
+						
+						print ("dice dropped on empty cell")
+						
 						var hero_cell = Global.hero_unit.current_cell
 						var max_move = dragging_dice.current_face.pips
 
@@ -124,8 +132,10 @@ func _input(event):
 							print("dragging dice is dropped on empty cell")
 							hovered_cell.move_hero(dragging_dice)
 							dragging_dice.use()
-
-			
+					
+					else:
+						print ("couldnt drop dice anywhere")
+					
 			# Reset dice drag
 			if dragging_dice != null:
 				dragging_dice.face_node.global_position = dragging_dice.global_position
@@ -169,7 +179,11 @@ func _input(event):
 			if hovered_item_slot != null:
 				if hovered_item_slot.occupant != null:
 					print ("PURCHASED ITEM IS ", hovered_item_slot.occupant)
+					if hovered_item_slot.occupant.item_type == Enums.ItemType.RELIC:
+						Global.relics.append(hovered_item_slot.occupant)
+						print ("Global.relics is now ", Global.relics)
 					hovered_item_slot.clear_slot()
+					
 	
 #region spell selection controls
 

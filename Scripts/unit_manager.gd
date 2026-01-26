@@ -40,20 +40,9 @@ func spawn_new_enemy(name_string: String, cell : Cell):
 	unit.atk_range = data["atk_range"]
 	unit.movement = data["movement"]
 	unit.range_type = data["range_type"]
-	
-	print ("for ", unit.unit_name, " data[action_1] is ", data["action_1"])
-	
-	if data["action_1"] == "":
-		unit.action_1 = Enums.EnemyAction.NONE
-	else:
-		print ("setting unit.action_1 in ", unit.unit_name, " for ", data["action_1"])
-		unit.action_1 = Enums.EnemyAction[data["action_1"]]
-		print ("it is now ", unit.action_1)
-		
-	if data["action_2"] == "":
-		unit.action_2 = Enums.EnemyAction.NONE
-	else:
-		unit.action_2 = Enums.EnemyAction[data["action_2"]]
+
+	unit.action_1 = data["action_1"]
+	unit.action_2 = data["action_2"]
 	
 	#APPLY ROUND DIFFICULTY STATS
 	

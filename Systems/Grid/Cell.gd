@@ -27,6 +27,7 @@ func clear_cell():
 	occupant = null
 
 func fill_with_unit(unit : Unit):
+	print ("fill_with_unit called")
 	occupant = unit
 	unit.current_cell = self
 	unit.global_position = global_position
@@ -45,7 +46,6 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	if Global.game_state == Enums.GameState.PLAYER_TURN:
 		
-		InputManager.hovered_cell = self
 		if InputManager.hovered_cell == self:
 			InputManager.hovered_cell = null
 			

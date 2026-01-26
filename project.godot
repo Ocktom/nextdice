@@ -20,9 +20,11 @@ Global="*res://Scripts/Autoloads/Global.gd"
 Enums="*res://Scripts/Autoloads/Enums.gd"
 InputManager="*res://Scripts/Autoloads/InputManager.gd"
 UnitManager="*res://Scripts/unit_manager.gd"
-ActionManager="*res://Scripts/Autoloads/action_manager.gd"
-SpellManager="*res://Scripts/Autoloads/spell_manager.gd"
+ActionManager="*res://Systems/Action System/action_manager.gd"
+SpellManager="*res://Systems/Spell System/spell_manager.gd"
 ItemManager="*res://Systems/Item System/item_manager.gd"
+PassiveManager="*res://Systems/Passive_System/passive_manager.gd"
+ActionRegistry="*res://Systems/action_registry.gd"
 
 [display]
 

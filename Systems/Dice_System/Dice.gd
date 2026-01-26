@@ -1,8 +1,6 @@
 extends Control
 class_name Dice
 
-var dice_color : Enums.DiceColor
-
 var faces : Array [Face]
 var used_this_turn : bool :
 	set(new_value):
@@ -26,7 +24,6 @@ var current_face : Face
 
 func _ready() -> void:
 	
-	print ("dice color set to ", dice_color)
 	
 	Global.player_dice.append(self)
 	

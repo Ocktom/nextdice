@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://de8jygopjlgu0" path="res://Systems/Grid/Cell.gd" id="1_hyvek"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1m28"]
-size = Vector2(203, 203)
+size = Vector2(201, 203)
 
 [node name="GridCell" type="Node2D"]
 script = ExtResource("1_hyvek")
@@ -26,5 +26,5 @@ color = Color(0.5183813, 0.42700657, 0.5606931, 1)
 [node name="Cell_Area" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cell_Area"]
-position = Vector2(0.5, 0.5)
+position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_m1m28")

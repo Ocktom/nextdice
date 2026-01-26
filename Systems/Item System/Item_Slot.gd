@@ -12,9 +12,9 @@ func _ready() -> void:
 	slot_area.connect("mouse_exited", _on_mouse_exited)
 
 func clear_slot():
+	Global.world.shop_screen.item_layer.remove_child(occupant)
+	occupant = null
 	
-	occupant.queue_free()
-
 func fill_with_item(item : Item):
 	
 	occupant = item
@@ -28,7 +28,6 @@ func _on_mouse_entered():
 		
 		print("cell hovered, occupant is ", occupant)
 		InputManager.hovered_item_slot = self
-
 
 func _on_mouse_exited():
 	

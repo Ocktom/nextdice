@@ -14,8 +14,8 @@ var can_attack_diag := true
 var turn_bonus := 0
 var round_bonus := 0
 
-var action_1 : Enums.EnemyAction
-var action_2 : Enums.EnemyAction
+var action_1 : String
+var action_2 : String
 
 var projectile := false
 var movement := 2
@@ -37,7 +37,6 @@ func plan_action():
 
 	var abs_dx = abs(dx)
 	var abs_dy = abs(dy)
-
 
 # ---------------- ATTACK CHECK ----------------
 
@@ -132,13 +131,11 @@ func attack(target_unit : Unit):
 	
 func enemy_actions():
 	
-	print ("checking enemy_actions of ", unit_name, " which are", action_1, " and ", action_2)
-	
-	if action_1 != Enums.EnemyAction.NONE:
-		await ActionManager.perform_enemy_action(action_1, self)
+	if action_1 != "":
+		await ActionManager.request_action(action_2, {"source " : self})
 		
-	if action_1 != Enums.EnemyAction.NONE:
-		await ActionManager.perform_enemy_action(action_2, self)
+	if action_1 != "":
+		await ActionManager.request_action(action_2, {"source " : self})
 	
 func take_attack(amount : int):
 	

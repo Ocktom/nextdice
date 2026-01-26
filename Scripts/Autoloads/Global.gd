@@ -17,7 +17,7 @@ var game_speed := 1
 
 var starting_enemy_count := 6
 
-var relics_owned : Array[Item]
+var relics : Array[Item]
 
 var mana := 0
 var max_mana := 10

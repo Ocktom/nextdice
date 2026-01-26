@@ -29,7 +29,7 @@ var data : Dictionary = {
 	"atk_range": 1,
 	"movement": 3,
 	"range_type": "REACH",
-	"action_1": "HEAL_ADJACENT",
+	"action_1": "heal_self",
 	"action_2": ""
   },
   "Boar": {
@@ -59,7 +59,7 @@ var data : Dictionary = {
 	"atk_range": 5,
 	"movement": 3,
 	"range_type": "SURROUND",
-	"action_1": "EMPOWER_ADJACENT",
+	"action_1": "heal_self",
 	"action_2": ""
   },
   "Snake": {

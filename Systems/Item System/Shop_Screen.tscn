@@ -10,6 +10,7 @@ script = ExtResource("1_cb6ln")
 offset_top = -6.0
 offset_right = 1940.0
 offset_bottom = 1091.0
+mouse_filter = 2
 color = Color(0.13319641, 0.13319641, 0.13319638, 1)
 
 [node name="Slots_Node" type="Node2D" parent="."]
