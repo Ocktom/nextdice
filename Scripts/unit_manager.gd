@@ -41,8 +41,14 @@ func spawn_new_enemy(name_string: String, cell : Cell):
 	unit.movement = data["movement"]
 	unit.range_type = data["range_type"]
 
-	unit.action_1 = data["action_1"]
-	unit.action_2 = data["action_2"]
+	unit.action_1_name = data["action_1_name"]
+	if not unit.action_1_name == "":
+		unit.action_1_context = data["action_1_context"]
+		
+	if not unit.action_2_name == "":
+		unit.action_2_context = data["action_2_context"]
+	
+	unit.passive_1_name = data["passive_1_name"]
 	
 	#APPLY ROUND DIFFICULTY STATS
 	
@@ -56,4 +62,4 @@ func spawn_new_enemy(name_string: String, cell : Cell):
 	await cell.fill_with_unit(unit)
 	Global.world.unit_layer.add_child(unit)
 	unit.unit_sprite.texture = load(sprite_path)
-	
+	unit.set_passives()

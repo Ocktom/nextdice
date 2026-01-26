@@ -1,9 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxtiwr8dj6nji"]
+[gd_scene load_steps=5 format=3 uid="uid://bxtiwr8dj6nji"]
 
 [ext_resource type="Script" uid="uid://bjndjqq3i8qmi" path="res://Systems/Unit_System/Unit.gd" id="1_n7hr6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1xpod"]
 font_size = 21
+
+[sub_resource type="LabelSettings" id="LabelSettings_3a2ma"]
+font_size = 31
+font_color = Color(1, 0.90588236, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_4im1a"]
 font_size = 31
@@ -82,6 +86,12 @@ offset_left = 53.0
 offset_top = -95.0
 offset_right = 93.0
 offset_bottom = -51.0
+
+[node name="ATK_Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "12"
+label_settings = SubResource("LabelSettings_3a2ma")
+horizontal_alignment = 1
 
 [node name="HP_Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2

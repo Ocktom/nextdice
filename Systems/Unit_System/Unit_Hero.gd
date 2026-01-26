@@ -6,10 +6,10 @@ func take_attack(amount : int):
 	Global.animate(self,Enums.Anim.SHAKE)
 	Global.animate(self,Enums.Anim.FLASH,Color.RED)
 	Global.player_hp = max(0,Global.player_hp - amount)
-	update_visuals()
+	update()
 	Global.player_ui.update()
 
-func update_visuals():
+func update():
 	
 	unit_name_label.text = str(unit_name)
 	hp_label.text = str(Global.player_hp)

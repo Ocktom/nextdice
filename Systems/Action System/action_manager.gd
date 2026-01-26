@@ -5,21 +5,12 @@ func destroy_enemy(unit : Unit):
 	unit.queue_free()
 	Global.world.victory_check()
 
-func request_action(action_name: String, context_dictionary : Dictionary):
-	create_action(action_name, context_dictionary)
-		
-func heal_unit(unit : Unit, amount : int):
-	unit.hp = max(unit.max_hp, unit.hp + amount)
-	Global.animate(unit, Enums.Anim.FLASH,Color.GREEN_YELLOW)
-	Global.float_text(str("+ ", amount),unit.global_position,Color.GREEN)
-	unit.update_visuals()
-	await Global.timer(.1)
+func request_action(action_name: String, context_dictionary : Dictionary, action_source: Node = null):
+	create_action(action_name, context_dictionary, action_source)
 
-func empower_unit(unit : Unit, amount : int):
-	unit.turn_bonus += amount
-
-func create_action(action_name : String, context_dictionary: Dictionary):
+func create_action(action_name : String, context_dictionary: Dictionary, action_source : Node = null):
 	var script_path = str("res://Systems/Action System/Action Scripts/action_", action_name, ".gd")
+	print ("loading path script", script_path)
 	var action = Action.new()
 	action.set_script(load(script_path))
-	action.execute()
+	action.execute(context_dictionary, action_source)

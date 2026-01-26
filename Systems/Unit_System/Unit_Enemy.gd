@@ -8,14 +8,27 @@ var max_hp : int
 var atk := 1
 var atk_range := 1
 
+var dying_this_turn := false
+
 var move_diag := false
 var can_attack_diag := true
 
 var turn_bonus := 0
 var round_bonus := 0
 
-var action_1 : String
-var action_2 : String
+var action_1_name : String
+var action_1_context : Dictionary
+
+var passive_1_name : String
+var passive_1 : Passive
+var passive_1_trigger : Enums.Trigger
+
+var passive_2_name : String
+var passive_2 : Passive
+
+var action_2_name : String
+var action_2_context : Dictionary
+
 
 var projectile := false
 var movement := 2
@@ -25,7 +38,27 @@ var step_time := .1
 
 var acted_this_turn := false
 
+func set_passives():
+	
+	if not passive_1_name == "":
+		passive_1 = Passive.new()
+		var script_path = str("res://Systems/Passive_System/Passive_Scripts/passive_",passive_1_name,".gd")
+		print ("setting passive script_path for ", script_path)
+		passive_1.set_script(load(script_path))
+		passive_1.passive_name = passive_1_name
+		print ("passive_1 is ", passive_1, " with name of ", passive_1.passive_name)
+		passive_1.source = self
+		passive_1.set_trigger()
+		
+	if not passive_2_name == "":
+		passive_2 = Passive.new()
+		var script_path = str("res://Systems/Passive_System/Passive_Scripts/",passive_2_name,".gd")
+		passive_2.set_script(load(script_path))
+		passive_1.source = self
+		passive_2.set_trigger()
+		
 func plan_action():
+	
 	print("enemy planning action")
 
 	var hero = Global.hero_unit
@@ -131,13 +164,32 @@ func attack(target_unit : Unit):
 	
 func enemy_actions():
 	
-	if action_1 != "":
-		await ActionManager.request_action(action_2, {"source " : self})
-		
-	if action_1 != "":
-		await ActionManager.request_action(action_2, {"source " : self})
+	if action_1_name != "":
+		await ActionManager.request_action(action_1_name, action_1_context, self)
 	
+	if action_2_name != "":
+		await ActionManager.request_action(action_1_name, action_2_context, self)
+
 func take_attack(amount : int):
+	
+	hp = max(0,hp-amount)
+	
+	if hp < 1:
+		dying_this_turn = true
+	
+	print ("was damaged")
+	Global.animate(self,Enums.Anim.SHAKE)
+	await Global.animate(self,Enums.Anim.FLASH,Color.RED)
+	await Global.float_text("Damage",global_position,Color.RED)
+	await Global.timer(.5)
+	
+	if dying_this_turn:
+		print ("unit has less then 1 hp, calling enemy death on manager")
+		ActionManager.request_action("enemy_death",{},self)
+	
+	update()
+	
+func take_non_attack_damage(amount : int):
 	
 	print ("was damaged")
 	Global.animate(self,Enums.Anim.SHAKE)
@@ -149,15 +201,13 @@ func take_attack(amount : int):
 	
 	if hp < 1:
 		
-		destroy()
+		print ("unit has less then 1 hp, calling enemy death on manager")
+		ActionManager.request_action("enemy_death",{},self)
 	
-	update_visuals()
+	update()
 
-func destroy(overkill := false):
-	
-	ActionManager.destroy_enemy(self)
-
-func update_visuals():
+func update():
 	
 	unit_name_label.text = str(unit_name)
 	hp_label.text = str(hp)
+	atk_label.text = str(atk)

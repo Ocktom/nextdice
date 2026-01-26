@@ -1,7 +1,6 @@
 extends Node
 
 var data : Dictionary = {
-
   "Rat": {
 	"enemy_name": "Rat",
 	"hp": 3,
@@ -9,8 +8,11 @@ var data : Dictionary = {
 	"atk_range": 1,
 	"movement": 1,
 	"range_type": "CARDINAL",
-	"action_1": "",
-	"action_2": ""
+	"action_1_name": "",
+	"action_1_context": "",
+	"action_2_name": "",
+	"action_2_context": "",
+	"passive_1_name": "scavenge"
   },
   "Bat": {
 	"enemy_name": "Bat",
@@ -19,8 +21,11 @@ var data : Dictionary = {
 	"atk_range": 1,
 	"movement": 3,
 	"range_type": "REACH",
-	"action_1": "",
-	"action_2": ""
+	"action_1_name": "",
+	"action_1_context": "",
+	"action_2_name": "",
+	"action_2_context": "",
+	"passive_1_name": ""
   },
   "Bee": {
 	"enemy_name": "Bee",
@@ -29,8 +34,13 @@ var data : Dictionary = {
 	"atk_range": 1,
 	"movement": 3,
 	"range_type": "REACH",
-	"action_1": "heal_self",
-	"action_2": ""
+	"action_1_name": "heal_self",
+	"action_1_context": {
+	  "amount": 1
+	},
+	"action_2_name": "",
+	"action_2_context": "",
+	"passive_1_name": "spikes"
   },
   "Boar": {
 	"enemy_name": "Boar",
@@ -39,8 +49,13 @@ var data : Dictionary = {
 	"atk_range": 1,
 	"movement": 3,
 	"range_type": "CARDINAL",
-	"action_1": "",
-	"action_2": ""
+	"action_1_name": "increase_attack_self",
+	"action_1_context": {
+	  "amount": 2
+	},
+	"action_2_name": "",
+	"action_2_context": "",
+	"passive_1_name": ""
   },
   "Scorpion": {
 	"enemy_name": "Scorpion",
@@ -49,8 +64,13 @@ var data : Dictionary = {
 	"atk_range": 2,
 	"movement": 3,
 	"range_type": "CARDINAL",
-	"action_1": "",
-	"action_2": ""
+	"action_1_name": "heal_self",
+	"action_1_context": {
+	  "amount": 3
+	},
+	"action_2_name": "",
+	"action_2_context": "",
+	"passive_1_name": "spikes"
   },
   "Spider": {
 	"enemy_name": "Spider",
@@ -59,8 +79,11 @@ var data : Dictionary = {
 	"atk_range": 5,
 	"movement": 3,
 	"range_type": "SURROUND",
-	"action_1": "heal_self",
-	"action_2": ""
+	"action_1_name": "",
+	"action_1_context": "",
+	"action_2_name": "",
+	"action_2_context": "",
+	"passive_1_name": ""
   },
   "Snake": {
 	"enemy_name": "Snake",
@@ -69,7 +92,10 @@ var data : Dictionary = {
 	"atk_range": 1,
 	"movement": 5,
 	"range_type": "SURROUND",
-	"action_1": "",
-	"action_2": ""
+	"action_1_name": "",
+	"action_1_context": "",
+	"action_2_name": "",
+	"action_2_context": "",
+	"passive_1_name": "enrage"
   }
 }

@@ -1,10 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://ftjtt0qa83u7"]
+[gd_scene load_steps=6 format=3 uid="uid://ftjtt0qa83u7"]
 
 [ext_resource type="Script" uid="uid://cp2heh7xwpfq0" path="res://Systems/Unit_System/Unit_Enemy.gd" id="1_y87hi"]
 [ext_resource type="Texture2D" uid="uid://b8of4vq6d1us3" path="res://Art/Enemy_Sprites/Bat.png" id="2_t6kcj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1xpod"]
 font_size = 21
+
+[sub_resource type="LabelSettings" id="LabelSettings_t6kcj"]
+font_size = 31
+font_color = Color(1, 0.90588236, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_4im1a"]
 font_size = 31
@@ -78,6 +82,7 @@ mouse_filter = 2
 color = Color(0.67673594, 0.53392845, 0.23370892, 1)
 
 [node name="Unit_Name_Label" type="Label" parent="."]
+visible = false
 offset_left = -87.0
 offset_top = -92.0
 offset_right = 36.0
@@ -90,6 +95,12 @@ offset_left = 53.0
 offset_top = -95.0
 offset_right = 93.0
 offset_bottom = -51.0
+
+[node name="ATK_Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "12"
+label_settings = SubResource("LabelSettings_t6kcj")
+horizontal_alignment = 1
 
 [node name="HP_Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2

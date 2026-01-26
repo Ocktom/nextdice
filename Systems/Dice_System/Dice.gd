@@ -49,12 +49,12 @@ func roll():
 	#dice_color.color = Global.colors.pick_random()
 	current_face = faces.pick_random()
 	face_node.face_sprite.frame = current_face.pips
-	await update_visuals()
+	await update()
 
 func setup_visuals():
 	pass
 	
-func update_visuals():
+func update():
 	face_node.face_sprite.frame = current_face.pips-1
 		
 func highlight():

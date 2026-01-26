@@ -8,7 +8,6 @@ var highlight := false
 var sprite_path : String
 var range_type : Enums.RangeType
 
-
 var border_color : Color = Color.WHITE
 var normal_color : Color = Color.BLACK
 
@@ -22,11 +21,14 @@ var damaged := false
 @onready var background_rect: ColorRect = $Background_Rect
 @onready var border_rect: ColorRect = $border_rect
 
+@onready var atk_label: Label = $VBoxContainer/ATK_Label
+
+
 func _ready():
 	
 	Global.all_units.append(self)
 
-	await update_visuals()
+	await update()
 
 func destroy(overkill := false):
 	
@@ -57,11 +59,11 @@ func assign_to_cell(cell: Cell) -> void:
 	current_cell.occupant = self
 	position = current_cell.global_position
 
-func update_visuals():
+func update():
 	
 	unit_name_label.text = str(unit_name)
 	hp_label.text = str(Global.player_hp)
-	
+
 func get_grid_position() -> Vector2i:
 	
 	if current_cell != null:
