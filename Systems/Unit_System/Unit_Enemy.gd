@@ -97,38 +97,45 @@ func get_attack_cells() -> Array[Cell]:
 	return cells
 
 func plan_action():
-	
 	print("enemy planning action")
 
-	var hero = Global.hero_unit
-	var hero_cell = hero.current_cell
-	var my_cell = current_cell
-
-	var dx = hero_cell.cell_vector.x - my_cell.cell_vector.x
-	var dy = hero_cell.cell_vector.y - my_cell.cell_vector.y
-
-	var abs_dx = abs(dx)
-	var abs_dy = abs(dy)
-
-# ---------------- ATTACK CHECK ----------------
-
-
-	var attack_cells = get_attack_cells()
-
-	if attack_cells.has(hero_cell):
-		print("enemy ", self, " attacking")
-		await Global.timer(wait_time)
-		await ActionManager.request_action(
-			"attack",
-			{"target" : hero, "amount" : atk},
-			self
-		)
-		turn_bonus = 0
+	if await attempt_attack():
 		await enemy_actions()
 		return
 
+	if await attempt_move():
+		await enemy_actions()
+		return
+	
+	else:
+		await enemy_actions()
+	
+func attempt_attack() -> bool:
+	var hero = Global.hero_unit
+	var hero_cell = hero.current_cell
 
-	# ---------------- MOVEMENT ----------------
+	var attack_cells = get_attack_cells()
+
+	if not attack_cells.has(hero_cell):
+		return false
+
+	print("enemy ", self, " attacking")
+	await Global.timer(wait_time)
+	await ActionManager.request_action(
+		"attack",
+		{"target" : hero, "amount" : atk},
+		self
+	)
+	turn_bonus = 0
+	await enemy_actions()
+	return true
+
+func attempt_move() -> bool:
+	var hero_cell = Global.hero_unit.current_cell
+	var my_cell = current_cell
+
+	var dx = abs(hero_cell.cell_vector.x - my_cell.cell_vector.x)
+	var dy = abs(hero_cell.cell_vector.y - my_cell.cell_vector.y)
 
 	var directions = [
 		Vector2i(0, -1),
@@ -142,7 +149,7 @@ func plan_action():
 	]
 
 	var best_path = []
-	var best_distance = max(abs_dx, abs_dy)
+	var best_distance = max(dx, dy)
 
 	for dir in directions:
 		var step_cell = my_cell
@@ -175,22 +182,23 @@ func plan_action():
 					await current_cell.clear_cell()
 					c.fill_with_unit(self)
 					await Global.timer(step_time)
-				return
+				return true
 
 			if dist < best_distance:
 				best_distance = dist
 				best_path = path.duplicate()
 
-	# ---------------- EXECUTE MOVE ----------------
+	if best_path.size() == 0:
+		return false
 
-	if best_path.size() > 0:
-		await Global.timer(wait_time)
-		print("enemy ", self, " moving")
-		for c in best_path:
-			await current_cell.clear_cell()
-			c.fill_with_unit(self)
-	
-	await enemy_actions()
+	print("enemy ", self, " moving")
+	await Global.timer(wait_time)
+	for c in best_path:
+		await current_cell.clear_cell()
+		c.fill_with_unit(self)
+		await Global.timer(step_time)
+
+	return true
 	
 func enemy_actions():
 	

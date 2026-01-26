@@ -13,8 +13,11 @@ func execute(context: Dictionary, action_source: Node = null):
 		if x.hp < x.max_hp:
 			damaged_enemies.append(x)
 	
+	if damaged_enemies.size() == 0:
+		return
+	
 	var x = damaged_enemies.pick_random()
-	x.occupant.hp = min(x.occupant.max_hp, x.occupant.hp + context["amount"])
+	x.hp = min(x.max_hp, x.hp + context["amount"])
 	Global.animate(x,Enums.Anim.FLASH,Color.GREEN)
-	Global.float_text(str("+",context["amount"]),x.occupant.global_position,Color.GREEN)
-	x.occupant.update()
+	Global.float_text(str("+",context["amount"]),x.global_position,Color.GREEN)
+	x.update()
