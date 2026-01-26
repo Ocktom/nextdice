@@ -6,7 +6,6 @@ extends Node2D
 @onready var sum_label: Label = $DiceLayer/Sum_label
 @onready var shop_screen: Node2D = $Shop_Screen
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	

@@ -3,7 +3,7 @@ extends Node
 var data : Dictionary = {
   "Rat": {
 	"enemy_name": "Rat",
-	"hp": 3,
+	"hp": 2,
 	"atk": 1,
 	"atk_range": 1,
 	"movement": 1,
@@ -16,11 +16,11 @@ var data : Dictionary = {
   },
   "Bat": {
 	"enemy_name": "Bat",
-	"hp": 3,
+	"hp": 4,
 	"atk": 1,
-	"atk_range": 1,
+	"atk_range": 2,
 	"movement": 3,
-	"range_type": "REACH",
+	"range_type": "ALL",
 	"action_1_name": "",
 	"action_1_context": "",
 	"action_2_name": "",
@@ -31,24 +31,37 @@ var data : Dictionary = {
 	"enemy_name": "Bee",
 	"hp": 3,
 	"atk": 3,
-	"atk_range": 1,
+	"atk_range": 2,
 	"movement": 3,
-	"range_type": "REACH",
-	"action_1_name": "heal_self",
+	"range_type": "ALL",
+	"action_1_name": "heal_random_enemy",
 	"action_1_context": {
-	  "amount": 1
+	  "amount": 5
 	},
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "spikes"
+	"passive_1_name": ""
   },
   "Boar": {
 	"enemy_name": "Boar",
 	"hp": 8,
 	"atk": 3,
-	"atk_range": 1,
+	"atk_range": 4,
 	"movement": 3,
 	"range_type": "CARDINAL",
+	"action_1_name": "",
+	"action_1_context": "",
+	"action_2_name": "",
+	"action_2_context": "",
+	"passive_1_name": "enrage"
+  },
+  "Scorpion": {
+	"enemy_name": "Scorpion",
+	"hp": 5,
+	"atk": 2,
+	"atk_range": 3,
+	"movement": 3,
+	"range_type": "DIAG",
 	"action_1_name": "increase_attack_self",
 	"action_1_context": {
 	  "amount": 2
@@ -57,28 +70,13 @@ var data : Dictionary = {
 	"action_2_context": "",
 	"passive_1_name": ""
   },
-  "Scorpion": {
-	"enemy_name": "Scorpion",
-	"hp": 5,
-	"atk": 3,
-	"atk_range": 2,
-	"movement": 3,
-	"range_type": "CARDINAL",
-	"action_1_name": "heal_self",
-	"action_1_context": {
-	  "amount": 3
-	},
-	"action_2_name": "",
-	"action_2_context": "",
-	"passive_1_name": "spikes"
-  },
   "Spider": {
 	"enemy_name": "Spider",
-	"hp": 3,
-	"atk": 2,
-	"atk_range": 5,
+	"hp": 4,
+	"atk": 3,
+	"atk_range": 3,
 	"movement": 3,
-	"range_type": "SURROUND",
+	"range_type": "CARDINAL",
 	"action_1_name": "",
 	"action_1_context": "",
 	"action_2_name": "",
@@ -88,14 +86,14 @@ var data : Dictionary = {
   "Snake": {
 	"enemy_name": "Snake",
 	"hp": 5,
-	"atk": 2,
-	"atk_range": 1,
-	"movement": 5,
-	"range_type": "SURROUND",
+	"atk": 3,
+	"atk_range": 3,
+	"movement": 8,
+	"range_type": "DIAG",
 	"action_1_name": "",
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "enrage"
+	"passive_1_name": ""
   }
 }

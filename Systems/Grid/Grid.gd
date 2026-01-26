@@ -1,6 +1,6 @@
 extends Node2D
 
-const GRID_WIDTH = 4
+const GRID_WIDTH = 5
 const GRID_HEIGHT = 4
 const CELL_SIZE = Vector2(210, 210)
 var CELL_SPACING = Vector2(6, 6)

@@ -3,6 +3,16 @@ class_name Cell
 
 @onready var cell_color : ColorRect = $Cell_Color
 @onready var cell_area: Area2D = $Cell_Area
+@onready var cell_highlight: ColorRect = $Cell_Highlight
+
+var highlight : bool :
+	set(new_value):
+		if highlight != new_value:
+			highlight = new_value
+		if highlight:
+			cell_highlight.visible = true
+		else:
+			cell_highlight.visible = false
 
 var poison := false : 
 	set(new_value):
@@ -25,6 +35,7 @@ func spawn_unit(new_unit : Unit):
 func clear_cell():
 	
 	occupant = null
+	Global.unhighlight_cells()
 
 func fill_with_unit(unit : Unit):
 	print ("fill_with_unit called")
@@ -38,16 +49,36 @@ func move_hero(dice : Dice):
 	fill_with_unit(Global.hero_unit)
 
 func _on_mouse_entered():
-	
+
 	if Global.game_state == Enums.GameState.PLAYER_TURN:
+				
 		print("cell hovered, occupant is ", occupant)
 		InputManager.hovered_cell = self
+		
+		Global.unhighlight_cells()
+		
+		if InputManager.dragging_dice != null:
+			
+			if is_empty():
+				var path_cells = Global.get_path_cells(Global.hero_unit.current_cell,self,InputManager.dragging_dice.current_face.pips)
+				for x in path_cells:
+					x.highlight = true
+
+				
+		elif occupant is Enemy:
+			for x in occupant.get_attack_cells():
+				x.highlight = true
+			
 
 func _on_mouse_exited():
 	if Global.game_state == Enums.GameState.PLAYER_TURN:
 		
 		if InputManager.hovered_cell == self:
 			InputManager.hovered_cell = null
+		
+		if InputManager.hovered_cell == null:
+			for x in Global.grid.all_cells:
+				x.highlight = false
 			
 func is_empty() -> bool:
 	

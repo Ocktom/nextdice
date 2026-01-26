@@ -39,7 +39,21 @@ func spawn_new_enemy(name_string: String, cell : Cell):
 	unit.atk = data["atk"]
 	unit.atk_range = data["atk_range"]
 	unit.movement = data["movement"]
-	unit.range_type = data["range_type"]
+	
+	unit.range_type = Enums.RangeType[data["range_type"]]
+	
+	print ("matching unit range_type of ", unit.range_type)
+	match unit.range_type:
+		
+		Enums.RangeType.CARDINAL:
+			unit.attack_diag = false
+			unit.attack_cardinal = true
+		Enums.RangeType.DIAG:
+			unit.attack_diag = true
+			unit.attack_cardinal = false
+		Enums.RangeType.ALL:
+			unit.attack_diag = true
+			unit.attack_cardinal = true
 
 	unit.action_1_name = data["action_1_name"]
 	if not unit.action_1_name == "":

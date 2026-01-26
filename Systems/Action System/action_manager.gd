@@ -6,6 +6,8 @@ func destroy_enemy(unit : Unit):
 	Global.world.victory_check()
 
 func request_action(action_name: String, context_dictionary : Dictionary, action_source: Node = null):
+	
+	InputManager.input_paused = true
 	create_action(action_name, context_dictionary, action_source)
 
 func create_action(action_name : String, context_dictionary: Dictionary, action_source : Node = null):
@@ -13,4 +15,7 @@ func create_action(action_name : String, context_dictionary: Dictionary, action_
 	print ("loading path script", script_path)
 	var action = Action.new()
 	action.set_script(load(script_path))
-	action.execute(context_dictionary, action_source)
+	await action.execute(context_dictionary, action_source)
+
+	InputManager.input_paused = false
+	

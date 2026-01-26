@@ -134,3 +134,36 @@ func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE, target_no
 				original,
 				duration_back
 			)
+
+func get_path_cells(start_cell : Cell, target_cell : Cell, max_move : int) -> Array[Cell]:
+	
+	var path : Array[Cell] = []
+	var current_pos = start_cell.cell_vector
+	var target_pos = target_cell.cell_vector
+
+	var remaining = max_move
+
+	while remaining > 0 and current_pos != target_pos:
+		
+		var dx = target_pos.x - current_pos.x
+		var dy = target_pos.y - current_pos.y
+
+		var step = Vector2i(
+			sign(dx),
+			sign(dy)
+		)
+
+		current_pos += step
+
+		if not Global.grid.is_in_bounds(current_pos):
+			break
+
+		path.append(Global.grid.grid[current_pos.x][current_pos.y])
+		remaining -= 1
+
+	return path
+
+
+func unhighlight_cells():
+	for x in grid.all_cells:
+		x.highlight = false

@@ -11,7 +11,9 @@ var atk_range := 1
 var dying_this_turn := false
 
 var move_diag := false
-var can_attack_diag := true
+
+var attack_diag : bool
+var attack_cardinal : bool
 
 var turn_bonus := 0
 var round_bonus := 0
@@ -56,7 +58,44 @@ func set_passives():
 		passive_2.set_script(load(script_path))
 		passive_1.source = self
 		passive_2.set_trigger()
-		
+
+func get_attack_cells() -> Array[Cell]:
+	
+	print (unit_name, " getting attack cells, attack_diag is", attack_diag, " and attack_caridnal is ", attack_cardinal)
+	
+	var cells : Array[Cell] = []
+	var origin = current_cell.cell_vector
+
+	var directions = []
+
+	if attack_cardinal:
+		directions.append(Vector2i(0, -1))
+		directions.append(Vector2i(0, 1))
+		directions.append(Vector2i(-1, 0))
+		directions.append(Vector2i(1, 0))
+
+	if attack_diag:
+		directions.append(Vector2i(-1, -1))
+		directions.append(Vector2i(1, -1))
+		directions.append(Vector2i(-1, 1))
+		directions.append(Vector2i(1, 1))
+
+	for dir in directions:
+		for i in range(1, atk_range + 1):
+			var p = origin + dir * i
+
+			if not Global.grid.is_in_bounds(p):
+				break
+
+			var cell = Global.grid.grid[p.x][p.y]
+			cells.append(cell)
+
+			# LOS BLOCKER
+			if not cell.is_empty():
+				break
+
+	return cells
+
 func plan_action():
 	
 	print("enemy planning action")
@@ -73,25 +112,21 @@ func plan_action():
 
 # ---------------- ATTACK CHECK ----------------
 
-	var in_range = false
 
-	# Cardinal attack
-	if dx == 0 and abs_dy <= atk_range:
-		in_range = true
-	elif dy == 0 and abs_dx <= atk_range:
-		in_range = true
+	var attack_cells = get_attack_cells()
 
-	# Diagonal attack (optional)
-	elif can_attack_diag and abs_dx == abs_dy and abs_dx <= atk_range:
-		in_range = true
-
-	if in_range:
-		
+	if attack_cells.has(hero_cell):
 		print("enemy ", self, " attacking")
-		await attack(Global.hero_unit)
+		await Global.timer(wait_time)
+		await ActionManager.request_action(
+			"attack",
+			{"target" : hero, "amount" : atk},
+			self
+		)
 		turn_bonus = 0
 		await enemy_actions()
 		return
+
 
 	# ---------------- MOVEMENT ----------------
 
@@ -140,7 +175,6 @@ func plan_action():
 					await current_cell.clear_cell()
 					c.fill_with_unit(self)
 					await Global.timer(step_time)
-				await enemy_actions()
 				return
 
 			if dist < best_distance:
@@ -155,12 +189,8 @@ func plan_action():
 		for c in best_path:
 			await current_cell.clear_cell()
 			c.fill_with_unit(self)
-			await enemy_actions()
-
-func attack(target_unit : Unit):
-	await Global.timer(wait_time)
-	Global.animate(self,Enums.Anim.DART,Color.WHITE,target_unit)
-	await target_unit.take_attack(atk + turn_bonus + round_bonus)
+	
+	await enemy_actions()
 	
 func enemy_actions():
 	

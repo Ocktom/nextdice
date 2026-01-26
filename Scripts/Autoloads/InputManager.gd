@@ -25,6 +25,7 @@ var input_paused :
 			if not x.used_this_turn:
 				x.grey_out = input_paused
 		
+		Global.unhighlight_cells()
 		reset_all_hovered_variables()
 
 signal unit_selected
@@ -33,6 +34,7 @@ signal cell_selected
 func _input(event):
 	
 	if input_paused:
+		print ("input paused, returning out of input")
 		return
 	
 	if Global.game_state == Enums.GameState.PLAYER_TURN:
@@ -122,17 +124,18 @@ func _input(event):
 
 						var dx = abs(hovered_cell.cell_vector.x - hero_cell.cell_vector.x)
 						var dy = abs(hovered_cell.cell_vector.y - hero_cell.cell_vector.y)
-						var dist = dx + dy
+
+						# Chebyshev distance (diagonals = 1)
+						var dist = max(dx, dy)
 
 						if dist > max_move:
 							print ("can't move, out of range")
 							Global.float_text("Out of Range", Global.hero_unit.global_position)
-							
 						else:
 							print("dragging dice is dropped on empty cell")
 							hovered_cell.move_hero(dragging_dice)
 							dragging_dice.use()
-					
+
 					else:
 						print ("couldnt drop dice anywhere")
 					

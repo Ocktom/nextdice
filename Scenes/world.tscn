@@ -22,7 +22,7 @@ font_size = 106
 script = ExtResource("1_8j60k")
 
 [node name="Grid" parent="." instance=ExtResource("3_5a7ea")]
-position = Vector2(606, 205)
+position = Vector2(514, 205)
 
 [node name="Spell_UI" type="Node2D" parent="."]
 position = Vector2(1748, 653)
