@@ -1,0 +1,41 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://rvergiihmw22"]
+
+[ext_resource type="Texture2D" uid="uid://difrjccini26x" path="res://Art/Enemy_Sprites/robot_rat.png" id="1_nefm2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iuoju"]
+atlas = ExtResource("1_nefm2")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35qab"]
+atlas = ExtResource("1_nefm2")
+region = Rect2(0, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koxc3"]
+atlas = ExtResource("1_nefm2")
+region = Rect2(0, 80, 40, 40)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuoju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35qab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koxc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koxc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35qab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuoju")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

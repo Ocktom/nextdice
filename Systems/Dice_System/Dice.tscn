@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cx1ojiejwf35o"]
+[gd_scene format=3 uid="uid://cx1ojiejwf35o"]
 
 [ext_resource type="Script" uid="uid://cwa4eug0l35fv" path="res://Systems/Dice_System/Dice.gd" id="1_kjc4w"]
 [ext_resource type="Texture2D" uid="uid://ch8jvxrx4h6xu" path="res://Art/Face_Sprites/DiceSprSheetX64.png" id="2_sffwb"]
@@ -110,19 +110,19 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2cjt"]
 size = Vector2(72, 74)
 
-[node name="Dice" type="Control"]
+[node name="Dice" type="Control" unique_id=686019580]
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("1_kjc4w")
 
-[node name="Face_Node" type="Control" parent="."]
+[node name="Face_Node" type="Control" parent="." unique_id=397719970]
 anchors_preset = 0
 size_flags_vertical = 4
 mouse_filter = 2
 script = SubResource("GDScript_n7sq3")
 
-[node name="ColorRect" type="ColorRect" parent="Face_Node"]
+[node name="ColorRect" type="ColorRect" parent="Face_Node" unique_id=1545935596]
 layout_mode = 0
 offset_left = -36.0
 offset_top = -37.0
@@ -131,19 +131,19 @@ offset_bottom = 37.0
 mouse_filter = 2
 color = Color(0.9556082, 0.95903677, 0.8316656, 1)
 
-[node name="Face_Sprite" type="AnimatedSprite2D" parent="Face_Node"]
+[node name="Face_Sprite" type="AnimatedSprite2D" parent="Face_Node" unique_id=1138159615]
 modulate = Color(1, 1, 1, 0.6509804)
 scale = Vector2(1.1093751, 1.1093751)
 sprite_frames = SubResource("SpriteFrames_y4la5")
 
-[node name="Dice_Area" type="Area2D" parent="."]
+[node name="Dice_Area" type="Area2D" parent="." unique_id=1598485104]
 position = Vector2(-1.5, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dice_Area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dice_Area" unique_id=227894293]
 position = Vector2(1.5, -1)
 shape = SubResource("RectangleShape2D_s2cjt")
 
-[node name="GreyOut_Rect" type="ColorRect" parent="."]
+[node name="GreyOut_Rect" type="ColorRect" parent="." unique_id=1171207009]
 visible = false
 layout_mode = 0
 offset_left = -40.0

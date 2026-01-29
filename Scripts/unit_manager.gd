@@ -25,6 +25,8 @@ func deal_unit_to_cell(name_string : String, cell : Cell):
 	
 func spawn_new_enemy(name_string: String, cell : Cell):
 	
+	print ("spawning enemy with name ", name_string)
+	
 	#PRERPARE NEW UNIT TO BE FILLED WITH DATA
 	
 	var unit_path = preload("res://Systems/Unit_System/Unit_Enemy.tscn")
@@ -70,10 +72,10 @@ func spawn_new_enemy(name_string: String, cell : Cell):
 		unit.atk += Global.round_number
 		unit.hp += Global.round_number * 2
 	
-	var sprite_path = str("res://Art/Enemy_Sprites/", name_string, ".png")
+	var frames_path = str("res://Art/Enemy_Sprites/sprite_frames/",name_string,"_frames.tres")
 	#SPAWN PREPARED UNIT INTO CELL
-	
-	await cell.fill_with_unit(unit)
 	Global.world.unit_layer.add_child(unit)
-	unit.unit_sprite.texture = load(sprite_path)
+	await cell.fill_with_unit(unit)
+	unit.unit_sprite.sprite_frames = load(frames_path)
+	unit.unit_sprite.play()
 	unit.set_passives()

@@ -1,0 +1,41 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://hi6kd45xdirh"]
+
+[ext_resource type="Texture2D" uid="uid://b4pwwsoa7wee1" path="res://Art/Enemy_Sprites/spr_dungeon_guard.png" id="1_gtbqk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iunps"]
+atlas = ExtResource("1_gtbqk")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8kdm"]
+atlas = ExtResource("1_gtbqk")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_il3lj"]
+atlas = ExtResource("1_gtbqk")
+region = Rect2(0, 96, 48, 48)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iunps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8kdm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_il3lj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_il3lj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8kdm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iunps")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

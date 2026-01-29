@@ -1,0 +1,48 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dt48rioorc6xl"]
+
+[ext_resource type="Texture2D" uid="uid://cshi6mm8120hg" path="res://Art/Enemy_Sprites/necrobot-sheet.png" id="1_7ypr3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvx6l"]
+atlas = ExtResource("1_7ypr3")
+region = Rect2(0, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcu5n"]
+atlas = ExtResource("1_7ypr3")
+region = Rect2(0, 42, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aiftq"]
+atlas = ExtResource("1_7ypr3")
+region = Rect2(0, 84, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfiyo"]
+atlas = ExtResource("1_7ypr3")
+region = Rect2(0, 126, 40, 42)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvx6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcu5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aiftq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aiftq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfiyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcu5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvx6l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

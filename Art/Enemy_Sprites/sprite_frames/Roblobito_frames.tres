@@ -1,0 +1,41 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cqh1pw1bt2wp2"]
+
+[ext_resource type="Texture2D" uid="uid://dwjapuahibucc" path="res://Art/Enemy_Sprites/small_blob.png" id="1_vtpxo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5x5wv"]
+atlas = ExtResource("1_vtpxo")
+region = Rect2(0, 40, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8v0q"]
+atlas = ExtResource("1_vtpxo")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ngt0"]
+atlas = ExtResource("1_vtpxo")
+region = Rect2(0, 80, 40, 40)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5x5wv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8v0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ngt0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ngt0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8v0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5x5wv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

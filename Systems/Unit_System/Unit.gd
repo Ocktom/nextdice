@@ -13,16 +13,11 @@ var normal_color : Color = Color.BLACK
 
 var damaged := false
 
-@onready var unit_sprite: TextureRect = $Unit_Sprite
+var status_effects : Dictionary = {}
 
 @onready var unit_name_label : Label = $Unit_Name_Label
-@onready var hp_label : Label = $VBoxContainer/HP_Label
-
 @onready var background_rect: ColorRect = $Background_Rect
 @onready var border_rect: ColorRect = $border_rect
-
-@onready var atk_label: Label = $VBoxContainer/ATK_Label
-
 
 func _ready():
 	
@@ -62,7 +57,6 @@ func assign_to_cell(cell: Cell) -> void:
 func update():
 	
 	unit_name_label.text = str(unit_name)
-	hp_label.text = str(Global.player_hp)
 
 func get_grid_position() -> Vector2i:
 	

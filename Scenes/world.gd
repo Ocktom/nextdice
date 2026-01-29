@@ -4,7 +4,7 @@ extends Node2D
 @onready var spell_ui: Node2D = $Spell_UI
 @onready var player_ui: Control = $Player_UI
 @onready var sum_label: Label = $DiceLayer/Sum_label
-@onready var shop_screen: Node2D = $Shop_Screen
+@onready var shop: Node2D = $Shop_Screen
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,9 +21,10 @@ func game_start():
 
 func new_round():
 	
+	InputManager.input_paused = true
 	print ("new round started, round number is ", Global.round_number)
 	await spawn_round_enemies()
-	start_turn()
+	start_player_turn()
 
 func spawn_hero():
 	
@@ -80,18 +81,21 @@ func roll_dice():
 	Global.player_ui.update()
 	update_sum()
 
-func start_turn():
+func start_player_turn():
 	
 	Global.game_state = Enums.GameState.PLAYER_TURN
-	
+
+	SignalBus.turn_start.emit()
+
 	for x in Global.player_dice:
 		x.used_this_turn = false
 		x.grey_out = false
 		
 	Global.rolls = Global.max_rolls
-	roll_dice()
-
-func end_turn():
+	await roll_dice()
+	InputManager.input_paused = false
+	
+func end_player_turn():
 	
 	for x in Global.player_dice:
 		if not x.used_this_turn:
@@ -99,6 +103,7 @@ func end_turn():
 	
 	Global.game_state = Enums.GameState.ENEMY_TURN
 	print ("TURN ENDED")
+	await Global.hero_unit.end_turn_effects()
 	enemy_turn()
 
 func enemy_turn():
@@ -117,8 +122,13 @@ func enemy_turn():
 			print ("enemy instance null, continuing")
 			continue
 		await x.plan_action()
-	
-	start_turn()
+		
+	end_enemy_turn()
+
+func end_enemy_turn():
+	for x in Global.grid.get_all_enemies():
+		await x.end_turn_effects()
+	start_player_turn()
 
 func victory_check():
 	print ("running victory check...")
@@ -138,6 +148,7 @@ func defeat():
 	print ("GAME OVER, DEFEAT!!!")
 
 func victory():
+	InputManager.input_paused = true
 	Global.game_state = Enums.GameState.ROUND_END
 	print ("ROUND OVER, VICTORY!!!")
 	Global.round_number += 1
@@ -145,9 +156,11 @@ func victory():
 	enter_shop()
 		
 func enter_shop():
+	
 	Global.game_state = Enums.GameState.SHOP
-	shop_screen.visible = true
-	shop_screen.get_new_items()
+	shop.visible = true
+	await shop.get_new_items()
+	InputManager.input_paused = false
 
 func hover_dice(dice : Dice):
 	
@@ -169,7 +182,7 @@ func kill_all_enemies():
 	for x in Global.grid.all_cells:
 		if x.occupant != null:
 			if x.occupant is Enemy:
-				x.occupant.destroy()
+				ActionManager.create_action("enemy_death",{},x.occupant)
 
 func update_sum():
 	var new_sum = 0

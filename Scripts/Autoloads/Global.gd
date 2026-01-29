@@ -24,6 +24,8 @@ var max_mana := 10
 var max_hp := 10
 var player_hp := 10
 
+var player_status_effects : Dictionary = {}
+
 var max_rolls := 3
 var rolls := 3
 
@@ -43,7 +45,7 @@ func float_text(message: String, position: Vector2, color := Color.WHITE):
 	get_tree().current_scene.add_child(floating_text)
 	floating_text.global_position = position
 	floating_text.show_text(message, color)
-	await timer(.2)
+	await timer(.4)
 
 func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE, target_node: Node = null):
 	
@@ -134,7 +136,38 @@ func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE, target_no
 				original,
 				duration_back
 			)
+	
+		Enums.Anim.LUNGE:
 
+			if target_node == null:
+				return
+
+			var original = node.global_position
+			var target = target_node.global_position
+
+			var duration_out = 0.12
+			var duration_back = 0.12
+
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.set_ease(Tween.EASE_OUT)
+
+			tween.tween_property(
+				node,
+				"global_position",
+				target,
+				duration_out
+			)
+
+			tween.set_ease(Tween.EASE_IN)
+
+			tween.tween_property(
+				node,
+				"global_position",
+				original,
+				duration_back
+			)
+
+	
 func get_path_cells(start_cell : Cell, target_cell : Cell, max_move : int) -> Array[Cell]:
 	
 	var path : Array[Cell] = []
@@ -162,7 +195,6 @@ func get_path_cells(start_cell : Cell, target_cell : Cell, max_move : int) -> Ar
 		remaining -= 1
 
 	return path
-
 
 func unhighlight_cells():
 	for x in grid.all_cells:

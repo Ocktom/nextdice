@@ -12,7 +12,7 @@ func _ready() -> void:
 	slot_area.connect("mouse_exited", _on_mouse_exited)
 
 func clear_slot():
-	Global.world.shop_screen.item_layer.remove_child(occupant)
+	Global.world.shop.item_layer.remove_child(occupant)
 	occupant = null
 	
 func fill_with_item(item : Item):
@@ -20,7 +20,7 @@ func fill_with_item(item : Item):
 	occupant = item
 	item.current_slot = self
 	item.global_position = global_position
-	Global.world.shop_screen.item_layer.add_child(item)
+	Global.world.shop.item_layer.add_child(item)
 
 func _on_mouse_entered():
 	

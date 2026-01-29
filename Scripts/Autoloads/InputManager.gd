@@ -52,7 +52,7 @@ func _input(event):
 
 		if event.is_action_released("enter"):
 			await reset_all_hovered_variables()
-			await Global.world.end_turn()
+			await Global.world.end_player_turn()
 		
 		if event.is_action_released("f"):
 			Global.world.kill_all_enemies()
@@ -66,7 +66,7 @@ func _input(event):
 				if x.used_this_turn: used_count += 1
 			
 			if Global.player_dice.size() == used_count:
-				await Global.world.end_turn()
+				await Global.world.end_player_turn()
 				return
 			
 			await Global.world.roll_dice()
@@ -89,20 +89,26 @@ func _input(event):
 				
 				if mana_area_hovered:
 					print ("using dice for mana")
-					Global.world.spell_ui.add_mana(dragging_dice.current_face.pips)
 					dragging_dice.use()
+					Global.world.spell_ui.add_mana(dragging_dice.current_face.pips)
+					
 				
 				elif hovered_spell_slot != null:
 					if hovered_spell_slot.occupant != null:
 						if dragging_dice.current_face.pips >= hovered_spell_slot.occupant.mana_cost:
-							hovered_spell_slot.occupant.use_spell()
 							dragging_dice.use()
+							hovered_spell_slot.occupant.use_spell()
+							
 				
 				elif not hovered_cell == null:
 					print ("hovered cell not null")
 					
 					if not hovered_cell.occupant == null:
 						if hovered_cell.occupant is Enemy:
+							if hovered_cell.occupant.status_effects.keys().has("invisible"):
+								Global.float_text("Invisible",hovered_cell.global_position,Color.WHITE)
+								return
+							
 							if hovered_cell.is_adjacent(Global.hero_unit.current_cell, true):
 								print ("dice dropped on enemy")
 								dragging_dice.use()
@@ -133,8 +139,9 @@ func _input(event):
 							Global.float_text("Out of Range", Global.hero_unit.global_position)
 						else:
 							print("dragging dice is dropped on empty cell")
-							hovered_cell.move_hero(dragging_dice)
 							dragging_dice.use()
+							await hovered_cell.move_hero(dragging_dice)
+							
 
 					else:
 						print ("couldnt drop dice anywhere")
@@ -187,7 +194,10 @@ func _input(event):
 						print ("Global.relics is now ", Global.relics)
 					hovered_item_slot.clear_slot()
 					
-	
+		elif event.is_action_pressed("enter"):
+			Global.world.shop.visible = false
+			Global.world.new_round()
+		
 #region spell selection controls
 
 

@@ -2,7 +2,7 @@ extends Passive
 
 func set_trigger():
 	print ("enrage trigger set on ", source.unit_name)
-	PassiveManager.connect("enemy_attacked",_on_triggered)
+	SignalBus.connect("enemy_attacked",_on_triggered)
 
 func _on_triggered(unit_damaged : Unit):
 	

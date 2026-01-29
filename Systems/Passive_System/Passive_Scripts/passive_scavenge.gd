@@ -2,10 +2,9 @@ extends Passive
 
 func set_trigger():
 	print ("scavenge trigger set on ", source.unit_name)
-	PassiveManager.connect("enemy_death",_on_triggered)
+	SignalBus.connect("enemy_death",_on_triggered)
 
 func _on_triggered():
-	
 	
 	if not is_instance_valid(source):
 		return

@@ -1,0 +1,41 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://81euce8twlm0"]
+
+[ext_resource type="Texture2D" uid="uid://dvs87trsrc5sq" path="res://Art/Enemy_Sprites/robosnake 2.png" id="1_tbp1t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wir21"]
+atlas = ExtResource("1_tbp1t")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kaugd"]
+atlas = ExtResource("1_tbp1t")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik00p"]
+atlas = ExtResource("1_tbp1t")
+region = Rect2(0, 64, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wir21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kaugd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik00p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik00p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kaugd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wir21")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

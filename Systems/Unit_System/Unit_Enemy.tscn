@@ -1,69 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://ftjtt0qa83u7"]
+[gd_scene format=3 uid="uid://ftjtt0qa83u7"]
 
 [ext_resource type="Script" uid="uid://cp2heh7xwpfq0" path="res://Systems/Unit_System/Unit_Enemy.gd" id="1_y87hi"]
-[ext_resource type="Texture2D" uid="uid://b8of4vq6d1us3" path="res://Art/Enemy_Sprites/Bat.png" id="2_t6kcj"]
+[ext_resource type="SpriteFrames" uid="uid://81euce8twlm0" path="res://Art/Enemy_Sprites/sprite_frames/Slitherbyte_frames.tres" id="2_t6kcj"]
+[ext_resource type="Texture2D" uid="uid://cmyov2mabjadp" path="res://Art/Icon_Sprites/icon_heart.png" id="3_koxc3"]
+[ext_resource type="Texture2D" uid="uid://d3lmbc3uluvo4" path="res://Art/Icon_Sprites/icon_poison.png" id="4_d55k6"]
+[ext_resource type="Texture2D" uid="uid://bcugoaijvi38n" path="res://Art/Icon_Sprites/icon_stun.png" id="5_fa0x6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1xpod"]
 font_size = 21
-
-[sub_resource type="LabelSettings" id="LabelSettings_t6kcj"]
-font_size = 31
-font_color = Color(1, 0.90588236, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_4im1a"]
 font_size = 31
 font_color = Color(1, 0.13333334, 0.27058825, 1)
 
-[node name="Unit_Enemy" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_t6kcj"]
+font_size = 31
+font_color = Color(1, 0.90588236, 0, 1)
+
+[node name="Unit_Enemy" type="Node2D" unique_id=275472339]
 texture_filter = 1
 script = ExtResource("1_y87hi")
 
-[node name="Border_texture_rect" type="TextureRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -104.5
-offset_top = -105.0
-offset_right = 104.5
-offset_bottom = 105.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Unit_Sprite" type="TextureRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 100.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_t6kcj")
-
-[node name="Background_Rect" type="ColorRect" parent="."]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -97.0
-offset_top = -101.0
-offset_right = 98.0
-offset_bottom = 99.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-color = Color(0.33574042, 0.13541216, 0.09526252, 1)
-
-[node name="border_rect" type="ColorRect" parent="."]
+[node name="border_rect" type="ColorRect" parent="." unique_id=29618881]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -79,9 +37,30 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-color = Color(0.67673594, 0.53392845, 0.23370892, 1)
 
-[node name="Unit_Name_Label" type="Label" parent="."]
+[node name="Background_Rect" type="ColorRect" parent="." unique_id=673991097]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -101.0
+offset_right = 98.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0.16565639, 0.16565642, 0.16565639, 1)
+
+[node name="Unit_Sprite" type="AnimatedSprite2D" parent="." unique_id=1905187628]
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("2_t6kcj")
+
+[node name="Unit_Name_Label" type="Label" parent="." unique_id=1266769384]
 visible = false
 offset_left = -87.0
 offset_top = -92.0
@@ -90,20 +69,59 @@ offset_bottom = -62.0
 text = "CARD NAME"
 label_settings = SubResource("LabelSettings_1xpod")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 53.0
-offset_top = -95.0
-offset_right = 93.0
-offset_bottom = -51.0
+[node name="Right_Stats" type="VBoxContainer" parent="." unique_id=233231666]
+offset_left = 63.0
+offset_top = -9.0
+offset_right = 103.0
+offset_bottom = 68.0
+theme_override_constants/separation = -11
 
-[node name="ATK_Label" type="Label" parent="VBoxContainer"]
+[node name="HP_Label" type="Label" parent="Right_Stats" unique_id=461646694]
+layout_mode = 2
+text = "12"
+label_settings = SubResource("LabelSettings_4im1a")
+horizontal_alignment = 1
+
+[node name="ATK_Label" type="Label" parent="Right_Stats" unique_id=91253544]
 layout_mode = 2
 text = "12"
 label_settings = SubResource("LabelSettings_t6kcj")
 horizontal_alignment = 1
 
-[node name="HP_Label" type="Label" parent="VBoxContainer"]
+[node name="Left_Stats" type="HBoxContainer" parent="." unique_id=1303445581]
+offset_left = -74.0
+offset_top = -86.0
+offset_right = 55.0
+theme_override_constants/separation = 43
+
+[node name="MarginContainer" type="MarginContainer" parent="Left_Stats" unique_id=1150525109]
 layout_mode = 2
-text = "12"
-label_settings = SubResource("LabelSettings_4im1a")
-horizontal_alignment = 1
+
+[node name="icon_1_sprite" type="Sprite2D" parent="Left_Stats/MarginContainer" unique_id=1097645438]
+visible = false
+scale = Vector2(5, 5)
+texture = ExtResource("3_koxc3")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Left_Stats" unique_id=1894315242]
+layout_mode = 2
+
+[node name="icon_2_sprite" type="Sprite2D" parent="Left_Stats/MarginContainer2" unique_id=934167194]
+visible = false
+scale = Vector2(5, 5)
+texture = ExtResource("4_d55k6")
+
+[node name="MarginContainer3" type="MarginContainer" parent="Left_Stats" unique_id=531092077]
+layout_mode = 2
+
+[node name="icon_3_sprite" type="Sprite2D" parent="Left_Stats/MarginContainer3" unique_id=933666250]
+visible = false
+scale = Vector2(5, 5)
+texture = ExtResource("5_fa0x6")
+
+[node name="MarginContainer4" type="MarginContainer" parent="Left_Stats" unique_id=210225053]
+layout_mode = 2
+
+[node name="icon_4_sprite" type="Sprite2D" parent="Left_Stats/MarginContainer4" unique_id=1707913132]
+visible = false
+scale = Vector2(5, 5)
+texture = ExtResource("5_fa0x6")

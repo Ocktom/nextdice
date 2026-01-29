@@ -1,0 +1,41 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://w718jh701tvj"]
+
+[ext_resource type="Texture2D" uid="uid://r561stei0pba" path="res://Art/Enemy_Sprites/skelly.png" id="1_515jf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqlpk"]
+atlas = ExtResource("1_515jf")
+region = Rect2(0, 0, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5p165"]
+atlas = ExtResource("1_515jf")
+region = Rect2(0, 42, 40, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yurhf"]
+atlas = ExtResource("1_515jf")
+region = Rect2(0, 84, 40, 42)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqlpk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqlpk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5p165")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yurhf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yurhf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5p165")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

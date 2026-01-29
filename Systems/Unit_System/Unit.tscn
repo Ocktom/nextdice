@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxtiwr8dj6nji"]
+[gd_scene format=3 uid="uid://bxtiwr8dj6nji"]
 
 [ext_resource type="Script" uid="uid://bjndjqq3i8qmi" path="res://Systems/Unit_System/Unit.gd" id="1_n7hr6"]
 
@@ -13,11 +13,11 @@ font_color = Color(1, 0.90588236, 0, 1)
 font_size = 31
 font_color = Color(1, 0.13333334, 0.27058825, 1)
 
-[node name="Card_Node" type="Node2D"]
+[node name="Card_Node" type="Node2D" unique_id=1713004707]
 texture_filter = 1
 script = ExtResource("1_n7hr6")
 
-[node name="Border_texture_rect" type="TextureRect" parent="."]
+[node name="Border_texture_rect" type="TextureRect" parent="." unique_id=141382165]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -30,15 +30,7 @@ offset_bottom = 105.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Unit_Sprite" type="TextureRect" parent="."]
-visible = false
-modulate = Color(0.79503334, 0.3311633, 0.6643504, 0.41960785)
-offset_left = -159.0
-offset_top = -165.0
-offset_right = 166.0
-offset_bottom = 160.0
-
-[node name="Background_Rect" type="ColorRect" parent="."]
+[node name="Background_Rect" type="ColorRect" parent="." unique_id=1558673814]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -55,7 +47,7 @@ size_flags_vertical = 4
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="border_rect" type="ColorRect" parent="."]
+[node name="border_rect" type="ColorRect" parent="." unique_id=300042186]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -73,7 +65,10 @@ size_flags_vertical = 4
 mouse_filter = 2
 color = Color(0.67673594, 0.53392845, 0.23370892, 1)
 
-[node name="Unit_Name_Label" type="Label" parent="."]
+[node name="Unit_Sprite" type="AnimatedSprite2D" parent="." unique_id=1357666848]
+scale = Vector2(5, 5)
+
+[node name="Unit_Name_Label" type="Label" parent="." unique_id=201169778]
 offset_left = -87.0
 offset_top = -92.0
 offset_right = 36.0
@@ -81,19 +76,19 @@ offset_bottom = -62.0
 text = "CARD NAME"
 label_settings = SubResource("LabelSettings_1xpod")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1759986832]
 offset_left = 53.0
 offset_top = -95.0
 offset_right = 93.0
 offset_bottom = -51.0
 
-[node name="ATK_Label" type="Label" parent="VBoxContainer"]
+[node name="ATK_Label" type="Label" parent="VBoxContainer" unique_id=2120265390]
 layout_mode = 2
 text = "12"
 label_settings = SubResource("LabelSettings_3a2ma")
 horizontal_alignment = 1
 
-[node name="HP_Label" type="Label" parent="VBoxContainer"]
+[node name="HP_Label" type="Label" parent="VBoxContainer" unique_id=1766797915]
 layout_mode = 2
 text = "12"
 label_settings = SubResource("LabelSettings_4im1a")

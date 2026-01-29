@@ -1,9 +1,23 @@
 extends Unit
 class_name Enemy
 
-var hp : int
+@onready var unit_sprite: AnimatedSprite2D = $Unit_Sprite
+@onready var hp_label: Label = $Right_Stats/HP_Label
+@onready var atk_label: Label = $Right_Stats/ATK_Label
 
+@onready var icon_1_sprite: Sprite2D = $Left_Stats/MarginContainer/icon_1_sprite
+@onready var icon_2_sprite: Sprite2D = $Left_Stats/MarginContainer2/icon_2_sprite
+@onready var icon_3_sprite: Sprite2D = $Left_Stats/MarginContainer3/icon_3_sprite
+@onready var icon_4_sprite: Sprite2D = $Left_Stats/MarginContainer4/icon_4_sprite
+
+var hp : int
 var max_hp : int
+var poison : int
+var burn : int
+var stun : bool
+var forcefield : bool
+var shield : int
+var invisible : int
 
 var atk := 1
 var atk_range := 1
@@ -97,27 +111,30 @@ func get_attack_cells() -> Array[Cell]:
 	return cells
 
 func plan_action():
-	print("enemy planning action")
 
+	if status_effects.has("root"):
+		Global.float_text("rooted",global_position)
+	
 	if await attempt_attack():
 		await enemy_actions()
 		return
 
-	if await attempt_move():
+	elif await attempt_move():
+		Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_HIT-Zap Metal_HY_PC-002.wav")
 		await enemy_actions()
 		return
 	
 	else:
 		await enemy_actions()
 	
-func attempt_attack() -> bool:
+func attempt_attack():
 	var hero = Global.hero_unit
 	var hero_cell = hero.current_cell
 
 	var attack_cells = get_attack_cells()
 
 	if not attack_cells.has(hero_cell):
-		return false
+		return null
 
 	print("enemy ", self, " attacking")
 	await Global.timer(wait_time)
@@ -128,9 +145,13 @@ func attempt_attack() -> bool:
 	)
 	turn_bonus = 0
 	await enemy_actions()
-	return true
+	return hero
 
 func attempt_move() -> bool:
+	
+	if status_effects.has("root"):
+		return false
+	
 	var hero_cell = Global.hero_unit.current_cell
 	var my_cell = current_cell
 
@@ -200,13 +221,13 @@ func attempt_move() -> bool:
 
 	return true
 	
-func enemy_actions():
+func enemy_actions(attack_target: Node2D = null):
 	
 	if action_1_name != "":
-		await ActionManager.request_action(action_1_name, action_1_context, self)
+		await ActionManager.request_action(action_1_name, action_1_context, self, attack_target)
 	
 	if action_2_name != "":
-		await ActionManager.request_action(action_1_name, action_2_context, self)
+		await ActionManager.request_action(action_2_name, action_2_context, self, attack_target)
 
 func take_attack(amount : int):
 	
@@ -216,10 +237,11 @@ func take_attack(amount : int):
 		dying_this_turn = true
 	
 	print ("was damaged")
+	Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNImpt_EXPLOSION-Sand Impact_HY_PC-005.wav")
 	Global.animate(self,Enums.Anim.SHAKE)
 	await Global.animate(self,Enums.Anim.FLASH,Color.RED)
 	await Global.float_text("Damage",global_position,Color.RED)
-	await Global.timer(.5)
+	await Global.timer(.3)
 	
 	if dying_this_turn:
 		print ("unit has less then 1 hp, calling enemy death on manager")
@@ -244,8 +266,37 @@ func take_non_attack_damage(amount : int):
 	
 	update()
 
+func end_turn_effects():
+	var decreasing_effects := ["poison","burn","root","stun","invisible"]
+	
+	for x in decreasing_effects:
+		if status_effects.keys().has(x):
+			if status_effects[x] < 1:
+				status_effects.erase(x)
+			else:
+				status_effects[x] -= 1
+	update()
+		
 func update():
 	
 	unit_name_label.text = str(unit_name)
 	hp_label.text = str(hp)
 	atk_label.text = str(atk)
+	
+	var status_icons : Array = [icon_1_sprite,icon_2_sprite,icon_3_sprite,icon_4_sprite]
+	
+	for x in status_icons:
+		x.visible = false
+		x.texture = null
+	
+	for x in status_effects.keys():
+		var ind = status_effects.keys().find(x)
+		status_icons[ind].texture = load(str("res://Art/Icon_Sprites/icon_",x,".png"))
+		status_icons[ind].visible = true
+	
+	if status_effects.keys().has("invisible"):
+		unit_sprite.modulate = Color(1.0, 1.0, 1.0, 0.424)
+	else:
+		unit_sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		
+	

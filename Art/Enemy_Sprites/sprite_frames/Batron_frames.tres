@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bbkmsqbf8f0kn"]
+
+[ext_resource type="Texture2D" uid="uid://bopdxtvpomekm" path="res://Art/Enemy_Sprites/batbot big.png" id="1_8feo2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2phi"]
+atlas = ExtResource("1_8feo2")
+region = Rect2(0, 0, 44, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qn7b"]
+atlas = ExtResource("1_8feo2")
+region = Rect2(0, 44, 44, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmsh4"]
+atlas = ExtResource("1_8feo2")
+region = Rect2(0, 88, 44, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3qhw"]
+atlas = ExtResource("1_8feo2")
+region = Rect2(0, 132, 44, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3vyb"]
+atlas = ExtResource("1_8feo2")
+region = Rect2(0, 176, 44, 44)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2phi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qn7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmsh4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3qhw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3vyb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

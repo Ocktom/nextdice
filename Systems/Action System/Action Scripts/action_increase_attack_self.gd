@@ -2,7 +2,7 @@ extends Action
 
 var action_name := "increase_attack_self"
 
-func execute(context: Dictionary, action_source: Node = null):
+func execute(context: Dictionary, action_source: Node = null,action_target: Node = null):
 	
 	print ("executing action script of ", action_name, " with context ", context)
 	

@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dy1serwqwfbkw"]
+
+[ext_resource type="Texture2D" uid="uid://cc8mrlw4pfivf" path="res://Art/Enemy_Sprites/gargoyle9.png" id="1_q2j5a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs4gn"]
+atlas = ExtResource("1_q2j5a")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpdwm"]
+atlas = ExtResource("1_q2j5a")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_df1nu"]
+atlas = ExtResource("1_q2j5a")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1f4vs"]
+atlas = ExtResource("1_q2j5a")
+region = Rect2(0, 144, 48, 48)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xs4gn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpdwm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_df1nu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1f4vs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

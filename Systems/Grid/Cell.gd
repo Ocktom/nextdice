@@ -4,6 +4,9 @@ class_name Cell
 @onready var cell_color : ColorRect = $Cell_Color
 @onready var cell_area: Area2D = $Cell_Area
 @onready var cell_highlight: ColorRect = $Cell_Highlight
+@onready var cell_effect_ov: TextureRect = $Cell_Effect_OV
+
+var cell_effect : Enums.CellEffect
 
 var highlight : bool :
 	set(new_value):
@@ -42,9 +45,15 @@ func fill_with_unit(unit : Unit):
 	occupant = unit
 	unit.current_cell = self
 	unit.global_position = global_position
+	
+	if cell_effect == Enums.CellEffect.WEB:
+		ActionManager.create_action("status_effect",{"color" : "WHITE","status_name" : "ROOT", "amount" : 1 },self,occupant)
+		cell_effect = Enums.CellEffect.NONE
+		update()
 
 func move_hero(dice : Dice):
 	
+	Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_MOVEMENT-Retro Jump_HY_PC-001.wav")
 	Global.hero_unit.current_cell.clear_cell()
 	fill_with_unit(Global.hero_unit)
 
@@ -69,7 +78,6 @@ func _on_mouse_entered():
 			for x in occupant.get_attack_cells():
 				x.highlight = true
 			
-
 func _on_mouse_exited():
 	if Global.game_state == Enums.GameState.PLAYER_TURN:
 		
@@ -94,3 +102,12 @@ func is_adjacent(cell : Cell, include_diagonal := false) -> bool:
 		return true
 	else:
 		return false
+
+func update():
+	
+	cell_effect_ov.visible = true
+	match cell_effect:
+		Enums.CellEffect.NONE: cell_effect_ov.visible = false
+		Enums.CellEffect.WEB: cell_effect_ov.texture = load("res://Art/spiderweb.png")
+		Enums.CellEffect.FIRE: cell_effect_ov.texture = load("res://Art/fire_cell.png")
+		

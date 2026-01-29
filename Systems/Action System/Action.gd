@@ -9,5 +9,5 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func execute(context: Dictionary, action_source : Node = null):
+func execute(context: Dictionary, action_source : Node = null, action_target: Node = null):
 	pass

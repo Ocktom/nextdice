@@ -1,8 +1,8 @@
 extends Node
 
 var data : Dictionary = {
-  "Rat": {
-	"enemy_name": "Rat",
+  "Ratron": {
+	"enemy_name": "Ratron",
 	"hp": 2,
 	"atk": 1,
 	"atk_range": 1,
@@ -12,10 +12,11 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "scavenge"
+	"passive_1_name": "scavenge",
+	"level_set": 1
   },
-  "Bat": {
-	"enemy_name": "Bat",
+  "Batron": {
+	"enemy_name": "Batron",
 	"hp": 4,
 	"atk": 1,
 	"atk_range": 2,
@@ -25,25 +26,11 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": ""
+	"passive_1_name": "",
+	"level_set": 1
   },
-  "Bee": {
-	"enemy_name": "Bee",
-	"hp": 3,
-	"atk": 3,
-	"atk_range": 2,
-	"movement": 3,
-	"range_type": "ALL",
-	"action_1_name": "heal_random_enemy",
-	"action_1_context": {
-	  "amount": 5
-	},
-	"action_2_name": "",
-	"action_2_context": "",
-	"passive_1_name": ""
-  },
-  "Boar": {
-	"enemy_name": "Boar",
+  "Goyletron": {
+	"enemy_name": "Goyletron",
 	"hp": 8,
 	"atk": 3,
 	"atk_range": 4,
@@ -53,47 +40,120 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "enrage"
+	"passive_1_name": "enrage",
+	"level_set": 2
   },
-  "Scorpion": {
-	"enemy_name": "Scorpion",
+  "Spectroid": {
+	"enemy_name": "Spectroid",
 	"hp": 5,
 	"atk": 2,
 	"atk_range": 3,
 	"movement": 3,
 	"range_type": "DIAG",
-	"action_1_name": "increase_attack_self",
-	"action_1_context": {
-	  "amount": 2
-	},
+	"action_1_name": "",
+	"action_1_context":"",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": ""
+	"passive_1_name": "ghostly",
+	"level_set": 2
   },
-  "Spider": {
-	"enemy_name": "Spider",
+  "Spidroid": {
+	"enemy_name": "Spidroid",
 	"hp": 4,
 	"atk": 3,
 	"atk_range": 3,
 	"movement": 3,
 	"range_type": "CARDINAL",
-	"action_1_name": "",
-	"action_1_context": "",
+	"action_1_name": "cell_effect",
+	"action_1_context": {"cell_effect": "WEB"},
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": ""
+	"passive_1_name": "",
+	"level_set": 2
   },
-  "Snake": {
-	"enemy_name": "Snake",
+  "Slitherbyte": {
+	"enemy_name": "Slitherbyte",
 	"hp": 5,
 	"atk": 3,
 	"atk_range": 3,
 	"movement": 8,
 	"range_type": "DIAG",
+	"action_1_name": "hero_status_effect",
+	"action_1_context": {"status_name" : "POISON","amount" : 3, "color" : "GREEN"},
+	"action_2_name": "",
+	"action_2_context": "",
+	"passive_1_name": "",
+	"level_set": 2
+  },
+  "Necrotron": {
+	"enemy_name": "Necrotron",
+	"hp": 4,
+	"atk": 0,
+	"atk_range": 0,
+	"movement": 3,
+	"range_type": "ALL",
+	"action_1_name": "spawn_unit",
+	"action_1_context": {
+	  "unit": "Skeltron"},
+	"action_2_name": "",
+	"action_2_context": "",
+	"passive_1_name": "",
+	"level_set": 3
+  },
+  "Skeltron": {
+	"enemy_name": "Skeltron",
+	"hp": 3,
+	"atk": 1,
+	"atk_range": 3,
+	"movement": 2,
+	"range_type": "CARDINAL",
 	"action_1_name": "",
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": ""
+	"passive_1_name": "",
+	"level_set": 1
+  },
+  "Roblob": {
+	"enemy_name": "Roblob",
+	"hp": 5,
+	"atk": 2,
+	"atk_range": 2,
+	"movement": 3,
+	"range_type": "ALL",
+	"action_1_name": "",
+	"action_1_context": "",
+	"action_2_name": "",
+	"action_2_context": "",
+	"passive_1_name": "",
+	"level_set": 3
+  },
+  "Protech": {
+	"enemy_name": "Protech",
+	"hp": 5,
+	"atk": 1,
+	"atk_range": 4,
+	"movement": 4,
+	"range_type": "DIAG",
+	"action_1_name": "",
+	"action_1_context": "",
+	"action_2_name": "",
+	"action_2_context": "",
+	"passive_1_name": "",
+	"level_set": 3
+  },
+  "Roblobito": {
+	"enemy_name": "Roblobito",
+	"hp": 2,
+	"atk": 1,
+	"atk_range": 1,
+	"movement": 2,
+	"range_type": "CARDINAL",
+	"action_1_name": "",
+	"action_1_context": "",
+	"action_2_name": "",
+	"action_2_context": "",
+	"passive_1_name": "",
+	"level_set": 3
   }
 }
