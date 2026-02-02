@@ -49,7 +49,9 @@ func use():
 	
 	used_this_turn = true
 	grey_out = true
-
+	
+	print ("dice used, current face gear is ", current_face.gear)
+	
 func roll():
 	
 	#dice_color.color = Global.colors.pick_random()

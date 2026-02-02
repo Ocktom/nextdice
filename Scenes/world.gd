@@ -25,7 +25,11 @@ func new_round():
 	print ("new round started, round number is ", Global.round_number)
 	await spawn_round_enemies()
 	start_player_turn()
-
+	
+	for x in Global.player_dice:
+		for y in x.faces:
+			GearManager.insert_gear("great_axe",y)
+	
 func spawn_hero():
 	
 	var starting_cell = Global.grid.all_cells.pick_random()
