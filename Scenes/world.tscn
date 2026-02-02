@@ -7,7 +7,9 @@
 [ext_resource type="Script" uid="uid://c7vn0i6aaeqys" path="res://Systems/Spell System/spell_slots.gd" id="3_o06y3"]
 [ext_resource type="PackedScene" uid="uid://bgc3x1l871e0" path="res://Systems/Player_UI/Player_UI.tscn" id="5_fo5ed"]
 [ext_resource type="PackedScene" uid="uid://dmb5i6rmsrgme" path="res://Systems/Spell System/Spell_Slot.tscn" id="6_5ukr8"]
+[ext_resource type="PackedScene" uid="uid://dt8vx5g8yasfa" path="res://Systems/Gear System/Gear_Slot.tscn" id="6_5v1tr"]
 [ext_resource type="PackedScene" uid="uid://dr1kdty3xqiul" path="res://Systems/Item System/Shop_Screen.tscn" id="8_k7acu"]
+[ext_resource type="Texture2D" uid="uid://d1i4ktdbjkhhf" path="res://Art/big grid.png" id="10_0fj1v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_o06y3"]
 font_size = 96
@@ -20,6 +22,20 @@ font_size = 106
 
 [node name="World" type="Node2D" unique_id=448514010]
 script = ExtResource("1_8j60k")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=259821961]
+offset_left = 4.0
+offset_top = -58.0
+offset_right = 1930.0
+offset_bottom = 1103.0
+mouse_filter = 2
+color = Color(0.2277165, 0.08377194, 0.14807004, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=668567970]
+texture_filter = 1
+position = Vector2(961, 563)
+scale = Vector2(5.2, 5.2)
+texture = ExtResource("10_0fj1v")
 
 [node name="Grid" parent="." unique_id=1969396144 instance=ExtResource("3_5a7ea")]
 position = Vector2(514, 205)
@@ -68,29 +84,81 @@ shape = SubResource("RectangleShape2D_k7acu")
 
 [node name="DiceLayer" type="Node2D" parent="." unique_id=763949601]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DiceLayer" unique_id=2056971714]
+[node name="ColorRect" type="ColorRect" parent="DiceLayer" unique_id=1719198044]
+offset_left = 69.0
+offset_top = 118.0
+offset_right = 169.0
+offset_bottom = 416.0
+mouse_filter = 2
+color = Color(0.3106152, 0.20645401, 0.31056988, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="DiceLayer" unique_id=1441239665]
+offset_left = 178.0
+offset_top = 121.0
+offset_right = 269.0
+offset_bottom = 414.0
+mouse_filter = 2
+color = Color(0.3106152, 0.20645401, 0.31056988, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="DiceLayer" unique_id=1269811384]
+offset_left = 276.0
+offset_top = 121.0
+offset_right = 367.0
+offset_bottom = 414.0
+mouse_filter = 2
+color = Color(0.3106152, 0.20645401, 0.31056988, 1)
+
+[node name="VBoxContainer" type="HBoxContainer" parent="DiceLayer" unique_id=1772261578]
 offset_left = 116.0
-offset_top = 99.0
-offset_right = 156.0
-offset_bottom = 307.0
+offset_top = 368.0
+offset_right = 324.0
+offset_bottom = 576.0
 theme_override_constants/separation = 104
 
-[node name="Dice" parent="DiceLayer/VBoxContainer" unique_id=1076685506 instance=ExtResource("2_go701")]
+[node name="Dice" parent="DiceLayer/VBoxContainer" unique_id=1076685506 node_paths=PackedStringArray("gear_slot_1", "gear_slot_2") instance=ExtResource("2_go701")]
 layout_mode = 2
+gear_slot_1 = NodePath("../../GearLayer/Gear_Slot")
+gear_slot_2 = NodePath("../../GearLayer/Gear_Slot2")
 
-[node name="Dice2" parent="DiceLayer/VBoxContainer" unique_id=591512051 instance=ExtResource("2_go701")]
+[node name="Dice2" parent="DiceLayer/VBoxContainer" unique_id=591512051 node_paths=PackedStringArray("gear_slot_1", "gear_slot_2") instance=ExtResource("2_go701")]
 layout_mode = 2
+gear_slot_1 = NodePath("../../GearLayer/Gear_Slot3")
+gear_slot_2 = NodePath("../../GearLayer/Gear_Slot4")
 
-[node name="Dice3" parent="DiceLayer/VBoxContainer" unique_id=51240406 instance=ExtResource("2_go701")]
+[node name="Dice3" parent="DiceLayer/VBoxContainer" unique_id=51240406 node_paths=PackedStringArray("gear_slot_1", "gear_slot_2") instance=ExtResource("2_go701")]
 layout_mode = 2
+gear_slot_1 = NodePath("../../GearLayer/Gear_Slot5")
+gear_slot_2 = NodePath("../../GearLayer/Gear_Slot6")
 
 [node name="Sum_label" type="Label" parent="DiceLayer" unique_id=930167674]
+visible = false
 offset_left = 222.0
 offset_top = 202.0
 offset_right = 343.0
 offset_bottom = 348.0
 text = "13"
 label_settings = SubResource("LabelSettings_k7acu")
+
+[node name="GearLayer" type="Node2D" parent="DiceLayer" unique_id=250534339]
+position = Vector2(0, 89)
+
+[node name="Gear_Slot" parent="DiceLayer/GearLayer" unique_id=4427040 instance=ExtResource("6_5v1tr")]
+position = Vector2(119, 178)
+
+[node name="Gear_Slot2" parent="DiceLayer/GearLayer" unique_id=2143112731 instance=ExtResource("6_5v1tr")]
+position = Vector2(119, 84)
+
+[node name="Gear_Slot3" parent="DiceLayer/GearLayer" unique_id=199601335 instance=ExtResource("6_5v1tr")]
+position = Vector2(224, 181)
+
+[node name="Gear_Slot4" parent="DiceLayer/GearLayer" unique_id=1087725031 instance=ExtResource("6_5v1tr")]
+position = Vector2(224, 86)
+
+[node name="Gear_Slot5" parent="DiceLayer/GearLayer" unique_id=972146498 instance=ExtResource("6_5v1tr")]
+position = Vector2(321, 182)
+
+[node name="Gear_Slot6" parent="DiceLayer/GearLayer" unique_id=40226783 instance=ExtResource("6_5v1tr")]
+position = Vector2(321, 85)
 
 [node name="Audio" parent="." unique_id=1516609735 instance=ExtResource("1_a02cp")]
 

@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://brgc3jws8hxbp"]
+[gd_scene format=3 uid="uid://b2gvcghgcp7ro"]
 
-[ext_resource type="Script" uid="uid://cc3t5fsan437" path="res://Systems/Item System/Item.gd" id="1_1ec0x"]
+[ext_resource type="Script" uid="uid://dfwe7of8ams5m" path="res://Systems/Gear System/Gear.gd" id="1_q3gjq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1xpod"]
 font_size = 21
@@ -8,11 +8,11 @@ font_size = 21
 [sub_resource type="LabelSettings" id="LabelSettings_erawd"]
 font_size = 66
 
-[node name="Shop_Item" type="Node2D" unique_id=1884501501]
+[node name="Gear" type="Node2D" unique_id=1035596751]
 texture_filter = 1
-script = ExtResource("1_1ec0x")
+script = ExtResource("1_q3gjq")
 
-[node name="Border_texture_rect" type="TextureRect" parent="." unique_id=792910959]
+[node name="Border_texture_rect" type="TextureRect" parent="." unique_id=1711863981]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -24,9 +24,8 @@ offset_right = 104.5
 offset_bottom = 105.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=396901561]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1905157465]
 visible = false
 modulate = Color(0.79503334, 0.3311633, 0.6643504, 0.41960785)
 offset_left = -159.0
@@ -34,7 +33,7 @@ offset_top = -165.0
 offset_right = 166.0
 offset_bottom = 160.0
 
-[node name="Background_Rect" type="ColorRect" parent="." unique_id=1438409904]
+[node name="Background_Rect" type="ColorRect" parent="." unique_id=198365435]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -50,9 +49,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
 
-[node name="border_rect" type="ColorRect" parent="." unique_id=1194857570]
+[node name="border_rect" type="ColorRect" parent="." unique_id=621753549]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -70,16 +68,15 @@ size_flags_vertical = 4
 mouse_filter = 2
 color = Color(0.67673594, 0.53392845, 0.23370892, 1)
 
-[node name="Item_Name_Label" type="Label" parent="." unique_id=174588971]
+[node name="Item_Name_Label" type="Label" parent="." unique_id=355397561]
 offset_left = -64.0
 offset_top = -92.0
 offset_right = 59.0
 offset_bottom = -62.0
 text = "CARD NAME"
 label_settings = SubResource("LabelSettings_1xpod")
-metadata/_edit_use_anchors_ = true
 
-[node name="Cost_Label" type="Label" parent="." unique_id=488472999]
+[node name="Cost_Label" type="Label" parent="." unique_id=1611781883]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -93,4 +90,3 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "6"
 label_settings = SubResource("LabelSettings_erawd")
-metadata/_edit_use_anchors_ = true

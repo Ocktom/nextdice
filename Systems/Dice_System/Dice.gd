@@ -1,6 +1,11 @@
 extends Control
 class_name Dice
 
+@export var gear_slot_1: Gear_Slot
+@export var gear_slot_2: Gear_Slot
+
+var gear_slots : Array [Gear_Slot]
+
 var faces : Array [Face]
 var used_this_turn : bool :
 	set(new_value):
@@ -24,6 +29,7 @@ var current_face : Face
 
 func _ready() -> void:
 	
+	gear_slots = [gear_slot_1,gear_slot_2]
 	
 	Global.player_dice.append(self)
 	

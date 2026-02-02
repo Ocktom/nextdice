@@ -4,6 +4,7 @@ var hovered_dice: Dice = null
 var hovered_cell : Cell = null
 var hovered_spell_slot : Spell_Slot = null
 var hovered_item_slot : Item_Slot = null
+var hovered_gear_slot : Gear_Slot = null
 
 var mana_area_hovered := false
 

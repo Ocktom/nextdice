@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://ege2upi1kcjk"]
+
+[ext_resource type="Texture2D" uid="uid://d22x5drag5vqa" path="res://Art/Enemy_Sprites/dembot_sprite_sheet.png" id="1_oumvh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvbb8"]
+atlas = ExtResource("1_oumvh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qilnl"]
+atlas = ExtResource("1_oumvh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm0mk"]
+atlas = ExtResource("1_oumvh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jypyp"]
+atlas = ExtResource("1_oumvh")
+region = Rect2(96, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvbb8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qilnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm0mk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jypyp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

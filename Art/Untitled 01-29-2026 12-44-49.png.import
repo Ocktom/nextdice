@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df8uaisyrp4al"
-path="res://.godot/imported/batbot big.png-2a5d0e8054119ef9667500e826cf1f9f.ctex"
+uid="uid://vks0q3f365d7"
+path="res://.godot/imported/Untitled 01-29-2026 12-44-49.png-c426b244337bec108c8a4291655041d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Enemy_Sprites/batbot big.png"
-dest_files=["res://.godot/imported/batbot big.png-2a5d0e8054119ef9667500e826cf1f9f.ctex"]
+source_file="res://Art/Untitled 01-29-2026 12-44-49.png"
+dest_files=["res://.godot/imported/Untitled 01-29-2026 12-44-49.png-c426b244337bec108c8a4291655041d8.ctex"]
 
 [params]
 

@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://g3dp16v3wnq0"]
+[gd_scene format=3 uid="uid://g3dp16v3wnq0"]
 
 [ext_resource type="Script" uid="uid://i0wi31w6u4bn" path="res://Systems/Item System/Item_Slot.gd" id="1_i6jkv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1m28"]
 size = Vector2(203, 203)
 
-[node name="Shop_Slot" type="Node2D"]
+[node name="Shop_Slot" type="Node2D" unique_id=1219974465]
 script = ExtResource("1_i6jkv")
 
-[node name="Slot_Color" type="ColorRect" parent="."]
+[node name="Slot_Color" type="ColorRect" parent="." unique_id=858235962]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -23,8 +23,8 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.5183813, 0.42700657, 0.5606931, 1)
 
-[node name="Slot_Area" type="Area2D" parent="."]
+[node name="Slot_Area" type="Area2D" parent="." unique_id=84360789]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Slot_Area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slot_Area" unique_id=494197808]
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_m1m28")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df8uaisyrp4al"
-path="res://.godot/imported/batbot big.png-2a5d0e8054119ef9667500e826cf1f9f.ctex"
+uid="uid://gjnkvuw8fhcd"
+path="res://.godot/imported/witch(1).png-576ed29fd9cb938e85b73039cee1073e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Enemy_Sprites/batbot big.png"
-dest_files=["res://.godot/imported/batbot big.png-2a5d0e8054119ef9667500e826cf1f9f.ctex"]
+source_file="res://Art/witch(1).png"
+dest_files=["res://.godot/imported/witch(1).png-576ed29fd9cb938e85b73039cee1073e.ctex"]
 
 [params]
 
