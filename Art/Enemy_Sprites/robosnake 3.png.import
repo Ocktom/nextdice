@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qabahperxa1c"
-path="res://.godot/imported/robosnake 2.png-b80616648783fc4529fccbb6894e8ba5.ctex"
+uid="uid://ckui8dwjusg6c"
+path="res://.godot/imported/robosnake 3.png-5cc5bde2309ef0017663a4277e26d105.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Enemy_Sprites/robosnake 2.png"
-dest_files=["res://.godot/imported/robosnake 2.png-b80616648783fc4529fccbb6894e8ba5.ctex"]
+source_file="res://Art/Enemy_Sprites/robosnake 3.png"
+dest_files=["res://.godot/imported/robosnake 3.png-5cc5bde2309ef0017663a4277e26d105.ctex"]
 
 [params]
 

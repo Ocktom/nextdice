@@ -113,7 +113,7 @@ func _input(event):
 							if hovered_cell.is_adjacent(Global.hero_unit.current_cell, true):
 								print ("dice dropped on enemy")
 								dragging_dice.use()
-								ActionManager.request_action("attack",{"target" : hovered_cell.occupant, "amount" : dragging_dice.current_face.pips},Global.hero_unit)
+								ActionManager.request_action("dice_attack",{"target" : hovered_cell.occupant, "amount" : dragging_dice.current_face.pips, "dice" : dragging_dice},Global.hero_unit)
 								Global.world.call_deferred("victory_check")
 							else:
 								Global.float_text("Out of Range", Global.hero_unit.global_position)

@@ -74,6 +74,10 @@ size_flags_vertical = 4
 mouse_filter = 2
 color = Color(0.67673594, 0.53392845, 0.23370892, 1)
 
+[node name="Effects_Sprite" type="AnimatedSprite2D" parent="." unique_id=246867172]
+visible = false
+scale = Vector2(4, 4)
+
 [node name="Unit_Name_Label" type="Label" parent="." unique_id=1960846644]
 offset_left = -87.0
 offset_top = -92.0

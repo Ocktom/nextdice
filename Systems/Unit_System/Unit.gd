@@ -18,6 +18,7 @@ var status_effects : Dictionary = {}
 @onready var unit_name_label : Label = $Unit_Name_Label
 @onready var background_rect: ColorRect = $Background_Rect
 @onready var border_rect: ColorRect = $border_rect
+@onready var effects_sprite: AnimatedSprite2D = $Effects_Sprite
 
 func _ready():
 	

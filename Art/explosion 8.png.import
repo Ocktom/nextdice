@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cu8y1bmt7hs7j"
-path="res://.godot/imported/spider.png-28357693e4c7b3f9ce0da69a9d56e889.ctex"
+uid="uid://bbepftcljytvl"
+path="res://.godot/imported/explosion 8.png-27188b85b7c0bf17e85e87b15443935e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Enemy_Sprites/spider.png"
-dest_files=["res://.godot/imported/spider.png-28357693e4c7b3f9ce0da69a9d56e889.ctex"]
+source_file="res://Art/explosion 8.png"
+dest_files=["res://.godot/imported/explosion 8.png-27188b85b7c0bf17e85e87b15443935e.ctex"]
 
 [params]
 

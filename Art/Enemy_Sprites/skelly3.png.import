@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6x0qg4abb36"
-path="res://.godot/imported/skelly.png-0227a532af4c4b2c88c3ef9f2c8784fb.ctex"
+uid="uid://b4phlwvgssen4"
+path="res://.godot/imported/skelly3.png-25613af828f276f1176008df9b8ca2f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Enemy_Sprites/skelly.png"
-dest_files=["res://.godot/imported/skelly.png-0227a532af4c4b2c88c3ef9f2c8784fb.ctex"]
+source_file="res://Art/Enemy_Sprites/skelly3.png"
+dest_files=["res://.godot/imported/skelly3.png-25613af828f276f1176008df9b8ca2f6.ctex"]
 
 [params]
 

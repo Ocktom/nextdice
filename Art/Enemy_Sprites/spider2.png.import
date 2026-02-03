@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg8vsl6vqby4q"
-path="res://.godot/imported/robot_rat.png-175f7482ba1319dfd2c4c1f070581491.ctex"
+uid="uid://c0oo18kwyysx7"
+path="res://.godot/imported/spider2.png-8f7f9ecbee0d23871771c8f35970fd5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Enemy_Sprites/robot_rat.png"
-dest_files=["res://.godot/imported/robot_rat.png-175f7482ba1319dfd2c4c1f070581491.ctex"]
+source_file="res://Art/Enemy_Sprites/spider2.png"
+dest_files=["res://.godot/imported/spider2.png-8f7f9ecbee0d23871771c8f35970fd5d.ctex"]
 
 [params]
 

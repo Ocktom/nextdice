@@ -84,6 +84,61 @@ func get_adjacent_cells(cell: Cell, include_diagonal : bool = false) -> Array[Ce
 
 	return adjacent_cells
 
+func get_cleave_targets(attacker_cell: Cell, target_cell: Cell) -> Array[Cell]:
+	var cleave_cells : Array[Cell] = []
+
+	var a = attacker_cell.cell_vector
+	var t = target_cell.cell_vector
+
+	var dx = t.x - a.x
+	var dy = t.y - a.y
+
+	# Normalize direction to -1, 0, or 1
+	dx = sign(dx)
+	dy = sign(dy)
+
+	# If attacker and target are on the same cell (shouldn't happen)
+	if dx == 0 and dy == 0:
+		return cleave_cells
+
+	# Perpendicular directions
+	# (dx, dy) rotated 90° left and right
+	var perp_1 = Vector2i(-dy, dx)
+	var perp_2 = Vector2i(dy, -dx)
+
+	var p1 = t + perp_1
+	var p2 = t + perp_2
+
+	if is_in_bounds(p1):
+		cleave_cells.append(grid[p1.x][p1.y])
+
+	if is_in_bounds(p2):
+		cleave_cells.append(grid[p2.x][p2.y])
+
+	return cleave_cells
+
+func get_impale_target(attacker_cell: Cell, target_cell: Cell) -> Cell:
+	var a = attacker_cell.cell_vector
+	var t = target_cell.cell_vector
+
+	var dx = t.x - a.x
+	var dy = t.y - a.y
+
+	# Normalize direction to -1, 0, or 1
+	dx = sign(dx)
+	dy = sign(dy)
+
+	# Same-cell safety (shouldn't happen)
+	if dx == 0 and dy == 0:
+		return null
+
+	# Cell directly behind the target (same direction again)
+	var behind_pos = t + Vector2i(dx, dy)
+
+	if not is_in_bounds(behind_pos):
+		return null
+
+	return grid[behind_pos.x][behind_pos.y]	
 
 func get_row(cell: Cell) -> Array[Cell]:
 	var y = cell.cell_vector.y
