@@ -8,6 +8,7 @@ class_name Item_Slot
 @onready var upgrade_sprite: Sprite2D = $Upgrade_Sprite
 @onready var dice_sprite: AnimatedSprite2D = $Dice_Sprite
 
+var dice_face_picked: Face
 
 var occupant : Item
 
@@ -19,6 +20,7 @@ func _ready() -> void:
 func clear_slot():
 	Global.world.shop.item_layer.remove_child(occupant)
 	occupant = null
+	dice_face_picked = null
 	
 func fill_with_item(item : Item):
 	
@@ -30,16 +32,21 @@ func fill_with_item(item : Item):
 func fill_with_upgrade(item : Item, dice_face : Face):
 	
 	occupant = item
+	dice_face_picked = dice_face
+	
 	item.current_slot = self
 	item.global_position = global_position
 	Global.world.shop.item_layer.add_child(item)
 	
-	dice_sprite.frame = dice_face.pips
+	dice_sprite.frame = dice_face.pips-1
+	print ("pips on item are ", dice_face.pips-1)
 	dice_sprite.visible = true
 	
-	upgrade_sprite.texture = load(str("res://Art/Upgrade_Sprites/",item.item_name,".png"))
-	dice_sprite.visible = true
+	var sprite_path = str("res://Art/Upgrade_Sprites/",item.item_name,".png")
+	print ("loading sprite of ", sprite_path)
+	upgrade_sprite.texture = load(sprite_path)
 	
+	upgrade_sprite.visible = true
 	relic_sprite.visible = false
 	
 func _on_mouse_entered():

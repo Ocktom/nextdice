@@ -62,13 +62,14 @@ func roll():
 	
 	#dice_color.color = Global.colors.pick_random()
 	current_face = faces.pick_random()
-	face_node.face_sprite.frame = current_face.pips
 	await update()
 
 func setup_visuals():
 	pass
 	
 func update():
+	
+	print ("updating dice current face, its upgrade dict is ", current_face.upgrade)
 	face_node.face_sprite.frame = current_face.pips-1
 	
 	var upgrade = current_face.upgrade

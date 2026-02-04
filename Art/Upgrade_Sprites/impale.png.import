@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c007maccddbmi"
-path="res://.godot/imported/great_axe.png-7b1dde997a26f6ab8236f3b5b5f4949a.ctex"
+uid="uid://b3t74c2egmk04"
+path="res://.godot/imported/impale.png-f3598e47cd632e0df96ff80b5de15347.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Upgrade_Sprites/great_axe.png"
-dest_files=["res://.godot/imported/great_axe.png-7b1dde997a26f6ab8236f3b5b5f4949a.ctex"]
+source_file="res://Art/Upgrade_Sprites/impale.png"
+dest_files=["res://.godot/imported/impale.png-f3598e47cd632e0df96ff80b5de15347.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3t74c2egmk04"
-path="res://.godot/imported/spear.png-76ae55f5011065bf0744cf342d09310b.ctex"
+uid="uid://c007maccddbmi"
+path="res://.godot/imported/cleave.png-945bfd7ccbf003873a90dfdd245e171d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Upgrade_Sprites/spear.png"
-dest_files=["res://.godot/imported/spear.png-76ae55f5011065bf0744cf342d09310b.ctex"]
+source_file="res://Art/Upgrade_Sprites/cleave.png"
+dest_files=["res://.godot/imported/cleave.png-945bfd7ccbf003873a90dfdd245e171d.ctex"]
 
 [params]
 

@@ -189,11 +189,7 @@ func _input(event):
 		if event.is_action_pressed("left_mouse"):
 			if hovered_item_slot != null:
 				if hovered_item_slot.occupant != null:
-					print ("PURCHASED ITEM IS ", hovered_item_slot.occupant)
-					if hovered_item_slot.occupant.item_type == Enums.ItemType.RELIC:
-						Global.relics.append(hovered_item_slot.occupant)
-						print ("Global.relics is now ", Global.relics)
-					hovered_item_slot.clear_slot()
+					Global.world.shop.buy_item(hovered_item_slot)
 					
 		elif event.is_action_pressed("enter"):
 			Global.world.shop.visible = false

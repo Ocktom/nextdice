@@ -26,12 +26,6 @@ func new_round():
 	await spawn_round_enemies()
 	start_player_turn()
 	
-	for x in Global.player_dice:
-		for y in x.faces:
-			await UpgradeManager.insert_upgrade("impale",y)
-			await UpgradeManager.insert_upgrade("cleave",y)
-		x.update()
-
 func spawn_hero():
 	
 	var starting_cell = Global.grid.all_cells.pick_random()

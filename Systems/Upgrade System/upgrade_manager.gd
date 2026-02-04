@@ -2,6 +2,7 @@ extends Node
 
 var upgrade_data_dictionary : Dictionary
 var upgrade_names = upgrade_data_dictionary.keys()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
@@ -11,7 +12,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func insert_upgrade(upgrade_name : String, dice_face: Face):
-	print("inserting upgrade")
+	print("inserting upgrade of ", upgrade_name, " into dice face of ", dice_face)
 	var upgrade_data = upgrade_data_dictionary[upgrade_name]
 	dice_face.upgrade[upgrade_name] = upgrade_data
 	
