@@ -15,7 +15,7 @@ var player_dice : Array
 var all_units : Array [Unit]
 var game_speed := 1
 
-var starting_enemy_count := 6
+var starting_enemy_count := 3
 
 var relics : Array[Item]
 

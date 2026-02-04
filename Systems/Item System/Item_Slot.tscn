@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://g3dp16v3wnq0"]
 
 [ext_resource type="Script" uid="uid://i0wi31w6u4bn" path="res://Systems/Item System/Item_Slot.gd" id="1_i6jkv"]
+[ext_resource type="Texture2D" uid="uid://c007maccddbmi" path="res://Art/Upgrade_Sprites/great_axe.png" id="2_ldamu"]
+[ext_resource type="SpriteFrames" uid="uid://d27i841bn63oc" path="res://Art/dice_frames.tres" id="2_sh00f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1m28"]
 size = Vector2(203, 203)
@@ -28,3 +30,17 @@ color = Color(0.5183813, 0.42700657, 0.5606931, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slot_Area" unique_id=494197808]
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_m1m28")
+
+[node name="Relic_Sprite" type="Sprite2D" parent="." unique_id=1253687586]
+visible = false
+
+[node name="Upgrade_Sprite" type="Sprite2D" parent="." unique_id=715362392]
+visible = false
+position = Vector2(0, -48)
+scale = Vector2(2, 2)
+texture = ExtResource("2_ldamu")
+
+[node name="Dice_Sprite" type="AnimatedSprite2D" parent="." unique_id=822801432]
+visible = false
+position = Vector2(0, 48)
+sprite_frames = ExtResource("2_sh00f")

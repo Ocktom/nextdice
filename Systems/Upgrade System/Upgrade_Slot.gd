@@ -1,10 +1,10 @@
 extends Node2D
-class_name Gear_Slot
+class_name Upgrade_Slot
 
 @onready var slot_color : ColorRect = $Slot_Color
 @onready var slot_area: Area2D = $Slot_Area
 
-var occupant : Gear
+var occupant : Upgrade
 
 func _ready() -> void:
 	
@@ -15,19 +15,19 @@ func clear_slot():
 	Global.world.shop.item_layer.remove_child(occupant)
 	occupant = null
 	
-func fill_with_item(gear : Gear):
+func fill_with_item(upgrade : Upgrade):
 	
-	occupant = gear
-	gear.current_slot = self
-	gear.global_position = global_position
-	Global.world.shop.item_layer.add_child(gear)
+	occupant = upgrade
+	upgrade.current_slot = self
+	upgrade.global_position = global_position
+	Global.world.shop.item_layer.add_child(upgrade)
 
 func _on_mouse_entered():
 	
 	if Global.game_state == Enums.GameState.PLAYER_TURN or Enums.GameState.SHOP:
 		
 		print("cell hovered, occupant is ", occupant)
-		InputManager.hovered_gear_slot = self
+		InputManager.hovered_upgrade_slot = self
 
 func _on_mouse_exited():
 	

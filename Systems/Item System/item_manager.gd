@@ -9,7 +9,7 @@ func _ready() -> void:
 	item_data_dictionary = item_data_script.data
 	item_names = item_data_dictionary.keys()
 
-func insert_item(item_name : String, item_slot: Item_Slot):
+func get_new_item(item_name : String):
 	print("inserting item")
 
 	var item_data = item_data_dictionary[item_name]
@@ -23,4 +23,12 @@ func insert_item(item_name : String, item_slot: Item_Slot):
 	item_inst.item_type = Enums.ItemType[item_data["item_type"]]
 	item_inst.description = item_data["description"]
 	
-	item_slot.fill_with_item(item_inst)
+	return item_inst
+
+func get_upgrade_names() -> Array[String]:
+	var upgrade_names : Array[String] = []
+	for x in item_names:
+		if Enums.ItemType[ItemManager.item_data_dictionary[x]["item_type"]] == Enums.ItemType.UPGRADE:
+			upgrade_names.append(x)
+	print ("get_upgrade_names returns ", upgrade_names)
+	return upgrade_names

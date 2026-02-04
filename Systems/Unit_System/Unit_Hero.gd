@@ -9,6 +9,9 @@ class_name Hero
 @onready var icon_3_sprite: Sprite2D = $Left_Stats/MarginContainer3/icon_3_sprite
 @onready var icon_4_sprite: Sprite2D = $Left_Stats/MarginContainer4/icon_4_sprite
 
+@onready var unit_sprite: AnimatedSprite2D = $Unit_Sprite
+
+
 func take_attack(amount : int):
 	Global.animate(self,Enums.Anim.SHAKE)
 	Global.animate(self,Enums.Anim.FLASH,Color.RED)
@@ -23,9 +26,9 @@ func take_non_attack_damage(amount : int):
 	print ("was damaged")
 	
 	Global.player_hp = max(0,Global.player_hp-amount)
+	update()
 	if Global.player_hp < 1:
 		
-		update()
 		await Global.timer(1)
 		Global.world.defeat()
 

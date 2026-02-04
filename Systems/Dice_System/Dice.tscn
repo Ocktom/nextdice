@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cx1ojiejwf35o"]
 
 [ext_resource type="Script" uid="uid://cwa4eug0l35fv" path="res://Systems/Dice_System/Dice.gd" id="1_kjc4w"]
-[ext_resource type="Texture2D" uid="uid://ch8jvxrx4h6xu" path="res://Art/Face_Sprites/DiceSprSheetX64.png" id="2_sffwb"]
+[ext_resource type="SpriteFrames" uid="uid://d27i841bn63oc" path="res://Art/dice_frames.tres" id="2_575np"]
 
 [sub_resource type="GDScript" id="GDScript_n7sq3"]
 script/source = "extends Control
@@ -14,98 +14,6 @@ func _ready() -> void:
 
 	
 "
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1rcds"]
-atlas = ExtResource("2_sffwb")
-region = Rect2(0, 0, 64, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s3jk1"]
-atlas = ExtResource("2_sffwb")
-region = Rect2(64, 0, 64, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8dsr0"]
-atlas = ExtResource("2_sffwb")
-region = Rect2(128, 0, 64, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nhhax"]
-atlas = ExtResource("2_sffwb")
-region = Rect2(192, 0, 64, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xgcrd"]
-atlas = ExtResource("2_sffwb")
-region = Rect2(256, 0, 64, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t8l4q"]
-atlas = ExtResource("2_sffwb")
-region = Rect2(320, 0, 64, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s3i28"]
-atlas = ExtResource("2_sffwb")
-region = Rect2(384, 0, 64, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ixh3r"]
-atlas = ExtResource("2_sffwb")
-region = Rect2(448, 0, 64, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nw4q3"]
-atlas = ExtResource("2_sffwb")
-region = Rect2(512, 0, 64, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xub22"]
-atlas = ExtResource("2_sffwb")
-region = Rect2(576, 0, 64, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6epnj"]
-atlas = ExtResource("2_sffwb")
-region = Rect2(640, 0, 64, 66)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_boiuc"]
-atlas = ExtResource("2_sffwb")
-region = Rect2(704, 0, 64, 66)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_y4la5"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1rcds")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s3jk1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8dsr0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nhhax")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xgcrd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t8l4q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s3i28")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ixh3r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nw4q3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xub22")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6epnj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_boiuc")
-}],
-"loop": false,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2cjt"]
 size = Vector2(72, 74)
@@ -134,7 +42,7 @@ color = Color(0.9556082, 0.95903677, 0.8316656, 1)
 [node name="Face_Sprite" type="AnimatedSprite2D" parent="Face_Node" unique_id=1138159615]
 modulate = Color(1, 1, 1, 0.6509804)
 scale = Vector2(1.1093751, 1.1093751)
-sprite_frames = SubResource("SpriteFrames_y4la5")
+sprite_frames = ExtResource("2_575np")
 
 [node name="Dice_Area" type="Area2D" parent="." unique_id=1598485104]
 position = Vector2(-1.5, 1)

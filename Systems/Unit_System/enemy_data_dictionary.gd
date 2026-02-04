@@ -172,7 +172,7 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "",
+	"passive_1_name": "spikes",
 	"level_set": 3
   },
   "Cacklebot": {

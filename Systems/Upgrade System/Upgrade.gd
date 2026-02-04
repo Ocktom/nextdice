@@ -1,5 +1,5 @@
 extends Node
-class_name Gear
+class_name Upgrade
 
 @onready var border_texture_rect: TextureRect = $Border_texture_rect
 @onready var texture_rect: TextureRect = $TextureRect
@@ -8,10 +8,10 @@ class_name Gear
 @onready var item_name_label: Label = $Item_Name_Label
 @onready var cost_label: Label = $Cost_Label
 
-var gear_name : String
+var upgrade_name : String
 var description : String
 
-var current_slot : Gear_Slot
+var current_slot : Upgrade_Slot
 var current_dice : Dice
 
 var border_color : Color = Color.WHITE

@@ -1,8 +1,8 @@
 extends Node
 
 var data : Dictionary = {
-  "great_axe": {
-	"gear_name": "great_axe",
+  "cleave": {
+	"upgrade_name": "cleave",
 	"ranged_effect": "",
 	"melee_effect": "cleave",
 	"move_effect": "",
@@ -14,8 +14,8 @@ var data : Dictionary = {
 	"change_to_type": "",
 	"compatible_with": ""
   },
-  "spear": {
-	"gear_name": "spear",
+  "impale": {
+	"upgrade_name": "impale",
 	"ranged_effect": "",
 	"melee_effect": "impale",
 	"move_effect": "",
@@ -28,7 +28,7 @@ var data : Dictionary = {
 	"compatible_with": ""
   },
   "lightning": {
-	"gear_name": "lightning",
+	"upgrade_name": "lightning",
 	"ranged_effect": "lightning",
 	"melee_effect": "",
 	"move_effect": "",
@@ -41,7 +41,7 @@ var data : Dictionary = {
 	"compatible_with": ""
   },
   "boomerang": {
-	"gear_name": "boomerang",
+	"upgrade_name": "boomerang",
 	"ranged_effect": "bounce",
 	"melee_effect": "",
 	"move_effect": "",
@@ -54,7 +54,7 @@ var data : Dictionary = {
 	"compatible_with": ""
   },
   "fire_boots": {
-	"gear_name": "fire_boots",
+	"upgrade_name": "fire_boots",
 	"ranged_effect": "",
 	"melee_effect": "",
 	"move_effect": "flame",
@@ -67,7 +67,7 @@ var data : Dictionary = {
 	"compatible_with": ""
   },
   "spiked_boots": {
-	"gear_name": "spiked_boots",
+	"upgrade_name": "spiked_boots",
 	"ranged_effect": "",
 	"melee_effect": "",
 	"move_effect": "damage",

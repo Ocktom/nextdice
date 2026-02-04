@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://jgbr0k23t5ri"]
 
 [ext_resource type="Script" uid="uid://rus3e1v7bhtv" path="res://Systems/Unit_System/Unit_Hero.gd" id="1_a2152"]
+[ext_resource type="SpriteFrames" uid="uid://dwj2eplpo608t" path="res://rogue_frames.tres" id="2_26pr7"]
 [ext_resource type="Texture2D" uid="uid://cmyov2mabjadp" path="res://Art/Icon_Sprites/icon_heart.png" id="2_kpg37"]
 [ext_resource type="Texture2D" uid="uid://d3lmbc3uluvo4" path="res://Art/Icon_Sprites/icon_poison.png" id="3_26pr7"]
 [ext_resource type="Texture2D" uid="uid://bcugoaijvi38n" path="res://Art/Icon_Sprites/icon_stun.png" id="4_8o46l"]
@@ -11,10 +12,6 @@ font_size = 21
 [sub_resource type="LabelSettings" id="LabelSettings_1djiq"]
 font_size = 31
 font_color = Color(1, 0.13333334, 0.27058825, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_0vqop"]
-font_size = 31
-font_color = Color(1, 0.90588236, 0, 1)
 
 [node name="Unit_Hero" type="Node2D" unique_id=197932065]
 texture_filter = 1
@@ -32,29 +29,6 @@ offset_right = 104.5
 offset_bottom = 105.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Background_Rect" type="ColorRect" parent="." unique_id=1160538609]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -97.0
-offset_top = -101.0
-offset_right = 98.0
-offset_bottom = 99.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-color = Color(0.35735375, 0.54627967, 0.3398197, 1)
-
-[node name="Unit_Sprite" type="TextureRect" parent="." unique_id=415608223]
-offset_left = -93.0
-offset_top = -94.0
-offset_right = 95.0
-offset_bottom = 94.0
 
 [node name="border_rect" type="ColorRect" parent="." unique_id=146622285]
 visible = false
@@ -74,11 +48,18 @@ size_flags_vertical = 4
 mouse_filter = 2
 color = Color(0.67673594, 0.53392845, 0.23370892, 1)
 
+[node name="Unit_Sprite" type="AnimatedSprite2D" parent="." unique_id=1881140890]
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("2_26pr7")
+autoplay = "default"
+
 [node name="Effects_Sprite" type="AnimatedSprite2D" parent="." unique_id=246867172]
 visible = false
 scale = Vector2(4, 4)
+autoplay = "default"
 
 [node name="Unit_Name_Label" type="Label" parent="." unique_id=1960846644]
+visible = false
 offset_left = -87.0
 offset_top = -92.0
 offset_right = 36.0
@@ -97,12 +78,6 @@ theme_override_constants/separation = -11
 layout_mode = 2
 text = "12"
 label_settings = SubResource("LabelSettings_1djiq")
-horizontal_alignment = 1
-
-[node name="ATK_Label" type="Label" parent="Right_Stats" unique_id=1069811717]
-layout_mode = 2
-text = "12"
-label_settings = SubResource("LabelSettings_0vqop")
 horizontal_alignment = 1
 
 [node name="Left_Stats" type="HBoxContainer" parent="." unique_id=1499179829]

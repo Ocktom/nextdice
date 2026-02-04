@@ -28,7 +28,9 @@ func new_round():
 	
 	for x in Global.player_dice:
 		for y in x.faces:
-			GearManager.insert_gear("spear",y)
+			await UpgradeManager.insert_upgrade("impale",y)
+			await UpgradeManager.insert_upgrade("cleave",y)
+		x.update()
 
 func spawn_hero():
 	
@@ -163,7 +165,7 @@ func enter_shop():
 	
 	Global.game_state = Enums.GameState.SHOP
 	shop.visible = true
-	await shop.get_new_items()
+	await shop.get_new_upgrades()
 	InputManager.input_paused = false
 
 func hover_dice(dice : Dice):

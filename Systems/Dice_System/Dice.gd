@@ -1,10 +1,14 @@
 extends Control
 class_name Dice
 
-@export var gear_slot_1: Gear_Slot
-@export var gear_slot_2: Gear_Slot
+@export var upgrade_slot_1: Upgrade_Slot
+@export var upgrade_slot_2: Upgrade_Slot
 
-var gear_slots : Array [Gear_Slot]
+@export var dice_icons_node : Node2D
+
+var dice_icons : Array[Node]
+
+var upgrade_slots : Array [Upgrade_Slot]
 
 var faces : Array [Face]
 var used_this_turn : bool :
@@ -29,7 +33,9 @@ var current_face : Face
 
 func _ready() -> void:
 	
-	gear_slots = [gear_slot_1,gear_slot_2]
+	upgrade_slots = [upgrade_slot_1,upgrade_slot_2]
+	
+	dice_icons = dice_icons_node.get_children()
 	
 	Global.player_dice.append(self)
 	
@@ -50,7 +56,7 @@ func use():
 	used_this_turn = true
 	grey_out = true
 	
-	print ("dice used, current face gear is ", current_face.gear)
+	print ("dice used, current face upgrade is ", current_face.upgrade)
 	
 func roll():
 	
@@ -64,10 +70,17 @@ func setup_visuals():
 	
 func update():
 	face_node.face_sprite.frame = current_face.pips-1
-		
+	
+	var upgrade = current_face.upgrade
+	
+	for x in upgrade.keys():
+		print ("checking ", x, " in current_face.upgrade.keys in dice update_function")
+		var x_icon : CompressedTexture2D = load(str("res://Art/Upgrade_Sprites/",x,".png")) 
+		var icon = dice_icons[0] if dice_icons[0].texture == null else dice_icons[1]
+		icon.texture = x_icon
+	
 func highlight():
 	face_node.modulate = Color(1.0, 0.663, 1.0)
-
 
 func return_dice():
 	

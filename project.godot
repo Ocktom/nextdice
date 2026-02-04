@@ -30,7 +30,7 @@ SpellManager="*res://Systems/Spell System/spell_manager.gd"
 ItemManager="*res://Systems/Item System/item_manager.gd"
 SignalBus="*res://Systems/Passive_System/SignalBus.gd"
 ActionRegistry="*res://Systems/action_registry.gd"
-GearManager="*uid://cvpdhrdrd237v"
+UpgradeManager="*uid://cvpdhrdrd237v"
 
 [display]
 

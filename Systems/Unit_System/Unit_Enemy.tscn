@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://ftjtt0qa83u7"]
 
 [ext_resource type="Script" uid="uid://cp2heh7xwpfq0" path="res://Systems/Unit_System/Unit_Enemy.gd" id="1_y87hi"]
-[ext_resource type="SpriteFrames" uid="uid://dekwy3x6jhm6" path="res://Art/Enemy_Sprites/sprite_frames/Cacklebot_frames.tres" id="2_koxc3"]
 [ext_resource type="Texture2D" uid="uid://bbepftcljytvl" path="res://Art/explosion 8.png" id="3_d55k6"]
 [ext_resource type="Texture2D" uid="uid://cmyov2mabjadp" path="res://Art/Icon_Sprites/icon_heart.png" id="3_koxc3"]
 [ext_resource type="Texture2D" uid="uid://d3lmbc3uluvo4" path="res://Art/Icon_Sprites/icon_poison.png" id="4_d55k6"]
@@ -116,7 +115,6 @@ color = Color(0.16565639, 0.16565642, 0.16565639, 1)
 
 [node name="Unit_Sprite" type="AnimatedSprite2D" parent="." unique_id=1905187628]
 scale = Vector2(4, 4)
-sprite_frames = ExtResource("2_koxc3")
 
 [node name="Effects_Sprite" type="AnimatedSprite2D" parent="." unique_id=531974913]
 visible = false

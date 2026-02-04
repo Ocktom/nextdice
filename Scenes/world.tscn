@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://c7vn0i6aaeqys" path="res://Systems/Spell System/spell_slots.gd" id="3_o06y3"]
 [ext_resource type="PackedScene" uid="uid://bgc3x1l871e0" path="res://Systems/Player_UI/Player_UI.tscn" id="5_fo5ed"]
 [ext_resource type="PackedScene" uid="uid://dmb5i6rmsrgme" path="res://Systems/Spell System/Spell_Slot.tscn" id="6_5ukr8"]
-[ext_resource type="PackedScene" uid="uid://dt8vx5g8yasfa" path="res://Systems/Gear System/Gear_Slot.tscn" id="6_5v1tr"]
+[ext_resource type="PackedScene" uid="uid://dt8vx5g8yasfa" path="res://Systems/Upgrade System/Upgrade_Slot.tscn" id="6_5v1tr"]
 [ext_resource type="PackedScene" uid="uid://dr1kdty3xqiul" path="res://Systems/Item System/Shop_Screen.tscn" id="8_k7acu"]
 [ext_resource type="Texture2D" uid="uid://d1i4ktdbjkhhf" path="res://Art/big grid.png" id="10_0fj1v"]
 
@@ -115,20 +115,23 @@ offset_right = 324.0
 offset_bottom = 576.0
 theme_override_constants/separation = 104
 
-[node name="Dice" parent="DiceLayer/VBoxContainer" unique_id=1076685506 node_paths=PackedStringArray("gear_slot_1", "gear_slot_2") instance=ExtResource("2_go701")]
+[node name="Dice" parent="DiceLayer/VBoxContainer" unique_id=1076685506 node_paths=PackedStringArray("upgrade_slot_1", "upgrade_slot_2", "dice_icons_node") instance=ExtResource("2_go701")]
 layout_mode = 2
-gear_slot_1 = NodePath("../../GearLayer/Gear_Slot")
-gear_slot_2 = NodePath("../../GearLayer/Gear_Slot2")
+upgrade_slot_1 = NodePath("../../Upgrade_Layer/Gear_Slot")
+upgrade_slot_2 = NodePath("../../Upgrade_Layer/Gear_Slot2")
+dice_icons_node = NodePath("../../Dice_1_Icons")
 
-[node name="Dice2" parent="DiceLayer/VBoxContainer" unique_id=591512051 node_paths=PackedStringArray("gear_slot_1", "gear_slot_2") instance=ExtResource("2_go701")]
+[node name="Dice2" parent="DiceLayer/VBoxContainer" unique_id=591512051 node_paths=PackedStringArray("upgrade_slot_1", "upgrade_slot_2", "dice_icons_node") instance=ExtResource("2_go701")]
 layout_mode = 2
-gear_slot_1 = NodePath("../../GearLayer/Gear_Slot3")
-gear_slot_2 = NodePath("../../GearLayer/Gear_Slot4")
+upgrade_slot_1 = NodePath("../../Upgrade_Layer/Gear_Slot3")
+upgrade_slot_2 = NodePath("../../Upgrade_Layer/Gear_Slot4")
+dice_icons_node = NodePath("../../Dice_2_Icons")
 
-[node name="Dice3" parent="DiceLayer/VBoxContainer" unique_id=51240406 node_paths=PackedStringArray("gear_slot_1", "gear_slot_2") instance=ExtResource("2_go701")]
+[node name="Dice3" parent="DiceLayer/VBoxContainer" unique_id=51240406 node_paths=PackedStringArray("upgrade_slot_1", "upgrade_slot_2", "dice_icons_node") instance=ExtResource("2_go701")]
 layout_mode = 2
-gear_slot_1 = NodePath("../../GearLayer/Gear_Slot5")
-gear_slot_2 = NodePath("../../GearLayer/Gear_Slot6")
+upgrade_slot_1 = NodePath("../../Upgrade_Layer/Gear_Slot5")
+upgrade_slot_2 = NodePath("../../Upgrade_Layer/Gear_Slot6")
+dice_icons_node = NodePath("../../Dice_3_Icons")
 
 [node name="Sum_label" type="Label" parent="DiceLayer" unique_id=930167674]
 visible = false
@@ -139,26 +142,64 @@ offset_bottom = 348.0
 text = "13"
 label_settings = SubResource("LabelSettings_k7acu")
 
-[node name="GearLayer" type="Node2D" parent="DiceLayer" unique_id=250534339]
+[node name="Upgrade_Layer" type="Node2D" parent="DiceLayer" unique_id=250534339]
 position = Vector2(0, 89)
 
-[node name="Gear_Slot" parent="DiceLayer/GearLayer" unique_id=4427040 instance=ExtResource("6_5v1tr")]
+[node name="Gear_Slot" parent="DiceLayer/Upgrade_Layer" unique_id=4427040 instance=ExtResource("6_5v1tr")]
 position = Vector2(119, 178)
 
-[node name="Gear_Slot2" parent="DiceLayer/GearLayer" unique_id=2143112731 instance=ExtResource("6_5v1tr")]
+[node name="Gear_Slot2" parent="DiceLayer/Upgrade_Layer" unique_id=2143112731 instance=ExtResource("6_5v1tr")]
 position = Vector2(119, 84)
 
-[node name="Gear_Slot3" parent="DiceLayer/GearLayer" unique_id=199601335 instance=ExtResource("6_5v1tr")]
+[node name="Gear_Slot3" parent="DiceLayer/Upgrade_Layer" unique_id=199601335 instance=ExtResource("6_5v1tr")]
 position = Vector2(224, 181)
 
-[node name="Gear_Slot4" parent="DiceLayer/GearLayer" unique_id=1087725031 instance=ExtResource("6_5v1tr")]
+[node name="Gear_Slot4" parent="DiceLayer/Upgrade_Layer" unique_id=1087725031 instance=ExtResource("6_5v1tr")]
 position = Vector2(224, 86)
 
-[node name="Gear_Slot5" parent="DiceLayer/GearLayer" unique_id=972146498 instance=ExtResource("6_5v1tr")]
+[node name="Gear_Slot5" parent="DiceLayer/Upgrade_Layer" unique_id=972146498 instance=ExtResource("6_5v1tr")]
 position = Vector2(321, 182)
 
-[node name="Gear_Slot6" parent="DiceLayer/GearLayer" unique_id=40226783 instance=ExtResource("6_5v1tr")]
+[node name="Gear_Slot6" parent="DiceLayer/Upgrade_Layer" unique_id=40226783 instance=ExtResource("6_5v1tr")]
 position = Vector2(321, 85)
+
+[node name="Dice_1_Icons" type="Node2D" parent="DiceLayer" unique_id=1472118233]
+visible = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Upgrade_Sprite_1" type="Sprite2D" parent="DiceLayer/Dice_1_Icons" unique_id=1777476149]
+position = Vector2(120, 185)
+scale = Vector2(2.5, 2.5)
+
+[node name="Upgrade_Sprite_2" type="Sprite2D" parent="DiceLayer/Dice_1_Icons" unique_id=814853498]
+position = Vector2(120, 276.00003)
+scale = Vector2(2.5, 2.5)
+
+[node name="Dice_2_Icons" type="Node2D" parent="DiceLayer" unique_id=1114123865]
+visible = false
+position = Vector2(101, 0)
+metadata/_edit_use_anchors_ = true
+
+[node name="Upgrade_Sprite_1" type="Sprite2D" parent="DiceLayer/Dice_2_Icons" unique_id=1232602665]
+position = Vector2(120, 185)
+scale = Vector2(2.5, 2.5)
+
+[node name="Upgrade_Sprite_2" type="Sprite2D" parent="DiceLayer/Dice_2_Icons" unique_id=979328583]
+position = Vector2(120, 276.00003)
+scale = Vector2(2.5, 2.5)
+
+[node name="Dice_3_Icons" type="Node2D" parent="DiceLayer" unique_id=121999453]
+visible = false
+position = Vector2(198, 0)
+metadata/_edit_use_anchors_ = true
+
+[node name="Upgrade_Sprite_1" type="Sprite2D" parent="DiceLayer/Dice_3_Icons" unique_id=683398886]
+position = Vector2(120, 185)
+scale = Vector2(2.5, 2.5)
+
+[node name="Upgrade_Sprite_2" type="Sprite2D" parent="DiceLayer/Dice_3_Icons" unique_id=1696225443]
+position = Vector2(120, 276.00003)
+scale = Vector2(2.5, 2.5)
 
 [node name="Audio" parent="." unique_id=1516609735 instance=ExtResource("1_a02cp")]
 

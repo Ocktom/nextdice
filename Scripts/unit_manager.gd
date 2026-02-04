@@ -69,8 +69,7 @@ func spawn_new_enemy(name_string: String, cell : Cell):
 	#APPLY ROUND DIFFICULTY STATS
 	
 	if Global.round_number > 1: 
-		unit.atk += Global.round_number
-		unit.hp += Global.round_number * 2
+		unit.hp += Global.round_number
 	
 	var frames_path = str("res://Art/Enemy_Sprites/sprite_frames/",name_string,"_frames.tres")
 	#SPAWN PREPARED UNIT INTO CELL

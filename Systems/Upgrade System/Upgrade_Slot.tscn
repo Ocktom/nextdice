@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dt8vx5g8yasfa"]
 
-[ext_resource type="Script" uid="uid://ldypjrxwu38r" path="res://Systems/Gear System/Gear_Slot.gd" id="1_f7pwb"]
+[ext_resource type="Script" uid="uid://dp3cg8qisr1dq" path="res://Systems/Upgrade System/Upgrade_Slot.gd" id="1_f7pwb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1m28"]
 size = Vector2(80, 80)
 
-[node name="Gear_Slot" type="Node2D" unique_id=4427040]
+[node name="Upgrade_Slot" type="Node2D" unique_id=4427040]
 script = ExtResource("1_f7pwb")
 
 [node name="Slot_Color" type="ColorRect" parent="." unique_id=1492203046]

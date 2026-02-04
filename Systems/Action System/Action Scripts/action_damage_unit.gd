@@ -8,9 +8,10 @@ func execute(context: Dictionary, action_source: Node = null,action_target: Node
 	var color : Color
 	
 	match context["damage_name"]:
-		"poison" : color = Color.GREEN
+		"poison" : 
+			color = Color.GREEN
+			Global.float_text("Poison",action_target.global_position,color)
 	
-	Global.float_text(context["damage_name"],action_target.global_position,color)
 	Global.animate(action_target,Enums.Anim.SHAKE)
 	Global.animate(action_target,Enums.Anim.FLASH,color)
 	SignalBus.unit_damaged.emit(action_target,self)

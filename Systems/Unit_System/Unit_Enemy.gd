@@ -65,7 +65,6 @@ func set_passives():
 		print ("passive_1 is ", passive_1, " with name of ", passive_1.passive_name)
 		passive_1.source = self
 		passive_1.set_trigger()
-		
 	if not passive_2_name == "":
 		passive_2 = Passive.new()
 		var script_path = str("res://Systems/Passive_System/Passive_Scripts/",passive_2_name,".gd")

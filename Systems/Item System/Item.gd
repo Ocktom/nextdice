@@ -14,11 +14,16 @@ var normal_color : Color = Color.BLACK
 var selected_target : Node2D
 var damaged := false
 
-@onready var background_rect: ColorRect = $Background_Rect
+var upgrade_options : Array[Face]
+var face_options : Array[Face]
 
+@onready var dice_sprite: Sprite2D = $Dice_Sprite
+@onready var dice_sprite_2: Sprite2D = $Dice_Sprite2
+@onready var dice_sprite_3: Sprite2D = $Dice_Sprite3
+
+@onready var background_rect: ColorRect = $Background_Rect
 @onready var item_name_label : Label = $Item_Name_Label
 @onready var cost_label: Label = $Cost_Label
-
 @onready var border_rect: ColorRect = $border_rect
 
 func _ready():
@@ -29,3 +34,5 @@ func update():
 	
 	item_name_label.text = item_name
 	cost_label.text = str(item_cost)
+	
+	

@@ -1,27 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://dr1kdty3xqiul"]
+[gd_scene format=3 uid="uid://dr1kdty3xqiul"]
 
 [ext_resource type="Script" uid="uid://cnr5h0sragvqx" path="res://Systems/Item System/Shop_Screen.gd" id="1_cb6ln"]
 [ext_resource type="PackedScene" uid="uid://g3dp16v3wnq0" path="res://Systems/Item System/Item_Slot.tscn" id="1_p5thw"]
 
-[node name="Shop_Screen" type="Node2D"]
+[node name="Shop_Screen" type="Node2D" unique_id=558793602]
 script = ExtResource("1_cb6ln")
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=2017562929]
 offset_top = -6.0
 offset_right = 1940.0
 offset_bottom = 1091.0
 mouse_filter = 2
 color = Color(0.13319641, 0.13319641, 0.13319638, 1)
 
-[node name="Slots_Node" type="Node2D" parent="."]
+[node name="Slots_Node" type="Node2D" parent="." unique_id=1252948243]
 position = Vector2(721, 518)
 
-[node name="Shop_Slot" parent="Slots_Node" instance=ExtResource("1_p5thw")]
+[node name="Shop_Slot" parent="Slots_Node" unique_id=1033433453 instance=ExtResource("1_p5thw")]
 
-[node name="Shop_Slot2" parent="Slots_Node" instance=ExtResource("1_p5thw")]
+[node name="Shop_Slot2" parent="Slots_Node" unique_id=542806347 instance=ExtResource("1_p5thw")]
 position = Vector2(234, 0)
 
-[node name="Shop_Slot3" parent="Slots_Node" instance=ExtResource("1_p5thw")]
+[node name="Shop_Slot3" parent="Slots_Node" unique_id=1800488406 instance=ExtResource("1_p5thw")]
 position = Vector2(470, 0)
 
-[node name="Item_Layer" type="Node2D" parent="."]
+[node name="Item_Layer" type="Node2D" parent="." unique_id=526057959]

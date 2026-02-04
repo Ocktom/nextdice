@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dwj2eplpo608t"]
+
+[ext_resource type="Texture2D" uid="uid://bjdyxhhakr4xp" path="res://Art/rogue.png" id="1_ikp70"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijqu4"]
+atlas = ExtResource("1_ikp70")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24jwa"]
+atlas = ExtResource("1_ikp70")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl1qr"]
+atlas = ExtResource("1_ikp70")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lv3g"]
+atlas = ExtResource("1_ikp70")
+region = Rect2(144, 0, 48, 48)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijqu4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24jwa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl1qr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lv3g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

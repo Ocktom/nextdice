@@ -50,7 +50,9 @@ func fill_with_unit(unit : Unit):
 		ActionManager.create_action("status_effect",{"color" : "WHITE","status_name" : "ROOT", "amount" : 1 },self,occupant)
 		cell_effect = Enums.CellEffect.NONE
 		update()
-
+	
+	unit.update()
+	
 func move_hero(dice : Dice):
 	
 	Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_MOVEMENT-Retro Jump_HY_PC-001.wav")

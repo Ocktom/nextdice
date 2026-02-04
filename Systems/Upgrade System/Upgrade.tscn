@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b2gvcghgcp7ro"]
 
-[ext_resource type="Script" uid="uid://dfwe7of8ams5m" path="res://Systems/Gear System/Gear.gd" id="1_q3gjq"]
+[ext_resource type="Script" uid="uid://dfwe7of8ams5m" path="res://Systems/Upgrade System/Upgrade.gd" id="1_ep3v2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1xpod"]
 font_size = 21
@@ -10,7 +10,7 @@ font_size = 66
 
 [node name="Gear" type="Node2D" unique_id=1035596751]
 texture_filter = 1
-script = ExtResource("1_q3gjq")
+script = ExtResource("1_ep3v2")
 
 [node name="Border_texture_rect" type="TextureRect" parent="." unique_id=1711863981]
 anchors_preset = 8
