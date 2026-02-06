@@ -16,6 +16,8 @@ var all_units : Array [Unit]
 var game_speed := 1
 
 var starting_enemy_count := 3
+var torch_unit_count := 3
+var treasure_unit_count := 1
 
 var relics : Array[Item]
 
@@ -167,7 +169,6 @@ func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE, target_no
 				duration_back
 			)
 
-	
 func get_path_cells(start_cell : Cell, target_cell : Cell, max_move : int) -> Array[Cell]:
 	
 	var path : Array[Cell] = []

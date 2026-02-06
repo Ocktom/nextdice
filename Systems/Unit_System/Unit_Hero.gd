@@ -13,8 +13,18 @@ class_name Hero
 
 
 func take_attack(amount : int):
+	
+	var shield : int = 0
+	
+	if status_effects.has("shield"):
+		shield = status_effects["shield"]
+	
+	print("shield is ", shield)
+	
 	Global.animate(self,Enums.Anim.SHAKE)
 	Global.animate(self,Enums.Anim.FLASH,Color.RED)
+	
+	
 	Global.player_hp = max(0,Global.player_hp - amount)
 	update()
 	Global.player_ui.update()

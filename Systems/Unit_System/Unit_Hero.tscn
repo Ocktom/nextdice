@@ -13,6 +13,10 @@ font_size = 21
 font_size = 31
 font_color = Color(1, 0.13333334, 0.27058825, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_26pr7"]
+font_size = 31
+font_color = Color(0.5489597, 0.7405164, 0.757634, 1)
+
 [node name="Unit_Hero" type="Node2D" unique_id=197932065]
 texture_filter = 1
 script = ExtResource("1_a2152")
@@ -69,15 +73,21 @@ label_settings = SubResource("LabelSettings_1xpod")
 
 [node name="Right_Stats" type="VBoxContainer" parent="." unique_id=710065752]
 offset_left = 63.0
-offset_top = -9.0
+offset_top = -73.0
 offset_right = 103.0
-offset_bottom = 68.0
+offset_bottom = 4.0
 theme_override_constants/separation = -11
 
 [node name="HP_Label" type="Label" parent="Right_Stats" unique_id=2008654700]
 layout_mode = 2
 text = "12"
 label_settings = SubResource("LabelSettings_1djiq")
+horizontal_alignment = 1
+
+[node name="Shield_Icon" type="Label" parent="Right_Stats" unique_id=1196741128]
+layout_mode = 2
+text = "12"
+label_settings = SubResource("LabelSettings_26pr7")
 horizontal_alignment = 1
 
 [node name="Left_Stats" type="HBoxContainer" parent="." unique_id=1499179829]

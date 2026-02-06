@@ -3,7 +3,6 @@ class_name Dice
 
 @export var upgrade_slot_1: Upgrade_Slot
 @export var upgrade_slot_2: Upgrade_Slot
-
 @export var dice_icons_node : Node2D
 
 var dice_icons : Array[Node]
@@ -29,13 +28,14 @@ var grey_out := false :
 @onready var face_node : Control = $Face_Node
 @onready var starting_pos : Vector2i = self.global_position
 
+@onready var upgrade_sprite: Sprite2D = $Upgrade_Sprite
+
+
 var current_face : Face
 
 func _ready() -> void:
 	
 	upgrade_slots = [upgrade_slot_1,upgrade_slot_2]
-	
-	dice_icons = dice_icons_node.get_children()
 	
 	Global.player_dice.append(self)
 	
@@ -61,6 +61,9 @@ func use():
 func roll():
 	
 	#dice_color.color = Global.colors.pick_random()
+	for x in upgrade_slots:
+		x.clear_slot()
+	
 	current_face = faces.pick_random()
 	await update()
 
@@ -76,10 +79,13 @@ func update():
 	
 	for x in upgrade.keys():
 		print ("checking ", x, " in current_face.upgrade.keys in dice update_function")
-		var x_icon : CompressedTexture2D = load(str("res://Art/Upgrade_Sprites/",x,".png")) 
-		var icon = dice_icons[0] if dice_icons[0].texture == null else dice_icons[1]
-		icon.texture = x_icon
+		var ind = upgrade.keys().find(x)
+		if upgrade_slots[ind].upgrade_name == "":
+			upgrade_slots[ind].fill_with_upgrade(x)
 	
+	for x in upgrade_slots:
+		x.update()
+		
 func highlight():
 	face_node.modulate = Color(1.0, 0.663, 1.0)
 

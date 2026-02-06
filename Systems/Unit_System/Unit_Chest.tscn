@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://do7bkkwj8w4db"]
+
+[ext_resource type="Script" uid="uid://bjndjqq3i8qmi" path="res://Systems/Unit_System/Unit.gd" id="1_3bdm0"]
+[ext_resource type="Texture2D" uid="uid://b1gd85y0diocx" path="res://Art/chest_3.png" id="2_mrpyd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1xpod"]
+font_size = 21
+
+[sub_resource type="LabelSettings" id="LabelSettings_3a2ma"]
+font_size = 31
+font_color = Color(1, 0.90588236, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4im1a"]
+font_size = 31
+font_color = Color(1, 0.13333334, 0.27058825, 1)
+
+[node name="Chest" type="Node2D" unique_id=1713004707]
+texture_filter = 1
+script = ExtResource("1_3bdm0")
+
+[node name="Border_texture_rect" type="TextureRect" parent="." unique_id=141382165]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.5
+offset_top = -105.0
+offset_right = 104.5
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background_Rect" type="ColorRect" parent="." unique_id=1558673814]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -101.0
+offset_right = 98.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="border_rect" type="ColorRect" parent="." unique_id=300042186]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -105.0
+offset_right = 105.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0.67673594, 0.53392845, 0.23370892, 1)
+
+[node name="Unit_Sprite" type="Sprite2D" parent="." unique_id=194981427]
+scale = Vector2(5, 5)
+texture = ExtResource("2_mrpyd")
+
+[node name="Unit_Name_Label" type="Label" parent="." unique_id=201169778]
+visible = false
+offset_left = -87.0
+offset_top = -92.0
+offset_right = 36.0
+offset_bottom = -62.0
+text = "CARD NAME"
+label_settings = SubResource("LabelSettings_1xpod")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1759986832]
+visible = false
+offset_left = 53.0
+offset_top = -95.0
+offset_right = 93.0
+offset_bottom = -51.0
+
+[node name="ATK_Label" type="Label" parent="VBoxContainer" unique_id=2120265390]
+layout_mode = 2
+text = "12"
+label_settings = SubResource("LabelSettings_3a2ma")
+horizontal_alignment = 1
+
+[node name="HP_Label" type="Label" parent="VBoxContainer" unique_id=1766797915]
+layout_mode = 2
+text = "12"
+label_settings = SubResource("LabelSettings_4im1a")
+horizontal_alignment = 1

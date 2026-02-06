@@ -78,3 +78,20 @@ func spawn_new_enemy(name_string: String, cell : Cell):
 	unit.unit_sprite.sprite_frames = load(frames_path)
 	unit.unit_sprite.play()
 	unit.set_passives()
+
+var enemy_sets : Dictionary = {
+	
+	"set_1" : ["Ratron","Ratron","Skeltron","Skeltron"],
+	"set_2" : ["Ratron","Ratron","Batron","Batron"],
+	"set_3" : ["Ratron","Ratron","Spectroid","Spectroid"],
+	"set_4" : ["Skeltron","Slitherbyte","Batron","Spectroid","Spectroid"],
+	"set_5" : ["Skeltron","Slitherbyte","Slitherbyte","Spectroid","Armadroid"],
+	"set_6" : ["Batron","Batron", "Batron", "Spidroid", "Spidroid","Armadroid"],
+	"set_7" : ["Necrotron", "Demodroid", "Roblob", "Caklebot","Batron","Batron"],
+	"set_8" : ["Armadroid", "Armadroid", "Spidroid", "Slitherbyte","Slitherbyte"],
+	"set_9" : ["Demodroid","Demodroid", "Armadroid", "Necrotron","Batron","Batron"]
+}
+
+var enemy_sets_easy := ["set_1","set_2","set_3"]
+var enemy_sets_medium := ["set_4","set_5","set_6"]
+var enemy_sets_difficult := ["set_7","set_8","set_9"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch8jvxrx4h6xu"
-path="res://.godot/imported/DiceSprSheetX64.png-e54af8d85ffc984e50dc9481d3c2c17b.ctex"
+uid="uid://rwdon6utqhia"
+path="res://.godot/imported/torch.png-08944d94dafbc2e2b98bf2207d16fd36.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Face_Sprites/DiceSprSheetX64.png"
-dest_files=["res://.godot/imported/DiceSprSheetX64.png-e54af8d85ffc984e50dc9481d3c2c17b.ctex"]
+source_file="res://Art/torch.png"
+dest_files=["res://.godot/imported/torch.png-08944d94dafbc2e2b98bf2207d16fd36.ctex"]
 
 [params]
 

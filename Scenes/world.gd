@@ -15,6 +15,9 @@ func _ready() -> void:
 	call_deferred("game_start")
 
 func game_start():
+	
+	await spawn_torches()
+	await spawn_chests()
 	await spawn_hero()
 	await spawn_spells()
 	await new_round()
@@ -25,7 +28,18 @@ func new_round():
 	print ("new round started, round number is ", Global.round_number)
 	await spawn_round_enemies()
 	start_player_turn()
-	
+
+func spawn_torches():
+	var unit_scene : PackedScene = preload("res://Systems/Unit_System/Unit_Torch.tscn")
+	for x in Global.torch_unit_count:
+		var inst = unit_scene.instantiate()
+		inst.unit_name = "Torch"
+		var cell = Global.grid.get_empty_cells().pick_random()
+		await cell.spawn_unit(inst)
+
+func spawn_chests():
+	pass
+
 func spawn_hero():
 	
 	var starting_cell = Global.grid.all_cells.pick_random()
@@ -43,15 +57,26 @@ func spawn_spells():
 
 func spawn_round_enemies():
 	
-	var enemy_count = Global.starting_enemy_count
-	if Global.round_number > 1:
-		enemy_count += Global.round_number
+	var enemy_set : String
+	var enemy_names : Array
+	
+	if Global.round_number <= 3:
+		enemy_set = UnitManager.enemy_sets_easy.pick_random()
+	if (Global.round_number > 3 && Global.round_number <= 6):
+		print ("picking enemy set from ", UnitManager.enemy_sets_medium)
+		enemy_set = UnitManager.enemy_sets_medium.pick_random()
+	if (Global.round_number > 6):
+		enemy_set = UnitManager.enemy_sets_difficult.pick_random()
+	
+	print ("enemy_set is ", enemy_set)
+	enemy_names = UnitManager.enemy_sets[enemy_set]
 	
 	var hero_cell = Global.hero_unit.current_cell
 	var forbidden_cells = Global.grid.get_adjacent_cells(hero_cell)
 	forbidden_cells.append(hero_cell)
 	
-	for x in enemy_count:
+	print ("enemy names is ", enemy_names)
+	for x in enemy_names:
 		
 		var valid_cells = []
 
@@ -65,8 +90,7 @@ func spawn_round_enemies():
 
 		var cell_pick = valid_cells.pick_random()
 		
-		var enemy_name = UnitManager.enemy_names.pick_random()
-		UnitManager.spawn_new_enemy(enemy_name,cell_pick)
+		UnitManager.spawn_new_enemy(x,cell_pick)
 		
 func roll_dice():
 	if Global.rolls == 0:
@@ -82,6 +106,8 @@ func roll_dice():
 	update_sum()
 
 func start_player_turn():
+	
+	Global.hero_unit.status_effects["shield"] = 3
 	
 	Global.game_state = Enums.GameState.PLAYER_TURN
 

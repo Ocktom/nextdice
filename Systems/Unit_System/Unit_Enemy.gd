@@ -109,6 +109,21 @@ func get_attack_cells() -> Array[Cell]:
 
 	return cells
 
+func get_attack_targets() -> Array[Unit]:
+	var targets : Array[Unit] = []
+
+	for cell in get_attack_cells():
+		if cell.occupant == null:
+			continue
+
+		if cell.occupant is Torch:
+			targets.append(cell.occupant)
+		
+		if cell.occupant is Hero:
+			targets.append(cell.occupant)
+		
+	return targets
+
 func plan_action():
 
 	if status_effects.has("root"):
@@ -127,24 +142,31 @@ func plan_action():
 		await enemy_actions()
 	
 func attempt_attack():
-	var hero = Global.hero_unit
-	var hero_cell = hero.current_cell
+	
+	var targets = get_attack_targets()
 
-	var attack_cells = get_attack_cells()
-
-	if not attack_cells.has(hero_cell):
+	if targets.is_empty():
 		return null
 
-	print("enemy ", self, " attacking")
+	# Pick ONE target at random
+	var target : Unit = targets.pick_random()
+
+	print("enemy ", unit_name, " attacking ", target.unit_name)
+
 	await Global.timer(wait_time)
 	await ActionManager.request_action(
 		"attack",
-		{"target" : hero, "amount" : atk},
+		{
+			"target": target,
+			"amount": atk
+		},
 		self
 	)
+
 	turn_bonus = 0
 	await enemy_actions()
-	return hero
+
+	return target
 
 func attempt_move() -> bool:
 	

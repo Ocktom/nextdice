@@ -12,6 +12,5 @@ func execute(context: Dictionary, action_source: Node = null,action_target: Node
 	await target.take_attack(context["amount"])
 	await Global.timer(.1)
 	SignalBus.unit_attacked.emit()
-	SignalBus.enemy_attacked.emit(target)
 	Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_HIT-Bit Kick_HY_PC-002.wav")
 	await Global.timer(.2)

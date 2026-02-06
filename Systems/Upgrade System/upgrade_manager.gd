@@ -13,6 +13,7 @@ func _ready() -> void:
 
 func insert_upgrade(upgrade_name : String, dice_face: Face):
 	print("inserting upgrade of ", upgrade_name, " into dice face of ", dice_face)
+
 	var upgrade_data = upgrade_data_dictionary[upgrade_name]
 	dice_face.upgrade[upgrade_name] = upgrade_data
 	

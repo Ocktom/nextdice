@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://i0wi31w6u4bn" path="res://Systems/Item System/Item_Slot.gd" id="1_i6jkv"]
 [ext_resource type="Texture2D" uid="uid://c007maccddbmi" path="res://Art/Upgrade_Sprites/cleave.png" id="2_ldamu"]
-[ext_resource type="SpriteFrames" uid="uid://d27i841bn63oc" path="res://Art/dice_frames.tres" id="2_sh00f"]
+[ext_resource type="SpriteFrames" uid="uid://d27i841bn63oc" path="res://Art/attack_dice_frames.tres" id="2_sh00f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1m28"]
 size = Vector2(203, 203)

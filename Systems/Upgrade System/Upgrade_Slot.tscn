@@ -25,6 +25,8 @@ size_flags_vertical = 4
 mouse_filter = 2
 color = Color(0.5183813, 0.42700657, 0.5606931, 1)
 
+[node name="Upgrade_Sprite" type="Sprite2D" parent="." unique_id=166472496]
+
 [node name="Slot_Area" type="Area2D" parent="." unique_id=1841485933]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slot_Area" unique_id=1982604123]

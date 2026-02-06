@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cx1ojiejwf35o"]
 
 [ext_resource type="Script" uid="uid://cwa4eug0l35fv" path="res://Systems/Dice_System/Dice.gd" id="1_kjc4w"]
-[ext_resource type="SpriteFrames" uid="uid://d27i841bn63oc" path="res://Art/dice_frames.tres" id="2_575np"]
+[ext_resource type="SpriteFrames" uid="uid://d27i841bn63oc" path="res://Art/attack_dice_frames.tres" id="2_575np"]
 
 [sub_resource type="GDScript" id="GDScript_n7sq3"]
 script/source = "extends Control
@@ -31,6 +31,7 @@ mouse_filter = 2
 script = SubResource("GDScript_n7sq3")
 
 [node name="ColorRect" type="ColorRect" parent="Face_Node" unique_id=1545935596]
+visible = false
 layout_mode = 0
 offset_left = -36.0
 offset_top = -37.0
@@ -40,8 +41,8 @@ mouse_filter = 2
 color = Color(0.9556082, 0.95903677, 0.8316656, 1)
 
 [node name="Face_Sprite" type="AnimatedSprite2D" parent="Face_Node" unique_id=1138159615]
-modulate = Color(1, 1, 1, 0.6509804)
-scale = Vector2(1.1093751, 1.1093751)
+texture_filter = 1
+scale = Vector2(4, 4)
 sprite_frames = ExtResource("2_575np")
 
 [node name="Dice_Area" type="Area2D" parent="." unique_id=1598485104]
