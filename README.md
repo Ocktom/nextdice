@@ -1,2 +1,0 @@
-# nextdice
-a dice game

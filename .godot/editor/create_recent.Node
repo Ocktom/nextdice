@@ -1,0 +1,14 @@
+AnimatedSprite2D
+Sprite2D
+Node
+Node2D
+VBoxContainer
+TextureRect
+HBoxContainer
+ColorRect
+Node3D
+XRHandModifier3D
+Label
+MarginContainer
+Marker2D
+Control
