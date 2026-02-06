@@ -48,3 +48,5 @@ func is_empty() -> bool:
 	else: is_empty = false
 	
 	return is_empty
+
+	print("BLOBS")
