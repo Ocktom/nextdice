@@ -71,10 +71,16 @@ func _on_mouse_entered():
 		if InputManager.dragging_dice != null:
 			
 			if is_empty():
-				var path_cells = Global.get_path_cells(Global.hero_unit.current_cell,self,InputManager.dragging_dice.current_face.pips)
-				for x in path_cells:
-					x.highlight = true
-
+			
+				if InputManager.dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_CELL \
+				or InputManager.dragging_dice.current_face.skill_target == Enums.SkillTarget.EMPTY_CELL:
+				
+					var path_cells = Global.get_path_cells(Global.hero_unit.current_cell,self,PlayerStats.move_points)
+					for x in path_cells:
+						x.highlight = true
+			elif occupant is Enemy:
+				if is_adjacent(Global.hero_unit.current_cell):
+					highlight = true
 				
 		elif occupant is Enemy:
 			for x in occupant.get_attack_cells():

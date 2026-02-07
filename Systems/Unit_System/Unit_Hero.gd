@@ -1,8 +1,8 @@
 extends Unit
 class_name Hero
 
-@onready var hp_label: Label = $Right_Stats/HP_Label
-@onready var atk_label: Label = $Right_Stats/ATK_Label
+@onready var hp_label: Label = $Right_Stats/HBoxContainer/HP_Label
+@onready var shield_label: Label = $Right_Stats/HBoxContainer/Shield_Label
 
 @onready var icon_1_sprite: Sprite2D = $Left_Stats/MarginContainer/icon_1_sprite
 @onready var icon_2_sprite: Sprite2D = $Left_Stats/MarginContainer2/icon_2_sprite
@@ -11,6 +11,8 @@ class_name Hero
 
 @onready var unit_sprite: AnimatedSprite2D = $Unit_Sprite
 
+var hp : int
+var atk : int
 
 func take_attack(amount : int):
 	
@@ -19,17 +21,31 @@ func take_attack(amount : int):
 	if status_effects.has("shield"):
 		shield = status_effects["shield"]
 	
-	print("shield is ", shield)
-	
-	Global.animate(self,Enums.Anim.SHAKE)
-	Global.animate(self,Enums.Anim.FLASH,Color.RED)
-	
-	
-	Global.player_hp = max(0,Global.player_hp - amount)
-	update()
-	Global.player_ui.update()
-	Global.float_text(str("-", amount),self.global_position,Color.RED)
-	await Global.timer(.2)
+		if amount <= shield:
+			status_effects["shield"] -= amount
+			Global.animate(self,Enums.Anim.SHAKE)
+			Global.animate(self,Enums.Anim.FLASH)
+			Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_HIT-Spell Hit_HY_PC-001.wav")
+			await update()
+			return
+		
+		if amount > shield:
+			
+			PlayerStats.player_hp = max(0,PlayerStats.player_hp - (amount-shield))
+			Global.animate(self,Enums.Anim.SHAKE)
+			Global.animate(self,Enums.Anim.FLASH,Color.RED)
+			await update()
+			return
+	else:
+		
+		Global.animate(self,Enums.Anim.SHAKE)
+		Global.animate(self,Enums.Anim.FLASH,Color.RED)
+		
+		PlayerStats.player_hp = max(0,PlayerStats.player_hp - amount)
+		update()
+		Global.player_ui.update()
+		Global.float_text(str("-", amount),self.global_position,Color.RED)
+		await Global.timer(.2)
 
 func take_non_attack_damage(amount : int):
 	
@@ -44,6 +60,10 @@ func take_non_attack_damage(amount : int):
 
 func end_turn_effects():
 	
+	#REMOVE SHIELD AT TURN END
+
+	if status_effects.has("shield"):
+		status_effects.erase("shield")
 	#ENACT EFFECTS HERE:
 	
 	if status_effects.has("poison"):
@@ -64,8 +84,17 @@ func end_turn_effects():
 
 func update():
 	
+	if status_effects.keys().has("shield"):
+		if status_effects["shield"] > 0:
+			shield_label.visible = true
+			shield_label.text = str("/",status_effects["shield"])
+		else:
+			status_effects.erase("shield")
+			
+	if not status_effects.has("shield"): shield_label.visible = false
+	
 	unit_name_label.text = str(unit_name)
-	hp_label.text = str(Global.player_hp)
+	hp_label.text = str(PlayerStats.player_hp)
 	
 	var status_icons : Array = [icon_1_sprite,icon_2_sprite,icon_3_sprite,icon_4_sprite]
 	
@@ -77,3 +106,7 @@ func update():
 		var ind = status_effects.keys().find(x)
 		status_icons[ind].texture = load(str("res://Art/Icon_Sprites/icon_",x,".png"))
 		status_icons[ind].visible = true
+	
+	if current_cell != null:
+		global_position = current_cell.global_position
+	

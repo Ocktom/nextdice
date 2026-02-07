@@ -2,7 +2,9 @@ extends Unit
 class_name Enemy
 
 @onready var unit_sprite: AnimatedSprite2D = $Unit_Sprite
-@onready var hp_label: Label = $Right_Stats/HP_Label
+@onready var hp_label: Label = $Right_Stats/HBoxContainer/HP_Label
+@onready var shield_label: Label = $Right_Stats/HBoxContainer/SHIELD_Label
+
 @onready var atk_label: Label = $Right_Stats/ATK_Label
 
 @onready var icon_1_sprite: Sprite2D = $Left_Stats/MarginContainer/icon_1_sprite
@@ -44,7 +46,6 @@ var passive_2 : Passive
 
 var action_2_name : String
 var action_2_context : Dictionary
-
 
 var projectile := false
 var movement := 2
@@ -303,6 +304,11 @@ func update():
 	unit_name_label.text = str(unit_name)
 	hp_label.text = str(hp)
 	atk_label.text = str(atk)
+	
+	if status_effects.keys().has("shield"):
+		if status_effects["shield"] > 0:
+			shield_label.visible = true
+			shield_label.text = str("/",status_effects["shield"])
 	
 	var status_icons : Array = [icon_1_sprite,icon_2_sprite,icon_3_sprite,icon_4_sprite]
 	

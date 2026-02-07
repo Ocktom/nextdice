@@ -85,3 +85,10 @@ func toggle_highlight():
 	else:
 		highlight = true
 		border_rect.visible = true
+
+func is_adjacent(cell: Cell)-> bool:
+	var adjacent_cells = Global.grid.get_adjacent_cells(cell)
+	if adjacent_cells.has(cell):
+		return true
+	else:
+		return false

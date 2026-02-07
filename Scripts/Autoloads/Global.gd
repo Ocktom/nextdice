@@ -16,20 +16,8 @@ var all_units : Array [Unit]
 var game_speed := 1
 
 var starting_enemy_count := 3
-var torch_unit_count := 3
+var torch_unit_count := 0
 var treasure_unit_count := 1
-
-var relics : Array[Item]
-
-var mana := 0
-var max_mana := 10
-var max_hp := 10
-var player_hp := 10
-
-var player_status_effects : Dictionary = {}
-
-var max_rolls := 3
-var rolls := 3
 
 var current_sum := 0
 
@@ -168,6 +156,9 @@ func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE, target_no
 				original,
 				duration_back
 			)
+	
+	if node is Unit:
+		node.update()
 
 func get_path_cells(start_cell : Cell, target_cell : Cell, max_move : int) -> Array[Cell]:
 	

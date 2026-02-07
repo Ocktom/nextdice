@@ -12,5 +12,5 @@ func _process(delta: float) -> void:
 	pass
 
 func update():
-	hp_label.text = str("HP: ", Global.player_hp)
-	rolls_label.text = str("Rolls: ", Global.rolls)
+	hp_label.text = str("HP: ", PlayerStats.player_hp)
+	rolls_label.text = str("Rolls: ", PlayerStats.rolls)

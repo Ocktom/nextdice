@@ -78,15 +78,19 @@ offset_right = 103.0
 offset_bottom = 4.0
 theme_override_constants/separation = -11
 
-[node name="HP_Label" type="Label" parent="Right_Stats" unique_id=2008654700]
+[node name="HBoxContainer" type="HBoxContainer" parent="Right_Stats" unique_id=1187409328]
+layout_mode = 2
+
+[node name="HP_Label" type="Label" parent="Right_Stats/HBoxContainer" unique_id=2008654700]
 layout_mode = 2
 text = "12"
 label_settings = SubResource("LabelSettings_1djiq")
 horizontal_alignment = 1
 
-[node name="Shield_Icon" type="Label" parent="Right_Stats" unique_id=1196741128]
+[node name="Shield_Label" type="Label" parent="Right_Stats/HBoxContainer" unique_id=1196741128]
+visible = false
 layout_mode = 2
-text = "12"
+text = "/12"
 label_settings = SubResource("LabelSettings_26pr7")
 horizontal_alignment = 1
 

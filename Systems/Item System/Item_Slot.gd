@@ -5,7 +5,7 @@ class_name Item_Slot
 @onready var slot_area: Area2D = $Slot_Area
 
 @onready var relic_sprite: Sprite2D = $Relic_Sprite
-@onready var upgrade_sprite: Sprite2D = $Upgrade_Sprite
+@onready var upgrade_sprite: Sprite2D = $Effect_Sprite
 @onready var dice_sprite: AnimatedSprite2D = $Dice_Sprite
 
 var dice_face_picked: Face
@@ -42,7 +42,7 @@ func fill_with_upgrade(item : Item, dice_face : Face):
 	print ("pips on item are ", dice_face.pips-1)
 	dice_sprite.visible = true
 	
-	var sprite_path = str("res://Art/Upgrade_Sprites/",item.item_name,".png")
+	var sprite_path = str("res://Art/Effect_Sprites/",item.item_name,".png")
 	print ("loading sprite of ", sprite_path)
 	upgrade_sprite.texture = load(sprite_path)
 	

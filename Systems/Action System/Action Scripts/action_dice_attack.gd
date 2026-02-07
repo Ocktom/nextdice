@@ -12,7 +12,7 @@ func execute(context: Dictionary, action_source: Node = null, action_target: Nod
 
 	await Global.animate(action_source,Enums.Anim.LUNGE,Color.WHITE,target)
 	await target.take_attack(context["amount"])
-	await UpgradeManager.attack_effects(target,context["amount"],context["dice"])
+	await EffectManager.attack_effects(target,context["amount"],context["dice"])
 	await Global.timer(.1)
 	SignalBus.unit_attacked.emit(target,user)
 	SignalBus.enemy_attacked.emit(target,user)

@@ -84,6 +84,16 @@ func get_adjacent_cells(cell: Cell, include_diagonal : bool = false) -> Array[Ce
 
 	return adjacent_cells
 
+func get_adjacent_units(cell: Cell):
+	var cells = get_adjacent_cells(cell,true)
+	var units : Array[Unit] = []
+	for x in cells:
+		if x.occupant != null:
+			if x.occupant is Unit:
+				units.append(x.occupant)
+	
+	return units
+	
 func get_cleave_targets(attacker_cell: Cell, target_cell: Cell) -> Array[Cell]:
 	var cleave_cells : Array[Cell] = []
 

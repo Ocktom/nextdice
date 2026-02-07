@@ -4,7 +4,7 @@ var hovered_dice: Dice = null
 var hovered_cell : Cell = null
 var hovered_spell_slot : Spell_Slot = null
 var hovered_item_slot : Item_Slot = null
-var hovered_upgrade_slot : Upgrade_Slot = null
+var hovered_upgrade_slot : Effect_Slot = null
 
 var mana_area_hovered := false
 
@@ -79,7 +79,7 @@ func _input(event):
 					Global.float_text("already used this turn",hovered_dice.global_position,Color.WHITE)
 					return
 				
-				hovered_dice.use()
+				#hovered_dice.use()
 
 		elif event.is_action_released("left_mouse"):
 
@@ -90,14 +90,13 @@ func _input(event):
 				
 				if mana_area_hovered:
 					print ("using dice for mana")
-					dragging_dice.use()
 					Global.world.spell_ui.add_mana(dragging_dice.current_face.pips)
 					
 				
 				elif hovered_spell_slot != null:
 					if hovered_spell_slot.occupant != null:
 						if dragging_dice.current_face.pips >= hovered_spell_slot.occupant.mana_cost:
-							dragging_dice.use()
+							#dragging_dice.use()
 							hovered_spell_slot.occupant.use_spell()
 							
 				
@@ -106,14 +105,22 @@ func _input(event):
 					
 					if not hovered_cell.occupant == null:
 						if hovered_cell.occupant is Enemy:
+							
+							if not dragging_dice.current_face.skill_target == Enums.SkillTarget.ENEMY_UNIT \
+							and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_UNIT \
+							and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_CELL:
+								
+									Global.float_text("INVALID TARGET",hovered_cell.global_position,Color.INDIAN_RED)
+									reset_drag()
+									return
+							
 							if hovered_cell.occupant.status_effects.keys().has("invisible"):
 								Global.float_text("Invisible",hovered_cell.global_position,Color.WHITE)
+								reset_drag()
 								return
 							
 							if hovered_cell.is_adjacent(Global.hero_unit.current_cell, true):
-								print ("dice dropped on enemy")
-								dragging_dice.use()
-								ActionManager.request_action("dice_attack",{"target" : hovered_cell.occupant, "amount" : dragging_dice.current_face.pips, "dice" : dragging_dice},Global.hero_unit)
+								dragging_dice.use(Global.hero_unit,hovered_cell.occupant)
 								Global.world.call_deferred("victory_check")
 				
 							else:
@@ -125,10 +132,18 @@ func _input(event):
 					
 					elif hovered_cell.is_empty():
 						
+						if not dragging_dice.current_face.skill_target == Enums.SkillTarget.EMPTY_CELL \
+						and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_CELL:
+							
+							print ("dragging_dice.current_face.skill_target is ", dragging_dice.current_face.skill_target)
+							Global.float_text("INVALID TARGET",hovered_cell.global_position,Color.INDIAN_RED)
+							reset_drag()
+							return
+							
 						print ("dice dropped on empty cell")
 						
 						var hero_cell = Global.hero_unit.current_cell
-						var max_move = dragging_dice.current_face.pips
+						var max_move = PlayerStats.move_points
 
 						var dx = abs(hovered_cell.cell_vector.x - hero_cell.cell_vector.x)
 						var dy = abs(hovered_cell.cell_vector.y - hero_cell.cell_vector.y)
@@ -141,10 +156,8 @@ func _input(event):
 							Global.float_text("Out of Range", Global.hero_unit.global_position)
 						else:
 							print("dragging dice is dropped on empty cell")
-							dragging_dice.use()
-							await hovered_cell.move_hero(dragging_dice)
+							dragging_dice.use(Global.hero_unit,hovered_cell)
 							
-
 					else:
 						print ("couldnt drop dice anywhere")
 					

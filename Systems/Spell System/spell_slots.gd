@@ -22,15 +22,15 @@ func create_new_spells():
 		x.fill_with_spell(spell_inst)
 	
 func update():
-	mana_label.text = str(Global.mana)
+	mana_label.text = str(PlayerStats.mana)
 
 func add_mana(amount : int):
-	Global.mana = min(Global.max_mana,Global.mana + amount)
+	PlayerStats.mana = min(PlayerStats.max_mana,PlayerStats.mana + amount)
 	update()
 	
 func spend_mana(amount : int):
 	Global.animate(mana_node,Enums.Anim.FLASH,Color.AQUA)
-	Global.mana = max(0,Global.mana - amount)
+	PlayerStats.mana = max(0,PlayerStats.mana - amount)
 	update()
 
 func _on_mana_area_entered():

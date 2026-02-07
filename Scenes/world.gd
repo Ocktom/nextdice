@@ -16,6 +16,7 @@ func _ready() -> void:
 
 func game_start():
 	
+	await SkillManager.setup_dice()
 	await spawn_torches()
 	await spawn_chests()
 	await spawn_hero()
@@ -93,7 +94,7 @@ func spawn_round_enemies():
 		UnitManager.spawn_new_enemy(x,cell_pick)
 		
 func roll_dice():
-	if Global.rolls == 0:
+	if PlayerStats.rolls == 0:
 		print ("no rolls left")
 		return
 
@@ -101,13 +102,11 @@ func roll_dice():
 	for x in Global.player_dice:
 		if not x.used_this_turn: x.roll()
 	
-	Global.rolls -= 1
+	PlayerStats.rolls -= 1
 	Global.player_ui.update()
 	update_sum()
 
 func start_player_turn():
-	
-	Global.hero_unit.status_effects["shield"] = 3
 	
 	Global.game_state = Enums.GameState.PLAYER_TURN
 
@@ -117,7 +116,7 @@ func start_player_turn():
 		x.used_this_turn = false
 		x.grey_out = false
 		
-	Global.rolls = Global.max_rolls
+	PlayerStats.rolls = PlayerStats.max_rolls
 	await roll_dice()
 	InputManager.input_paused = false
 	
@@ -129,7 +128,7 @@ func end_player_turn():
 	
 	Global.game_state = Enums.GameState.ENEMY_TURN
 	print ("TURN ENDED")
-	await Global.hero_unit.end_turn_effects()
+	
 	enemy_turn()
 
 func enemy_turn():
@@ -154,6 +153,8 @@ func enemy_turn():
 func end_enemy_turn():
 	for x in Global.grid.get_all_enemies():
 		await x.end_turn_effects()
+		
+	await Global.hero_unit.end_turn_effects()
 	start_player_turn()
 
 func victory_check():
@@ -185,7 +186,7 @@ func enter_shop():
 	
 	Global.game_state = Enums.GameState.SHOP
 	shop.visible = true
-	await shop.get_new_upgrades()
+	await shop.get_new_items()
 	InputManager.input_paused = false
 
 func hover_dice(dice : Dice):

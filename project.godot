@@ -29,8 +29,9 @@ ActionManager="*res://Systems/Action System/action_manager.gd"
 SpellManager="*res://Systems/Spell System/spell_manager.gd"
 ItemManager="*res://Systems/Item System/item_manager.gd"
 SignalBus="*res://Systems/Passive_System/SignalBus.gd"
-ActionRegistry="*res://Systems/action_registry.gd"
-UpgradeManager="*uid://cvpdhrdrd237v"
+EffectManager="*uid://cvpdhrdrd237v"
+SkillManager="*uid://bt2iaunwo888v"
+PlayerStats="*uid://bh0t2fshqgyjc"
 
 [display]
 

@@ -1,13 +1,13 @@
 extends Control
 class_name Dice
 
-@export var upgrade_slot_1: Upgrade_Slot
-@export var upgrade_slot_2: Upgrade_Slot
+@export var upgrade_slot_1: Effect_Slot
+@export var upgrade_slot_2: Effect_Slot
 @export var dice_icons_node : Node2D
 
 var dice_icons : Array[Node]
 
-var upgrade_slots : Array [Upgrade_Slot]
+var upgrade_slots : Array [Effect_Slot]
 
 var faces : Array [Face]
 var used_this_turn : bool :
@@ -28,7 +28,9 @@ var grey_out := false :
 @onready var face_node : Control = $Face_Node
 @onready var starting_pos : Vector2i = self.global_position
 
-@onready var upgrade_sprite: Sprite2D = $Upgrade_Sprite
+@onready var face_sprite: Sprite2D = $Face_Node/Face_Sprite
+
+@onready var upgrade_sprite: Sprite2D = $Effect_Sprite
 
 
 var current_face : Face
@@ -45,47 +47,37 @@ func _ready() -> void:
 	for x in range(1,7):
 			
 		var y = Face.new()
-		y.pips = x
+		y.pips = 3
 		
 		faces.append(y)
 	
 	print ("dice faces are", faces)
 
-func use():
+func use(action_source: Node, action_target: Node):
+	
+	print ("current_face.skill_name being used is ", current_face.skill_name)
+	
+	var skill_script : Skill = load(str("res://Systems/Skill_System/Skill_Scripts/skill_",current_face.skill_name,".gd")).new()
+	await skill_script.execute(action_source,action_target,{})
 	
 	used_this_turn = true
 	grey_out = true
 	
-	print ("dice used, current face upgrade is ", current_face.upgrade)
+	await Global.hero_unit.update()
 	
 func roll():
 	
-	#dice_color.color = Global.colors.pick_random()
-	for x in upgrade_slots:
-		x.clear_slot()
-	
 	current_face = faces.pick_random()
+	print ("rolled current_face of ", current_face, " with skill of ", current_face.skill_name)
 	await update()
 
 func setup_visuals():
 	pass
 	
 func update():
+
+	face_sprite.texture =  load(str("res://Art/Skill_Sprites/",current_face.skill_name,".png"))
 	
-	print ("updating dice current face, its upgrade dict is ", current_face.upgrade)
-	face_node.face_sprite.frame = current_face.pips-1
-	
-	var upgrade = current_face.upgrade
-	
-	for x in upgrade.keys():
-		print ("checking ", x, " in current_face.upgrade.keys in dice update_function")
-		var ind = upgrade.keys().find(x)
-		if upgrade_slots[ind].upgrade_name == "":
-			upgrade_slots[ind].fill_with_upgrade(x)
-	
-	for x in upgrade_slots:
-		x.update()
-		
 func highlight():
 	face_node.modulate = Color(1.0, 0.663, 1.0)
 

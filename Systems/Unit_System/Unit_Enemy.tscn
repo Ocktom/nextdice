@@ -70,6 +70,10 @@ font_size = 21
 font_size = 31
 font_color = Color(1, 0.13333334, 0.27058825, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_koxc3"]
+font_size = 31
+font_color = Color(0.62982994, 0.636288, 0.6266591, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_t6kcj"]
 font_size = 31
 font_color = Color(1, 0.90588236, 0, 1)
@@ -131,23 +135,31 @@ text = "CARD NAME"
 label_settings = SubResource("LabelSettings_1xpod")
 
 [node name="Right_Stats" type="VBoxContainer" parent="." unique_id=233231666]
-offset_left = 63.0
+offset_left = 50.0
 offset_top = -9.0
-offset_right = 103.0
+offset_right = 150.0
 offset_bottom = 68.0
 theme_override_constants/separation = -11
 
-[node name="HP_Label" type="Label" parent="Right_Stats" unique_id=461646694]
+[node name="HBoxContainer" type="HBoxContainer" parent="Right_Stats" unique_id=389829734]
+layout_mode = 2
+
+[node name="HP_Label" type="Label" parent="Right_Stats/HBoxContainer" unique_id=461646694]
 layout_mode = 2
 text = "12"
 label_settings = SubResource("LabelSettings_4im1a")
 horizontal_alignment = 1
 
+[node name="SHIELD_Label" type="Label" parent="Right_Stats/HBoxContainer" unique_id=1205448260]
+visible = false
+layout_mode = 2
+text = "/12"
+label_settings = SubResource("LabelSettings_koxc3")
+
 [node name="ATK_Label" type="Label" parent="Right_Stats" unique_id=91253544]
 layout_mode = 2
 text = "12"
 label_settings = SubResource("LabelSettings_t6kcj")
-horizontal_alignment = 1
 
 [node name="Left_Stats" type="HBoxContainer" parent="." unique_id=1303445581]
 offset_left = -74.0
