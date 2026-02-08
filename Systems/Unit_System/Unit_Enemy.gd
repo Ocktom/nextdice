@@ -261,7 +261,6 @@ func take_attack(amount : int):
 	print ("was damaged")
 	Global.animate(self,Enums.Anim.SHAKE)
 	await Global.animate(self,Enums.Anim.FLASH,Color.RED)
-	await Global.float_text("Damage",global_position,Color.RED)
 	await Global.timer(.3)
 	
 	if dying_this_turn:

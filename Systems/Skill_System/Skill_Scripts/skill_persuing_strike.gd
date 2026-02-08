@@ -16,4 +16,5 @@ func execute(action_source: Node, action_target: Node, context:= {}):
 	var adjacent_units = Global.grid.get_adjacent_units(action_source.current_cell)
 	for x in adjacent_units:
 		await Global.timer(.25)
-		ActionManager.request_action("attack",{"target" : x, "amount" : PlayerStats.player_str/2},action_source,x)
+		ActionManager.request_action("attack",{"target" : x, "amount" : PlayerStats.player_str/2, "sound_path" : "res://Audio/Sound_Effects/DSGNTonl_INTERFACE-Tonal Click_HY_PC-006.wav"},action_source,x)
+		

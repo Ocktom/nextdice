@@ -13,5 +13,7 @@ func execute(action_source: Node, action_target: Node, context_dict : Dictionary
 	
 	action_target = action_target.occupant
 	
-	await ActionManager.request_action("attack",{"amount" : PlayerStats.player_str/2, "target" : action_target},Global.hero_unit,Global.hero_unit)
+	await ActionManager.request_action("attack",{"amount" : PlayerStats.player_str/2, "target" : action_target},
+	Global.hero_unit,Global.hero_unit)
+	await Global.timer(.3)
 	await ActionManager.request_action("shield_unit",{"amount" : PlayerStats.player_str/2},Global.hero_unit,Global.hero_unit)

@@ -18,5 +18,6 @@ func execute(context: Dictionary, action_source: Node = null, action_target: Nod
 	
 	action_target.update()
 	Global.animate(action_target,Enums.Anim.FLASH,Color.GREEN)
+	Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_HIT-Spell Hit_HY_PC-001.wav")
 	Global.float_text("SHIELD",action_target.global_position,Color.GREEN)
 	action_target.update()
