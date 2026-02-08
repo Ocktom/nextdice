@@ -29,3 +29,6 @@ func setup_dice():
 			#y.skill_actions = skill_actions
 			y.skill_target = Enums.SkillTarget[SkillManager.skill_data_dictionary[y.skill_name]["skill_target"]]
 			print ("skill_target in setup is ", y.skill_target)
+
+func is_useable(dice_face: Face, target_cell : Cell):
+	

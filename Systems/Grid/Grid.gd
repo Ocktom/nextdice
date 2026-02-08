@@ -174,7 +174,7 @@ func get_column(cell: Cell) -> Array[Cell]:
 
 	return col_cells
 
-func get_cell_in_direction(cell: Cell, direction: Enums.Direction) -> Cell:
+func get_cell_in_direction(cell: Cell, direction: Enums.Direction, include_diagonals: bool = true) -> Cell:
 
 	var p = cell.cell_vector
 	var t: Vector2i
@@ -188,6 +188,20 @@ func get_cell_in_direction(cell: Cell, direction: Enums.Direction) -> Cell:
 			t = p + Vector2i(-1, 0)
 		Enums.Direction.RIGHT:
 			t = p + Vector2i(1, 0)
+
+		Enums.Direction.UP_LEFT:
+			if not include_diagonals: return null
+			t = p + Vector2i(-1, -1)
+		Enums.Direction.UP_RIGHT:
+			if not include_diagonals: return null
+			t = p + Vector2i(1, -1)
+		Enums.Direction.DOWN_LEFT:
+			if not include_diagonals: return null
+			t = p + Vector2i(-1, 1)
+		Enums.Direction.DOWN_RIGHT:
+			if not include_diagonals: return null
+			t = p + Vector2i(1, 1)
+
 		_:
 			return null
 
@@ -195,6 +209,63 @@ func get_cell_in_direction(cell: Cell, direction: Enums.Direction) -> Cell:
 		return null
 
 	return grid[t.x][t.y]
+
+func get_obstructing_unit(start_cell: Cell, direction: Enums.Direction) -> Unit:
+	var dir := Vector2i.ZERO
+	match direction:
+		Enums.Direction.UP: dir = Vector2i(0, -1)
+		Enums.Direction.DOWN: dir = Vector2i(0, 1)
+		Enums.Direction.LEFT: dir = Vector2i(-1, 0)
+		Enums.Direction.RIGHT: dir = Vector2i(1, 0)
+		Enums.Direction.UP_LEFT: dir = Vector2i(-1, -1)
+		Enums.Direction.UP_RIGHT: dir = Vector2i(1, -1)
+		Enums.Direction.DOWN_LEFT: dir = Vector2i(-1, 1)
+		Enums.Direction.DOWN_RIGHT: dir = Vector2i(1, 1)
+		_: return null
+	var p = start_cell.cell_vector + dir
+	while is_in_bounds(p):
+		var cell = grid[p.x][p.y]
+		if cell.occupant != null:
+			return cell.occupant
+		p += dir
+	return null
+
+func has_clear_path(cell_1: Cell, cell_2: Cell) -> bool:
+	print ("checking has_clear_path")
+	var a = cell_1.cell_vector
+	var b = cell_2.cell_vector
+	var dx = b.x - a.x
+	var dy = b.y - a.y
+	var step = Vector2i(sign(dx), sign(dy))
+	if not (dx == 0 or dy == 0 or abs(dx) == abs(dy)):
+		return false
+	var p = a + step
+	while p != b:
+		if not is_in_bounds(p):
+			return false
+		if not grid[p.x][p.y].is_empty():
+			return false
+		p += step
+	return true
+	print ("has_clear_path returning true")
+	
+func get_furthest_empty_cell_in_direction(cell_1: Cell, cell_2: Cell) -> Cell:
+	var a = cell_1.cell_vector
+	var b = cell_2.cell_vector
+	var dx = b.x - a.x
+	var dy = b.y - a.y
+	if not (dx == 0 or dy == 0 or abs(dx) == abs(dy)):
+		return null
+	var step = Vector2i(sign(dx), sign(dy))
+	var p = a + step
+	var last_empty : Cell = null
+	while Global.grid.is_in_bounds(p):
+		var c = Global.grid.grid[p.x][p.y]
+		if not c.is_empty():
+			break
+		last_empty = c
+		p += step
+	return last_empty
 
 func is_in_bounds(pos: Vector2i) -> bool:
 	return (

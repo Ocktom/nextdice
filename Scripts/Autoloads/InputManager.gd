@@ -106,8 +106,14 @@ func _input(event):
 					if not hovered_cell.occupant == null:
 						if hovered_cell.occupant is Enemy:
 							
+							if dragging_dice.current_face.skill_target == Enums.SkillTarget.LOS_UNIT:
+								if not Global.grid.has_clear_path(Global.hero_unit.current_cell,hovered_cell):
+									Global.float_text("NEEDS LOS",hovered_cell.global_position,Color.INDIAN_RED)
+									return
+							
 							if not dragging_dice.current_face.skill_target == Enums.SkillTarget.ENEMY_UNIT \
 							and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_UNIT \
+							and not dragging_dice.current_face.skill_target == Enums.SkillTarget.LOS_UNIT \
 							and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_CELL:
 								
 									Global.float_text("INVALID TARGET",hovered_cell.global_position,Color.INDIAN_RED)
@@ -210,7 +216,6 @@ func _input(event):
 			Global.world.new_round()
 		
 #region spell selection controls
-
 
 #endregion
 
