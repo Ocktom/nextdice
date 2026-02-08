@@ -79,7 +79,7 @@ func _on_mouse_entered():
 				if InputManager.dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_CELL \
 				or InputManager.dragging_dice.current_face.skill_target == Enums.SkillTarget.EMPTY_CELL:
 				
-					var path_cells = Global.get_path_cells(Global.hero_unit.current_cell,self,PlayerStats.move_points)
+					var path_cells = Global.grid.get_cells_in_path(Global.hero_unit.current_cell,self)
 					for x in path_cells:
 						x.highlight = true
 						

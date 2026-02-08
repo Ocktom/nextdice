@@ -1,12 +1,19 @@
 [gd_scene format=3 uid="uid://chix8pomfhr04"]
 
 [ext_resource type="Script" uid="uid://de8jygopjlgu0" path="res://Systems/Grid/Cell.gd" id="1_hyvek"]
+[ext_resource type="Texture2D" uid="uid://cc7ia6nupvhui" path="res://Art/cell_grey.png" id="2_r3c2n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1m28"]
 size = Vector2(201, 203)
 
 [node name="GridCell" type="Node2D" unique_id=704447098]
 script = ExtResource("1_hyvek")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=854796418]
+modulate = Color(0.6947659, 0.8573696, 0.8238324, 1)
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("2_r3c2n")
 
 [node name="Cell_Color" type="ColorRect" parent="." unique_id=1300276636]
 visible = false

@@ -4,6 +4,8 @@ var action_name := "damage"
 
 func execute(context: Dictionary, action_source: Node = null,action_target_cell: Node = null):
 	
+	#CONTEXT: damage_name, amount, audio_path (optional)
+	
 	print ("excecuting action_damage_unit")
 	var action_target = action_target_cell.occupant
 	

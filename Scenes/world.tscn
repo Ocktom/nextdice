@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dmb5i6rmsrgme" path="res://Systems/Spell System/Spell_Slot.tscn" id="6_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://dr1kdty3xqiul" path="res://Systems/Item System/Shop_Screen.tscn" id="8_k7acu"]
 [ext_resource type="Texture2D" uid="uid://d1i4ktdbjkhhf" path="res://Art/big grid.png" id="10_0fj1v"]
-[ext_resource type="PackedScene" uid="uid://do7bkkwj8w4db" path="res://Systems/Unit_System/Unit_Chest.tscn" id="11_ikia7"]
 [ext_resource type="Texture2D" uid="uid://csutw0bkptx3y" path="res://Art/brick_wall_4.png" id="12_7yui6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_o06y3"]
@@ -30,9 +29,10 @@ offset_top = -58.0
 offset_right = 1930.0
 offset_bottom = 1103.0
 mouse_filter = 2
-color = Color(0.2277165, 0.08377194, 0.14807004, 1)
+color = Color(0.10138751, 0.1495589, 0.1596767, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=668567970]
+visible = false
 texture_filter = 1
 position = Vector2(961.00006, 571.0001)
 scale = Vector2(5.3, 5.3)
@@ -146,46 +146,50 @@ mouse_filter = 2
 [node name="Shop_Screen" parent="." unique_id=540836891 instance=ExtResource("8_k7acu")]
 visible = false
 
-[node name="Chest" parent="." unique_id=1713004707 instance=ExtResource("11_ikia7")]
-position = Vector2(741, 391)
-
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=573492340]
+visible = false
 texture_filter = 1
 position = Vector2(503.99997, 29.999996)
 scale = Vector2(5, 5)
 texture = ExtResource("12_7yui6")
 
 [node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1070046110]
+visible = false
 texture_filter = 1
 position = Vector2(662.99994, 29.999996)
 scale = Vector2(5, 5)
 texture = ExtResource("12_7yui6")
 
 [node name="Sprite2D4" type="Sprite2D" parent="." unique_id=299059175]
+visible = false
 texture_filter = 1
 position = Vector2(823, 29.999996)
 scale = Vector2(5, 5)
 texture = ExtResource("12_7yui6")
 
 [node name="Sprite2D5" type="Sprite2D" parent="." unique_id=1016124882]
+visible = false
 texture_filter = 1
 position = Vector2(982, 29.999996)
 scale = Vector2(5, 5)
 texture = ExtResource("12_7yui6")
 
 [node name="Sprite2D6" type="Sprite2D" parent="." unique_id=130954379]
+visible = false
 texture_filter = 1
 position = Vector2(1142, 29.999996)
 scale = Vector2(5, 5)
 texture = ExtResource("12_7yui6")
 
 [node name="Sprite2D7" type="Sprite2D" parent="." unique_id=161871909]
+visible = false
 texture_filter = 1
 position = Vector2(1284.0001, 29.999996)
 scale = Vector2(5, 5)
 texture = ExtResource("12_7yui6")
 
 [node name="Sprite2D8" type="Sprite2D" parent="." unique_id=1619276491]
+visible = false
 texture_filter = 1
 position = Vector2(1403.0001, 29.999996)
 scale = Vector2(5, 5)

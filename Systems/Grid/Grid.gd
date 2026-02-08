@@ -230,24 +230,42 @@ func get_obstructing_unit(start_cell: Cell, direction: Enums.Direction) -> Unit:
 		p += dir
 	return null
 
-func has_clear_path(cell_1: Cell, cell_2: Cell) -> bool:
-	print ("checking has_clear_path")
+func get_cells_in_path(cell_1: Cell, cell_2: Cell) -> Array[Cell]:
+	var path : Array[Cell] = []
+
 	var a = cell_1.cell_vector
 	var b = cell_2.cell_vector
-	var dx = b.x - a.x
-	var dy = b.y - a.y
-	var step = Vector2i(sign(dx), sign(dy))
-	if not (dx == 0 or dy == 0 or abs(dx) == abs(dy)):
-		return false
-	var p = a + step
+	var p = a
+
 	while p != b:
-		if not is_in_bounds(p):
-			return false
-		if not grid[p.x][p.y].is_empty():
-			return false
+		var dx = b.x - p.x
+		var dy = b.y - p.y
+		var step = Vector2i(sign(dx), sign(dy))
 		p += step
+		if not is_in_bounds(p):
+			return []
+		path.append(grid[p.x][p.y])
+
+	return path
+
+
+func get_units_in_path(cell_1: Cell, cell_2: Cell) -> Array[Unit]:
+	var units : Array[Unit] = []
+	for x in get_cells_in_path(cell_1,cell_2):
+		if x.occupant != null:
+			units.append(x.occupant)
+	return units
+
+func has_clear_path(cell_1: Cell, cell_2: Cell) -> bool:
+	var path = get_cells_in_path(cell_1, cell_2)
+	if path.is_empty():
+		return false
+
+	for c in path:
+		if c != cell_2 and not c.is_empty():
+			return false
+
 	return true
-	print ("has_clear_path returning true")
 	
 func get_furthest_empty_cell_in_direction(cell_1: Cell, cell_2: Cell) -> Cell:
 	var a = cell_1.cell_vector
