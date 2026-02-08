@@ -13,8 +13,6 @@ var faces : Array [Face]
 var used_this_turn : bool :
 	set(new_value):
 		if used_this_turn != new_value: used_this_turn = new_value
-		if used_this_turn:
-			Global.world.update_sum()
 
 var grey_out := false :
 	set (new_value):
@@ -47,7 +45,6 @@ func _ready() -> void:
 	for x in range(1,7):
 			
 		var y = Face.new()
-		y.pips = 3
 		
 		faces.append(y)
 	

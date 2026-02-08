@@ -267,6 +267,14 @@ func get_furthest_empty_cell_in_direction(cell_1: Cell, cell_2: Cell) -> Cell:
 		p += step
 	return last_empty
 
+func get_distance(cell_1 : Cell, cell_2 : Cell) -> int: 
+	return max(abs(cell_1.cell_vector.x - cell_2.cell_vector.x), 
+	abs(cell_1.cell_vector.y - cell_2.cell_vector.y))
+
+func is_in_range(cell_1 : Cell, cell_2 : Cell, range : int) -> bool:
+		pass
+		return false
+
 func is_in_bounds(pos: Vector2i) -> bool:
 	return (
 		pos.x >= 0 and pos.x < GRID_WIDTH and

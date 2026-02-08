@@ -259,7 +259,6 @@ func take_attack(amount : int):
 		dying_this_turn = true
 	
 	print ("was damaged")
-	Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNImpt_EXPLOSION-Sand Impact_HY_PC-005.wav")
 	Global.animate(self,Enums.Anim.SHAKE)
 	await Global.animate(self,Enums.Anim.FLASH,Color.RED)
 	await Global.float_text("Damage",global_position,Color.RED)
@@ -271,12 +270,11 @@ func take_attack(amount : int):
 	
 	update()
 	
-func take_non_attack_damage(amount : int):
+func take_damage(amount : int):
 	
 	print ("was damaged")
 	Global.animate(self,Enums.Anim.SHAKE)
 	await Global.animate(self,Enums.Anim.FLASH,Color.RED)
-	await Global.float_text("Damage",global_position,Color.RED)
 	await Global.timer(.5)
 	
 	hp = max(0,hp-amount)

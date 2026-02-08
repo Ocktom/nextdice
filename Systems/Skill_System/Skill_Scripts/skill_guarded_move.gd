@@ -1,5 +1,6 @@
 extends Skill
 
+var range = PlayerStats.move_points
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

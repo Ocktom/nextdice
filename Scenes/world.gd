@@ -104,7 +104,6 @@ func roll_dice():
 	
 	PlayerStats.rolls -= 1
 	Global.player_ui.update()
-	update_sum()
 
 func start_player_turn():
 	
@@ -121,11 +120,7 @@ func start_player_turn():
 	InputManager.input_paused = false
 	
 func end_player_turn():
-	
-	for x in Global.player_dice:
-		if not x.used_this_turn:
-			spell_ui.add_mana(x.current_face.pips)
-	
+
 	Global.game_state = Enums.GameState.ENEMY_TURN
 	print ("TURN ENDED")
 	
@@ -211,11 +206,4 @@ func kill_all_enemies():
 			if x.occupant is Enemy:
 				ActionManager.create_action("enemy_death",{},x.occupant)
 
-func update_sum():
-	var new_sum = 0
-	for x in Global.player_dice:
-		if not x.used_this_turn:
-			new_sum += x.current_face.pips
-	Global.current_sum = new_sum
-	sum_label.text = str(Global.current_sum)
 	

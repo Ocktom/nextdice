@@ -70,6 +70,10 @@ func _on_mouse_entered():
 		
 		if InputManager.dragging_dice != null:
 			
+			if not SkillManager.is_useable(InputManager.dragging_dice,self,false):
+				print ("not highlighting, useable check not passed")
+				return
+			
 			if is_empty():
 			
 				if InputManager.dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_CELL \
@@ -78,8 +82,8 @@ func _on_mouse_entered():
 					var path_cells = Global.get_path_cells(Global.hero_unit.current_cell,self,PlayerStats.move_points)
 					for x in path_cells:
 						x.highlight = true
+						
 			elif occupant is Enemy:
-				if is_adjacent(Global.hero_unit.current_cell):
 					highlight = true
 				
 		elif occupant is Enemy:

@@ -57,6 +57,6 @@ var data : Dictionary = {
 	"skill_name": "fireball",
 	"skill_value": 2,
 	"melee_effect": "",
-	"skill_target": "LOS_UNIT"
+	"skill_target": "ENEMY_UNIT"
   }
 }

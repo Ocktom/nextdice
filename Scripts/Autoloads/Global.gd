@@ -7,6 +7,8 @@ var grid : Node
 var world: Node
 var hero_unit : Unit
 
+var projectile_time := .3
+
 var round_number := 1
 
 var player_ui: Control
@@ -159,6 +161,13 @@ func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE, target_no
 	
 	if node is Unit:
 		node.update()
+
+func animate_projectile(start_pos : Vector2, end_pos: Vector2, sprite_path: String, rotate : bool = false):
+	var sprite := Sprite2D.new(); sprite.texture = load(sprite_path); sprite.global_position = start_pos; Global.world.unit_layer.add_child(sprite)
+	sprite.scale = Vector2(6,6)
+	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	if rotate: sprite.rotation = (end_pos - start_pos).angle()
+	var tween = sprite.create_tween(); tween.tween_property(sprite,"global_position",end_pos,projectile_time); tween.tween_callback(sprite.queue_free)
 
 func get_path_cells(start_cell : Cell, target_cell : Cell, max_move : int) -> Array[Cell]:
 	

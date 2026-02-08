@@ -1,7 +1,6 @@
 extends Node
 class_name Skill
 
-
 func execute(action_source: Node, action_target: Node, context_dict : Dictionary = {}):
 	print ("SKILL USED")
 
