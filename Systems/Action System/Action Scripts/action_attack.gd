@@ -2,7 +2,7 @@ extends Action
 
 var action_name := "attack"
 
-func execute(context: Dictionary, action_source: Node = null,action_target: Node = null):
+func execute(context: Dictionary, action_source: Node = null, action_target: Node = null):
 	
 	print ("executing acttack action")
 	var user = action_source

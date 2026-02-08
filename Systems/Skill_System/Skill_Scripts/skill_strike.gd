@@ -11,4 +11,7 @@ func _process(delta: float) -> void:
 
 func execute(action_source: Node, action_target: Node, context:= {}):
 	print ("strike being used")
+	
+	action_target = action_target.occupant
+	
 	ActionManager.request_action("attack",{"target" : action_target, "amount" : PlayerStats.player_str},action_source,action_target)

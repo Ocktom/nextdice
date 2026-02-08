@@ -103,69 +103,13 @@ func _input(event):
 				elif not hovered_cell == null:
 					print ("hovered cell not null")
 					
-					if not hovered_cell.occupant == null:
-						if hovered_cell.occupant is Enemy:
-							
-							if dragging_dice.current_face.skill_target == Enums.SkillTarget.LOS_UNIT:
-								if not Global.grid.has_clear_path(Global.hero_unit.current_cell,hovered_cell):
-									Global.float_text("NEEDS LOS",hovered_cell.global_position,Color.INDIAN_RED)
-									return
-							
-							if not dragging_dice.current_face.skill_target == Enums.SkillTarget.ENEMY_UNIT \
-							and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_UNIT \
-							and not dragging_dice.current_face.skill_target == Enums.SkillTarget.LOS_UNIT \
-							and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_CELL:
-								
-									Global.float_text("INVALID TARGET",hovered_cell.global_position,Color.INDIAN_RED)
-									reset_drag()
-									return
-							
-							if hovered_cell.occupant.status_effects.keys().has("invisible"):
-								Global.float_text("Invisible",hovered_cell.global_position,Color.WHITE)
-								reset_drag()
-								return
-							
-							if hovered_cell.is_adjacent(Global.hero_unit.current_cell, true):
-								dragging_dice.use(Global.hero_unit,hovered_cell.occupant)
-								Global.world.call_deferred("victory_check")
-				
-							else:
-								Global.float_text("Out of Range", Global.hero_unit.global_position)
-								
-							
-						else:
-							print ("dice dropped on non enemy unit")
-					
-					elif hovered_cell.is_empty():
-						
-						if not dragging_dice.current_face.skill_target == Enums.SkillTarget.EMPTY_CELL \
-						and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_CELL:
-							
-							print ("dragging_dice.current_face.skill_target is ", dragging_dice.current_face.skill_target)
-							Global.float_text("INVALID TARGET",hovered_cell.global_position,Color.INDIAN_RED)
-							reset_drag()
-							return
-							
-						print ("dice dropped on empty cell")
-						
-						var hero_cell = Global.hero_unit.current_cell
-						var max_move = PlayerStats.move_points
-
-						var dx = abs(hovered_cell.cell_vector.x - hero_cell.cell_vector.x)
-						var dy = abs(hovered_cell.cell_vector.y - hero_cell.cell_vector.y)
-
-						# Chebyshev distance (diagonals = 1)
-						var dist = max(dx, dy)
-
-						if dist > max_move:
-							print ("can't move, out of range")
-							Global.float_text("Out of Range", Global.hero_unit.global_position)
-						else:
-							print("dragging dice is dropped on empty cell")
-							dragging_dice.use(Global.hero_unit,hovered_cell)
-							
+					if SkillManager.is_useable(dragging_dice,hovered_cell):
+						print ("dice is useable, using...")
+						dragging_dice.use(Global.hero_unit,hovered_cell)
 					else:
-						print ("couldnt drop dice anywhere")
+						print ("dice is NOT useable, resetting")
+						reset_drag()
+						return
 					
 			# Reset dice drag
 			if dragging_dice != null:
@@ -179,6 +123,7 @@ func _input(event):
 				if hovered_dice.used_this_turn:
 					Global.float_text("cooldown!",hovered_dice.global_position,Color.WHITE)
 					return
+					
 				dragging_dice = hovered_dice
 				drag_offset = dragging_dice.global_position - event.position
 				return

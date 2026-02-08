@@ -9,6 +9,7 @@ func _process(delta: float) -> void:
 	pass
 
 func execute(action_source: Node, action_target: Node, context:= {}):
+	
 	await ActionManager.request_action("move_unit",{},Global.hero_unit,action_target)
 	var adjacent_units = Global.grid.get_adjacent_units(action_source.current_cell)
 	for x in adjacent_units:

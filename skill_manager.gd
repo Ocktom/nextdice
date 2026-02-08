@@ -30,5 +30,48 @@ func setup_dice():
 			y.skill_target = Enums.SkillTarget[SkillManager.skill_data_dictionary[y.skill_name]["skill_target"]]
 			print ("skill_target in setup is ", y.skill_target)
 
-func is_useable(dice_face: Face, target_cell : Cell):
-	
+func is_useable(dragging_dice: Dice, hovered_cell : Cell) -> bool:
+							
+	if not hovered_cell.occupant == null:
+		
+		if hovered_cell.occupant is Enemy:
+			
+			if dragging_dice.current_face.skill_target == Enums.SkillTarget.LOS_UNIT:
+				if not Global.grid.has_clear_path(Global.hero_unit.current_cell,hovered_cell):
+					Global.float_text("NEEDS LOS",hovered_cell.global_position,Color.INDIAN_RED)
+					return false
+			
+			if not dragging_dice.current_face.skill_target == Enums.SkillTarget.ENEMY_UNIT \
+			and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_UNIT \
+			and not dragging_dice.current_face.skill_target == Enums.SkillTarget.LOS_UNIT \
+			and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_CELL:
+				
+					Global.float_text("INVALID TARGET",hovered_cell.global_position,Color.INDIAN_RED)
+					return false
+			
+			if hovered_cell.occupant.status_effects.keys().has("invisible"):
+				Global.float_text("Invisible",hovered_cell.global_position,Color.WHITE)
+				return false
+			
+			if hovered_cell.is_adjacent(Global.hero_unit.current_cell, true):
+				return true
+
+			else:
+				Global.float_text("Out of Range", Global.hero_unit.global_position)
+				return false
+			
+	elif hovered_cell.is_empty():
+		
+		if not dragging_dice.current_face.skill_target == Enums.SkillTarget.EMPTY_CELL \
+		and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_CELL:
+			
+			print ("dragging_dice.current_face.skill_target is ", dragging_dice.current_face.skill_target)
+			Global.float_text("INVALID TARGET",hovered_cell.global_position,Color.INDIAN_RED)
+			return false
+		
+		else:
+			return true
+			
+	return false
+		
+		
