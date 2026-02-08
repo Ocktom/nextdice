@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 class_name Item
 
 var item_name : String
@@ -10,12 +10,6 @@ var current_slot : Item_Slot
 
 var border_color : Color = Color.WHITE
 var normal_color : Color = Color.BLACK
-
-var selected_target : Node2D
-var damaged := false
-
-var upgrade_options : Array[Face]
-var face_options : Array[Face]
 
 @onready var dice_sprite: Sprite2D = $Dice_Sprite
 @onready var dice_sprite_2: Sprite2D = $Dice_Sprite2
@@ -33,6 +27,5 @@ func _ready():
 func update():
 	
 	item_name_label.text = item_name
-	cost_label.text = str(item_cost)
 	
 	

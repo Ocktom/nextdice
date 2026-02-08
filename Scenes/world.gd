@@ -181,7 +181,7 @@ func enter_shop():
 	
 	Global.game_state = Enums.GameState.SHOP
 	shop.visible = true
-	await shop.get_new_items()
+	await shop.get_new_level_ups()
 	InputManager.input_paused = false
 
 func hover_dice(dice : Dice):

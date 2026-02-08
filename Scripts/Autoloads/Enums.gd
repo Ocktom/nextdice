@@ -20,7 +20,7 @@ enum Trigger {HERO_MOVE, ENEMY_MOVE, HERO_DAMAGED, UNIT_ATTACKED, HERO_ATTACKED,
 
 enum CellEffect {NONE,FIRE,WEB,POISON,TRAP}
 
-enum Stat{NONE, STR, DEX, INT, CRIT, MP}
+enum Stat{NONE, STR, DEX, INT, CRIT_CHANCE, CRIT_DMG, MOVE_POINTS, MAX_HP, MAX_MANA, SHIELD}
 enum SkillTarget {ANY_CELL, EMPTY_CELL, ENEMY_UNIT, HERO_UNIT, ANY_UNIT, LOS_UNIT}
 
 # Called when the node enters the scene tree for the first time.

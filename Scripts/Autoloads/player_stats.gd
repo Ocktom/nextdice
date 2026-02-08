@@ -11,6 +11,14 @@ var max_mana := 2
 var max_hp := 5
 var player_hp := 5
 
+var shield_bonus := 0
+var heal_bonus := 0
+var poison_bonus := 0
+var fire_bonus := 0
+
+var crit_chance := 0
+var crit_damage := 0
+
 var status_effects : Dictionary = {}
 
 var max_rolls := 3
