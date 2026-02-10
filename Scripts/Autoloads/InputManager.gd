@@ -123,7 +123,11 @@ func _input(event):
 				if hovered_dice.used_this_turn:
 					Global.float_text("cooldown!",hovered_dice.global_position,Color.WHITE)
 					return
-					
+				
+				if hovered_dice.current_face.skill_target == Enums.SkillTarget.SELF:
+					hovered_dice.use(Global.hero_unit,Global.hero_unit.current_cell)
+					return
+				
 				dragging_dice = hovered_dice
 				drag_offset = dragging_dice.global_position - event.position
 				return
@@ -151,12 +155,12 @@ func _input(event):
 				cell_selected.emit(hovered_cell)
 	
 	if Global.game_state == Enums.GameState.SHOP:
-		if event.is_action_pressed("left_mouse"):
+		if event.is_action_released("left_mouse"):
 			if hovered_item_slot != null:
 				if hovered_item_slot.occupant != null:
 					Global.world.shop.buy_item(hovered_item_slot)
 					
-		elif event.is_action_pressed("enter"):
+		elif event.is_action_released("enter"):
 			Global.world.shop.visible = false
 			Global.world.new_round()
 		

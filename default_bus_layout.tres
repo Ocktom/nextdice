@@ -1,0 +1,11 @@
+[gd_resource type="AudioBusLayout" format=3 uid="uid://dmqx8qe4t11qy"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
+resource_name = "Reverb"
+damping = 0.4
+hipass = 0.2
+wet = 0.17
+
+[resource]
+bus/0/effect/0/effect = SubResource("AudioEffectReverb_j3pel")
+bus/0/effect/0/enabled = true

@@ -7,7 +7,7 @@ var skill_names : Array = []
 
 var dice_1_set : Array[String] = ["impaling_strike","cleaving_strike","guarded_strike","guarded_strike","strike","strike"]
 var dice_2_set : Array[String] = ["move","persuing_strike","guarded_move","persuing_strike","persuing_strike","strike_through"]
-var dice_3_set : Array[String] = ["mana","mana","mana","fireball","fireball","fireball"]
+var dice_3_set : Array[String] = ["heal","heal","shield","fireball","lightning","lightning"]
 
 var all_dice_sets = [dice_1_set,dice_2_set,dice_3_set]
 

@@ -38,7 +38,14 @@ func create_grid():
 			add_child(cell)
 			grid[x].append(cell)
 			all_cells.append(cell)
-
+	
+	var dupe_cells = all_cells.duplicate()
+	for x in 5:
+		var y = dupe_cells.pick_random()
+		y.cell_effect = Enums.CellEffect.OIL
+		y.update()
+		dupe_cells.erase(y)
+	
 func get_empty_cells(cell_pool : Array[Cell] = all_cells):
 	
 	var cell_array = cell_pool

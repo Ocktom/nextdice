@@ -4,18 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bwe77gb3gfi0o" path="res://Systems/Audio_Bus/Audio.tscn" id="1_a02cp"]
 [ext_resource type="PackedScene" uid="uid://cx1ojiejwf35o" path="res://Systems/Dice_System/Dice.tscn" id="2_go701"]
 [ext_resource type="PackedScene" uid="uid://d013w2ydl1xat" path="res://Systems/Grid/Grid.tscn" id="3_5a7ea"]
-[ext_resource type="Script" uid="uid://c7vn0i6aaeqys" path="res://Systems/Spell System/spell_slots.gd" id="3_o06y3"]
 [ext_resource type="PackedScene" uid="uid://bgc3x1l871e0" path="res://Systems/Player_UI/Player_UI.tscn" id="5_fo5ed"]
-[ext_resource type="PackedScene" uid="uid://dmb5i6rmsrgme" path="res://Systems/Spell System/Spell_Slot.tscn" id="6_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://dr1kdty3xqiul" path="res://Systems/Item System/Shop_Screen.tscn" id="8_k7acu"]
 [ext_resource type="Texture2D" uid="uid://d1i4ktdbjkhhf" path="res://Art/big grid.png" id="10_0fj1v"]
-[ext_resource type="Texture2D" uid="uid://csutw0bkptx3y" path="res://Art/brick_wall_4.png" id="12_7yui6"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_o06y3"]
-font_size = 96
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7acu"]
-size = Vector2(227.5, 223.5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_k7acu"]
 font_size = 106
@@ -40,46 +31,6 @@ texture = ExtResource("10_0fj1v")
 
 [node name="Grid" parent="." unique_id=1969396144 instance=ExtResource("3_5a7ea")]
 position = Vector2(514, 205)
-
-[node name="Spell_UI" type="Node2D" parent="." unique_id=1879354099]
-position = Vector2(1748, 653)
-script = ExtResource("3_o06y3")
-
-[node name="Spell_Slots" type="Node2D" parent="Spell_UI" unique_id=1546798920]
-
-[node name="Spell_Slot" parent="Spell_UI/Spell_Slots" unique_id=1969877857 instance=ExtResource("6_5ukr8")]
-position = Vector2(-95, -140)
-
-[node name="Spell_Slot2" parent="Spell_UI/Spell_Slots" unique_id=833290661 instance=ExtResource("6_5ukr8")]
-position = Vector2(-95, -409)
-
-[node name="Spell_Slot3" parent="Spell_UI/Spell_Slots" unique_id=83927126 instance=ExtResource("6_5ukr8")]
-position = Vector2(-95, 127)
-
-[node name="Mana" type="Node2D" parent="Spell_UI" unique_id=1863991941]
-position = Vector2(-1317, -160)
-
-[node name="ColorRect" type="ColorRect" parent="Spell_UI/Mana" unique_id=528154628]
-offset_left = -362.0
-offset_top = 101.0
-offset_right = -137.0
-offset_bottom = 324.0
-mouse_filter = 2
-color = Color(0.17590174, 0.51103765, 0.72578615, 1)
-
-[node name="Mana_Label" type="Label" parent="Spell_UI/Mana" unique_id=1525929195]
-offset_left = -298.0
-offset_top = 148.0
-offset_right = -188.0
-offset_bottom = 280.0
-text = "13"
-label_settings = SubResource("LabelSettings_o06y3")
-
-[node name="Mana_Area" type="Area2D" parent="Spell_UI/Mana" unique_id=965920659]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Spell_UI/Mana/Mana_Area" unique_id=2124004823]
-position = Vector2(-249.75, 215.75)
-shape = SubResource("RectangleShape2D_k7acu")
 
 [node name="Unit_Layer" type="Node2D" parent="." unique_id=957354395]
 
@@ -134,6 +85,8 @@ offset_bottom = 348.0
 text = "13"
 label_settings = SubResource("LabelSettings_k7acu")
 
+[node name="Effects_Layer" type="Node2D" parent="." unique_id=726888367]
+
 [node name="Audio" parent="." unique_id=1516609735 instance=ExtResource("1_a02cp")]
 
 [node name="Player_UI" parent="." unique_id=2089692981 instance=ExtResource("5_fo5ed")]
@@ -145,52 +98,3 @@ mouse_filter = 2
 
 [node name="Shop_Screen" parent="." unique_id=540836891 instance=ExtResource("8_k7acu")]
 visible = false
-
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=573492340]
-visible = false
-texture_filter = 1
-position = Vector2(503.99997, 29.999996)
-scale = Vector2(5, 5)
-texture = ExtResource("12_7yui6")
-
-[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1070046110]
-visible = false
-texture_filter = 1
-position = Vector2(662.99994, 29.999996)
-scale = Vector2(5, 5)
-texture = ExtResource("12_7yui6")
-
-[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=299059175]
-visible = false
-texture_filter = 1
-position = Vector2(823, 29.999996)
-scale = Vector2(5, 5)
-texture = ExtResource("12_7yui6")
-
-[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=1016124882]
-visible = false
-texture_filter = 1
-position = Vector2(982, 29.999996)
-scale = Vector2(5, 5)
-texture = ExtResource("12_7yui6")
-
-[node name="Sprite2D6" type="Sprite2D" parent="." unique_id=130954379]
-visible = false
-texture_filter = 1
-position = Vector2(1142, 29.999996)
-scale = Vector2(5, 5)
-texture = ExtResource("12_7yui6")
-
-[node name="Sprite2D7" type="Sprite2D" parent="." unique_id=161871909]
-visible = false
-texture_filter = 1
-position = Vector2(1284.0001, 29.999996)
-scale = Vector2(5, 5)
-texture = ExtResource("12_7yui6")
-
-[node name="Sprite2D8" type="Sprite2D" parent="." unique_id=1619276491]
-visible = false
-texture_filter = 1
-position = Vector2(1403.0001, 29.999996)
-scale = Vector2(5, 5)
-texture = ExtResource("12_7yui6")

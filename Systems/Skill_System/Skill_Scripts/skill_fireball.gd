@@ -15,3 +15,7 @@ func execute(action_source: Node, action_target: Node, context:= {}):
 		Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_SKILL RELEASE-Mecha Laser Release_HY_PC-004.wav")
 		await Global.timer(Global.projectile_time)
 		await ActionManager.request_action("damage_unit",{"amount" : PlayerStats.player_int/2,"damage_name" : "fire"},action_source,action_target)
+		
+		if action_target.cell_effect == Enums.CellEffect.OIL:
+			action_target.cell_effect = Enums.CellEffect.FIRE
+			action_target.update()

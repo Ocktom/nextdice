@@ -87,7 +87,7 @@ var enemy_sets : Dictionary = {
 	"set_4" : ["Skeltron","Slitherbyte","Batron","Spectroid","Spectroid"],
 	"set_5" : ["Skeltron","Slitherbyte","Slitherbyte","Spectroid","Armadroid"],
 	"set_6" : ["Batron","Batron", "Batron", "Spidroid", "Spidroid","Armadroid"],
-	"set_7" : ["Necrotron", "Demodroid", "Roblob", "Caklebot","Batron","Batron"],
+	"set_7" : ["Necrotron", "Demodroid", "Roblob", "Cacklebot","Batron","Batron"],
 	"set_8" : ["Armadroid", "Armadroid", "Spidroid", "Slitherbyte","Slitherbyte"],
 	"set_9" : ["Demodroid","Demodroid", "Armadroid", "Necrotron","Batron","Batron"]
 }

@@ -5,6 +5,8 @@ extends Node2D
 @onready var player_ui: Control = $Player_UI
 @onready var sum_label: Label = $DiceLayer/Sum_label
 @onready var shop: Node2D = $Shop_Screen
+@onready var effects_layer: Node2D = $Effects_Layer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,7 +22,6 @@ func game_start():
 	await spawn_torches()
 	await spawn_chests()
 	await spawn_hero()
-	await spawn_spells()
 	await new_round()
 
 func new_round():
@@ -49,7 +50,6 @@ func spawn_hero():
 	hero_inst.unit_name = "HERO"
 	Global.hero_unit = hero_inst
 	starting_cell.spawn_unit(hero_inst)
-	spell_ui.create_new_spells()
 
 func spawn_spells():
 	for x in spell_ui.spell_slots:

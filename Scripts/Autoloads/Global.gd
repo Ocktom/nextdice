@@ -169,6 +169,25 @@ func animate_projectile(start_pos : Vector2, end_pos: Vector2, sprite_path: Stri
 	if rotate: sprite.rotation = (end_pos - start_pos).angle()
 	var tween = sprite.create_tween(); tween.tween_property(sprite,"global_position",end_pos,projectile_time); tween.tween_callback(sprite.queue_free)
 
+func animate_lightning(start_cell: Cell, end_cell: Cell):
+	var inst = AnimatedSprite2D.new()
+	inst.scale = Vector2(6,6)
+	inst.sprite_frames = load("res://Art/Effect_Sprites/lightning_frames.tres")
+	var start_pos = start_cell.global_position
+	var end_pos = end_cell.global_position
+	inst.global_position = (start_pos + end_pos) * 0.5
+	inst.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	
+	var dir = end_pos - start_pos
+	var angle = dir.angle()
+	inst.rotation = angle
+
+
+	world.effects_layer.add_child(inst)
+	inst.play()
+	await timer(.3)
+	inst.queue_free()
+
 func get_path_cells(start_cell : Cell, target_cell : Cell, max_move : int) -> Array[Cell]:
 	
 	var path : Array[Cell] = []

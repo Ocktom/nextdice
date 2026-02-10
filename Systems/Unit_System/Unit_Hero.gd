@@ -47,13 +47,13 @@ func take_attack(amount : int):
 		Global.float_text(str("-", amount),self.global_position,Color.RED)
 		await Global.timer(.2)
 
-func take_non_attack_damage(amount : int):
+func take_damage(amount : int):
 	
 	print ("was damaged")
 	
-	Global.player_hp = max(0,Global.player_hp-amount)
+	PlayerStats.player_hp = max(0,PlayerStats.player_hp-amount)
 	update()
-	if Global.player_hp < 1:
+	if PlayerStats.player_hp < 1:
 		
 		await Global.timer(1)
 		Global.world.defeat()

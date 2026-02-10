@@ -120,6 +120,14 @@ func update():
 	cell_effect_ov.visible = true
 	match cell_effect:
 		Enums.CellEffect.NONE: cell_effect_ov.visible = false
-		Enums.CellEffect.WEB: cell_effect_ov.texture = load("res://Art/spiderweb.png")
-		Enums.CellEffect.FIRE: cell_effect_ov.texture = load("res://Art/fire_cell.png")
-		
+		Enums.CellEffect.WEB: cell_effect_ov.texture = load("res://Art/Cell_Effect_Sprites/spiderweb.png")
+		Enums.CellEffect.FIRE: cell_effect_ov.texture = load("res://Art/Cell_Effect_Sprites/fire_cell.png")
+		Enums.CellEffect.OIL: cell_effect_ov.texture = load("res://Art/Cell_Effect_Sprites/Oil.png")
+	
+	if cell_effect == Enums.CellEffect.FIRE:
+		for x in Global.grid.get_adjacent_cells(self):
+			if x.cell_effect == Enums.CellEffect.OIL:
+				x.cell_effect = Enums.CellEffect.FIRE
+				x.update()
+	
+	

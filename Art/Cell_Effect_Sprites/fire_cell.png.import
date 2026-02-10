@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfn2a0goywpod"
-path="res://.godot/imported/spiderweb.png-1e07d0a6d3d036248ce82a9bdfa27012.ctex"
+uid="uid://bwr85avdsau75"
+path="res://.godot/imported/fire_cell.png-ea6b6b2e19d0c77ee1c28c01d54c454f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/spiderweb.png"
-dest_files=["res://.godot/imported/spiderweb.png-1e07d0a6d3d036248ce82a9bdfa27012.ctex"]
+source_file="res://Art/Cell_Effect_Sprites/fire_cell.png"
+dest_files=["res://.godot/imported/fire_cell.png-ea6b6b2e19d0c77ee1c28c01d54c454f.ctex"]
 
 [params]
 

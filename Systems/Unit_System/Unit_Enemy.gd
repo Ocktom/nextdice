@@ -286,6 +286,13 @@ func take_damage(amount : int):
 	update()
 
 func end_turn_effects():
+	
+	if current_cell.cell_effect == Enums.CellEffect.FIRE:
+		status_effects["burn"] = 3
+	
+	if status_effects.has("burn"):
+		await ActionManager.request_action("damage_unit",{"damage_name" : "burn", "amount": 1, "target" : self},current_cell,current_cell)
+	
 	var decreasing_effects := ["poison","burn","root","stun","invisible"]
 	
 	for x in decreasing_effects:
