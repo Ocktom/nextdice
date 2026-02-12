@@ -32,7 +32,7 @@ func attack_effects(unit: Unit, amount : int, dice: Dice):
 				cleave_units.append(x.occupant)
 		
 		for x in cleave_units:
-			await ActionManager.request_action("damage_unit",{"target" : x, "amount" : amount/2, "damage_name" : "physical"},Global.hero_unit,x)
+			await ActionManager.request_action("damage_unit",{"target" : x, "amount" : amount/2, "damage_name" : "physical"},unit.current_cell,x.current_cell)
 
 	if face.effect.keys().has("impale"):
 		
@@ -42,4 +42,4 @@ func attack_effects(unit: Unit, amount : int, dice: Dice):
 		if impale_cell != null:
 			if impale_cell.occupant != null:
 				var impale_unit = impale_cell.occupant
-				await ActionManager.request_action("damage_unit",{"target" : impale_unit, "amount" : amount, "damage_name" : "physical"},Global.hero_unit,impale_unit)
+				await ActionManager.request_action("damage_unit",{"target" : impale_cell, "amount" : amount, "damage_name" : "physical"},unit.current_cell,impale_cell)

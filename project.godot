@@ -19,6 +19,10 @@ run/main_scene="uid://bgc5u58x43q3q"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://dmqx8qe4t11qy"
+
 [autoload]
 
 Global="*res://Scripts/Autoloads/Global.gd"
@@ -28,10 +32,10 @@ UnitManager="*res://Scripts/unit_manager.gd"
 ActionManager="*res://Systems/Action System/action_manager.gd"
 SpellManager="*res://Systems/Spell System/spell_manager.gd"
 ItemManager="*res://Systems/Item System/item_manager.gd"
-SignalBus="*res://Systems/Passive_System/SignalBus.gd"
 EffectManager="*uid://cvpdhrdrd237v"
 SkillManager="*uid://bt2iaunwo888v"
 PlayerStats="*uid://bh0t2fshqgyjc"
+EventManager="*uid://m1owfwi3vv5y"
 
 [display]
 

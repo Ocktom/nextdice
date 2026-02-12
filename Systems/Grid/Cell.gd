@@ -47,7 +47,7 @@ func fill_with_unit(unit : Unit):
 	unit.global_position = global_position
 	
 	if cell_effect == Enums.CellEffect.WEB:
-		ActionManager.create_action("status_effect",{"color" : "WHITE","status_name" : "ROOT", "amount" : 1 },self,occupant)
+		ActionManager.create_action("status_effect",{"color" : "WHITE","status_name" : "ROOT", "amount" : 1 },self,self)
 		cell_effect = Enums.CellEffect.NONE
 		update()
 	

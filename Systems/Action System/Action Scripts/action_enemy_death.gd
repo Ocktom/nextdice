@@ -2,9 +2,10 @@ extends Action
 
 var action_name := "enemy_death"
 
-func execute(context: Dictionary, action_source: Node = null,action_target: Node = null):
+func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
+	
 	print ("enemy death executed")
-	var target = action_source
+	var target = action_source_cell.occupant
 	
 	target.effects_sprite.visible = true
 	target.effects_sprite.play()
@@ -14,5 +15,4 @@ func execute(context: Dictionary, action_source: Node = null,action_target: Node
 	
 	await target.current_cell.clear_cell()
 	target.queue_free()
-	SignalBus.enemy_death.emit()
 	Global.world.victory_check()

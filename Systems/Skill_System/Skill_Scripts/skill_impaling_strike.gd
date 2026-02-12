@@ -10,16 +10,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func execute(action_source_cell: Node, action_target_cell: Node, context:= {}):
+func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 	
 	var amount := PlayerStats.player_str
 	var impale_cell = Global.grid.get_impale_target(Global.hero_unit.current_cell,action_target_cell)
 	
-	await ActionManager.request_action("attack",{"amount" : amount, "target" : action_target_cell.occupant},Global.hero_unit,action_target_cell)
+	await ActionManager.request_action("attack",{"amount" : amount, "target" : action_target_cell},action_source_cell,action_target_cell)
 	
 	if impale_cell != null:
 		if impale_cell.occupant != null:
 			await Global.timer(.3)
 			await ActionManager.request_action("damage_unit",
 			{"target" : impale_cell, "amount" : amount, "damage_name" : "physical", "audio_path" : "res://Audio/Sound_Effects/DSGNMisc_HIT-Zap Metal_HY_PC-001.wav"},\
-			Global.hero_unit,impale_cell)
+			action_source_cell,impale_cell)

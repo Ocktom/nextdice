@@ -2,34 +2,20 @@
 
 [ext_resource type="Script" uid="uid://de8jygopjlgu0" path="res://Systems/Grid/Cell.gd" id="1_hyvek"]
 [ext_resource type="Texture2D" uid="uid://cc7ia6nupvhui" path="res://Art/cell_grey.png" id="2_r3c2n"]
+[ext_resource type="Texture2D" uid="uid://7r4j6l7pfgm5" path="res://Art/cell_spikes.png" id="3_w1573"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1m28"]
-size = Vector2(201, 203)
+size = Vector2(176, 176)
 
 [node name="GridCell" type="Node2D" unique_id=704447098]
 script = ExtResource("1_hyvek")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=854796418]
-modulate = Color(0.6947659, 0.8573696, 0.8238324, 1)
+modulate = Color(0.8258219, 0.7001115, 0.91950977, 1)
 texture_filter = 1
-scale = Vector2(4, 4)
+position = Vector2(1, 1)
+scale = Vector2(3.5, 3.5)
 texture = ExtResource("2_r3c2n")
-
-[node name="Cell_Color" type="ColorRect" parent="." unique_id=1300276636]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 100.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.35181463, 0.14598635, 0.12615672, 1)
 
 [node name="Cell_Highlight" type="ColorRect" parent="." unique_id=28755570]
 anchors_preset = 8
@@ -37,10 +23,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 100.0
-offset_bottom = 100.0
+offset_left = -87.0
+offset_top = -86.0
+offset_right = 89.0
+offset_bottom = 89.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -49,13 +35,15 @@ color = Color(1, 1, 1, 0.19215687)
 [node name="Cell_Area" type="Area2D" parent="." unique_id=473789914]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cell_Area" unique_id=1972858220]
-position = Vector2(-0.5, 0.5)
+position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_m1m28")
 
 [node name="Cell_Effect_OV" type="TextureRect" parent="." unique_id=2063739821]
+visible = false
 modulate = Color(1, 1, 1, 0.6666667)
 texture_filter = 1
-offset_left = -102.0
-offset_top = -102.0
-offset_right = 101.0
-offset_bottom = 101.0
+offset_left = -76.0
+offset_top = -76.0
+offset_right = 75.0
+offset_bottom = 75.0
+texture = ExtResource("3_w1573")

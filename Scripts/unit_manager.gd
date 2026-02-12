@@ -41,7 +41,7 @@ func spawn_new_enemy(name_string: String, cell : Cell):
 	unit.atk = data["atk"]
 	unit.atk_range = data["atk_range"]
 	unit.movement = data["movement"]
-	
+	unit.unit_passives = parse_passives_string(data["unit_passives"])
 	unit.range_type = Enums.RangeType[data["range_type"]]
 	
 	print ("matching unit range_type of ", unit.range_type)
@@ -64,8 +64,6 @@ func spawn_new_enemy(name_string: String, cell : Cell):
 	if not unit.action_2_name == "":
 		unit.action_2_context = data["action_2_context"]
 	
-	unit.passive_1_name = data["passive_1_name"]
-	
 	#APPLY ROUND DIFFICULTY STATS
 	
 	if Global.round_number > 1: 
@@ -77,7 +75,15 @@ func spawn_new_enemy(name_string: String, cell : Cell):
 	await cell.fill_with_unit(unit)
 	unit.unit_sprite.sprite_frames = load(frames_path)
 	unit.unit_sprite.play()
-	unit.set_passives()
+
+func parse_passives_string(s: String) -> Dictionary:
+	if s == "" or s == null:
+		return {}
+	var result = JSON.parse_string(s)
+	if typeof(result) != TYPE_DICTIONARY:
+		return {}
+	return result
+
 
 var enemy_sets : Dictionary = {
 	

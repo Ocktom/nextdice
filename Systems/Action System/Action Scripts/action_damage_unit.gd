@@ -2,14 +2,14 @@ extends Action
 
 var action_name := "damage"
 
-func execute(context: Dictionary, action_source: Node = null,action_target_cell: Node = null):
+func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	
 	#CONTEXT: damage_name, amount, audio_path (optional)
 	
 	print ("excecuting action_damage_unit")
 	var action_target = action_target_cell.occupant
 	
-	var user = action_source
+	var user = action_source_cell.occupant
 	var audio_path : String = ""
 	var color : Color
 	
@@ -35,7 +35,6 @@ func execute(context: Dictionary, action_source: Node = null,action_target_cell:
 	Global.animate(action_target,Enums.Anim.SHAKE)
 	Global.animate(action_target,Enums.Anim.FLASH,color)
 	action_target.take_damage(context["amount"])
-	SignalBus.unit_damaged.emit(action_target,self)
 	
 	
 	await Global.timer(.4)

@@ -9,12 +9,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func execute(context: Dictionary, action_source: Node = null, action_target: Node = null):
+func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	
 	print ("executing acttack action")
-	var user = action_source
-	var target = action_target.occupant
 	
 	var sprite_path := str("res://Art/Projectile_Sprites/",context["projectile_name"],".png")
-	await Global.animate_projectile(action_source.global_position,action_target.global_position,sprite_path,true)
+	await Global.animate_projectile(action_source_cell.global_position,action_target_cell.global_position,sprite_path,true)
 	await Global.timer(.3)

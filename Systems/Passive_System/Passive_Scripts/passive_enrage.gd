@@ -1,8 +1,7 @@
 extends Passive
 
 func set_trigger():
-	print ("enrage trigger set on ", source.unit_name)
-	SignalBus.connect("enemy_attacked",_on_triggered)
+	pass
 
 func _on_triggered(unit_damaged : Unit):
 	

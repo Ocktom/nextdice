@@ -8,6 +8,8 @@ var highlight := false
 var sprite_path : String
 var range_type : Enums.RangeType
 
+var unit_passives : Dictionary
+
 var border_color : Color = Color.WHITE
 var normal_color : Color = Color.BLACK
 
@@ -16,12 +18,11 @@ var damaged := false
 var status_effects : Dictionary = {}
 
 @onready var unit_name_label : Label = $Unit_Name_Label
-@onready var background_rect: ColorRect = $Background_Rect
-@onready var border_rect: ColorRect = $border_rect
 @onready var effects_sprite: AnimatedSprite2D = $Effects_Sprite
 
 func _ready():
 	
+	print ("unit passives for ", unit_name, " is ", unit_passives)
 	Global.all_units.append(self)
 
 	await update()
@@ -81,10 +82,8 @@ func _on_mouse_exited():
 func toggle_highlight():
 	if highlight:
 		highlight = false
-		border_rect.visible = false
 	else:
 		highlight = true
-		border_rect.visible = true
 
 func is_adjacent(cell: Cell)-> bool:
 	var adjacent_cells = Global.grid.get_adjacent_cells(cell)

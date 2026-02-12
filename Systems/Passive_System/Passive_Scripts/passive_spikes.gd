@@ -4,7 +4,6 @@ var passive_value := 2
 
 func set_trigger():
 	print ("setting trigger for spikes")
-	SignalBus.connect("unit_attacked",_on_triggered)
 
 func _on_triggered(target : Unit, attacker: Unit):
 	

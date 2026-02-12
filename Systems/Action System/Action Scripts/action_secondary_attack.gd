@@ -4,12 +4,8 @@ extends Action
 
 var action_name := "attack"
 
-func execute(context: Dictionary, action_source: Node = null,action_target: Node = null):
+func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	
-	var user = action_source
 	var target = context["target"]
-
 	await target.take_attack(context["amount"])
-	SignalBus.unit_attacked.emit(target,self)
-	SignalBus.enemy_attacked.emit(target)
 	

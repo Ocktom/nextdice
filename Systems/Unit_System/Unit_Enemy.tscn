@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ftjtt0qa83u7"]
 
 [ext_resource type="Script" uid="uid://cp2heh7xwpfq0" path="res://Systems/Unit_System/Unit_Enemy.gd" id="1_y87hi"]
+[ext_resource type="SpriteFrames" uid="uid://cjlqlq0v0fwmf" path="res://Art/Enemy_Sprites/sprite_frames/Spidroid_frames.tres" id="2_d55k6"]
 [ext_resource type="Texture2D" uid="uid://bbepftcljytvl" path="res://Art/explosion 8.png" id="3_d55k6"]
 [ext_resource type="Texture2D" uid="uid://cmyov2mabjadp" path="res://Art/Icon_Sprites/icon_heart.png" id="3_koxc3"]
 [ext_resource type="Texture2D" uid="uid://d3lmbc3uluvo4" path="res://Art/Icon_Sprites/icon_poison.png" id="4_d55k6"]
@@ -63,9 +64,6 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="LabelSettings" id="LabelSettings_1xpod"]
-font_size = 21
-
 [sub_resource type="LabelSettings" id="LabelSettings_4im1a"]
 font_size = 31
 font_color = Color(1, 0.13333334, 0.27058825, 1)
@@ -82,57 +80,14 @@ font_color = Color(1, 0.90588236, 0, 1)
 texture_filter = 1
 script = ExtResource("1_y87hi")
 
-[node name="border_rect" type="ColorRect" parent="." unique_id=29618881]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -105.0
-offset_top = -105.0
-offset_right = 105.0
-offset_bottom = 105.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-
-[node name="Background_Rect" type="ColorRect" parent="." unique_id=673991097]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -97.0
-offset_top = -101.0
-offset_right = 98.0
-offset_bottom = 99.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-color = Color(0.16565639, 0.16565642, 0.16565639, 1)
-
 [node name="Unit_Sprite" type="AnimatedSprite2D" parent="." unique_id=1905187628]
 scale = Vector2(4, 4)
+sprite_frames = ExtResource("2_d55k6")
 
 [node name="Effects_Sprite" type="AnimatedSprite2D" parent="." unique_id=531974913]
 visible = false
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ddic1")
-
-[node name="Unit_Name_Label" type="Label" parent="." unique_id=1266769384]
-visible = false
-offset_left = -87.0
-offset_top = -92.0
-offset_right = 36.0
-offset_bottom = -62.0
-text = "CARD NAME"
-label_settings = SubResource("LabelSettings_1xpod")
 
 [node name="Right_Stats" type="VBoxContainer" parent="." unique_id=233231666]
 offset_left = 50.0

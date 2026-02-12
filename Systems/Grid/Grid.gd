@@ -1,8 +1,8 @@
 extends Node2D
 
-const GRID_WIDTH = 5
-const GRID_HEIGHT = 4
-const CELL_SIZE = Vector2(210, 210)
+const GRID_WIDTH = 7
+const GRID_HEIGHT = 5
+const CELL_SIZE = Vector2(160, 160)
 var CELL_SPACING = Vector2(6, 6)
 var CellScene = preload("res://Systems/Grid/Cell.tscn")
 
@@ -57,12 +57,18 @@ func get_empty_cells(cell_pool : Array[Cell] = all_cells):
 	print ("returning empty cells from grid...", empty_cells)
 	return empty_cells
 
-func get_all_enemies() -> Array[Enemy]:
-	var enemies : Array[Enemy]
+func get_all_units() -> Array[Unit]:
+	var units : Array[Unit] = []
 	for x in all_cells:
 		if x.occupant != null:
-			if x.occupant is Enemy:
-				enemies.append(x.occupant)
+				units.append(x.occupant)
+	return units
+	
+func get_all_enemies() -> Array[Enemy]:
+	var enemies : Array[Enemy]
+	for x in get_all_units():
+			if x is Enemy:
+				enemies.append(x)
 	
 	print ("returning all enemies from grid...", enemies)
 	return enemies
@@ -156,6 +162,39 @@ func get_impale_target(attacker_cell: Cell, target_cell: Cell) -> Cell:
 		return null
 
 	return grid[behind_pos.x][behind_pos.y]	
+
+func push_unit(source_cell: Cell, target_cell: Cell):
+	if source_cell == null or target_cell == null:
+		return
+	if source_cell.occupant == null:
+		return
+	if target_cell.occupant == null:
+		return
+
+	var a = source_cell.cell_vector
+	var b = target_cell.cell_vector
+	var dx = sign(b.x - a.x)
+	var dy = sign(b.y - a.y)
+
+	if dx == 0 and dy == 0:
+		return
+
+	var push_pos = b + Vector2i(dx, dy)
+
+	if not is_in_bounds(push_pos):
+		return
+
+	var push_cell = grid[push_pos.x][push_pos.y]
+	var pushed_unit = target_cell.occupant
+
+	if not push_cell.is_empty():
+		if push_cell.occupant is Unit:
+			pushed_unit.take_damage(1)
+			await push_cell.occupant.take_damage(1)
+		return
+
+	target_cell.clear_cell()
+	push_cell.fill_with_unit(pushed_unit)
 
 func get_row(cell: Cell) -> Array[Cell]:
 	var y = cell.cell_vector.y
@@ -254,7 +293,6 @@ func get_cells_in_path(cell_1: Cell, cell_2: Cell) -> Array[Cell]:
 		path.append(grid[p.x][p.y])
 
 	return path
-
 
 func get_units_in_path(cell_1: Cell, cell_2: Cell) -> Array[Unit]:
 	var units : Array[Unit] = []

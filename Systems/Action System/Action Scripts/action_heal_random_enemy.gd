@@ -2,7 +2,7 @@ extends Action
 
 var action_name := "heal_random_enemy"
 
-func execute(context: Dictionary, action_source: Node = null, action_target: Node = null):
+func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	
 	var user = action_source
 	

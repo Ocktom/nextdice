@@ -68,7 +68,5 @@ func _on_mouse_exited():
 func toggle_highlight():
 	if highlight:
 		highlight = false
-		border_rect.visible = false
 	else:
 		highlight = true
-		border_rect.visible = true

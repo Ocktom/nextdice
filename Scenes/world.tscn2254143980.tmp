@@ -20,16 +20,16 @@ offset_top = -58.0
 offset_right = 1930.0
 offset_bottom = 1103.0
 mouse_filter = 2
-color = Color(0.1684652, 0.11581395, 0.1945354, 1)
+color = Color(0.10138751, 0.1495589, 0.1596767, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=668567970]
 texture_filter = 1
-position = Vector2(1077, 568)
-scale = Vector2(5.6837206, 4.7065215)
+position = Vector2(1078.7365, 623.24994)
+scale = Vector2(5.690572, 5.0353255)
 texture = ExtResource("10_0fj1v")
 
 [node name="Grid" parent="." unique_id=1969396144 instance=ExtResource("3_5a7ea")]
-position = Vector2(578, 217)
+position = Vector2(578, 134)
 
 [node name="Unit_Layer" type="Node2D" parent="." unique_id=957354395]
 

@@ -10,8 +10,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func execute(action_source: Node, action_target: Node, context_dict : Dictionary = {}):
+func execute(action_source_cell: Cell, action_target_cell: Cell, context_dict : Dictionary = {}):
 	
-	await ActionManager.request_action("move_unit",{},Global.hero_unit,action_target)
-	await ActionManager.request_action("shield_unit",{"amount" : PlayerStats.player_dex/2},Global.hero_unit,Global.hero_unit)
+	await ActionManager.request_action("shield_unit",{"amount" : PlayerStats.player_dex/2},action_source_cell,action_target_cell)
 	

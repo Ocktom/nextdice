@@ -158,12 +158,12 @@ func attempt_attack():
 	await ActionManager.request_action(
 		"attack",
 		{
-			"target": target,
 			"amount": atk
 		},
-		self
+		self.current_cell,
+		target.current_cell
 	)
-
+	
 	turn_bonus = 0
 	await enemy_actions()
 
@@ -246,10 +246,10 @@ func attempt_move() -> bool:
 func enemy_actions(attack_target: Node2D = null):
 	
 	if action_1_name != "":
-		await ActionManager.request_action(action_1_name, action_1_context, self, attack_target)
+		await ActionManager.request_action(action_1_name, action_1_context, current_cell, attack_target.current_cell)
 	
 	if action_2_name != "":
-		await ActionManager.request_action(action_2_name, action_2_context, self, attack_target)
+		await ActionManager.request_action(action_2_name, action_2_context, current_cell, attack_target.current_cell)
 
 func take_attack(amount : int):
 	
@@ -265,7 +265,7 @@ func take_attack(amount : int):
 	
 	if dying_this_turn:
 		print ("unit has less then 1 hp, calling enemy death on manager")
-		ActionManager.request_action("enemy_death",{},self)
+		ActionManager.request_action("enemy_death",{},current_cell)
 	
 	update()
 	
@@ -281,10 +281,13 @@ func take_damage(amount : int):
 	if hp < 1:
 		
 		print ("unit has less then 1 hp, calling enemy death on manager")
-		ActionManager.request_action("enemy_death",{},self)
+		dying_this_turn = true
+		await ActionManager.request_action("enemy_death",{},current_cell)
 	
-	update()
-
+	if not dying_this_turn:
+		await update()
+		await EventManager.on_unit_damaged(self)
+	
 func end_turn_effects():
 	
 	if current_cell.cell_effect == Enums.CellEffect.FIRE:
@@ -305,7 +308,6 @@ func end_turn_effects():
 		
 func update():
 	
-	unit_name_label.text = str(unit_name)
 	hp_label.text = str(hp)
 	atk_label.text = str(atk)
 	

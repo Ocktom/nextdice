@@ -10,12 +10,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func execute(action_source: Node, action_target: Node, context:= {}):
+func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 	
-	var units_passed = Global.grid.get_units_in_path(Global.hero_unit.current_cell,action_target)
-	await ActionManager.request_action("move_unit",{},Global.hero_unit,action_target)
+	#UNIT REF FOR AFTER MOVE
+	var unit = action_source_cell.occupant
+	
+	var units_passed = Global.grid.get_units_in_path(Global.hero_unit.current_cell,action_target_cell)
+	await ActionManager.request_action("move_unit",{},Global.hero_unit.current_cell,action_target_cell)
+	
 	for x in units_passed:
 		await Global.timer(.04)
 		await ActionManager.request_action("damage_unit",
 		{"damage_name" : "physical","amount" : PlayerStats.player_dex/2, "audio_path" : "res://Audio/Sound_Effects/DSGNMisc_HIT-Zap Metal_HY_PC-002.wav"},
-		action_source,x.current_cell)
+		unit.current_cell,x.current_cell)

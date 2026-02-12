@@ -105,7 +105,7 @@ func _input(event):
 					
 					if SkillManager.is_useable(dragging_dice,hovered_cell):
 						print ("dice is useable, using...")
-						dragging_dice.use(Global.hero_unit,hovered_cell)
+						dragging_dice.use(Global.hero_unit.current_cell,hovered_cell)
 					else:
 						print ("dice is NOT useable, resetting")
 						reset_drag()
@@ -125,7 +125,7 @@ func _input(event):
 					return
 				
 				if hovered_dice.current_face.skill_target == Enums.SkillTarget.SELF:
-					hovered_dice.use(Global.hero_unit,Global.hero_unit.current_cell)
+					hovered_dice.use(Global.hero_unit.current_cell,Global.hero_unit.current_cell)
 					return
 				
 				dragging_dice = hovered_dice

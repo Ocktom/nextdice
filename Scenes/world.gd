@@ -109,8 +109,6 @@ func start_player_turn():
 	
 	Global.game_state = Enums.GameState.PLAYER_TURN
 
-	SignalBus.turn_start.emit()
-
 	for x in Global.player_dice:
 		x.used_this_turn = false
 		x.grey_out = false
@@ -204,6 +202,6 @@ func kill_all_enemies():
 	for x in Global.grid.all_cells:
 		if x.occupant != null:
 			if x.occupant is Enemy:
-				ActionManager.create_action("enemy_death",{},x.occupant)
+				ActionManager.create_action("enemy_death",{},x,x)
 
 	

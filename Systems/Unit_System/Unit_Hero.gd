@@ -67,7 +67,7 @@ func end_turn_effects():
 	#ENACT EFFECTS HERE:
 	
 	if status_effects.has("poison"):
-		await ActionManager.create_action("damage_unit",{"damage_name" : "poison","amount":status_effects["poison"]},null,self)
+		await ActionManager.create_action("damage_unit",{"damage_name" : "poison","amount":status_effects["poison"]},null,current_cell)
 	
 	#DECREASE OR ERASE EFFECTS HERE:
 	
@@ -93,7 +93,6 @@ func update():
 			
 	if not status_effects.has("shield"): shield_label.visible = false
 	
-	unit_name_label.text = str(unit_name)
 	hp_label.text = str(PlayerStats.player_hp)
 	
 	var status_icons : Array = [icon_1_sprite,icon_2_sprite,icon_3_sprite,icon_4_sprite]

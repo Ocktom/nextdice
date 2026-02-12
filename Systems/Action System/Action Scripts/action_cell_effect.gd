@@ -1,6 +1,6 @@
 extends Action
 
-func execute(context: Dictionary, action_source: Node = null,action_target: Node = null):
+func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	
 	print ("setting spell effect from action script")
 	

@@ -12,8 +12,8 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "scavenge",
-	"level_set": 1
+	"level_set": 1,
+	"unit_passives": "{\"enrage\" : {\"amount\" : 3}}"
   },
   "Batron": {
 	"enemy_name": "Batron",
@@ -26,8 +26,8 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "",
-	"level_set": 1
+	"level_set": 1,
+	"unit_passives": ""
   },
   "Goyletron": {
 	"enemy_name": "Goyletron",
@@ -40,8 +40,8 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "enrage",
-	"level_set": 2
+	"level_set": 2,
+	"unit_passives": ""
   },
   "Spectroid": {
 	"enemy_name": "Spectroid",
@@ -54,8 +54,8 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "ghostly",
-	"level_set": 2
+	"level_set": 2,
+	"unit_passives": ""
   },
   "Spidroid": {
 	"enemy_name": "Spidroid",
@@ -70,8 +70,8 @@ var data : Dictionary = {
 	},
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "",
-	"level_set": 2
+	"level_set": 2,
+	"unit_passives": ""
   },
   "Slitherbyte": {
 	"enemy_name": "Slitherbyte",
@@ -84,8 +84,8 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "",
-	"level_set": 2
+	"level_set": 2,
+	"unit_passives": ""
   },
   "Necrotron": {
 	"enemy_name": "Necrotron",
@@ -100,8 +100,8 @@ var data : Dictionary = {
 	},
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "",
-	"level_set": 3
+	"level_set": 3,
+	"unit_passives": ""
   },
   "Skeltron": {
 	"enemy_name": "Skeltron",
@@ -114,8 +114,8 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "",
-	"level_set": 1
+	"level_set": 1,
+	"unit_passives": ""
   },
   "Roblob": {
 	"enemy_name": "Roblob",
@@ -130,8 +130,8 @@ var data : Dictionary = {
 	},
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "",
-	"level_set": 3
+	"level_set": 3,
+	"unit_passives": ""
   },
   "Protech": {
 	"enemy_name": "Protech",
@@ -144,8 +144,8 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "",
-	"level_set": 3
+	"level_set": 3,
+	"unit_passives": ""
   },
   "Roblobito": {
 	"enemy_name": "Roblobito",
@@ -158,8 +158,8 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "",
-	"level_set": 3
+	"level_set": 3,
+	"unit_passives": ""
   },
   "Armadroid": {
 	"enemy_name": "Armadroid",
@@ -172,8 +172,8 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "spikes",
-	"level_set": 3
+	"level_set": 3,
+	"unit_passives": ""
   },
   "Cacklebot": {
 	"enemy_name": "Cacklebot",
@@ -186,8 +186,8 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "",
-	"level_set": 3
+	"level_set": 3,
+	"unit_passives": ""
   },
   "Demodroid": {
 	"enemy_name": "Demodroid",
@@ -200,7 +200,7 @@ var data : Dictionary = {
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"passive_1_name": "",
-	"level_set": 3
+	"level_set": 3,
+	"unit_passives": ""
   }
 }

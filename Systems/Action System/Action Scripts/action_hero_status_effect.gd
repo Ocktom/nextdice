@@ -2,11 +2,10 @@ extends Action
 
 var action_name := "hero_status_effect"
 
-func execute(context: Dictionary, action_source: Node = null, target_node : Node = null):
+func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	
 	var target = Global.hero_unit
 	
-	var user = action_source
 	var color = context["color"]
 	var status_name = context["status_name"].to_lower()
 	var amount = max(1,context["amount"])

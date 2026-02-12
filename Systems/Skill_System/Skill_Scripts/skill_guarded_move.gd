@@ -10,8 +10,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func execute(action_source: Node, action_target: Node, context_dict : Dictionary = {}):
+func execute(action_source_cell: Cell, action_target_cell: Cell, context_dict : Dictionary = {}):
 	
-	await ActionManager.request_action("move_unit",{},Global.hero_unit,action_target)
-	await ActionManager.request_action("shield_unit",{"amount" : PlayerStats.player_dex/2},Global.hero_unit,Global.hero_unit)
+	#NEED REFERENCE TO UNIT, FOR USE AFTER IT MOVES
+	var unit = action_source_cell.occupant
+	
+	await ActionManager.request_action("move_unit",{},action_source_cell,action_target_cell)
+	await ActionManager.request_action("shield_unit",{"amount" : PlayerStats.player_dex/2},unit.current_cell,unit.current_cell)
 	

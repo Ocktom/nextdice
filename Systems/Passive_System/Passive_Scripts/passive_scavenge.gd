@@ -2,7 +2,6 @@ extends Passive
 
 func set_trigger():
 	print ("scavenge trigger set on ", source.unit_name)
-	SignalBus.connect("enemy_death",_on_triggered)
 
 func _on_triggered():
 	

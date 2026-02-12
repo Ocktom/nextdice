@@ -2,11 +2,12 @@ extends Action
 
 var action_name := "move_unit"
 
-func execute(context: Dictionary, action_source: Node = null,action_target: Node = null):
+func execute(context: Dictionary, unit_current_cell: Cell = null, target_cell: Cell = null):
 	
-	var user = action_source
 	var color : Color
+	var unit_to_move = unit_current_cell.occupant
 	
 	Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_MOVEMENT-Retro Jump_HY_PC-001.wav")
-	action_source.current_cell.clear_cell()
-	action_target.fill_with_unit(action_source)
+	target_cell.fill_with_unit(unit_to_move)
+
+	unit_current_cell.clear_cell()
