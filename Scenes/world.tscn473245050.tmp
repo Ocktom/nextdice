@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://bgc5u58x43q3q"]
+
+[ext_resource type="Script" uid="uid://go0f4eo80y6" path="res://Scenes/world.gd" id="1_8j60k"]
+[ext_resource type="PackedScene" uid="uid://bwe77gb3gfi0o" path="res://Systems/Audio_Bus/Audio.tscn" id="1_a02cp"]
+[ext_resource type="PackedScene" uid="uid://cx1ojiejwf35o" path="res://Systems/Dice_System/Dice.tscn" id="2_go701"]
+[ext_resource type="PackedScene" uid="uid://d013w2ydl1xat" path="res://Systems/Grid/Grid.tscn" id="3_5a7ea"]
+[ext_resource type="PackedScene" uid="uid://bgc3x1l871e0" path="res://Systems/Player_UI/Player_UI.tscn" id="5_fo5ed"]
+[ext_resource type="PackedScene" uid="uid://dr1kdty3xqiul" path="res://Systems/Item System/Shop_Screen.tscn" id="8_k7acu"]
+[ext_resource type="Texture2D" uid="uid://d1i4ktdbjkhhf" path="res://Art/big grid.png" id="10_0fj1v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_k7acu"]
+font_size = 106
+
+[node name="World" type="Node2D" unique_id=448514010]
+script = ExtResource("1_8j60k")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=259821961]
+offset_left = 4.0
+offset_top = -58.0
+offset_right = 1930.0
+offset_bottom = 1103.0
+mouse_filter = 2
+color = Color(0.1684652, 0.11581395, 0.1945354, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=668567970]
+visible = false
+texture_filter = 1
+position = Vector2(1077, 568)
+scale = Vector2(5.6837206, 4.7065215)
+texture = ExtResource("10_0fj1v")
+
+[node name="Grid" parent="." unique_id=1969396144 instance=ExtResource("3_5a7ea")]
+position = Vector2(571, 184)
+
+[node name="Unit_Layer" type="Node2D" parent="." unique_id=957354395]
+
+[node name="Hero_Layer" type="Node2D" parent="." unique_id=70606172]
+
+[node name="DiceLayer" type="Node2D" parent="." unique_id=763949601]
+
+[node name="ColorRect" type="ColorRect" parent="DiceLayer" unique_id=1719198044]
+offset_left = 69.0
+offset_top = 118.0
+offset_right = 169.0
+offset_bottom = 416.0
+mouse_filter = 2
+color = Color(0.3106152, 0.20645401, 0.31056988, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="DiceLayer" unique_id=1441239665]
+offset_left = 178.0
+offset_top = 121.0
+offset_right = 269.0
+offset_bottom = 414.0
+mouse_filter = 2
+color = Color(0.3106152, 0.20645401, 0.31056988, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="DiceLayer" unique_id=1269811384]
+offset_left = 276.0
+offset_top = 121.0
+offset_right = 367.0
+offset_bottom = 414.0
+mouse_filter = 2
+color = Color(0.3106152, 0.20645401, 0.31056988, 1)
+
+[node name="VBoxContainer" type="HBoxContainer" parent="DiceLayer" unique_id=1772261578]
+offset_left = 114.0
+offset_top = 369.0
+offset_right = 322.0
+offset_bottom = 369.0
+theme_override_constants/separation = 104
+
+[node name="Dice" parent="DiceLayer/VBoxContainer" unique_id=1076685506 instance=ExtResource("2_go701")]
+layout_mode = 2
+
+[node name="Dice2" parent="DiceLayer/VBoxContainer" unique_id=591512051 instance=ExtResource("2_go701")]
+layout_mode = 2
+
+[node name="Dice3" parent="DiceLayer/VBoxContainer" unique_id=686019580 instance=ExtResource("2_go701")]
+layout_mode = 2
+
+[node name="Sum_label" type="Label" parent="DiceLayer" unique_id=930167674]
+visible = false
+offset_left = 222.0
+offset_top = 202.0
+offset_right = 343.0
+offset_bottom = 348.0
+text = "13"
+label_settings = SubResource("LabelSettings_k7acu")
+
+[node name="Effects_Layer" type="Node2D" parent="." unique_id=726888367]
+
+[node name="Audio" parent="." unique_id=1516609735 instance=ExtResource("1_a02cp")]
+
+[node name="Player_UI" parent="." unique_id=2089692981 instance=ExtResource("5_fo5ed")]
+offset_left = 255.0
+offset_top = 916.0
+offset_right = 255.0
+offset_bottom = 916.0
+mouse_filter = 2
+
+[node name="Shop_Screen" parent="." unique_id=540836891 instance=ExtResource("8_k7acu")]
+visible = false

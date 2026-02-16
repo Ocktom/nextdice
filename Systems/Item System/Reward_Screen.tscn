@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://ddbny0pognqon"]
+
+[ext_resource type="Script" uid="uid://sdpq1460kx58" path="res://Systems/Item System/Reward_Screen.gd" id="1_20j3i"]
+[ext_resource type="FontFile" uid="uid://d35kupukt7jqu" path="res://Fonts/LazyFox Pixel Font 1.ttf" id="3_ixd1j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fo0e3"]
+font = ExtResource("3_ixd1j")
+font_size = 101
+
+[node name="Reward_Screen" type="Control" unique_id=953885582]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_20j3i")
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=2017562929]
+layout_mode = 0
+offset_left = -969.0
+offset_top = -551.0
+offset_right = 981.0
+offset_bottom = 555.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=2069117005]
+layout_mode = 0
+offset_left = -872.5
+offset_top = -462.0
+offset_right = 866.30005
+offset_bottom = 454.0
+mouse_filter = 2
+color = Color(0.28950858, 0.23048478, 0.34316862, 1)
+
+[node name="Item_Container" type="HBoxContainer" parent="." unique_id=1756809328]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -461.0
+offset_top = -20.0
+offset_right = 461.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 461
+alignment = 1
+
+[node name="Label" type="Label" parent="." unique_id=1356790222]
+layout_mode = 1
+offset_left = -469.0
+offset_top = -371.0
+offset_right = 469.0
+offset_bottom = -247.0
+text = "Replace a skill"
+label_settings = SubResource("LabelSettings_fo0e3")
+horizontal_alignment = 1
+
+[node name="Skip_Button" type="Button" parent="." unique_id=1499540231]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -182.5
+offset_top = 263.0
+offset_right = 182.5
+offset_bottom = 409.5
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_ixd1j")
+theme_override_font_sizes/font_size = 100
+text = "SKIP"

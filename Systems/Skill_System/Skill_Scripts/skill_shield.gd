@@ -12,5 +12,5 @@ func _process(delta: float) -> void:
 
 func execute(action_source_cell: Cell, action_target_cell: Cell, context_dict : Dictionary = {}):
 	
-	await ActionManager.request_action("shield_unit",{"amount" : PlayerStats.player_dex/2},action_source_cell,action_target_cell)
+	await ActionManager.request_action("status_effect",{"status_name" : "SHIELD", "amount" : PlayerStats.player_str},Global.hero_unit.current_cell,Global.hero_unit.current_cell)
 	

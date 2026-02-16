@@ -12,4 +12,4 @@ func on_unit_damaged(unit_damaged: Unit):
 	if unit_damaged.unit_passives.keys().has("enrage"):
 		print (unit_damaged.unit_name, " is ENRAGED")
 		Global.float_text("ENRAGE", unit_damaged.global_position,Color.RED)
-		
+	 

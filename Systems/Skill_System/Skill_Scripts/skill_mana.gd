@@ -9,5 +9,5 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func execute(action_source: Node, action_target: Node, context:= {}):
-	await ActionManager.request_action("move_unit",{},Global.hero_unit,action_target)
+func execute(action_source: Cell, action_target_cell: Cell, context:= {}):
+	await ActionManager.request_action("move_unit",{},Global.hero_unit.current_cell,Global.hero_unit.current_cell)

@@ -84,12 +84,11 @@ func parse_passives_string(s: String) -> Dictionary:
 		return {}
 	return result
 
-
 var enemy_sets : Dictionary = {
 	
-	"set_1" : ["Ratron","Ratron","Skeltron","Skeltron"],
-	"set_2" : ["Ratron","Ratron","Batron","Batron"],
-	"set_3" : ["Ratron","Ratron","Spectroid","Spectroid"],
+	"set_1" : ["Armadroid","Demodroid","Armadroid","Skeltron","Demodroid"],
+	"set_2" : ["Armadroid","Demodroid","Armadroid","Skeltron"],
+	"set_3" : ["Ratron","Ratron","Demodroid","Spectroid"],
 	"set_4" : ["Skeltron","Slitherbyte","Batron","Spectroid","Spectroid"],
 	"set_5" : ["Skeltron","Slitherbyte","Slitherbyte","Spectroid","Armadroid"],
 	"set_6" : ["Batron","Batron", "Batron", "Spidroid", "Spidroid","Armadroid"],
@@ -97,7 +96,67 @@ var enemy_sets : Dictionary = {
 	"set_8" : ["Armadroid", "Armadroid", "Spidroid", "Slitherbyte","Slitherbyte"],
 	"set_9" : ["Demodroid","Demodroid", "Armadroid", "Necrotron","Batron","Batron"]
 }
-
 var enemy_sets_easy := ["set_1","set_2","set_3"]
 var enemy_sets_medium := ["set_4","set_5","set_6"]
 var enemy_sets_difficult := ["set_7","set_8","set_9"]
+
+func spawn_torches():
+	var unit_scene : PackedScene = preload("res://Systems/Unit_System/Unit_Torch.tscn")
+	for x in Global.torch_unit_count:
+		var inst = unit_scene.instantiate()
+		inst.unit_name = "Torch"
+		var cell = Global.grid.get_empty_cells().pick_random()
+		await cell.spawn_unit(inst)
+
+func spawn_starting_chests():
+	for x in PlayerStats.starting_chests:
+		var chest_path : PackedScene = preload("res://Systems/Unit_System/Unit_Chest.tscn")
+		var inst = chest_path.instantiate()
+		var cell_pick = Global.grid.get_empty_cells().pick_random()
+		await cell_pick.spawn_unit(inst)
+		
+func spawn_hero():
+	
+	var starting_cell = Global.grid.all_cells.pick_random()
+	var hero_scene : PackedScene = preload("res://Systems/Unit_System/Unit_Hero.tscn")
+	var hero_inst = hero_scene.instantiate()
+	hero_inst.unit_name = "HERO"
+	Global.hero_unit = hero_inst
+	starting_cell.spawn_unit(hero_inst)
+
+func spawn_round_enemies():
+	
+	var enemy_set : String
+	var enemy_names : Array
+	
+	if Global.round_number <= 3:
+		enemy_set = UnitManager.enemy_sets_easy.pick_random()
+	if (Global.round_number > 3 && Global.round_number <= 6):
+		print ("picking enemy set from ", UnitManager.enemy_sets_medium)
+		enemy_set = UnitManager.enemy_sets_medium.pick_random()
+	if (Global.round_number > 6):
+		enemy_set = UnitManager.enemy_sets_difficult.pick_random()
+	
+	print ("enemy_set is ", enemy_set)
+	enemy_names = UnitManager.enemy_sets[enemy_set]
+	
+	var hero_cell = Global.hero_unit.current_cell
+	var forbidden_cells = Global.grid.get_adjacent_cells(hero_cell)
+	forbidden_cells.append(hero_cell)
+	
+	print ("enemy names is ", enemy_names)
+	for x in enemy_names:
+		
+		var valid_cells = []
+
+		for cell in Global.grid.get_empty_cells():
+			if not forbidden_cells.has(cell):
+				valid_cells.append(cell)
+
+		if valid_cells.is_empty():
+			print ("no valid cells to spawn enemy to")
+			return
+
+		var cell_pick = valid_cells.pick_random()
+		
+		UnitManager.spawn_new_enemy(x,cell_pick)

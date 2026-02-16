@@ -2,7 +2,7 @@ extends Node2D
 
 const GRID_WIDTH = 7
 const GRID_HEIGHT = 5
-const CELL_SIZE = Vector2(160, 160)
+const CELL_SIZE = Vector2(170, 170)
 var CELL_SPACING = Vector2(6, 6)
 var CellScene = preload("res://Systems/Grid/Cell.tscn")
 
@@ -39,13 +39,6 @@ func create_grid():
 			grid[x].append(cell)
 			all_cells.append(cell)
 	
-	var dupe_cells = all_cells.duplicate()
-	for x in 5:
-		var y = dupe_cells.pick_random()
-		y.cell_effect = Enums.CellEffect.OIL
-		y.update()
-		dupe_cells.erase(y)
-	
 func get_empty_cells(cell_pool : Array[Cell] = all_cells):
 	
 	var cell_array = cell_pool
@@ -63,6 +56,16 @@ func get_all_units() -> Array[Unit]:
 		if x.occupant != null:
 				units.append(x.occupant)
 	return units
+
+func get_enemies_with_status(status_name : String):
+	var enemies_with_status: Array[Unit] = []
+	for x in get_all_units():
+		if x is Hero:
+			continue	
+		if x.status_effects.keys().has(status_name):
+			enemies_with_status.append(x)
+	print ("grid returning units with status of ", status_name, " returned array is ", enemies_with_status)
+	return enemies_with_status
 	
 func get_all_enemies() -> Array[Enemy]:
 	var enemies : Array[Enemy]
@@ -255,6 +258,50 @@ func get_cell_in_direction(cell: Cell, direction: Enums.Direction, include_diago
 		return null
 
 	return grid[t.x][t.y]
+
+func get_cells_in_direction(cell: Cell, direction: Enums.Direction, cell_amount: int) -> Array[Cell]:
+	var cells: Array[Cell] = []
+	var p = cell.cell_vector
+	var step: Vector2i
+
+	match direction:
+		Enums.Direction.UP: step = Vector2i(0, -1)
+		Enums.Direction.DOWN: step = Vector2i(0, 1)
+		Enums.Direction.LEFT: step = Vector2i(-1, 0)
+		Enums.Direction.RIGHT: step = Vector2i(1, 0)
+		Enums.Direction.UP_LEFT: step = Vector2i(-1, -1)
+		Enums.Direction.UP_RIGHT: step = Vector2i(1, -1)
+		Enums.Direction.DOWN_LEFT: step = Vector2i(-1, 1)
+		Enums.Direction.DOWN_RIGHT: step = Vector2i(1, 1)
+		_: return cells
+
+	for i in range(cell_amount):
+		p += step
+		if not is_in_bounds(p):
+			break
+		cells.append(grid[p.x][p.y])
+
+	return cells
+
+func get_cell_direction(cell_1: Cell, cell_2: Cell) -> Enums.Direction:
+	var a = cell_1.cell_vector
+	var b = cell_2.cell_vector
+	var dx = b.x - a.x
+	var dy = b.y - a.y
+
+	dx = sign(dx)
+	dy = sign(dy)
+
+	if dx == 0 and dy == -1: return Enums.Direction.UP
+	if dx == 0 and dy == 1: return Enums.Direction.DOWN
+	if dx == -1 and dy == 0: return Enums.Direction.LEFT
+	if dx == 1 and dy == 0: return Enums.Direction.RIGHT
+	if dx == -1 and dy == -1: return Enums.Direction.UP_LEFT
+	if dx == 1 and dy == -1: return Enums.Direction.UP_RIGHT
+	if dx == -1 and dy == 1: return Enums.Direction.DOWN_LEFT
+	if dx == 1 and dy == 1: return Enums.Direction.DOWN_RIGHT
+
+	return Enums.Direction.NONE
 
 func get_obstructing_unit(start_cell: Cell, direction: Enums.Direction) -> Unit:
 	var dir := Vector2i.ZERO

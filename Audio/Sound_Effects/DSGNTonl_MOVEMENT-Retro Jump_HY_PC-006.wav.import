@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://3y4b4sq6bg28"
+path="res://.godot/imported/DSGNTonl_MOVEMENT-Retro Jump_HY_PC-006.wav-463209337c97f9e9f0d17e87c29f1cb1.sample"
+
+[deps]
+
+source_file="res://Audio/Sound_Effects/DSGNTonl_MOVEMENT-Retro Jump_HY_PC-006.wav"
+dest_files=["res://.godot/imported/DSGNTonl_MOVEMENT-Retro Jump_HY_PC-006.wav-463209337c97f9e9f0d17e87c29f1cb1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

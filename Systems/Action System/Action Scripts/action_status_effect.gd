@@ -4,21 +4,35 @@ var action_name := "status_effect"
 
 func execute(context: Dictionary, action_source_cell: Cell = null, target_cell: Cell = null):
 	
-	var target = target_cell.occupant
+	var status_effects : Dictionary
+	if target_cell.occupant is Hero:
+		status_effects = PlayerStats.status_effects
+	else:
+		status_effects = target_cell.occupant.status_effects
 	
-	var color = context["color"]
+	var target = target_cell.occupant
+	var color : Color
 	var status_name = context["status_name"].to_lower()
 	var amount = max(1,context["amount"])
 	var status = Enums.Status[context["status_name"]]
 	
-	if target.status_effects.keys().has(status_name):
-		target.status_effects[status_name] = max(amount, target.status_effects[status_name]+amount)
+	match status_name:
+		"poison" : color = Color.LIME_GREEN
+		"burn" : color = Color.ORANGE
+		"frost" : color = Color.POWDER_BLUE
+		"stun" : color = Color.WHITE
+		"root" : color = Color.NAVAJO_WHITE
+		"shield" : color = Color.GAINSBORO
+	
+	if status_effects.keys().has(status_name):
+		status_effects[status_name] = max(amount, status_effects[status_name]+amount)
 	else:
-		target.status_effects[status_name] = amount
+		status_effects[status_name] = amount
 	
-	print ("the amount of ", status_name, " in ", target.unit_name, "'s status dictionary is ", target.status_effects[status_name])
+	print ("the amount of ", status_name, " in ", target.unit_name, "'s status dictionary is ", status_effects[status_name])
 	
+	Global.animate(target_cell.occupant,Enums.Anim.FLASH,color)
 	Global.float_text(str(status_name, " +",amount),target.global_position,Color.WHITE)
 	
-	target.update()
+	await target.update()
 	

@@ -3,9 +3,39 @@
 [ext_resource type="Script" uid="uid://de8jygopjlgu0" path="res://Systems/Grid/Cell.gd" id="1_hyvek"]
 [ext_resource type="Texture2D" uid="uid://cc7ia6nupvhui" path="res://Art/cell_grey.png" id="2_r3c2n"]
 [ext_resource type="Texture2D" uid="uid://7r4j6l7pfgm5" path="res://Art/cell_spikes.png" id="3_w1573"]
+[ext_resource type="Texture2D" uid="uid://ctqbyvjdlx4hl" path="res://Art/cell_fire Copy.png" id="4_k38i7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1m28"]
-size = Vector2(176, 176)
+size = Vector2(171, 169)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck7ux"]
+atlas = ExtResource("4_k38i7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcg8a"]
+atlas = ExtResource("4_k38i7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fo6c7"]
+atlas = ExtResource("4_k38i7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3spm2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ck7ux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcg8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fo6c7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="GridCell" type="Node2D" unique_id=704447098]
 script = ExtResource("1_hyvek")
@@ -14,7 +44,7 @@ script = ExtResource("1_hyvek")
 modulate = Color(0.8258219, 0.7001115, 0.91950977, 1)
 texture_filter = 1
 position = Vector2(1, 1)
-scale = Vector2(3.5, 3.5)
+scale = Vector2(4, 4)
 texture = ExtResource("2_r3c2n")
 
 [node name="Cell_Highlight" type="ColorRect" parent="." unique_id=28755570]
@@ -23,10 +53,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -87.0
-offset_top = -86.0
-offset_right = 89.0
-offset_bottom = 89.0
+offset_left = -82.0
+offset_top = -82.0
+offset_right = 84.0
+offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -35,7 +65,7 @@ color = Color(1, 1, 1, 0.19215687)
 [node name="Cell_Area" type="Area2D" parent="." unique_id=473789914]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cell_Area" unique_id=1972858220]
-position = Vector2(1, 1)
+position = Vector2(1.5, -0.5)
 shape = SubResource("RectangleShape2D_m1m28")
 
 [node name="Cell_Effect_OV" type="TextureRect" parent="." unique_id=2063739821]
@@ -47,3 +77,11 @@ offset_top = -76.0
 offset_right = 75.0
 offset_bottom = 75.0
 texture = ExtResource("3_w1573")
+
+[node name="Cell_Animation" type="AnimatedSprite2D" parent="." unique_id=1057638428]
+visible = false
+texture_filter = 1
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_3spm2")
+autoplay = "default"
+frame_progress = 0.3236081

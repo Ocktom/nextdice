@@ -73,6 +73,7 @@ func _input(event):
 			await Global.world.roll_dice()
 
 		if event.is_action_released("right_mouse"):
+			
 			if hovered_dice is Dice:
 				
 				if hovered_dice.used_this_turn:
@@ -80,7 +81,13 @@ func _input(event):
 					return
 				
 				#hovered_dice.use()
-
+			
+			elif hovered_cell != null:
+					if hovered_cell.occupant != null:
+						if hovered_cell.occupant is Chest:
+							await hovered_cell.occupant.open_chest()
+							return
+			
 		elif event.is_action_released("left_mouse"):
 
 			# Dice drop
@@ -92,7 +99,6 @@ func _input(event):
 					print ("using dice for mana")
 					Global.world.spell_ui.add_mana(dragging_dice.current_face.pips)
 					
-				
 				elif hovered_spell_slot != null:
 					if hovered_spell_slot.occupant != null:
 						if dragging_dice.current_face.pips >= hovered_spell_slot.occupant.mana_cost:
@@ -125,6 +131,7 @@ func _input(event):
 					return
 				
 				if hovered_dice.current_face.skill_target == Enums.SkillTarget.SELF:
+					print ("using skill on self")
 					hovered_dice.use(Global.hero_unit.current_cell,Global.hero_unit.current_cell)
 					return
 				

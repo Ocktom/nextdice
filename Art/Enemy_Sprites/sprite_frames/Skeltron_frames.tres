@@ -1,22 +1,22 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://w718jh701tvj"]
 
-[ext_resource type="Texture2D" uid="uid://b4phlwvgssen4" path="res://Art/Enemy_Sprites/skelly3.png" id="1_iu6nd"]
+[ext_resource type="Texture2D" uid="uid://t7fcl4jgrtpq" path="res://Art/Enemy_Sprites/32skelly.png" id="1_iu6nd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bi2oc"]
 atlas = ExtResource("1_iu6nd")
-region = Rect2(0, 0, 48, 48)
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uqa4y"]
 atlas = ExtResource("1_iu6nd")
-region = Rect2(48, 0, 48, 48)
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_isrx8"]
 atlas = ExtResource("1_iu6nd")
-region = Rect2(96, 0, 48, 48)
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6idy6"]
 atlas = ExtResource("1_iu6nd")
-region = Rect2(144, 0, 48, 48)
+region = Rect2(96, 0, 32, 32)
 
 [resource]
 animations = [{

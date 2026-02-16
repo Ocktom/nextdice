@@ -23,15 +23,18 @@ mouse_filter = 2
 color = Color(0.1684652, 0.11581395, 0.1945354, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=668567970]
+visible = false
 texture_filter = 1
 position = Vector2(1077, 568)
 scale = Vector2(5.6837206, 4.7065215)
 texture = ExtResource("10_0fj1v")
 
 [node name="Grid" parent="." unique_id=1969396144 instance=ExtResource("3_5a7ea")]
-position = Vector2(578, 217)
+position = Vector2(571, 184)
 
 [node name="Unit_Layer" type="Node2D" parent="." unique_id=957354395]
+
+[node name="Hero_Layer" type="Node2D" parent="." unique_id=70606172]
 
 [node name="DiceLayer" type="Node2D" parent="." unique_id=763949601]
 
@@ -97,3 +100,5 @@ mouse_filter = 2
 
 [node name="Shop_Screen" parent="." unique_id=540836891 instance=ExtResource("8_k7acu")]
 visible = false
+
+[node name="Overlay_Layer" type="Node" parent="." unique_id=659131176]

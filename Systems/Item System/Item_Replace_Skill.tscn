@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://cy1j1xh7exwvi"]
+
+[ext_resource type="Script" uid="uid://1m2y0m52xvkl" path="res://Systems/Item System/Item_Replace_Skill.gd" id="1_53ydq"]
+[ext_resource type="FontFile" uid="uid://d35kupukt7jqu" path="res://Fonts/LazyFox Pixel Font 1.ttf" id="2_66nno"]
+[ext_resource type="Texture2D" uid="uid://ca6pvixx7s2qy" path="res://Art/Skill_Sprites/blade_walk.png" id="3_52u18"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3b055"]
+font = ExtResource("2_66nno")
+font_size = 40
+
+[node name="Item" type="Control" unique_id=702389158]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_53ydq")
+
+[node name="Item_Color" type="ColorRect" parent="." unique_id=858235962]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -223.62161
+offset_top = -210.0
+offset_right = 221.49188
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.3871733, 0.3110846, 0.42336905, 1)
+
+[node name="Item_Color2" type="ColorRect" parent="." unique_id=1119890759]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -197.0
+offset_top = -185.0
+offset_right = 197.0
+offset_bottom = 185.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.5183813, 0.42700657, 0.5606931, 1)
+
+[node name="Skill_Replace" type="VBoxContainer" parent="." unique_id=339621742]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -158.0
+offset_top = -159.0
+offset_right = 163.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -7
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Skill_Replace" unique_id=979299621]
+layout_mode = 2
+
+[node name="Replace" type="Label" parent="Skill_Replace/HBoxContainer" unique_id=2025210474]
+layout_mode = 2
+text = "REPLACE:"
+label_settings = SubResource("LabelSettings_3b055")
+
+[node name="old_sprite" type="TextureRect" parent="Skill_Replace/HBoxContainer" unique_id=1373301098]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_52u18")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Skill_Replace" unique_id=1686257011]
+layout_mode = 2
+theme_override_constants/separation = 59
+
+[node name="With" type="Label" parent="Skill_Replace/HBoxContainer2" unique_id=804267105]
+layout_mode = 2
+text = "WITH:"
+label_settings = SubResource("LabelSettings_3b055")
+horizontal_alignment = 1
+
+[node name="new_sprite" type="TextureRect" parent="Skill_Replace/HBoxContainer2" unique_id=1561676676]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_52u18")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Item_Button" type="Button" parent="." unique_id=1102833955]
+layout_mode = 0
+offset_left = -223.0
+offset_top = -212.0
+offset_right = 220.0
+offset_bottom = 206.0
+flat = true

@@ -1,68 +1,28 @@
 extends Unit
 class_name Chest
 
-func _ready():
-	
-	Global.all_units.append(self)
+@onready var unit_sprite: AnimatedSprite2D = $Unit_Sprite
+@onready var hp_label: Label = $Right_Stats/HBoxContainer/HP_Label
+@onready var shield_label: Label = $Right_Stats/HBoxContainer/SHIELD_Label
 
-	await update()
+var hp : int
+var max_hp : int
 
-func destroy(overkill := false):
-	
-	pass
+var dying_this_turn := false
 
-func remove():
-	
-	print ("disuniting!")
-	await Global.animate(self,Enums.Anim.SQUISH)
-	await Global.timer(.07)
-	visible = false
-	await Global.float_text("DISCARDED",position,Color.ROSY_BROWN)
-	Global.all_units.erase(self)
-	await current_cell.clear_cell()
-	
-	queue_free()
-
-func apply_destroy_effects():
-	
-	pass
-
-func assign_to_cell(cell: Cell) -> void:
-	
-	if current_cell != null:
-		current_cell.occupant = null
-
-	current_cell = cell
-	current_cell.occupant = self
-	position = current_cell.global_position
-
+var acted_this_turn := false
+		
 func update():
 	
-	unit_name_label.text = str(unit_name)
+	hp_label.text = str(hp)
 
-func get_grid_position() -> Vector2i:
-	
-	if current_cell != null:
-		return current_cell.grid_position
-	return Vector2i(-1, -1)
-		
-func _on_mouse_entered():
-	
-	InputManager.hovered_unit = self
-	if not InputManager.dragging_dice == null:
-		toggle_highlight()
+func open_chest():
+	unit_sprite.play()
+	Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_MOVEMENT-Retro Jump_HY_PC-005.wav"
+)
+	await Global.timer(1)
+	Global.world.reward()
 
-func _on_mouse_exited():
-	if InputManager.hovered_unit == self:
-		InputManager.hovered_unit = null
-	
-	if highlight:
-		toggle_highlight()
-	
-func toggle_highlight():
-	if highlight:
-		highlight = false
-		border_rect.visible = false
-	else:
-		highlight = true
-		border_rect.visible = true
+func take_damage(amount : int):
+	await current_cell.clear_cell()
+	queue_free()

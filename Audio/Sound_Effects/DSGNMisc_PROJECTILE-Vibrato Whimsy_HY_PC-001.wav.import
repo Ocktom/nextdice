@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ccave330yrd3c"
+path="res://.godot/imported/DSGNMisc_PROJECTILE-Vibrato Whimsy_HY_PC-001.wav-a6b64f39e6de3e2c5d2770ab9632f67e.sample"
+
+[deps]
+
+source_file="res://Audio/Sound_Effects/DSGNMisc_PROJECTILE-Vibrato Whimsy_HY_PC-001.wav"
+dest_files=["res://.godot/imported/DSGNMisc_PROJECTILE-Vibrato Whimsy_HY_PC-001.wav-a6b64f39e6de3e2c5d2770ab9632f67e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

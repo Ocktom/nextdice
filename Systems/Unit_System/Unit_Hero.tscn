@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://jgbr0k23t5ri"]
 
 [ext_resource type="Script" uid="uid://rus3e1v7bhtv" path="res://Systems/Unit_System/Unit_Hero.gd" id="1_a2152"]
-[ext_resource type="SpriteFrames" uid="uid://dwj2eplpo608t" path="res://rogue_frames.tres" id="2_26pr7"]
+[ext_resource type="SpriteFrames" uid="uid://dh5ru2lhds8tx" path="res://Art/warriro_frames.tres" id="2_8o46l"]
 [ext_resource type="Texture2D" uid="uid://cmyov2mabjadp" path="res://Art/Icon_Sprites/icon_heart.png" id="2_kpg37"]
 [ext_resource type="Texture2D" uid="uid://d3lmbc3uluvo4" path="res://Art/Icon_Sprites/icon_poison.png" id="3_26pr7"]
 [ext_resource type="Texture2D" uid="uid://bcugoaijvi38n" path="res://Art/Icon_Sprites/icon_stun.png" id="4_8o46l"]
+[ext_resource type="PackedScene" uid="uid://klesx8yr3cp8" path="res://Systems/Unit_System/status_sprites.tscn" id="6_8o46l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1djiq"]
 font_size = 31
@@ -20,19 +21,18 @@ script = ExtResource("1_a2152")
 
 [node name="Unit_Sprite" type="AnimatedSprite2D" parent="." unique_id=1881140890]
 scale = Vector2(4, 4)
-sprite_frames = ExtResource("2_26pr7")
+sprite_frames = ExtResource("2_8o46l")
 autoplay = "default"
 
 [node name="Effects_Sprite" type="AnimatedSprite2D" parent="." unique_id=246867172]
-visible = false
 scale = Vector2(4, 4)
 autoplay = "default"
 
 [node name="Right_Stats" type="VBoxContainer" parent="." unique_id=710065752]
-offset_left = 63.0
-offset_top = -73.0
-offset_right = 103.0
-offset_bottom = 4.0
+offset_left = 53.0
+offset_top = -21.0
+offset_right = 93.0
+offset_bottom = 56.0
 theme_override_constants/separation = -11
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Right_Stats" unique_id=1187409328]
@@ -91,3 +91,16 @@ texture = ExtResource("4_8o46l")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Left_Stats" unique_id=1740274406]
 layout_mode = 2
+
+[node name="Status_Sprites" parent="." unique_id=170577677 instance=ExtResource("6_8o46l")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -94.0
+offset_right = -32.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,6 +1,10 @@
 extends Node
 class_name Skill
 
+var face : Face
+var target_type : Enums.TargetType
+#var range := 1
+
 func execute(action_source: Cell, action_target_cell: Cell, context_dict : Dictionary = {}):
 	print ("SKILL USED")
 

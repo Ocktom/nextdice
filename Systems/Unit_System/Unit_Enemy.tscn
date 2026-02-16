@@ -1,39 +1,29 @@
 [gd_scene format=3 uid="uid://ftjtt0qa83u7"]
 
 [ext_resource type="Script" uid="uid://cp2heh7xwpfq0" path="res://Systems/Unit_System/Unit_Enemy.gd" id="1_y87hi"]
-[ext_resource type="SpriteFrames" uid="uid://cjlqlq0v0fwmf" path="res://Art/Enemy_Sprites/sprite_frames/Spidroid_frames.tres" id="2_d55k6"]
-[ext_resource type="Texture2D" uid="uid://bbepftcljytvl" path="res://Art/explosion 8.png" id="3_d55k6"]
-[ext_resource type="Texture2D" uid="uid://cmyov2mabjadp" path="res://Art/Icon_Sprites/icon_heart.png" id="3_koxc3"]
-[ext_resource type="Texture2D" uid="uid://d3lmbc3uluvo4" path="res://Art/Icon_Sprites/icon_poison.png" id="4_d55k6"]
-[ext_resource type="Texture2D" uid="uid://bcugoaijvi38n" path="res://Art/Icon_Sprites/icon_stun.png" id="5_fa0x6"]
+[ext_resource type="SpriteFrames" uid="uid://dqbj5yrcuryri" path="res://Art/Enemy_Sprites/sprite_frames/Ribbot_frames.tres" id="2_fa0x6"]
+[ext_resource type="Texture2D" uid="uid://bkf6vafdccgdi" path="res://Art/explosion B2 small.png" id="3_fa0x6"]
+[ext_resource type="PackedScene" uid="uid://klesx8yr3cp8" path="res://Systems/Unit_System/status_sprites.tscn" id="7_fa0x6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fa0x6"]
-atlas = ExtResource("3_d55k6")
-region = Rect2(0, 0, 48, 48)
+atlas = ExtResource("3_fa0x6")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5xla7"]
-atlas = ExtResource("3_d55k6")
-region = Rect2(48, 0, 48, 48)
+atlas = ExtResource("3_fa0x6")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ojshi"]
-atlas = ExtResource("3_d55k6")
-region = Rect2(96, 0, 48, 48)
+atlas = ExtResource("3_fa0x6")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ifnka"]
-atlas = ExtResource("3_d55k6")
-region = Rect2(144, 0, 48, 48)
+atlas = ExtResource("3_fa0x6")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l7j8l"]
-atlas = ExtResource("3_d55k6")
-region = Rect2(192, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d5wec"]
-atlas = ExtResource("3_d55k6")
-region = Rect2(240, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_waate"]
-atlas = ExtResource("3_d55k6")
-region = Rect2(288, 0, 48, 48)
+atlas = ExtResource("3_fa0x6")
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ddic1"]
 animations = [{
@@ -54,10 +44,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_l7j8l")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d5wec")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_waate")
+"texture": null
 }],
 "loop": false,
 "name": &"default",
@@ -82,18 +69,20 @@ script = ExtResource("1_y87hi")
 
 [node name="Unit_Sprite" type="AnimatedSprite2D" parent="." unique_id=1905187628]
 scale = Vector2(4, 4)
-sprite_frames = ExtResource("2_d55k6")
+sprite_frames = ExtResource("2_fa0x6")
+frame_progress = 0.055521667
 
 [node name="Effects_Sprite" type="AnimatedSprite2D" parent="." unique_id=531974913]
 visible = false
-scale = Vector2(4, 4)
+scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_ddic1")
+frame_progress = 1.0
 
 [node name="Right_Stats" type="VBoxContainer" parent="." unique_id=233231666]
 offset_left = 50.0
-offset_top = -9.0
+offset_top = -23.0
 offset_right = 150.0
-offset_bottom = 68.0
+offset_bottom = 54.0
 theme_override_constants/separation = -11
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Right_Stats" unique_id=389829734]
@@ -116,40 +105,8 @@ layout_mode = 2
 text = "12"
 label_settings = SubResource("LabelSettings_t6kcj")
 
-[node name="Left_Stats" type="HBoxContainer" parent="." unique_id=1303445581]
-offset_left = -74.0
+[node name="Status_Sprites" parent="." unique_id=170577677 instance=ExtResource("7_fa0x6")]
+offset_left = -66.0
 offset_top = -86.0
-offset_right = 55.0
-theme_override_constants/separation = 43
-
-[node name="MarginContainer" type="MarginContainer" parent="Left_Stats" unique_id=1150525109]
-layout_mode = 2
-
-[node name="icon_1_sprite" type="Sprite2D" parent="Left_Stats/MarginContainer" unique_id=1097645438]
-visible = false
-scale = Vector2(5, 5)
-texture = ExtResource("3_koxc3")
-
-[node name="MarginContainer2" type="MarginContainer" parent="Left_Stats" unique_id=1894315242]
-layout_mode = 2
-
-[node name="icon_2_sprite" type="Sprite2D" parent="Left_Stats/MarginContainer2" unique_id=934167194]
-visible = false
-scale = Vector2(5, 5)
-texture = ExtResource("4_d55k6")
-
-[node name="MarginContainer3" type="MarginContainer" parent="Left_Stats" unique_id=531092077]
-layout_mode = 2
-
-[node name="icon_3_sprite" type="Sprite2D" parent="Left_Stats/MarginContainer3" unique_id=933666250]
-visible = false
-scale = Vector2(5, 5)
-texture = ExtResource("5_fa0x6")
-
-[node name="MarginContainer4" type="MarginContainer" parent="Left_Stats" unique_id=210225053]
-layout_mode = 2
-
-[node name="icon_4_sprite" type="Sprite2D" parent="Left_Stats/MarginContainer4" unique_id=1707913132]
-visible = false
-scale = Vector2(5, 5)
-texture = ExtResource("5_fa0x6")
+offset_right = -33.0
+offset_bottom = -77.0

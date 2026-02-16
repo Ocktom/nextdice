@@ -3,6 +3,9 @@ class_name Unit
 
 var current_cell: Cell
 var unit_name : String = "Unit"
+@onready var status_sprites: HBoxContainer = $Status_Sprites
+
+var status_icons : Array[Node]
 
 var highlight := false
 var sprite_path : String
@@ -24,7 +27,7 @@ func _ready():
 	
 	print ("unit passives for ", unit_name, " is ", unit_passives)
 	Global.all_units.append(self)
-
+	status_icons = status_sprites.get_children()
 	await update()
 
 func destroy(overkill := false):

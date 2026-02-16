@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dh5ru2lhds8tx"]
+
+[ext_resource type="Texture2D" uid="uid://ybu0j8qs7yii" path="res://Art/warrior_sheet.png" id="1_qvift"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovcr2"]
+atlas = ExtResource("1_qvift")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sdog"]
+atlas = ExtResource("1_qvift")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o46ve"]
+atlas = ExtResource("1_qvift")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpuce"]
+atlas = ExtResource("1_qvift")
+region = Rect2(96, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovcr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sdog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o46ve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpuce")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

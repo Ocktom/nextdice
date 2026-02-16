@@ -7,10 +7,6 @@ class_name Enemy
 
 @onready var atk_label: Label = $Right_Stats/ATK_Label
 
-@onready var icon_1_sprite: Sprite2D = $Left_Stats/MarginContainer/icon_1_sprite
-@onready var icon_2_sprite: Sprite2D = $Left_Stats/MarginContainer2/icon_2_sprite
-@onready var icon_3_sprite: Sprite2D = $Left_Stats/MarginContainer3/icon_3_sprite
-@onready var icon_4_sprite: Sprite2D = $Left_Stats/MarginContainer4/icon_4_sprite
 
 var hp : int
 var max_hp : int
@@ -165,7 +161,7 @@ func attempt_attack():
 	)
 	
 	turn_bonus = 0
-	await enemy_actions()
+	await enemy_actions(target)
 
 	return target
 
@@ -238,30 +234,28 @@ func attempt_move() -> bool:
 	await Global.timer(wait_time)
 	for c in best_path:
 		await current_cell.clear_cell()
-		c.fill_with_unit(self)
+		await c.fill_with_unit(self)
 		await Global.timer(step_time)
 
 	return true
 	
 func enemy_actions(attack_target: Node2D = null):
+	var target_cell: Cell
+	
+	if attack_target == null:
+		target_cell = null
+	else:
+		target_cell = attack_target.current_cell
 	
 	if action_1_name != "":
-		await ActionManager.request_action(action_1_name, action_1_context, current_cell, attack_target.current_cell)
+		await ActionManager.request_action(action_1_name, action_1_context, current_cell, target_cell)
 	
 	if action_2_name != "":
-		await ActionManager.request_action(action_2_name, action_2_context, current_cell, attack_target.current_cell)
+		await ActionManager.request_action(action_2_name, action_2_context, current_cell, target_cell)
 
-func take_attack(amount : int):
+func take_attack(amount : int, attacker: Unit):
 	
-	hp = max(0,hp-amount)
-	
-	if hp < 1:
-		dying_this_turn = true
-	
-	print ("was damaged")
-	Global.animate(self,Enums.Anim.SHAKE)
-	await Global.animate(self,Enums.Anim.FLASH,Color.RED)
-	await Global.timer(.3)
+	await ActionManager.request_action("damage_unit",{"amount" : amount, "damage_name" : "physical"},attacker.current_cell,current_cell)
 	
 	if dying_this_turn:
 		print ("unit has less then 1 hp, calling enemy death on manager")
@@ -290,11 +284,17 @@ func take_damage(amount : int):
 	
 func end_turn_effects():
 	
+	print ("end_turn effects for ", unit_name)
+	
 	if current_cell.cell_effect == Enums.CellEffect.FIRE:
 		status_effects["burn"] = 3
 	
 	if status_effects.has("burn"):
-		await ActionManager.request_action("damage_unit",{"damage_name" : "burn", "amount": 1, "target" : self},current_cell,current_cell)
+		print ("unit has burn, applying...")
+		await ActionManager.request_action("damage_unit",{"damage_name" : "fire", "amount": 1, "target" : self},current_cell,current_cell)
+	
+	if status_effects.has("poison"):
+		await ActionManager.request_action("damage_unit",{"damage_name" : "poison", "amount": 1, "target" : self},current_cell,current_cell)
 	
 	var decreasing_effects := ["poison","burn","root","stun","invisible"]
 	
@@ -315,8 +315,6 @@ func update():
 		if status_effects["shield"] > 0:
 			shield_label.visible = true
 			shield_label.text = str("/",status_effects["shield"])
-	
-	var status_icons : Array = [icon_1_sprite,icon_2_sprite,icon_3_sprite,icon_4_sprite]
 	
 	for x in status_icons:
 		x.visible = false

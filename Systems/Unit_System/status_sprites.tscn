@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://klesx8yr3cp8"]
+
+[ext_resource type="Texture2D" uid="uid://cmyov2mabjadp" path="res://Art/Icon_Sprites/icon_heart.png" id="1_ls04p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_k6ecb"]
+font_size = 6
+
+[node name="Status_Icons" type="HBoxContainer" unique_id=170577677]
+offset_right = 33.0
+offset_bottom = 9.0
+scale = Vector2(4, 4)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1226660674]
+layout_mode = 2
+texture = ExtResource("1_ls04p")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="TextureRect" unique_id=293766936]
+visible = false
+layout_mode = 0
+offset_top = 2.3333335
+offset_right = 40.0
+offset_bottom = 25.333334
+text = "12"
+label_settings = SubResource("LabelSettings_k6ecb")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=998836780]
+layout_mode = 2
+texture = ExtResource("1_ls04p")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=1511396644]
+layout_mode = 2
+texture = ExtResource("1_ls04p")
+stretch_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="." unique_id=1251821257]
+layout_mode = 2
+texture = ExtResource("1_ls04p")
+stretch_mode = 2

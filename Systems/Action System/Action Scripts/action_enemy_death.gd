@@ -13,6 +13,9 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	target.unit_sprite.visible = false
 	await Global.timer(.6)
 	
+	if not is_instance_valid(target):
+		return
+	
 	await target.current_cell.clear_cell()
 	target.queue_free()
-	Global.world.victory_check()
+	await Global.world.victory_check()

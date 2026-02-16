@@ -4,10 +4,14 @@ var action_name := "attack"
 
 func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	
-	print ("executing acttack action")
-
+	print ("executing acttack action, amount is", context["amount"])
 	
 	var sound_path : String
+	
+	if action_source_cell.occupant == Global.hero_unit:
+		action_source_cell.occupant.unit_sprite.sprite_frames = load("res://Art/warrior_attack_frames.tres")
+		action_source_cell.occupant.unit_sprite.play()
+		await Global.timer(.26)
 	
 	if context.keys().has("sound_path"):
 		sound_path = context["sound_path"]
@@ -16,6 +20,12 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	
 	Global.audio_node.play_sfx(sound_path)
 	await Global.animate(action_source_cell.occupant,Enums.Anim.LUNGE,Color.WHITE,action_target_cell)
-	await action_target_cell.occupant.take_attack(context["amount"])
+	
+	if action_source_cell.occupant == Global.hero_unit:
+		await Global.timer(.1)
+		action_source_cell.occupant.unit_sprite.sprite_frames = load("res://Art/warriro_frames.tres")
+		action_source_cell.occupant.unit_sprite.play()
+	
 	await Global.timer(.1)
-	await Global.timer(.2)
+	
+	await action_target_cell.occupant.take_attack(context["amount"],action_source_cell.occupant)

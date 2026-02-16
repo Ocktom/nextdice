@@ -1,10 +1,11 @@
 extends Node2D
 class_name Cell
 
-@onready var cell_color : ColorRect = $Cell_Color
 @onready var cell_area: Area2D = $Cell_Area
 @onready var cell_highlight: ColorRect = $Cell_Highlight
 @onready var cell_effect_ov: TextureRect = $Cell_Effect_OV
+@onready var cell_animation: AnimatedSprite2D = $Cell_Animation
+
 
 var cell_effect : Enums.CellEffect
 
@@ -20,8 +21,6 @@ var highlight : bool :
 var poison := false : 
 	set(new_value):
 		poison = new_value
-		if poison:
-			cell_color.color = Color.SEA_GREEN
 			
 var occupant : Unit = null
 var cell_vector: Vector2i   # Position in grid coordinates (x,y)
@@ -31,8 +30,10 @@ func _ready() -> void:
 	cell_area.connect("mouse_exited", _on_mouse_exited)
 	
 func spawn_unit(new_unit : Unit):
-
-	Global.world.unit_layer.add_child(new_unit)
+	var spawn_layer : Node2D
+	spawn_layer = Global.world.hero_layer if new_unit == Global.hero_unit else Global.world.unit_layer
+		
+	spawn_layer.add_child(new_unit)
 	await fill_with_unit(new_unit)
 
 func clear_cell():
@@ -41,17 +42,38 @@ func clear_cell():
 	Global.unhighlight_cells()
 
 func fill_with_unit(unit : Unit):
-	print ("fill_with_unit called")
+	print ("fill_with_unit called", unit.unit_name)
 	occupant = unit
 	unit.current_cell = self
 	unit.global_position = global_position
 	
-	if cell_effect == Enums.CellEffect.WEB:
-		ActionManager.create_action("status_effect",{"color" : "WHITE","status_name" : "ROOT", "amount" : 1 },self,self)
-		cell_effect = Enums.CellEffect.NONE
-		update()
-	
+	apply_cell_effects_to_unit()
 	unit.update()
+
+func apply_cell_effects_to_unit():
+	
+	if occupant == null:
+		return
+	
+	if cell_effect != Enums.CellEffect.NONE:
+		
+		match cell_effect:
+		
+			Enums.CellEffect.WEB:
+				
+				if occupant != null:
+					ActionManager.create_action("status_effect",{"status_name" : "ROOT", "amount" : 1 },self,self)
+					cell_effect = Enums.CellEffect.NONE
+					
+			Enums.CellEffect.FIRE:
+				
+				ActionManager.create_action("status_effect",{"status_name" : "BURN", "amount" : 1 },self,self)
+			
+			Enums.CellEffect.SNOW:
+				
+				ActionManager.create_action("status_effect",{"status_name" : "FROST", "amount" : 1 },self,self)
+		
+		occupant.update()
 	
 func move_hero(dice : Dice):
 	
@@ -118,16 +140,20 @@ func is_adjacent(cell : Cell, include_diagonal := false) -> bool:
 func update():
 	
 	cell_effect_ov.visible = true
+	
 	match cell_effect:
 		Enums.CellEffect.NONE: cell_effect_ov.visible = false
-		Enums.CellEffect.WEB: cell_effect_ov.texture = load("res://Art/Cell_Effect_Sprites/spiderweb.png")
-		Enums.CellEffect.FIRE: cell_effect_ov.texture = load("res://Art/Cell_Effect_Sprites/fire_cell.png")
-		Enums.CellEffect.OIL: cell_effect_ov.texture = load("res://Art/Cell_Effect_Sprites/Oil.png")
+		Enums.CellEffect.WEB: cell_effect_ov.texture = load("res://Art/Cell_Effect_Sprites/web.png")
+		Enums.CellEffect.FIRE: cell_effect_ov.texture = load("res://Art/Cell_Effect_Sprites/fire.png")
+		Enums.CellEffect.GRASS: cell_effect_ov.texture = load("res://Art/Cell_Effect_Sprites/grass.png")
+		Enums.CellEffect.SNOW: cell_effect_ov.texture = load("res://Art/Cell_Effect_Sprites/snow.png")
 	
 	if cell_effect == Enums.CellEffect.FIRE:
+		cell_animation.visible = true
+		
 		for x in Global.grid.get_adjacent_cells(self):
-			if x.cell_effect == Enums.CellEffect.OIL:
-				x.cell_effect = Enums.CellEffect.FIRE
-				x.update()
-	
+			if x.cell_effect == Enums.CellEffect.GRASS:
+				ActionManager.request_action("cell_effect",{"cell_effect" : "FIRE"},self,x)
+	else:
+		cell_animation.visible = false
 	

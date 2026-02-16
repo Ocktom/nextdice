@@ -48,12 +48,14 @@ func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE, target_no
 	match anim:
 		
 		Enums.Anim.FLASH:
-
+			
+			print ("animate flash used")
+			
 			tween.set_ease(Tween.EASE_OUT)
 			tween.set_trans(Tween.TRANS_SINE)
 			var original_modulate = Color(1,1,1,1)
-			var bright_flash = flash_color * 1.5
-			bright_flash.a = 1.0
+			var bright_flash = flash_color * 3
+			bright_flash.a = 3.0
 			tween.tween_property(node, "modulate", bright_flash, 0.1)
 			tween.tween_property(node, "modulate", original_modulate, 0.1)
 		

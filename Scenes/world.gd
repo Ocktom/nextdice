@@ -1,11 +1,15 @@
 extends Node2D
 
 @onready var unit_layer : Node2D = $Unit_Layer
+@onready var hero_layer: Node2D = $Hero_Layer
+
 @onready var spell_ui: Node2D = $Spell_UI
 @onready var player_ui: Control = $Player_UI
 @onready var sum_label: Label = $DiceLayer/Sum_label
 @onready var shop: Node2D = $Shop_Screen
 @onready var effects_layer: Node2D = $Effects_Layer
+
+@onready var overlay_layer: Node = $Overlay_Layer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -19,79 +23,35 @@ func _ready() -> void:
 func game_start():
 	
 	await SkillManager.setup_dice()
-	await spawn_torches()
-	await spawn_chests()
-	await spawn_hero()
+	await UnitManager.spawn_torches()
+	await UnitManager.spawn_starting_chests()
+	await UnitManager.spawn_hero()
 	await new_round()
-
+	#await Global.audio_node.play_music("res://Audio/First Fruits3.ogg")
+	
 func new_round():
 	
 	InputManager.input_paused = true
 	print ("new round started, round number is ", Global.round_number)
-	await spawn_round_enemies()
+	await make_new_grid()
+	await UnitManager.spawn_round_enemies()
 	start_player_turn()
 
-func spawn_torches():
-	var unit_scene : PackedScene = preload("res://Systems/Unit_System/Unit_Torch.tscn")
-	for x in Global.torch_unit_count:
-		var inst = unit_scene.instantiate()
-		inst.unit_name = "Torch"
-		var cell = Global.grid.get_empty_cells().pick_random()
-		await cell.spawn_unit(inst)
-
-func spawn_chests():
-	pass
-
-func spawn_hero():
-	
-	var starting_cell = Global.grid.all_cells.pick_random()
-	var hero_scene : PackedScene = preload("res://Systems/Unit_System/Unit_Hero.tscn")
-	var hero_inst = hero_scene.instantiate()
-	hero_inst.unit_name = "HERO"
-	Global.hero_unit = hero_inst
-	starting_cell.spawn_unit(hero_inst)
+func make_new_grid():
+	for x in Global.grid.all_cells:
+		x.cell_effect = Enums.CellEffect.NONE
+		x.update()
+	var dupe_cells = Global.grid.all_cells.duplicate()
+	for x in 5:
+		var y = dupe_cells.pick_random()
+		y.cell_effect = Enums.CellEffect.GRASS
+		y.update()
+		dupe_cells.erase(y)
 
 func spawn_spells():
 	for x in spell_ui.spell_slots:
 		var spell_choice = SpellManager.spell_names.pick_random()
 		SpellManager.insert_spell(spell_choice,x)
-
-func spawn_round_enemies():
-	
-	var enemy_set : String
-	var enemy_names : Array
-	
-	if Global.round_number <= 3:
-		enemy_set = UnitManager.enemy_sets_easy.pick_random()
-	if (Global.round_number > 3 && Global.round_number <= 6):
-		print ("picking enemy set from ", UnitManager.enemy_sets_medium)
-		enemy_set = UnitManager.enemy_sets_medium.pick_random()
-	if (Global.round_number > 6):
-		enemy_set = UnitManager.enemy_sets_difficult.pick_random()
-	
-	print ("enemy_set is ", enemy_set)
-	enemy_names = UnitManager.enemy_sets[enemy_set]
-	
-	var hero_cell = Global.hero_unit.current_cell
-	var forbidden_cells = Global.grid.get_adjacent_cells(hero_cell)
-	forbidden_cells.append(hero_cell)
-	
-	print ("enemy names is ", enemy_names)
-	for x in enemy_names:
-		
-		var valid_cells = []
-
-		for cell in Global.grid.get_empty_cells():
-			if not forbidden_cells.has(cell):
-				valid_cells.append(cell)
-
-		if valid_cells.is_empty():
-			print ("no valid cells to spawn enemy to")
-			return
-
-		var cell_pick = valid_cells.pick_random()
-		
-		UnitManager.spawn_new_enemy(x,cell_pick)
 		
 func roll_dice():
 	if PlayerStats.rolls == 0:
@@ -114,6 +74,8 @@ func start_player_turn():
 		x.grey_out = false
 		
 	PlayerStats.rolls = PlayerStats.max_rolls
+	PlayerStats.spaces_moved_this_turn = 0
+	
 	await roll_dice()
 	InputManager.input_paused = false
 	
@@ -144,7 +106,11 @@ func enemy_turn():
 	end_enemy_turn()
 
 func end_enemy_turn():
-	for x in Global.grid.get_all_enemies():
+	for x in Global.grid.get_all_enemies().duplicate():
+		
+		if not is_instance_valid(x):
+			continue
+		
 		await x.end_turn_effects()
 		
 	await Global.hero_unit.end_turn_effects()
@@ -174,7 +140,14 @@ func victory():
 	Global.round_number += 1
 	
 	enter_shop()
-		
+
+func reward():
+	Global.game_state = Enums.GameState.REWARD
+	var reward_inst : PackedScene = preload("res://Systems/Item System/Reward_Screen.tscn")
+	var inst = reward_inst.instantiate()
+	overlay_layer.add_child(inst)
+	inst.get_new_rewards()
+	
 func enter_shop():
 	
 	Global.game_state = Enums.GameState.SHOP
@@ -203,5 +176,3 @@ func kill_all_enemies():
 		if x.occupant != null:
 			if x.occupant is Enemy:
 				ActionManager.create_action("enemy_death",{},x,x)
-
-	

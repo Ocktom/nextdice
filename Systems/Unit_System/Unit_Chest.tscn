@@ -1,101 +1,137 @@
-[gd_scene format=3 uid="uid://do7bkkwj8w4db"]
+[gd_scene format=3 uid="uid://cgkh48tjdcrkw"]
 
-[ext_resource type="Script" uid="uid://bjndjqq3i8qmi" path="res://Systems/Unit_System/Unit.gd" id="1_3bdm0"]
-[ext_resource type="Texture2D" uid="uid://b1gd85y0diocx" path="res://Art/chest_3.png" id="2_mrpyd"]
+[ext_resource type="Script" uid="uid://bw2hvv0nsimr" path="res://Systems/Unit_System/Unit_Chest.gd" id="1_s3uvi"]
+[ext_resource type="Texture2D" uid="uid://dw4hswi4a6aiy" path="res://Art/chest_open.png" id="2_s3uvi"]
+[ext_resource type="Texture2D" uid="uid://bkf6vafdccgdi" path="res://Art/explosion B2 small.png" id="3_gprp8"]
+[ext_resource type="PackedScene" uid="uid://klesx8yr3cp8" path="res://Systems/Unit_System/status_sprites.tscn" id="7_6dks5"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_1xpod"]
-font_size = 21
+[sub_resource type="AtlasTexture" id="AtlasTexture_30ybj"]
+atlas = ExtResource("2_s3uvi")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="LabelSettings" id="LabelSettings_3a2ma"]
-font_size = 31
-font_color = Color(1, 0.90588236, 0, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3nlg"]
+atlas = ExtResource("2_s3uvi")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7iv5"]
+atlas = ExtResource("2_s3uvi")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fw5fy"]
+atlas = ExtResource("2_s3uvi")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gprp8"]
+atlas = ExtResource("2_s3uvi")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1m5kr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30ybj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3nlg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7iv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fw5fy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gprp8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fa0x6"]
+atlas = ExtResource("3_gprp8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xla7"]
+atlas = ExtResource("3_gprp8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojshi"]
+atlas = ExtResource("3_gprp8")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifnka"]
+atlas = ExtResource("3_gprp8")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7j8l"]
+atlas = ExtResource("3_gprp8")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ddic1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fa0x6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xla7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojshi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ifnka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7j8l")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4im1a"]
 font_size = 31
 font_color = Color(1, 0.13333334, 0.27058825, 1)
 
-[node name="Chest" type="Node2D" unique_id=1713004707]
+[node name="Unit_Chest" type="Node2D" unique_id=275472339]
 texture_filter = 1
-script = ExtResource("1_3bdm0")
+script = ExtResource("1_s3uvi")
 
-[node name="Border_texture_rect" type="TextureRect" parent="." unique_id=141382165]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -104.5
-offset_top = -105.0
-offset_right = 104.5
-offset_bottom = 105.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Background_Rect" type="ColorRect" parent="." unique_id=1558673814]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -97.0
-offset_top = -101.0
-offset_right = 98.0
-offset_bottom = 99.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="border_rect" type="ColorRect" parent="." unique_id=300042186]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -105.0
-offset_top = -105.0
-offset_right = 105.0
-offset_bottom = 105.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-color = Color(0.67673594, 0.53392845, 0.23370892, 1)
-
-[node name="Unit_Sprite" type="Sprite2D" parent="." unique_id=194981427]
+[node name="Unit_Sprite" type="AnimatedSprite2D" parent="." unique_id=1342932675]
+position = Vector2(0, -15.999999)
 scale = Vector2(5, 5)
-texture = ExtResource("2_mrpyd")
+sprite_frames = SubResource("SpriteFrames_1m5kr")
 
-[node name="Unit_Name_Label" type="Label" parent="." unique_id=201169778]
+[node name="Effects_Sprite" type="AnimatedSprite2D" parent="." unique_id=531974913]
 visible = false
-offset_left = -87.0
-offset_top = -92.0
-offset_right = 36.0
-offset_bottom = -62.0
-text = "CARD NAME"
-label_settings = SubResource("LabelSettings_1xpod")
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_ddic1")
+frame_progress = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1759986832]
-visible = false
-offset_left = 53.0
-offset_top = -95.0
-offset_right = 93.0
-offset_bottom = -51.0
+[node name="Right_Stats" type="VBoxContainer" parent="." unique_id=233231666]
+offset_left = 50.0
+offset_top = -23.0
+offset_right = 150.0
+offset_bottom = 54.0
+theme_override_constants/separation = -11
 
-[node name="ATK_Label" type="Label" parent="VBoxContainer" unique_id=2120265390]
+[node name="HBoxContainer" type="HBoxContainer" parent="Right_Stats" unique_id=389829734]
 layout_mode = 2
-text = "12"
-label_settings = SubResource("LabelSettings_3a2ma")
-horizontal_alignment = 1
 
-[node name="HP_Label" type="Label" parent="VBoxContainer" unique_id=1766797915]
+[node name="HP_Label" type="Label" parent="Right_Stats/HBoxContainer" unique_id=461646694]
 layout_mode = 2
 text = "12"
 label_settings = SubResource("LabelSettings_4im1a")
 horizontal_alignment = 1
+
+[node name="Status_Sprites" parent="." unique_id=170577677 instance=ExtResource("7_6dks5")]
+visible = false
+offset_left = -66.0
+offset_top = -86.0
+offset_right = -33.0
+offset_bottom = -77.0

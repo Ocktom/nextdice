@@ -202,5 +202,19 @@ var data : Dictionary = {
 	"action_2_context": "",
 	"level_set": 3,
 	"unit_passives": ""
-  }
+  },
+  "Ribbot": {
+	"enemy_name": "Ribbot",
+	"hp": 5,
+	"atk": 4,
+	"atk_range": 1,
+	"movement": 4,
+	"range_type": "ALL",
+	"action_1_name": "",
+	"action_1_context": "",
+	"action_2_name": "",
+	"action_2_context": "",
+	"level_set": 3,
+	"unit_passives": ""
+  },
 }

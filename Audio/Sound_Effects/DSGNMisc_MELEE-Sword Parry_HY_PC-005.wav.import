@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://8pkdkuwivw2f"
+path="res://.godot/imported/DSGNMisc_MELEE-Sword Parry_HY_PC-005.wav-77e58c58cdff16ff81562dcdb95c348a.sample"
+
+[deps]
+
+source_file="res://Audio/Sound_Effects/DSGNMisc_MELEE-Sword Parry_HY_PC-005.wav"
+dest_files=["res://.godot/imported/DSGNMisc_MELEE-Sword Parry_HY_PC-005.wav-77e58c58cdff16ff81562dcdb95c348a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
