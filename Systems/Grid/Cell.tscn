@@ -41,7 +41,7 @@ animations = [{
 script = ExtResource("1_hyvek")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=854796418]
-modulate = Color(0.8258219, 0.7001115, 0.91950977, 1)
+modulate = Color(0.9640239, 0.70238125, 0.8116842, 1)
 texture_filter = 1
 position = Vector2(1, 1)
 scale = Vector2(4, 4)

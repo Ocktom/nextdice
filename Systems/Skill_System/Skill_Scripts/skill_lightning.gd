@@ -1,7 +1,5 @@
 extends Skill
 
-var range := 10
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -21,7 +19,6 @@ func execute(action_source: Node, target: Node, context:= {}):
 	var source_cell : Cell = Global.hero_unit.current_cell
 	
 	while current_unit != null and amount > 0:
-		#Global.animate_projectile(source_cell.global_position,current_unit.global_position,"res://Art/Projectile_Sprites/fireball.png",true)
 		if source_cell.occupant != Global.hero_unit:
 			Global.animate_lightning(source_cell,current_unit.current_cell)
 		await Global.timer(.3)

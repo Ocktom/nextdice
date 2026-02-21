@@ -1,48 +1,55 @@
 [gd_scene format=3 uid="uid://bgc3x1l871e0"]
 
 [ext_resource type="Script" uid="uid://nwyhk811gfhs" path="res://Systems/Player_UI/Player_UI.gd" id="1_7fohd"]
+[ext_resource type="FontFile" uid="uid://d35kupukt7jqu" path="res://Fonts/LazyFox Pixel Font 1.ttf" id="2_m2f3g"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8j60k"]
+font = ExtResource("2_m2f3g")
 font_size = 86
+font_color = Color(0.8839259, 0.25204328, 0.32363307, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7fohd"]
+font = ExtResource("2_m2f3g")
 font_size = 86
+
+[sub_resource type="LabelSettings" id="LabelSettings_gt6dp"]
+font = ExtResource("2_m2f3g")
+font_size = 86
+font_color = Color(1, 1, 0.42352942, 1)
 
 [node name="Player_UI" type="Control" unique_id=1573511350]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_7fohd")
 
-[node name="HP_Label" type="Label" parent="." unique_id=780362404]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2061271657]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -204.57895
-offset_top = -92.0
-offset_right = 204.57895
-offset_bottom = 92.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 54.0
+offset_top = -387.0
+offset_right = 383.0
+offset_bottom = -61.0
+grow_vertical = 0
+
+[node name="HP_Label" type="Label" parent="VBoxContainer" unique_id=780362404]
+layout_mode = 2
 text = "HP: 10"
 label_settings = SubResource("LabelSettings_8j60k")
 
-[node name="Rolls_Label" type="Label" parent="." unique_id=1058333856]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -207.0
-offset_top = -3.0
-offset_right = 172.0
-offset_bottom = 122.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Rolls_Label" type="Label" parent="VBoxContainer" unique_id=1058333856]
+layout_mode = 2
 text = "ROLLS: 0"
 label_settings = SubResource("LabelSettings_7fohd")
+
+[node name="Gold_Label" type="Label" parent="VBoxContainer" unique_id=1092461337]
+layout_mode = 2
+text = "Gold: 0"
+label_settings = SubResource("LabelSettings_gt6dp")

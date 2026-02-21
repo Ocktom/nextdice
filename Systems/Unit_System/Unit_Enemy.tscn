@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ftjtt0qa83u7"]
 
 [ext_resource type="Script" uid="uid://cp2heh7xwpfq0" path="res://Systems/Unit_System/Unit_Enemy.gd" id="1_y87hi"]
-[ext_resource type="SpriteFrames" uid="uid://dqbj5yrcuryri" path="res://Art/Enemy_Sprites/sprite_frames/Ribbot_frames.tres" id="2_fa0x6"]
 [ext_resource type="Texture2D" uid="uid://bkf6vafdccgdi" path="res://Art/explosion B2 small.png" id="3_fa0x6"]
+[ext_resource type="Texture2D" uid="uid://cil7g43ous00o" path="res://Art/icy_cell.png" id="5_koxc3"]
 [ext_resource type="PackedScene" uid="uid://klesx8yr3cp8" path="res://Systems/Unit_System/status_sprites.tscn" id="7_fa0x6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fa0x6"]
@@ -69,8 +69,6 @@ script = ExtResource("1_y87hi")
 
 [node name="Unit_Sprite" type="AnimatedSprite2D" parent="." unique_id=1905187628]
 scale = Vector2(4, 4)
-sprite_frames = ExtResource("2_fa0x6")
-frame_progress = 0.055521667
 
 [node name="Effects_Sprite" type="AnimatedSprite2D" parent="." unique_id=531974913]
 visible = false
@@ -105,8 +103,14 @@ layout_mode = 2
 text = "12"
 label_settings = SubResource("LabelSettings_t6kcj")
 
-[node name="Status_Sprites" parent="." unique_id=170577677 instance=ExtResource("7_fa0x6")]
+[node name="Status_Bar" parent="." unique_id=170577677 instance=ExtResource("7_fa0x6")]
 offset_left = -66.0
 offset_top = -86.0
 offset_right = -33.0
 offset_bottom = -77.0
+
+[node name="Sprite_OV" type="Sprite2D" parent="." unique_id=991892893]
+visible = false
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("5_koxc3")

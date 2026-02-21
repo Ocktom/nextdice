@@ -61,15 +61,7 @@ func update():
 	if not PlayerStats.status_effects.has("shield"): shield_label.visible = false
 	
 	hp_label.text = str(PlayerStats.player_hp)
-	
-	for x in status_icons:
-		x.visible = false
-		x.texture = null
-	
-	for x in PlayerStats.status_effects.keys():
-		var ind = PlayerStats.status_effects.keys().find(x)
-		status_icons[ind].texture = load(str("res://Art/Icon_Sprites/icon_",x,".png"))
-		status_icons[ind].visible = true
+
 	
 	if current_cell != null:
 		global_position = current_cell.global_position

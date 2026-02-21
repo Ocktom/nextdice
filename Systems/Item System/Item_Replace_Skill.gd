@@ -8,6 +8,8 @@ var old_skill : String
 var new_skill : String
 var face_picked : Face
 
+var reward_screen: Control
+
 @onready var old_sprite: TextureRect = $Skill_Replace/HBoxContainer/old_sprite
 @onready var new_sprite: TextureRect = $Skill_Replace/HBoxContainer2/new_sprite
 @onready var item_button: Button = $Item_Button
@@ -17,19 +19,19 @@ func _ready() -> void:
 
 func pick_random_skills():
 	
-	var current_skills : Array = []
+	var all_faces: Array
 	
 	print ("player dice is", Global.player_dice)
+	
 	for x in Global.player_dice:
 		print ("checking ", x, " with faces of ", x.faces)
 		for y in x.faces:
+			all_faces.append(y)
 			print ("checking face of ", y)
-			print ("skill name is ", y.skill_name)
-			current_skills.append(y.skill_name)
+			print ("skill name is ", y.skill.skill_name)
 	
-	print ("current_skills are ", current_skills)
-	
-	old_skill = current_skills.pick_random()
+	face_picked = all_faces.pick_random()
+	old_skill = face_picked.skill.skill_name
 	
 	new_skill = SkillManager.skill_data_dictionary.keys().pick_random()
 	print ("new_skill_name chosen is ", new_skill)
@@ -39,7 +41,9 @@ func pick_random_skills():
 	print ("old skill chosen ", old_skill, " new skill chosen ", new_skill)
 	
 func choose():
-	face_picked.insert
+	await SkillManager.insert_skill_to_face(new_skill,face_picked)
+	Global.game_state = Enums.GameState.PLAYER_TURN
+	reward_screen.queue_free()
 	
 func _on_button_pressed():
 	await choose()

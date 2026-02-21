@@ -7,6 +7,12 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	#CONTEXT: damage_name, amount, audio_path (optional)
 	
 	var action_target = action_target_cell.occupant
+	
+	if not is_instance_valid(action_target):
+		return
+	if action_target.dying_this_turn:
+		return
+	
 	var target_status_effects : Dictionary
 	
 	var user = action_source_cell.occupant
@@ -54,8 +60,8 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 			
 		"physical" :
 			color = Color.RED
-			amount += PlayerStats.physical_damage["round_bonus"] 
-			+ PlayerStats.physical_damage["turn_bonus"]	
+			amount += (PlayerStats.physical_damage["round_bonus"])
+			+ (PlayerStats.physical_damage["turn_bonus"])	
 		
 		"magic" :
 			color = Color.DODGER_BLUE
@@ -72,7 +78,10 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 		Global.audio_node.play_sfx(audio_path)
 	Global.animate(action_target,Enums.Anim.SHAKE)
 	Global.animate(action_target,Enums.Anim.FLASH,color)
-	action_target.take_damage(amount)
 	
+	await action_target.take_damage(amount)
 	
 	await Global.timer(.4)
+	
+	print ("calling unit_damaged...")
+	await EventManager.on_unit_damaged(action_target, amount, context["damage_name"])

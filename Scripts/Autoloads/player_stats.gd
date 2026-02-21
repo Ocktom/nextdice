@@ -29,6 +29,7 @@ var max_rolls := 3
 var rolls := 3
 
 var relics : Array[Item]
+var gold := 0
 
 var fire_damage := {"base" : 1, " game_bonus" : 0, "round_bonus" : 0, "turn_bonus" : 0}
 var poison_damage := {"base" : 1, " game_bonus" : 0, "round_bonus" : 0, "turn_bonus" : 0}

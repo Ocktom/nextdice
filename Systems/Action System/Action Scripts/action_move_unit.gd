@@ -11,7 +11,8 @@ func execute(context: Dictionary, unit_current_cell: Cell = null, target_cell: C
 	PlayerStats.spaces_moved_this_turn += spaces_moved
 	
 	Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_MOVEMENT-Retro Jump_HY_PC-001.wav")
-	target_cell.fill_with_unit(unit_to_move)
+	await target_cell.fill_with_unit(unit_to_move)
+	await EventManager.on_unit_moved(unit_to_move,unit_current_cell,target_cell)
 	
 	unit_current_cell.clear_cell()
 	

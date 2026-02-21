@@ -64,16 +64,31 @@ text = "Replace a skill"
 label_settings = SubResource("LabelSettings_fo0e3")
 horizontal_alignment = 1
 
-[node name="Skip_Button" type="Button" parent="." unique_id=1499540231]
+[node name="Bottom_Buttons" type="HBoxContainer" parent="." unique_id=1720165631]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-offset_left = -182.5
-offset_top = 263.0
-offset_right = 182.5
-offset_bottom = 409.5
+anchor_bottom = 1.0
+offset_left = -472.0
+offset_top = 273.0
+offset_right = 472.0
+offset_bottom = 439.0
 grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 219
+
+[node name="Skip_Button" type="Button" parent="Bottom_Buttons" unique_id=1499540231]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_ixd1j")
-theme_override_font_sizes/font_size = 100
-text = "SKIP"
+theme_override_font_sizes/font_size = 126
+text = " SKIP "
+autowrap_trim_flags = 0
+
+[node name="Reroll_Button" type="Button" parent="Bottom_Buttons" unique_id=1789066606]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ixd1j")
+theme_override_font_sizes/font_size = 64
+text = "REROLL -  $1"

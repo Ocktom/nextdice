@@ -4,9 +4,8 @@ class_name Enemy
 @onready var unit_sprite: AnimatedSprite2D = $Unit_Sprite
 @onready var hp_label: Label = $Right_Stats/HBoxContainer/HP_Label
 @onready var shield_label: Label = $Right_Stats/HBoxContainer/SHIELD_Label
-
 @onready var atk_label: Label = $Right_Stats/ATK_Label
-
+@onready var sprite_ov: Sprite2D = $Sprite_OV
 
 var hp : int
 var max_hp : int
@@ -20,7 +19,7 @@ var invisible : int
 var atk := 1
 var atk_range := 1
 
-var dying_this_turn := false
+var frozen := false
 
 var move_diag := false
 
@@ -123,6 +122,14 @@ func get_attack_targets() -> Array[Unit]:
 
 func plan_action():
 
+	if status_effects.has("stun"):
+		Global.float_text("stunned",global_position)
+		return
+	
+	if status_effects.has("freeze"):
+		Global.float_text("FROZEN",global_position,Color.AQUA)
+		return
+	
 	if status_effects.has("root"):
 		Global.float_text("rooted",global_position)
 	
@@ -139,6 +146,9 @@ func plan_action():
 		await enemy_actions()
 	
 func attempt_attack():
+	
+	if atk < 1:
+		return null
 	
 	var targets = get_attack_targets()
 
@@ -168,6 +178,9 @@ func attempt_attack():
 func attempt_move() -> bool:
 	
 	if status_effects.has("root"):
+		return false
+	
+	if movement < 1:
 		return false
 	
 	var hero_cell = Global.hero_unit.current_cell
@@ -247,6 +260,16 @@ func enemy_actions(attack_target: Node2D = null):
 	else:
 		target_cell = attack_target.current_cell
 	
+	if action_1_name == "transform_unit":
+		if status_effects.keys().has("regrowing"):
+			if status_effects["regrowing"] > 0:
+				return
+				
+		target_cell = current_cell
+	
+	if action_1_name == "spawn_unit":
+		target_cell = Global.grid.get_empty_cells().pick_random()
+		
 	if action_1_name != "":
 		await ActionManager.request_action(action_1_name, action_1_context, current_cell, target_cell)
 	
@@ -257,11 +280,6 @@ func take_attack(amount : int, attacker: Unit):
 	
 	await ActionManager.request_action("damage_unit",{"amount" : amount, "damage_name" : "physical"},attacker.current_cell,current_cell)
 	
-	if dying_this_turn:
-		print ("unit has less then 1 hp, calling enemy death on manager")
-		ActionManager.request_action("enemy_death",{},current_cell)
-	
-	update()
 	
 func take_damage(amount : int):
 	
@@ -276,58 +294,22 @@ func take_damage(amount : int):
 		
 		print ("unit has less then 1 hp, calling enemy death on manager")
 		dying_this_turn = true
-		await ActionManager.request_action("enemy_death",{},current_cell)
+		ActionManager.request_action("enemy_death",{},current_cell)
 	
 	if not dying_this_turn:
 		await update()
-		await EventManager.on_unit_damaged(self)
 	
 func end_turn_effects():
 	
 	print ("end_turn effects for ", unit_name)
 	
-	if current_cell.cell_effect == Enums.CellEffect.FIRE:
-		status_effects["burn"] = 3
-	
-	if status_effects.has("burn"):
-		print ("unit has burn, applying...")
-		await ActionManager.request_action("damage_unit",{"damage_name" : "fire", "amount": 1, "target" : self},current_cell,current_cell)
-	
-	if status_effects.has("poison"):
-		await ActionManager.request_action("damage_unit",{"damage_name" : "poison", "amount": 1, "target" : self},current_cell,current_cell)
-	
-	var decreasing_effects := ["poison","burn","root","stun","invisible"]
-	
-	for x in decreasing_effects:
-		if status_effects.keys().has(x):
-			if status_effects[x] < 1:
-				status_effects.erase(x)
-			else:
-				status_effects[x] -= 1
-	update()
+	await StatusManager.end_turn_effects(self)
+	if not dying_this_turn:
+		await update()
 		
 func update():
 	
 	hp_label.text = str(hp)
 	atk_label.text = str(atk)
 	
-	if status_effects.keys().has("shield"):
-		if status_effects["shield"] > 0:
-			shield_label.visible = true
-			shield_label.text = str("/",status_effects["shield"])
-	
-	for x in status_icons:
-		x.visible = false
-		x.texture = null
-	
-	for x in status_effects.keys():
-		var ind = status_effects.keys().find(x)
-		status_icons[ind].texture = load(str("res://Art/Icon_Sprites/icon_",x,".png"))
-		status_icons[ind].visible = true
-	
-	if status_effects.keys().has("invisible"):
-		unit_sprite.modulate = Color(1.0, 1.0, 1.0, 0.424)
-	else:
-		unit_sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
-		
-	
+	await StatusManager.update_status_effects(self)

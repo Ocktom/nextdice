@@ -27,7 +27,7 @@ var input_paused :
 				x.grey_out = input_paused
 		
 		Global.unhighlight_cells()
-		reset_all_hovered_variables()
+		#reset_all_hovered_variables()
 
 signal unit_selected
 signal cell_selected
@@ -118,9 +118,7 @@ func _input(event):
 						return
 					
 			# Reset dice drag
-			if dragging_dice != null:
-				dragging_dice.face_node.global_position = dragging_dice.global_position
-				dragging_dice = null
+			reset_drag()
 		
 		elif event.is_action_pressed("left_mouse"):
 
@@ -130,13 +128,16 @@ func _input(event):
 					Global.float_text("cooldown!",hovered_dice.global_position,Color.WHITE)
 					return
 				
-				if hovered_dice.current_face.skill_target == Enums.SkillTarget.SELF:
+				if hovered_dice.current_face.skill.skill_target == Enums.SkillTarget.SELF:
 					print ("using skill on self")
 					hovered_dice.use(Global.hero_unit.current_cell,Global.hero_unit.current_cell)
 					return
 				
 				dragging_dice = hovered_dice
 				drag_offset = dragging_dice.global_position - event.position
+				
+				SkillManager.highlight_useable_cells(hovered_dice)
+				
 				return
 		
 			if hovered_spell_slot != null:
@@ -186,6 +187,8 @@ func reset_drag():
 	dragging_unit = null
 	drag_offset = Vector2.ZERO
 	unit_drag_offset = Vector2.ZERO
+	
+	Global.unhighlight_cells()
 		
 #region debug controls
 
@@ -193,4 +196,5 @@ func reset_all_hovered_variables():
 	hovered_cell = null
 	hovered_dice = null
 	hovered_spell_slot = null
+	
 	reset_drag()

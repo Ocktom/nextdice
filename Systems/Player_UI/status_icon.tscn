@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://b3emur6iw687m"]
+
+[ext_resource type="Texture2D" uid="uid://cmyov2mabjadp" path="res://Art/Icon_Sprites/icon_heart.png" id="1_fcwdx"]
+[ext_resource type="Script" uid="uid://b55v7bgkwbmrq" path="res://Systems/Player_UI/status_icon.gd" id="2_1055r"]
+[ext_resource type="FontFile" uid="uid://bx543rn5x5ecb" path="res://Fonts/m5x7.ttf" id="3_fcwdx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s527d"]
+font = ExtResource("3_fcwdx")
+font_size = 35
+font_color = Color(0.28627452, 1, 1, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Status_Icon" type="Control" unique_id=389466195]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 46.0
+offset_bottom = 35.0
+script = ExtResource("2_1055r")
+
+[node name="icon_texture" type="TextureRect" parent="." unique_id=1301157304]
+texture_filter = 1
+layout_mode = 1
+offset_right = 9.0
+offset_bottom = 9.0
+scale = Vector2(4, 4)
+texture = ExtResource("1_fcwdx")
+stretch_mode = 2
+
+[node name="value_label" type="Label" parent="." unique_id=1407284046]
+texture_filter = 1
+layout_mode = 0
+offset_left = 28.0
+offset_top = 13.0
+offset_right = 41.0
+offset_bottom = 50.0
+label_settings = SubResource("LabelSettings_s527d")

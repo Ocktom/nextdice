@@ -17,9 +17,16 @@ func execute(context: Dictionary, action_source_cell: Cell = null, target_cell: 
 	var status = Enums.Status[context["status_name"]]
 	
 	match status_name:
+		
 		"poison" : color = Color.LIME_GREEN
 		"burn" : color = Color.ORANGE
-		"frost" : color = Color.POWDER_BLUE
+		
+		"frost" : 
+			color = Color.POWDER_BLUE
+			if target_cell.occupant.status_effects.has("freeze"):
+				return
+		
+		"freeze" : color = Color.POWDER_BLUE
 		"stun" : color = Color.WHITE
 		"root" : color = Color.NAVAJO_WHITE
 		"shield" : color = Color.GAINSBORO

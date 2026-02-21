@@ -54,7 +54,7 @@ func use(action_source_cell: Node, action_target_cell: Node):
 	
 	print ("current_face.skill_name being used is ", current_face.skill_name)
 	
-	var skill_script : Skill = load(str("res://Systems/Skill_System/Skill_Scripts/skill_",current_face.skill_name,".gd")).new()
+	var skill_script : Skill = load(str("res://Systems/Skill_System/Skill_Scripts/skill_",current_face.skill.skill_name,".gd")).new()
 	await skill_script.execute(action_source_cell,action_target_cell,{})
 	
 	used_this_turn = true
@@ -73,7 +73,7 @@ func setup_visuals():
 	
 func update():
 
-	face_sprite.texture =  load(str("res://Art/Skill_Sprites/",current_face.skill_name,".png"))
+	face_sprite.texture =  load(str("res://Art/Skill_Sprites/",current_face.skill.skill_name,".png"))
 	
 func highlight():
 	face_node.modulate = Color(1.0, 0.663, 1.0)

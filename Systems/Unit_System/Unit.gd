@@ -3,20 +3,16 @@ class_name Unit
 
 var current_cell: Cell
 var unit_name : String = "Unit"
-@onready var status_sprites: HBoxContainer = $Status_Sprites
+@onready var status_bar: GridContainer = $Status_Bar
 
 var status_icons : Array[Node]
 
 var highlight := false
-var sprite_path : String
 var range_type : Enums.RangeType
 
 var unit_passives : Dictionary
 
-var border_color : Color = Color.WHITE
-var normal_color : Color = Color.BLACK
-
-var damaged := false
+var dying_this_turn := false
 
 var status_effects : Dictionary = {}
 
@@ -27,7 +23,6 @@ func _ready():
 	
 	print ("unit passives for ", unit_name, " is ", unit_passives)
 	Global.all_units.append(self)
-	status_icons = status_sprites.get_children()
 	await update()
 
 func destroy(overkill := false):

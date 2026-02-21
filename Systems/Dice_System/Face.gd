@@ -7,7 +7,6 @@ var skill_actions : Array
 var skill : Skill
 var skill_range := 0
 
-var skill_target : Enums.SkillTarget
 
 func show_pips():
 	print ("face self is ", self)
@@ -19,4 +18,3 @@ func clear_skill():
 	skill_name = ""
 	skill_actions = []
 	skill = null
-	skill_target = Enums.SkillTarget.ANY_CELL

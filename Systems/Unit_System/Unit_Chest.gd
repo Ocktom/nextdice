@@ -8,8 +8,6 @@ class_name Chest
 var hp : int
 var max_hp : int
 
-var dying_this_turn := false
-
 var acted_this_turn := false
 		
 func update():

@@ -29,3 +29,4 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	await Global.timer(.1)
 	
 	await action_target_cell.occupant.take_attack(context["amount"],action_source_cell.occupant)
+	await EventManager.on_unit_attacked(action_source_cell.occupant,action_target_cell.occupant)

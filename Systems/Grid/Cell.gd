@@ -71,7 +71,7 @@ func apply_cell_effects_to_unit():
 			
 			Enums.CellEffect.SNOW:
 				
-				ActionManager.create_action("status_effect",{"status_name" : "FROST", "amount" : 1 },self,self)
+				ActionManager.create_action("status_effect",{"status_name" : "FROST", "amount" : 2 },self,self)
 		
 		occupant.update()
 	
@@ -88,6 +88,8 @@ func _on_mouse_entered():
 		print("cell hovered, occupant is ", occupant)
 		InputManager.hovered_cell = self
 		
+		return
+		
 		Global.unhighlight_cells()
 		
 		if InputManager.dragging_dice != null:
@@ -98,15 +100,28 @@ func _on_mouse_entered():
 			
 			if is_empty():
 			
-				if InputManager.dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_CELL \
-				or InputManager.dragging_dice.current_face.skill_target == Enums.SkillTarget.EMPTY_CELL:
+				if InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.ANY_CELL \
+				or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.EMPTY_CELL \
+				or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ANY_CELL \
+				or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_EMPTY_CELL :
 				
 					var path_cells = Global.grid.get_cells_in_path(Global.hero_unit.current_cell,self)
 					for x in path_cells:
 						x.highlight = true
 						
+					
 			elif occupant is Enemy:
-					highlight = true
+				
+				if InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.ENEMY_UNIT \
+				or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ENEMY_UNIT \
+				or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.ANY_UNIT \
+				or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ANY_UNIT \
+				or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.ANY_CELL \
+				or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ANY_CELL:
+				
+					var path_cells = Global.grid.get_cells_in_path(Global.hero_unit.current_cell,self)
+					for x in path_cells:
+						highlight = true
 				
 		elif occupant is Enemy:
 			for x in occupant.get_attack_cells():
@@ -118,9 +133,9 @@ func _on_mouse_exited():
 		if InputManager.hovered_cell == self:
 			InputManager.hovered_cell = null
 		
-		if InputManager.hovered_cell == null:
-			for x in Global.grid.all_cells:
-				x.highlight = false
+		#if InputManager.hovered_cell == null:
+			#for x in Global.grid.all_cells:
+				#x.highlight = false
 			
 func is_empty() -> bool:
 	

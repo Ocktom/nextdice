@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dxec5lcmirtu0"]
+
+[ext_resource type="Texture2D" uid="uid://b4g7kxhlebwb1" path="res://Art/Enemy_Sprites/bomber_sheet.png" id="1_75xs2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d55k6"]
+atlas = ExtResource("1_75xs2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5wec"]
+atlas = ExtResource("1_75xs2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_waate"]
+atlas = ExtResource("1_75xs2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddic1"]
+atlas = ExtResource("1_75xs2")
+region = Rect2(96, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d55k6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5wec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_waate")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddic1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

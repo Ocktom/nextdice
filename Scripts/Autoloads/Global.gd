@@ -23,6 +23,7 @@ var treasure_unit_count := 1
 
 var current_sum := 0
 
+
 func timer(time : float):
 
 	time = (time/game_speed)
@@ -34,7 +35,7 @@ func float_text(message: String, position: Vector2, color := Color.WHITE):
 	
 	var text_scene = preload("res://Systems/Float_Text/Float_Text.tscn")
 	var floating_text = text_scene.instantiate()
-	get_tree().current_scene.add_child(floating_text)
+	Global.world.float_layer.add_child(floating_text)
 	floating_text.global_position = position
 	floating_text.show_text(message, color)
 	await timer(.4)

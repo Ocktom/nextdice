@@ -13,7 +13,7 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 1,
-	"unit_passives": "{\"enrage\" : {\"amount\" : 3}}"
+	"status_effects": "{\"scavenge\" : {\"amount\":2}}"
   },
   "Batron": {
 	"enemy_name": "Batron",
@@ -27,7 +27,7 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 1,
-	"unit_passives": ""
+	"status_effects": "{\"flying\" : {\"amount\" : 0}}"
   },
   "Goyletron": {
 	"enemy_name": "Goyletron",
@@ -41,7 +41,7 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 2,
-	"unit_passives": ""
+	"status_effects": "{\"enrage\" : {\"amount\" : 0}}"
   },
   "Spectroid": {
 	"enemy_name": "Spectroid",
@@ -55,7 +55,7 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 2,
-	"unit_passives": ""
+	"status_effects": ""
   },
   "Spidroid": {
 	"enemy_name": "Spidroid",
@@ -71,7 +71,7 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 2,
-	"unit_passives": ""
+	"status_effects": ""
   },
   "Slitherbyte": {
 	"enemy_name": "Slitherbyte",
@@ -85,7 +85,7 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 2,
-	"unit_passives": ""
+	"status_effects": ""
   },
   "Necrotron": {
 	"enemy_name": "Necrotron",
@@ -96,12 +96,12 @@ var data : Dictionary = {
 	"range_type": "ALL",
 	"action_1_name": "spawn_unit",
 	"action_1_context": {
-	  "unit": "Skeltron"
+	  "unit_name": "Skeltron"
 	},
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 3,
-	"unit_passives": ""
+	"status_effects": ""
   },
   "Skeltron": {
 	"enemy_name": "Skeltron",
@@ -115,7 +115,7 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 1,
-	"unit_passives": ""
+	"status_effects": "{\"undying\" : {\"amount\" : 0}}"
   },
   "Roblob": {
 	"enemy_name": "Roblob",
@@ -124,14 +124,14 @@ var data : Dictionary = {
 	"atk_range": 2,
 	"movement": 3,
 	"range_type": "ALL",
-	"action_1_name": "spawn_unit",
+	"action_1_name": "",
 	"action_1_context": {
-	  "unit": "Roblobito"
+	  "unit_name": "Roblobito"
 	},
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 3,
-	"unit_passives": ""
+	"status_effects": ""
   },
   "Protech": {
 	"enemy_name": "Protech",
@@ -145,7 +145,7 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 3,
-	"unit_passives": ""
+	"status_effects": ""
   },
   "Roblobito": {
 	"enemy_name": "Roblobito",
@@ -159,7 +159,7 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 3,
-	"unit_passives": ""
+	"status_effects": ""
   },
   "Armadroid": {
 	"enemy_name": "Armadroid",
@@ -173,7 +173,7 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 3,
-	"unit_passives": ""
+	"status_effects": "{\"spikes\" : {\"amount\" : 3}}\n"
   },
   "Cacklebot": {
 	"enemy_name": "Cacklebot",
@@ -187,7 +187,7 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 3,
-	"unit_passives": ""
+	"status_effects": ""
   },
   "Demodroid": {
 	"enemy_name": "Demodroid",
@@ -201,20 +201,33 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 3,
-	"unit_passives": ""
+	"status_effects": "{ \"alert\" : {\"amount\" : 3}, \"enrage\" : {\"amount\" : 0}}\n"
   },
-  "Ribbot": {
-	"enemy_name": "Ribbot",
-	"hp": 5,
-	"atk": 4,
-	"atk_range": 1,
-	"movement": 4,
+  "Bomberbot": {
+	"enemy_name": "Bomberbot",
+	"hp": 4,
+	"atk": 2,
+	"atk_range": 3,
+	"movement": 3,
 	"range_type": "ALL",
 	"action_1_name": "",
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
-	"level_set": 3,
-	"unit_passives": ""
+	"level_set": 2,
+	"status_effects": ""
   },
-}
+  "ScrapPile": {
+	"enemy_name": "ScrapPile",
+	"hp": 2,
+	"atk": 0,
+	"atk_range": 0,
+	"movement": 0,
+	"range_type": "ALL",
+	"action_1_name": "",
+	"action_1_context": "",
+	"action_2_name": "",
+	"action_2_context": "",
+	"level_set": 99,
+	"status_effects": "{ \"regrow\" : {\"amount\" : 1}}\n"
+  }}

@@ -24,19 +24,69 @@ func setup_dice():
 		
 		for y in x.faces:
 			var face_ind = x.faces.find(y)
-			var skill = load(str("res://Systems/Skill_System/Skill_Scripts/skill_",(dice_set[face_ind]),".gd")).new()
-			y.skill = skill
-			y.skill_name = (dice_set[face_ind])
-			y.skill_target = Enums.SkillTarget[SkillManager.skill_data_dictionary[y.skill_name]["skill_target"]]
-			y.skill_range = skill.range
-			y.skill.face = y
+			await insert_skill_to_face((dice_set[face_ind]),y)
 		
 func insert_skill_to_face(skill_name : String, face: Face):
 	
 	var skill = load(str("res://Systems/Skill_System/Skill_Scripts/skill_",skill_name,".gd")).new()
-	face.skill = skill
-	face.skill_name = skill_name
 	
+	print ("loading skill_name of ", skill_name, " skill is ", skill)
+	
+	var skill_data = skill_data_dictionary[skill_name]
+	
+	skill.skill_name = skill_name
+	skill.face = face
+	skill.skill_target = Enums.SkillTarget[skill_data["skill_target"]]
+	skill.range = skill_data["skill_range"]
+	
+	face.skill = skill
+	
+	face.update()
+
+func highlight_useable_cells(dragging_dice: Dice):
+	
+	#While we COULD just check each cell for is_useable(draggign_dice), we may want this to be its own fucntion
+	#so ath you can highlight units that will be damaged, say for bladewalk or whatever
+	
+	for x in Global.grid.all_cells:
+		
+		x.highlight = false
+			
+		if x.is_empty():
+		
+			if InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.STRAIGHT_EMPTY_CELL \
+			or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.STRAIGHT_ANY_CELL:
+				if Global.grid.has_straight_path(Global.hero_unit.current_cell,x):
+					x.highlight = true
+					continue
+			
+			if InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_EMPTY_CELL \
+			or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ANY_CELL:
+				
+				if Global.grid.has_clear_path(Global.hero_unit.current_cell,x):
+					x.highlight = true
+					continue
+			
+			if InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.ANY_CELL \
+			or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.EMPTY_CELL:
+					x.highlight = true
+					continue
+					
+				
+		elif x.occupant is Enemy:
+			
+			if InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.ENEMY_UNIT \
+			or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ENEMY_UNIT \
+			or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.ANY_UNIT \
+			or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ANY_UNIT \
+			or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.ANY_CELL \
+			or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ANY_CELL:
+			
+				var path_cells = Global.grid.get_cells_in_path(Global.hero_unit.current_cell,x)
+				for y in path_cells:
+					y.highlight = true
+			
+
 func is_useable(dragging_dice: Dice, hovered_cell : Cell, float_text : bool = true) -> bool:
 							
 	var distance = Global.grid.get_distance(Global.hero_unit.current_cell,hovered_cell)
@@ -53,39 +103,59 @@ func is_useable(dragging_dice: Dice, hovered_cell : Cell, float_text : bool = tr
 		
 		if hovered_cell.occupant is Enemy:
 			
-			if dragging_dice.current_face.skill_target == Enums.SkillTarget.LOS_UNIT:
-				if not Global.grid.has_clear_path(Global.hero_unit.current_cell,hovered_cell):
-					
-					if float_text: Global.float_text("NEEDS LOS",hovered_cell.global_position,Color.INDIAN_RED)
-					return false
-			
-			if not dragging_dice.current_face.skill_target == Enums.SkillTarget.ENEMY_UNIT \
-			and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_UNIT \
-			and not dragging_dice.current_face.skill_target == Enums.SkillTarget.LOS_UNIT \
-			and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_CELL:
+			if dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ANY_UNIT \
+			or dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ENEMY_UNIT\
+			or dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ANY_CELL:
 				
-					if float_text: Global.float_text("INVALID TARGET",hovered_cell.global_position,Color.INDIAN_RED)
+				if Global.grid.has_clear_path(Global.hero_unit.current_cell,hovered_cell):
+					return true
+				else:
 					return false
+					Global.float_text("NEEDS CLEAR PATH",hovered_cell.global_position,Color.INDIAN_RED)
 			
-			if hovered_cell.occupant.status_effects.keys().has("invisible"):
-				if float_text: Global.float_text("Invisible",hovered_cell.global_position,Color.WHITE)
+			if dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.STRAIGHT_ANY_UNIT \
+			or dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.STRAIGHT_ENEMY_UNIT\
+			or dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.STRAIGHT_ANY_CELL:
+				if Global.grid.has_straight_path(Global.hero_unit.current_cell,hovered_cell):
+					return true
+				else:
+					return false
+					Global.float_text("NEEDS STRAIGHT PATH",hovered_cell.global_position,Color.INDIAN_RED)
+			
+			if dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.ENEMY_UNIT \
+			or dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.ANY_UNIT \
+			or dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.ANY_CELL:
+				return true
+			else:
 				return false
-				
-			return true
 			
 	elif hovered_cell.is_empty():
 		
-		if not dragging_dice.current_face.skill_target == Enums.SkillTarget.EMPTY_CELL \
-		and not dragging_dice.current_face.skill_target == Enums.SkillTarget.ANY_CELL:
+			if dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_EMPTY_CELL \
+			or dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ANY_CELL:
+				
+				if Global.grid.has_clear_path(Global.hero_unit.current_cell,hovered_cell):
+					return true
+				else:
+					return false
+					Global.float_text("NEEDS CLEAR PATH",hovered_cell.global_position,Color.INDIAN_RED)
 			
-			print ("dragging_dice.current_face.skill_target is ", dragging_dice.current_face.skill_target)
-			if float_text: Global.float_text("INVALID TARGET",hovered_cell.global_position,Color.INDIAN_RED)
-			return false
-		
-		else:
-			return true
+			if dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.STRAIGHT_EMPTY_CELL\
+			or dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.STRAIGHT_ANY_CELL:
+				if Global.grid.has_straight_path(Global.hero_unit.current_cell,hovered_cell):
+					return true
+				else:
+					return false
+					Global.float_text("NEEDS STRAIGHT PATH",hovered_cell.global_position,Color.INDIAN_RED)
+			
+			if dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.EMPTY_CELL \
+			or dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.ANY_CELL:
+				return true
+			
+			else:
+				return false
 	
-	if float_text: Global.float_text("no useable checks passed",hovered_cell.global_position,Color.INDIAN_RED)
+	Global.float_text("no useable checks passed",hovered_cell.global_position,Color.INDIAN_RED)
 	return false
 		
 func get_skills_of_type(type_string):

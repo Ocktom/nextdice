@@ -47,7 +47,6 @@ func get_empty_cells(cell_pool : Array[Cell] = all_cells):
 		if x.occupant == null:
 			empty_cells.append(x)
 			
-	print ("returning empty cells from grid...", empty_cells)
 	return empty_cells
 
 func get_all_units() -> Array[Unit]:
@@ -60,11 +59,10 @@ func get_all_units() -> Array[Unit]:
 func get_enemies_with_status(status_name : String):
 	var enemies_with_status: Array[Unit] = []
 	for x in get_all_units():
-		if x is Hero:
+		if x is not Enemy:
 			continue	
 		if x.status_effects.keys().has(status_name):
 			enemies_with_status.append(x)
-	print ("grid returning units with status of ", status_name, " returned array is ", enemies_with_status)
 	return enemies_with_status
 	
 func get_all_enemies() -> Array[Enemy]:
@@ -73,7 +71,6 @@ func get_all_enemies() -> Array[Enemy]:
 			if x is Enemy:
 				enemies.append(x)
 	
-	print ("returning all enemies from grid...", enemies)
 	return enemies
 	
 func get_adjacent_cells(cell: Cell, include_diagonal : bool = false) -> Array[Cell]:
@@ -348,17 +345,32 @@ func get_units_in_path(cell_1: Cell, cell_2: Cell) -> Array[Unit]:
 			units.append(x.occupant)
 	return units
 
+func has_straight_path(cell_1: Cell, cell_2: Cell) -> bool:
+	var a = cell_1.cell_vector
+	var b = cell_2.cell_vector
+	var dx = abs(b.x - a.x)
+	var dy = abs(b.y - a.y)
+
+	print ("has_straight_path function returning ", dx == 0 or dy == 0 or dx == dy)
+	return dx == 0 or dy == 0 or dx == dy
+
 func has_clear_path(cell_1: Cell, cell_2: Cell) -> bool:
-	var path = get_cells_in_path(cell_1, cell_2)
-	if path.is_empty():
+	var dir = get_cell_direction(cell_1, cell_2)
+	if dir == null:
 		return false
 
-	for c in path:
+	var distance = get_distance(cell_1, cell_2)
+	var cells = get_cells_in_direction(cell_1, dir, distance)
+
+	if cells.is_empty() or cells.back() != cell_2:
+		return false
+
+	for c in cells:
 		if c != cell_2 and not c.is_empty():
 			return false
 
 	return true
-	
+
 func get_furthest_empty_cell_in_direction(cell_1: Cell, cell_2: Cell) -> Cell:
 	var a = cell_1.cell_vector
 	var b = cell_2.cell_vector
@@ -380,10 +392,6 @@ func get_furthest_empty_cell_in_direction(cell_1: Cell, cell_2: Cell) -> Cell:
 func get_distance(cell_1 : Cell, cell_2 : Cell) -> int: 
 	return max(abs(cell_1.cell_vector.x - cell_2.cell_vector.x), 
 	abs(cell_1.cell_vector.y - cell_2.cell_vector.y))
-
-func is_in_range(cell_1 : Cell, cell_2 : Cell, range : int) -> bool:
-		pass
-		return false
 
 func is_in_bounds(pos: Vector2i) -> bool:
 	return (

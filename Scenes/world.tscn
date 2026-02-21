@@ -92,13 +92,15 @@ label_settings = SubResource("LabelSettings_k7acu")
 [node name="Audio" parent="." unique_id=1516609735 instance=ExtResource("1_a02cp")]
 
 [node name="Player_UI" parent="." unique_id=2089692981 instance=ExtResource("5_fo5ed")]
-offset_left = 255.0
-offset_top = 916.0
-offset_right = 255.0
-offset_bottom = 916.0
+offset_left = -7.0
+offset_top = 1113.0
+offset_right = -7.0
+offset_bottom = 1113.0
 mouse_filter = 2
 
 [node name="Shop_Screen" parent="." unique_id=540836891 instance=ExtResource("8_k7acu")]
 visible = false
 
 [node name="Overlay_Layer" type="Node" parent="." unique_id=659131176]
+
+[node name="Float_Layer" type="Node" parent="." unique_id=215981411]

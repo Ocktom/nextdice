@@ -10,6 +10,7 @@ extends Node2D
 @onready var effects_layer: Node2D = $Effects_Layer
 
 @onready var overlay_layer: Node = $Overlay_Layer
+@onready var float_layer: Node = $Float_Layer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,8 +19,8 @@ func _ready() -> void:
 	Global.world = self
 	Global.player_ui = $Player_UI
 	Global.player_ui.update()
-	call_deferred("game_start")
-
+	await call_deferred("game_start")
+	
 func game_start():
 	
 	await SkillManager.setup_dice()
@@ -27,7 +28,7 @@ func game_start():
 	await UnitManager.spawn_starting_chests()
 	await UnitManager.spawn_hero()
 	await new_round()
-	#await Global.audio_node.play_music("res://Audio/First Fruits3.ogg")
+	await Global.audio_node.play_music("res://Audio/First Fruits3.ogg")
 	
 func new_round():
 	
