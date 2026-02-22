@@ -6,7 +6,6 @@ class_name Cell
 @onready var cell_effect_ov: TextureRect = $Cell_Effect_OV
 @onready var cell_animation: AnimatedSprite2D = $Cell_Animation
 
-
 var cell_effect : Enums.CellEffect
 
 var highlight : bool :
@@ -55,7 +54,12 @@ func apply_cell_effects_to_unit():
 	if occupant == null:
 		return
 	
+	
 	if cell_effect != Enums.CellEffect.NONE:
+		
+		if occupant.status_effects.keys().has("flying"):
+			Global.float_text("FLYING", global_position,Color.POWDER_BLUE)
+			return
 		
 		match cell_effect:
 		

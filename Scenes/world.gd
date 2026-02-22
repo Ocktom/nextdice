@@ -68,6 +68,8 @@ func roll_dice():
 
 func start_player_turn():
 	
+	print ("player_turn started in world node")
+	
 	Global.game_state = Enums.GameState.PLAYER_TURN
 
 	for x in Global.player_dice:
@@ -102,23 +104,43 @@ func enemy_turn():
 		if x == null:
 			print ("enemy instance null, continuing")
 			continue
+		
+		await StatusManager.start_turn_effects(x)
+	
+	for x in enemies:
+		print ("checking enemy ", x, " for taking turn...")
+		if not is_instance_valid(x):
+			print ("enemy instance invalid, continuing")
+			continue
+		if x == null:
+			print ("enemy instance null, continuing")
+			continue
+		
 		await x.plan_action()
 		
-	end_enemy_turn()
+	await end_enemy_turn()
 
 func end_enemy_turn():
-	for x in Global.grid.get_all_enemies().duplicate():
+	
+	print ("end_enemy_turn run in world node")
+	
+	for x in Global.grid.get_all_enemies():
+		
+		print ("world node checking end_turn effects for unit ", x.unit_name)
 		
 		if not is_instance_valid(x):
 			continue
 		
-		await x.end_turn_effects()
+		await StatusManager.end_turn_effects(x)
+	
+	print ("end_turn_effects complete in world node for enemies")
 		
 	await Global.hero_unit.end_turn_effects()
 	start_player_turn()
 
 func victory_check():
-	print ("running victory check...")
+	
+	print ("running victory check in world node...")
 	var enemy_present := false
 	for x in Global.grid.all_cells:
 		if x.occupant != null:
@@ -126,6 +148,7 @@ func victory_check():
 				enemy_present = true
 	
 	print ("enemy present is ", enemy_present)
+	
 	if not enemy_present:
 		print ("no enemy present, victory")
 		victory()
@@ -176,4 +199,4 @@ func kill_all_enemies():
 	for x in Global.grid.all_cells:
 		if x.occupant != null:
 			if x.occupant is Enemy:
-				ActionManager.create_action("enemy_death",{},x,x)
+				ActionManager.request_action("enemy_death",{},x,x)

@@ -42,6 +42,10 @@ func float_text(message: String, position: Vector2, color := Color.WHITE):
 
 func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE, target_node: Node = null):
 	
+	if not is_instance_valid(node):
+		print ("invalid instance in global.animate, retuning")
+		return
+	
 	print ("animating...")
 	
 	var tween = node.create_tween()

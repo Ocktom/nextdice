@@ -15,7 +15,9 @@ func on_unit_damaged(unit_damaged: Unit, amount: int, damage_name: String):
 	if unit_damaged.status_effects.keys().has("enrage"):
 		print (unit_damaged.unit_name, " is ENRAGED")
 		Global.float_text("ENRAGE", unit_damaged.global_position,Color.RED)
-	 
+	
+	print ("on_unit_damage finished running in event_manager")
+	
 func on_unit_attacked(attacker: Unit, attacked: Unit):
 	if attacked.status_effects.has("spikes"):
 		print ("unit has spikes of ", attacked.status_effects["spikes"])
@@ -28,6 +30,9 @@ func on_unit_moved(moved_unit: Unit, start_cell: Cell, end_cell: Cell):
 		
 		for x in Global.grid.get_all_units():
 			if x.status_effects.keys().has("alert"):
+				if x.status_effects.keys().has("freeze") or x.status_effects.keys().has("stun"):
+					return
+				
 				if Global.grid.get_distance(x.current_cell,end_cell) <= x.atk_range:
 					if Global.grid.has_clear_path(x.current_cell,end_cell):
 						await ActionManager.request_action("attack",{"amount" : x.atk},x.current_cell,end_cell)
@@ -45,3 +50,16 @@ func on_enemy_death(enemy_dying: Enemy):
 			var cell_pick = Global.grid.get_empty_cells().pick_random()
 			await ActionManager.request_action("spawn_unit",{"unit_name" : "Roblobito"},cell_pick,cell_pick)
 	
+	for x in Global.grid.get_all_units():
+		
+		if x.dying_this_turn:
+			continue
+		
+		if not is_instance_valid(x):
+			continue
+		
+		if x.status_effects.keys().has("scavenge"):
+			print ("the unit ", x.unit_name, " has scavange!")
+			await ActionManager.request_action("increase_attack",{"amount" : 2},x.current_cell,x.current_cell)
+			await ActionManager.request_action("increase_hp",{"amount" : 2},x.current_cell,x.current_cell)
+		

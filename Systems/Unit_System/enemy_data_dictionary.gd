@@ -125,9 +125,7 @@ var data : Dictionary = {
 	"movement": 3,
 	"range_type": "ALL",
 	"action_1_name": "",
-	"action_1_context": {
-	  "unit_name": "Roblobito"
-	},
+	"action_1_context":"",
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 3,
@@ -135,13 +133,16 @@ var data : Dictionary = {
   },
   "Protech": {
 	"enemy_name": "Protech",
-	"hp": 5,
+	"hp": 4,
 	"atk": 1,
-	"atk_range": 4,
+	"atk_range": 1,
 	"movement": 4,
-	"range_type": "DIAG",
-	"action_1_name": "",
-	"action_1_context": "",
+	"range_type": "CARDINAL",
+	"action_1_name": "status_effect_adjacent_enemies",
+	"action_1_context": {
+	  "status_name": "SHIELD",
+	  "amount": 3
+	},
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 3,
@@ -154,7 +155,7 @@ var data : Dictionary = {
 	"atk_range": 1,
 	"movement": 2,
 	"range_type": "CARDINAL",
-	"action_1_name": "",
+	"action_1_name": "status_effect",
 	"action_1_context": "",
 	"action_2_name": "",
 	"action_2_context": "",
@@ -201,7 +202,7 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 3,
-	"status_effects": "{ \"alert\" : {\"amount\" : 3}, \"enrage\" : {\"amount\" : 0}}\n"
+	"status_effects": "{\"alert\" : {\"amount\" : 0},\"enrage\": {\"amount\" : 0} }\n"
   },
   "Bomberbot": {
 	"enemy_name": "Bomberbot",
@@ -224,10 +225,13 @@ var data : Dictionary = {
 	"atk_range": 0,
 	"movement": 0,
 	"range_type": "ALL",
-	"action_1_name": "",
-	"action_1_context": "",
+	"action_1_name": "transform_unit",
+	"action_1_context": {
+	  "unit_name": "Skeltron"
+	},
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 99,
-	"status_effects": "{ \"regrow\" : {\"amount\" : 1}}\n"
-  }}
+	"status_effects": ""
+  }
+}

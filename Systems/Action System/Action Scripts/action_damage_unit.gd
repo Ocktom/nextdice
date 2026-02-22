@@ -4,6 +4,8 @@ var action_name := "damage"
 
 func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	
+	print ("running action_damage_unit script on ", action_target_cell.occupant)
+	
 	#CONTEXT: damage_name, amount, audio_path (optional)
 	
 	var action_target = action_target_cell.occupant
@@ -80,8 +82,8 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	Global.animate(action_target,Enums.Anim.FLASH,color)
 	
 	await action_target.take_damage(amount)
-	
+	await EventManager.on_unit_damaged(action_target, amount, context["damage_name"])
+	print ("on_unit_damaged awaited sucsessfully in action_damage_unit_script")
 	await Global.timer(.4)
 	
-	print ("calling unit_damaged...")
-	await EventManager.on_unit_damaged(action_target, amount, context["damage_name"])
+	print ("unit_damaged action finished, gamestate is ", Global.game_state, " input_paused is ", InputManager.input_paused)

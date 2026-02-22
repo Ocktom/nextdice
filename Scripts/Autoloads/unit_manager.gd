@@ -5,6 +5,8 @@ var enemy_data
 var starting_enemy_count := 4
 var enemy_names : Array
 
+var dead_units : Array[Unit]
+
 func _ready() -> void:
 	
 	var unit_data_script = load("res://Systems/Unit_System/enemy_data_dictionary.gd").new()
@@ -90,9 +92,9 @@ func parse_status_effects_string(s: String) -> Dictionary:
 
 var enemy_sets : Dictionary = {
 	
-	"set_1" : ["Armadroid","Roblob","Bomberbot","Skeltron","Demodroid"],
-	"set_2" : ["Armadroid","Roblob","Armadroid","Skeltron"],
-	"set_3" : ["Bomberbot","Roblob","Roblob","Bomberbot"],
+	"set_1" : ["Armadroid","Protech","Protech","Skeltron","Demodroid"],
+	"set_2" : ["Protech","Protech","Armadroid","Skeltron"],
+	"set_3" : ["Ratron","Protech","Protech","Bomberbot"],
 	"set_4" : ["Skeltron","Slitherbyte","Batron","Spectroid","Spectroid"],
 	"set_5" : ["Skeltron","Slitherbyte","Slitherbyte","Spectroid","Armadroid"],
 	"set_6" : ["Batron","Batron", "Batron", "Spidroid", "Spidroid","Armadroid"],
@@ -164,3 +166,9 @@ func spawn_round_enemies():
 		var cell_pick = valid_cells.pick_random()
 		
 		UnitManager.spawn_new_enemy(x,cell_pick)
+
+func clear_dead_units():
+	for x in dead_units:
+		x.queue_free()
+	
+	dead_units.clear()

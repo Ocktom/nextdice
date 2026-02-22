@@ -280,7 +280,6 @@ func take_attack(amount : int, attacker: Unit):
 	
 	await ActionManager.request_action("damage_unit",{"amount" : amount, "damage_name" : "physical"},attacker.current_cell,current_cell)
 	
-	
 func take_damage(amount : int):
 	
 	print ("was damaged")
@@ -293,20 +292,11 @@ func take_damage(amount : int):
 	if hp < 1:
 		
 		print ("unit has less then 1 hp, calling enemy death on manager")
-		dying_this_turn = true
-		ActionManager.request_action("enemy_death",{},current_cell)
+		await ActionManager.request_action("enemy_death",{},current_cell)
 	
 	if not dying_this_turn:
 		await update()
 	
-func end_turn_effects():
-	
-	print ("end_turn effects for ", unit_name)
-	
-	await StatusManager.end_turn_effects(self)
-	if not dying_this_turn:
-		await update()
-		
 func update():
 	
 	hp_label.text = str(hp)

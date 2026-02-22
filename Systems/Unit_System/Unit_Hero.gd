@@ -6,9 +6,6 @@ class_name Hero
 
 @onready var unit_sprite: AnimatedSprite2D = $Unit_Sprite
 
-var hp : int
-var atk : int
-
 func take_attack(amount : int, attacker: Unit):
 	
 	await ActionManager.request_action("damage_unit",{"amount" : amount, "damage_name" : "physical"},attacker.current_cell,current_cell)
@@ -18,12 +15,17 @@ func take_damage(amount : int):
 	print ("was damaged")
 	
 	PlayerStats.player_hp = max(0,PlayerStats.player_hp-amount)
-	update()
+	await update()
+	
 	if PlayerStats.player_hp < 1:
 		
-		Global.hero_unit.visible = false
-		await Global.timer(1)
-		Global.world.defeat()
+		print ("unit has less then 1 hp, calling enemy death on manager")
+		dying_this_turn = true
+		visible = false
+		await Global.world.defeat()
+	
+	if not dying_this_turn:
+		await update()
 
 func end_turn_effects():
 	

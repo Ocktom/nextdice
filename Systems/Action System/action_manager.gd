@@ -1,11 +1,5 @@
 extends Node
 
-func destroy_enemy(unit : Unit):
-	
-	unit.current_cell.clear_cell()
-	unit.queue_free()
-	Global.world.victory_check()
-
 func request_action(action_name: String, context_dictionary : Dictionary, action_source_cell: Cell = null, action_target_cell : Cell = null):
 	
 	if Global.game_state == Enums.GameState.PLAYER_TURN:

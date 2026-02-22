@@ -1,18 +1,18 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://rvergiihmw22"]
 
-[ext_resource type="Texture2D" uid="uid://3b4aq4qwnflo" path="res://Art/Enemy_Sprites/robot_rat 4.png" id="1_3l36v"]
+[ext_resource type="Texture2D" uid="uid://tpas38c8kr4x" path="res://Art/Enemy_Sprites/rat_32.png" id="1_3l36v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_knw6h"]
 atlas = ExtResource("1_3l36v")
-region = Rect2(0, 0, 48, 48)
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w7qj7"]
 atlas = ExtResource("1_3l36v")
-region = Rect2(48, 0, 48, 48)
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3betm"]
 atlas = ExtResource("1_3l36v")
-region = Rect2(96, 0, 48, 48)
+region = Rect2(64, 0, 32, 32)
 
 [resource]
 animations = [{

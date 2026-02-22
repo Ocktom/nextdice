@@ -23,7 +23,6 @@ func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 		if x.dying_this_turn:
 			continue
 		
-		await Global.timer(.04)
 		await ActionManager.request_action("damage_unit",
 		{"damage_name" : "physical","amount" : PlayerStats.player_dex/2, "audio_path" : "res://Audio/Sound_Effects/DSGNMisc_HIT-Zap Metal_HY_PC-002.wav"},
 		unit.current_cell,x.current_cell)
