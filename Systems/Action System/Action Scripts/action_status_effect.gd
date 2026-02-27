@@ -39,7 +39,7 @@ func execute(context: Dictionary, action_source_cell: Cell = null, target_cell: 
 	print ("the amount of ", status_name, " in ", target.unit_name, "'s status dictionary is ", status_effects[status_name])
 	
 	Global.animate(target_cell.occupant,Enums.Anim.FLASH,color)
-	Global.float_text(str(status_name, " +",amount),target.global_position,Color.WHITE)
+	#Global.float_text(str(status_name, " +",amount),target.global_position,Color.WHITE)
 	
 	await target.update()
 	

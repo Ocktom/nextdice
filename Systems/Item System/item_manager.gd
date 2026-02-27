@@ -1,9 +1,13 @@
 extends Node
 
 var item_data_dictionary : Dictionary
+var gear_data_dictionary : Dictionary
 var item_names : Array
 
 func _ready() -> void:
+	
+	var gear_data_script = load("res://Systems/Inventory/gear_data_dictionary.gd").new()
+	gear_data_dictionary = gear_data_script.data
 	
 	var item_data_script = load("res://Systems/Item System/item_data_dictionary.gd").new()
 	item_data_dictionary = item_data_script.data

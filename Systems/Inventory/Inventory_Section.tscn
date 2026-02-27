@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://cfk3rfxe3x3bs"]
+
+[ext_resource type="Script" uid="uid://biooxu0xdvmpo" path="res://Systems/Inventory/inventory_section.gd" id="1_ouodq"]
+[ext_resource type="Texture2D" uid="uid://ca6pvixx7s2qy" path="res://Art/Skill_Sprites/blade_walk.png" id="1_ri4sp"]
+[ext_resource type="PackedScene" uid="uid://ddlv2rf2dtgko" path="res://Systems/Inventory/gear_slot.tscn" id="4_3rdjd"]
+
+[node name="Inventory_Section" type="Control" unique_id=1552526897]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(4, 4)
+mouse_filter = 2
+script = ExtResource("1_ouodq")
+
+[node name="BG_color" type="ColorRect" parent="." unique_id=1753695106]
+layout_mode = 0
+offset_left = -1.75
+offset_top = -11.0
+offset_right = 90.0
+offset_bottom = 78.25
+mouse_filter = 2
+color = Color(0.2878403, 0.456892, 0.29885015, 1)
+
+[node name="Skill_Grid" type="GridContainer" parent="." unique_id=1324008792]
+layout_mode = 0
+offset_left = 0.5
+offset_top = -8.5
+offset_right = 83.5
+offset_bottom = 44.5
+theme_override_constants/v_separation = 0
+columns = 3
+
+[node name="skill_texture_1" type="TextureRect" parent="Skill_Grid" unique_id=1939314561]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("1_ri4sp")
+
+[node name="skill_texture_3" type="TextureRect" parent="Skill_Grid" unique_id=2044540092]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("1_ri4sp")
+
+[node name="skill_texture_5" type="TextureRect" parent="Skill_Grid" unique_id=337290589]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("1_ri4sp")
+
+[node name="skill_texture_2" type="TextureRect" parent="Skill_Grid" unique_id=1763862722]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("1_ri4sp")
+
+[node name="skill_texture_4" type="TextureRect" parent="Skill_Grid" unique_id=1250341124]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("1_ri4sp")
+
+[node name="skill_texture_6" type="TextureRect" parent="Skill_Grid" unique_id=1836871764]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("1_ri4sp")
+
+[node name="Gear_Slot_1" parent="." unique_id=688289814 instance=ExtResource("4_3rdjd")]
+layout_mode = 0
+offset_left = 1.5
+offset_top = 48.25
+offset_right = 1.5
+offset_bottom = 48.25
+
+[node name="Gear_Slot2" parent="." unique_id=1506724202 instance=ExtResource("4_3rdjd")]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 48.25
+offset_right = 31.0
+offset_bottom = 48.25
+
+[node name="Gear_Slot3" parent="." unique_id=2116910068 instance=ExtResource("4_3rdjd")]
+layout_mode = 0
+offset_left = 59.75
+offset_top = 48.25
+offset_right = 59.75
+offset_bottom = 48.25

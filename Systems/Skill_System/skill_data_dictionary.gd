@@ -1,8 +1,17 @@
 var data : Dictionary = {
-  "blade_walk": {
+ 
+ "nothing": {
+	"skill_name": "nothing",
+	"skill_value": 0,
+	"skill_target": "SELF",
+	"dice_type": "ANY",
+	"skill_range": 0
+  },
+
+ "blade_walk": {
 	"skill_name": "blade_walk",
 	"skill_value": 2,
-	"skill_target": "EMPTY_CELL",
+	"skill_target": "STRAIGHT_EMPTY_CELL",
 	"dice_type": "MOVEMENT",
 	"skill_range": 3
   },

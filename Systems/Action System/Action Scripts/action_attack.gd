@@ -4,7 +4,11 @@ var action_name := "attack"
 
 func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	
+	#LOAD THE APPROPRIATE SOUNDS AND ATTACK ANIMATION:
+	
 	print ("executing acttack action, amount is", context["amount"])
+	
+	var amount = context["amount"]
 	
 	var sound_path : String
 	
@@ -28,5 +32,8 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	
 	await Global.timer(.1)
 	
-	await action_target_cell.occupant.take_attack(context["amount"],action_source_cell.occupant)
-	await EventManager.on_unit_attacked(action_source_cell.occupant,action_target_cell.occupant)
+	await EventManager.on_unit_attacked_before_damage(action_source_cell.occupant,action_target_cell.occupant)
+
+	await ActionManager.request_action("damage_unit",{"amount" : amount, "damage_name" : "physical"},action_source_cell,action_target_cell)
+	#CREATE THE APPROPRIATE TARGET TAKE_ATTACK ANIMTION
+	

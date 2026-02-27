@@ -18,7 +18,9 @@ func on_unit_damaged(unit_damaged: Unit, amount: int, damage_name: String):
 	
 	print ("on_unit_damage finished running in event_manager")
 	
-func on_unit_attacked(attacker: Unit, attacked: Unit):
+func on_unit_attacked_before_damage(attacker: Unit, attacked: Unit):
+	
+	
 	if attacked.status_effects.has("spikes"):
 		print ("unit has spikes of ", attacked.status_effects["spikes"])
 		ActionManager.request_action("damage_unit",
@@ -63,3 +65,14 @@ func on_enemy_death(enemy_dying: Enemy):
 			await ActionManager.request_action("increase_attack",{"amount" : 2},x.current_cell,x.current_cell)
 			await ActionManager.request_action("increase_hp",{"amount" : 2},x.current_cell,x.current_cell)
 		
+func explode_bombs():
+	for x in Global.grid.get_all_units():
+		if not is_instance_valid(x):
+			continue
+		if x is Bomb:
+			var cell = x.current_cell
+			x.current_cell.clear_cell()
+			x.queue_free()
+			
+			await ActionManager.request_action("explosion",{},x.current_cell,x.current_cell)
+			

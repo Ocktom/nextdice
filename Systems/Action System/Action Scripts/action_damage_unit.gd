@@ -71,19 +71,40 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 				amount += PlayerStats.magic_damage["round_bonus"] 
 				+ PlayerStats.magic_damage["turn_bonus"]	
 	
-	Global.float_text(str(context["damage_name"],": ",amount),action_target.global_position,color)
+	Global.float_text(str(amount),action_target.global_position,color)
 	
 	if context.keys().has("audio_path"):
 		audio_path = context["audio_path"]
 	
 	if audio_path != "":
 		Global.audio_node.play_sfx(audio_path)
+	
 	Global.animate(action_target,Enums.Anim.SHAKE)
 	Global.animate(action_target,Enums.Anim.FLASH,color)
 	
-	await action_target.take_damage(amount)
+	if action_target is Enemy:
+			action_target.hp = max(0,action_target.hp-amount)
+			
+			if action_target.hp < 1:
+				
+				print ("unit has less then 1 hp, calling enemy death on manager")
+				await ActionManager.request_action("enemy_death",{},action_target.current_cell)
+			
+			if not action_target.dying_this_turn:
+				await action_target.update()
+	
+	if action_target is Hero:
+		PlayerStats.player_hp = max(0,PlayerStats.player_hp-amount)
+		await action_target.update()
+		
+		if PlayerStats.player_hp < 1:
+			await Global.world.defeat()
+			return
+		
+		else:
+			await action_target.update()
+	
 	await EventManager.on_unit_damaged(action_target, amount, context["damage_name"])
 	print ("on_unit_damaged awaited sucsessfully in action_damage_unit_script")
-	await Global.timer(.4)
 	
 	print ("unit_damaged action finished, gamestate is ", Global.game_state, " input_paused is ", InputManager.input_paused)

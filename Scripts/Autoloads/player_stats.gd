@@ -7,6 +7,7 @@ var player_dex := 3
 var player_int := 3
 
 var move_points := 2
+var max_move_points := 2
 
 var mana := 0
 var max_mana := 2
@@ -37,9 +38,6 @@ var attack_damage := {"base" : 1, " game_bonus" : 0, "round_bonus" : 0, "turn_bo
 var magic_damage := {"base" : 1, " game_bonus" : 0, "round_bonus" : 0, "turn_bonus" : 0}
 var physical_damage := {"base" : 1, " game_bonus" : 0, "round_bonus" : 0, "turn_bonus" : 0}
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

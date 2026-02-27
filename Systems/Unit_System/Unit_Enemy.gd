@@ -123,27 +123,33 @@ func get_attack_targets() -> Array[Unit]:
 func plan_action():
 
 	if status_effects.has("stun"):
-		Global.float_text("stunned",global_position)
+		Global.float_text("stunned", global_position)
 		return
 	
 	if status_effects.has("freeze"):
-		Global.float_text("FROZEN",global_position,Color.AQUA)
+		Global.float_text("FROZEN", global_position, Color.AQUA)
 		return
 	
 	if status_effects.has("root"):
-		Global.float_text("rooted",global_position)
+		Global.float_text("rooted", global_position)
 	
-	if await attempt_attack():
-		await enemy_actions()
+	var attack_target = await attempt_attack()
+
+	if attack_target:
+		await enemy_actions(attack_target)
 		return
 
-	elif await attempt_move():
+	var moved = await attempt_move()
+
+	if moved:
 		Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_HIT-Zap Metal_HY_PC-002.wav")
-		await enemy_actions()
+
+		# 🔥 try attacking AGAIN after movement (old behavior)
+		attack_target = await attempt_attack()
+		await enemy_actions(attack_target)
 		return
 	
-	else:
-		await enemy_actions()
+	await enemy_actions()
 	
 func attempt_attack():
 	
@@ -155,12 +161,12 @@ func attempt_attack():
 	if targets.is_empty():
 		return null
 
-	# Pick ONE target at random
 	var target : Unit = targets.pick_random()
 
 	print("enemy ", unit_name, " attacking ", target.unit_name)
 
 	await Global.timer(wait_time)
+
 	await ActionManager.request_action(
 		"attack",
 		{
@@ -171,7 +177,6 @@ func attempt_attack():
 	)
 	
 	turn_bonus = 0
-	await enemy_actions(target)
 
 	return target
 
@@ -275,17 +280,8 @@ func enemy_actions(attack_target: Node2D = null):
 	
 	if action_2_name != "":
 		await ActionManager.request_action(action_2_name, action_2_context, current_cell, target_cell)
-
-func take_attack(amount : int, attacker: Unit):
-	
-	await ActionManager.request_action("damage_unit",{"amount" : amount, "damage_name" : "physical"},attacker.current_cell,current_cell)
 	
 func take_damage(amount : int):
-	
-	print ("was damaged")
-	Global.animate(self,Enums.Anim.SHAKE)
-	await Global.animate(self,Enums.Anim.FLASH,Color.RED)
-	await Global.timer(.5)
 	
 	hp = max(0,hp-amount)
 	

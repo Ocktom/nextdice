@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dfam1ss7djg48"]
+
+[ext_resource type="Script" uid="uid://lqr4pwplkfe7" path="res://Systems/Unit_System/Unit_Bomb.gd" id="1_dxhsm"]
+[ext_resource type="Texture2D" uid="uid://bdlatc4s8f1se" path="res://Art/small_bomb_32.png" id="2_dxhsm"]
+[ext_resource type="SpriteFrames" uid="uid://do0btxhn7lkbf" path="res://Art/Cell_Effect_Sprites/explosion_frames.tres" id="3_dxhsm"]
+[ext_resource type="PackedScene" uid="uid://klesx8yr3cp8" path="res://Systems/Unit_System/status_sprites.tscn" id="4_tqblp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yydcj"]
+atlas = ExtResource("2_dxhsm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ab0ya"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yydcj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4im1a"]
+font_size = 31
+font_color = Color(1, 0.13333334, 0.27058825, 1)
+
+[node name="Unit_Bomb" type="Node2D" unique_id=275472339]
+texture_filter = 1
+script = ExtResource("1_dxhsm")
+
+[node name="Unit_Sprite" type="AnimatedSprite2D" parent="." unique_id=1342932675]
+position = Vector2(0, -15.999999)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_ab0ya")
+
+[node name="Effects_Sprite" type="AnimatedSprite2D" parent="." unique_id=531974913]
+visible = false
+scale = Vector2(5, 5)
+sprite_frames = ExtResource("3_dxhsm")
+frame_progress = 1.0
+
+[node name="Right_Stats" type="VBoxContainer" parent="." unique_id=233231666]
+offset_left = 50.0
+offset_top = -23.0
+offset_right = 150.0
+offset_bottom = 54.0
+theme_override_constants/separation = -11
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Right_Stats" unique_id=389829734]
+layout_mode = 2
+
+[node name="HP_Label" type="Label" parent="Right_Stats/HBoxContainer" unique_id=461646694]
+layout_mode = 2
+text = "12"
+label_settings = SubResource("LabelSettings_4im1a")
+horizontal_alignment = 1
+
+[node name="Status_Sprites" parent="." unique_id=170577677 instance=ExtResource("4_tqblp")]
+visible = false
+offset_left = -66.0
+offset_top = -86.0
+offset_right = -33.0
+offset_bottom = -77.0

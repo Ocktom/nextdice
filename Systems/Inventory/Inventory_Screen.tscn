@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cfrplwwuryyes"]
+
+[ext_resource type="Script" uid="uid://cu54aghca3uw3" path="res://Systems/Inventory/inventory_screen.gd" id="1_u0wde"]
+[ext_resource type="PackedScene" uid="uid://cfk3rfxe3x3bs" path="res://Systems/Inventory/Inventory_Section.tscn" id="2_maxfw"]
+[ext_resource type="PackedScene" uid="uid://cqctoenwbb4tr" path="res://Systems/Inventory/backpack_gear.tscn" id="3_u0wde"]
+
+[node name="InventoryScreen" type="Control" unique_id=1156296463]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+mouse_filter = 2
+script = ExtResource("1_u0wde")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2084850945]
+layout_mode = 0
+offset_left = -242.5
+offset_top = -138.0
+offset_right = 244.0
+offset_bottom = 136.5
+color = Color(0.29544282, 0.21066329, 0.19134402, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1771098330]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.5
+offset_top = -65.0
+offset_right = 154.5
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 115
+
+[node name="attack_gear" parent="HBoxContainer" unique_id=1552526897 instance=ExtResource("2_maxfw")]
+layout_mode = 2
+
+[node name="movement_gear" parent="HBoxContainer" unique_id=1180162272 instance=ExtResource("2_maxfw")]
+layout_mode = 2
+
+[node name="magic_gear" parent="HBoxContainer" unique_id=832687401 instance=ExtResource("2_maxfw")]
+layout_mode = 2
+
+[node name="backpack_gear" parent="." unique_id=1017807794 instance=ExtResource("3_u0wde")]
+layout_mode = 0
+offset_left = 115.25
+offset_top = 30.5
+offset_right = 115.25
+offset_bottom = 70.5

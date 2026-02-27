@@ -1,7 +1,7 @@
 extends Node
 
 enum GameState {PLAYER_TURN, ENEMY_TURN, ROUND_END, 
-SELECT_TARGET_UNIT, SELECT_TARGET_CELL, SHOP, REWARD}
+SELECT_TARGET_UNIT, SELECT_TARGET_CELL, SHOP, REWARD, TITLE, INVENTORY}
 
 enum Status {STUN, ROOT, POISON, BURN, INVISIBLE, SHIELD, FOREFIELD, HASTE, FROST, FREEZE, SPIKES}
 
@@ -30,11 +30,9 @@ enum EnemyTarget {NONE, ATTACK_TARGET, ADJACENT_ENEMIES, RANDOM_ENEMY, NEAR_HERO
 
 enum SkillType {MOVEMENT, ATTACK, MAGIC}
 
+enum GearSlotType {ATTACK, MOVEMENT, MAGIC, BACKPACK, REWARD}
+
 # Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
 	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

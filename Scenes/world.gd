@@ -12,7 +12,6 @@ extends Node2D
 @onready var overlay_layer: Node = $Overlay_Layer
 @onready var float_layer: Node = $Float_Layer
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
@@ -23,7 +22,7 @@ func _ready() -> void:
 	
 func game_start():
 	
-	await SkillManager.setup_dice()
+	await DiceManager.setup_dice()
 	await UnitManager.spawn_torches()
 	await UnitManager.spawn_starting_chests()
 	await UnitManager.spawn_hero()
@@ -49,11 +48,6 @@ func make_new_grid():
 		y.update()
 		dupe_cells.erase(y)
 
-func spawn_spells():
-	for x in spell_ui.spell_slots:
-		var spell_choice = SpellManager.spell_names.pick_random()
-		SpellManager.insert_spell(spell_choice,x)
-		
 func roll_dice():
 	if PlayerStats.rolls == 0:
 		print ("no rolls left")
@@ -78,6 +72,7 @@ func start_player_turn():
 		
 	PlayerStats.rolls = PlayerStats.max_rolls
 	PlayerStats.spaces_moved_this_turn = 0
+	PlayerStats.move_points = PlayerStats.max_move_points
 	
 	await roll_dice()
 	InputManager.input_paused = false
@@ -87,6 +82,7 @@ func end_player_turn():
 	Global.game_state = Enums.GameState.ENEMY_TURN
 	print ("TURN ENDED")
 	
+	await EventManager.explode_bombs()
 	enemy_turn()
 
 func enemy_turn():

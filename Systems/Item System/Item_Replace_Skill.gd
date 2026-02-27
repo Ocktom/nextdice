@@ -33,7 +33,7 @@ func pick_random_skills():
 	face_picked = all_faces.pick_random()
 	old_skill = face_picked.skill.skill_name
 	
-	new_skill = SkillManager.skill_data_dictionary.keys().pick_random()
+	new_skill = DiceManager.skill_data_dictionary.keys().pick_random()
 	print ("new_skill_name chosen is ", new_skill)
 	new_sprite.texture = load(str("res://Art/Skill_Sprites/",new_skill,".png"))
 	old_sprite.texture = load(str("res://Art/Skill_Sprites/",old_skill,".png"))
@@ -41,7 +41,7 @@ func pick_random_skills():
 	print ("old skill chosen ", old_skill, " new skill chosen ", new_skill)
 	
 func choose():
-	await SkillManager.insert_skill_to_face(new_skill,face_picked)
+	await DiceManager.insert_skill_to_face(new_skill,face_picked)
 	Global.game_state = Enums.GameState.PLAYER_TURN
 	reward_screen.queue_free()
 	

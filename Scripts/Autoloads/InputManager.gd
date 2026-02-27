@@ -2,9 +2,11 @@ extends Node
 
 var hovered_dice: Dice = null
 var hovered_cell : Cell = null
-var hovered_spell_slot : Spell_Slot = null
 var hovered_item_slot : Item_Slot = null
-var hovered_upgrade_slot : Effect_Slot = null
+
+var hovered_gear : GearSlot = null
+var dragging_gear : GearSlot = null
+var gear_original_position : Vector2
 
 var mana_area_hovered := false
 
@@ -40,7 +42,7 @@ func _input(event):
 	
 	if Global.game_state == Enums.GameState.PLAYER_TURN:
 
-#region standard turn controls
+#region PLAYERTURN input starts here
 
 		# ---------- DRAGGING MOVEMENT ----------
 		if event is InputEventMouseMotion:
@@ -99,23 +101,28 @@ func _input(event):
 					print ("using dice for mana")
 					Global.world.spell_ui.add_mana(dragging_dice.current_face.pips)
 					
-				elif hovered_spell_slot != null:
-					if hovered_spell_slot.occupant != null:
-						if dragging_dice.current_face.pips >= hovered_spell_slot.occupant.mana_cost:
-							#dragging_dice.use()
-							hovered_spell_slot.occupant.use_spell()
-							
-				
 				elif not hovered_cell == null:
 					print ("hovered cell not null")
 					
-					if SkillManager.is_useable(dragging_dice,hovered_cell):
+					if DiceManager.is_useable(dragging_dice,hovered_cell):
 						print ("dice is useable, using...")
 						dragging_dice.use(Global.hero_unit.current_cell,hovered_cell)
 					else:
 						print ("dice is NOT useable, resetting")
 						reset_drag()
 						return
+				
+				#Unit Drop
+			if dragging_unit is Hero:
+				print ("dropped hero")
+				if hovered_cell != null:
+					if hovered_cell.is_empty():
+						var distance = Global.grid.get_distance(Global.hero_unit.current_cell,hovered_cell)
+						if PlayerStats.move_points >= distance:
+							print ("moving hero")
+							ActionManager.request_action("hero_movement",{},Global.hero_unit.current_cell,hovered_cell)
+						else:
+							Global.float_text("NOT ENOUGH MOVE POINTS",hovered_cell.global_position)
 					
 			# Reset dice drag
 			reset_drag()
@@ -130,27 +137,56 @@ func _input(event):
 				
 				if hovered_dice.current_face.skill.skill_target == Enums.SkillTarget.SELF:
 					print ("using skill on self")
-					hovered_dice.use(Global.hero_unit.current_cell,Global.hero_unit.current_cell)
+					await hovered_dice.use(Global.hero_unit.current_cell,Global.hero_unit.current_cell)
 					return
 				
 				dragging_dice = hovered_dice
 				drag_offset = dragging_dice.global_position - event.position
 				
-				SkillManager.highlight_useable_cells(hovered_dice)
+				DiceManager.highlight_useable_cells(hovered_dice)
 				
 				return
-		
-			if hovered_spell_slot != null:
-				if hovered_spell_slot.occupant != null:
-					if Global.mana >= hovered_spell_slot.occupant.mana_cost:
-						hovered_spell_slot.occupant.use_spell()
-		
+			
+			if hovered_cell != null:
+				if hovered_cell.occupant != null:
+					if hovered_cell.occupant is Hero:
+						dragging_unit = Global.hero_unit
+						drag_offset = dragging_unit.global_position - event.position
+				
 		#RIGHT MOUSE
 		
-		elif event.is_action_released("right_mouse"):
-			print ("right mosue")
-#endregion
-	
+		elif event.is_action_released("esc"):
+			await Global.main.enter_inventory_screen()
+			return
+			
+#endregion PLAYERTURN input ends here
+
+#region INVENTORY input begins here
+
+	if Global.game_state == Enums.GameState.INVENTORY:
+		
+		if event.is_action_released("esc"):
+			await Global.main.resume_game()
+			
+		if event is InputEventMouseMotion:
+			if dragging_gear != null:
+				dragging_gear.gear_texture.global_position = event.position + drag_offset
+		
+		if event.is_action_released("left_mouse"):
+			
+			if dragging_gear is GearSlot:
+				if hovered_gear is GearSlot:
+					Global.inventory.insert_gear_from_slot(dragging_gear,hovered_gear)
+				
+				reset_drag()
+				return
+		
+		if event.is_action_pressed("left_mouse"):
+				if hovered_gear is GearSlot:
+					gear_original_position = hovered_gear.gear_texture.global_position
+					dragging_gear = hovered_gear
+					drag_offset = dragging_gear.gear_texture.global_position - event.position
+		
 	if Global.game_state == Enums.GameState.SELECT_TARGET_UNIT:
 		if event.is_action_pressed("left_mouse"):
 			if hovered_cell != null:
@@ -177,14 +213,19 @@ func _input(event):
 #endregion
 
 func reset_drag():
+	
 	if dragging_dice:
 		dragging_dice.face_node.global_position = dragging_dice.global_position
 
 	if dragging_unit:
-		dragging_unit.global_position = unit_original_position
-
+		dragging_unit.global_position = dragging_unit.current_cell.global_position
+	
+	if dragging_gear:
+		dragging_gear.gear_texture.global_position = gear_original_position
+	
 	dragging_dice = null
 	dragging_unit = null
+	dragging_gear = null
 	drag_offset = Vector2.ZERO
 	unit_drag_offset = Vector2.ZERO
 	
@@ -195,6 +236,6 @@ func reset_drag():
 func reset_all_hovered_variables():
 	hovered_cell = null
 	hovered_dice = null
-	hovered_spell_slot = null
+	hovered_gear = null
 	
 	reset_drag()

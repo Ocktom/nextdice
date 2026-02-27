@@ -3,6 +3,7 @@ extends Control
 @onready var hp_label: Label = $VBoxContainer/HP_Label
 @onready var rolls_label: Label = $VBoxContainer/Rolls_Label
 @onready var gold_label: Label = $VBoxContainer/Gold_Label
+@onready var move_label: Label = $VBoxContainer/Move_Label
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,3 +18,4 @@ func update():
 	hp_label.text = str("HP: ", PlayerStats.player_hp)
 	rolls_label.text = str("Rolls: ", PlayerStats.rolls)
 	gold_label.text = str("Gold: ", PlayerStats.gold)
+	move_label.text = str("Move:", PlayerStats.move_points)

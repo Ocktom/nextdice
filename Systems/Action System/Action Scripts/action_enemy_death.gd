@@ -8,7 +8,9 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	print ("enemy death executed")
 	var target = action_source_cell.occupant
 	
-	if target.dying_this_turn : return
+	if target.dying_this_turn : 
+		print ("unit ", target.unit_name, " already dying this turn, exiting out of action_death script ")
+		return
 	
 	target.dying_this_turn = true
 	

@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cqctoenwbb4tr"]
+
+[ext_resource type="Script" uid="uid://i7l5ok2hxwq2" path="res://Systems/Inventory/backpack_section.gd" id="1_wguhy"]
+[ext_resource type="PackedScene" uid="uid://ddlv2rf2dtgko" path="res://Systems/Inventory/gear_slot.tscn" id="2_yog7v"]
+
+[node name="backpack_gear" type="Control" unique_id=1017807794]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 137.25
+offset_top = 33.25
+offset_right = 137.25
+offset_bottom = 73.25
+mouse_filter = 2
+script = ExtResource("1_wguhy")
+
+[node name="Backpack_Hbox" type="HBoxContainer" parent="." unique_id=1236276017]
+layout_mode = 0
+offset_left = -240.0
+offset_right = -30.0
+offset_bottom = 40.0
+theme_override_constants/separation = 30
+
+[node name="Gear_Slot" parent="Backpack_Hbox" unique_id=688289814 instance=ExtResource("2_yog7v")]
+layout_mode = 2
+
+[node name="Gear_Slot2" parent="Backpack_Hbox" unique_id=437751804 instance=ExtResource("2_yog7v")]
+layout_mode = 2
+
+[node name="Gear_Slot3" parent="Backpack_Hbox" unique_id=242358486 instance=ExtResource("2_yog7v")]
+layout_mode = 2
+
+[node name="Gear_Slot4" parent="Backpack_Hbox" unique_id=908332697 instance=ExtResource("2_yog7v")]
+layout_mode = 2
+
+[node name="Gear_Slot5" parent="Backpack_Hbox" unique_id=54585766 instance=ExtResource("2_yog7v")]
+layout_mode = 2
+
+[node name="Gear_Slot6" parent="Backpack_Hbox" unique_id=1399762765 instance=ExtResource("2_yog7v")]
+layout_mode = 2
+
+[node name="Gear_Slot7" parent="Backpack_Hbox" unique_id=2076946778 instance=ExtResource("2_yog7v")]
+layout_mode = 2
+
+[node name="Gear_Slot8" parent="Backpack_Hbox" unique_id=449460211 instance=ExtResource("2_yog7v")]
+layout_mode = 2

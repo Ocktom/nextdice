@@ -98,7 +98,7 @@ func _on_mouse_entered():
 		
 		if InputManager.dragging_dice != null:
 			
-			if not SkillManager.is_useable(InputManager.dragging_dice,self,false):
+			if not DiceManager.is_useable(InputManager.dragging_dice,self,false):
 				print ("not highlighting, useable check not passed")
 				return
 			

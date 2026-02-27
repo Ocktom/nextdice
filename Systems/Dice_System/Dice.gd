@@ -1,18 +1,13 @@
 extends Control
 class_name Dice
 
-@export var upgrade_slot_1: Effect_Slot
-@export var upgrade_slot_2: Effect_Slot
+
 @export var dice_icons_node : Node2D
 
 var dice_icons : Array[Node]
 
-var upgrade_slots : Array [Effect_Slot]
-
 var faces : Array [Face]
-var used_this_turn : bool :
-	set(new_value):
-		if used_this_turn != new_value: used_this_turn = new_value
+var used_this_turn : bool
 
 var grey_out := false :
 	set (new_value):
@@ -30,12 +25,9 @@ var grey_out := false :
 
 @onready var upgrade_sprite: Sprite2D = $Effect_Sprite
 
-
 var current_face : Face
 
 func _ready() -> void:
-	
-	upgrade_slots = [upgrade_slot_1,upgrade_slot_2]
 	
 	Global.player_dice.append(self)
 	
@@ -60,7 +52,9 @@ func use(action_source_cell: Node, action_target_cell: Node):
 	used_this_turn = true
 	grey_out = true
 	
+	
 	await Global.hero_unit.update()
+	print ("end of dice use function reached, dice.used is ", used_this_turn)
 	
 func roll():
 	

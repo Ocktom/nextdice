@@ -8,6 +8,11 @@ font = ExtResource("2_m2f3g")
 font_size = 86
 font_color = Color(0.8839259, 0.25204328, 0.32363307, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_m2f3g"]
+font = ExtResource("2_m2f3g")
+font_size = 86
+font_color = Color(0.30826202, 0.58521885, 0.4140259, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_7fohd"]
 font = ExtResource("2_m2f3g")
 font_size = 86
@@ -43,6 +48,11 @@ grow_vertical = 0
 layout_mode = 2
 text = "HP: 10"
 label_settings = SubResource("LabelSettings_8j60k")
+
+[node name="Move_Label" type="Label" parent="VBoxContainer" unique_id=701486576]
+layout_mode = 2
+text = "HP: 10"
+label_settings = SubResource("LabelSettings_m2f3g")
 
 [node name="Rolls_Label" type="Label" parent="VBoxContainer" unique_id=1058333856]
 layout_mode = 2

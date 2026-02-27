@@ -92,9 +92,9 @@ func parse_status_effects_string(s: String) -> Dictionary:
 
 var enemy_sets : Dictionary = {
 	
-	"set_1" : ["Armadroid","Protech","Protech","Skeltron","Demodroid"],
-	"set_2" : ["Protech","Protech","Armadroid","Skeltron"],
-	"set_3" : ["Ratron","Protech","Protech","Bomberbot"],
+	"set_1" : ["Armadroid","Bomberbot","Protech","Bomberbot","Spidroid"],
+	"set_2" : ["Protech","Protech","Spidroid","Bomberbot"],
+	"set_3" : ["Ratron","Bomberbot","Protech","Spidroid"],
 	"set_4" : ["Skeltron","Slitherbyte","Batron","Spectroid","Spectroid"],
 	"set_5" : ["Skeltron","Slitherbyte","Slitherbyte","Spectroid","Armadroid"],
 	"set_6" : ["Batron","Batron", "Batron", "Spidroid", "Spidroid","Armadroid"],
@@ -120,7 +120,13 @@ func spawn_starting_chests():
 		var inst = chest_path.instantiate()
 		var cell_pick = Global.grid.get_empty_cells().pick_random()
 		await cell_pick.spawn_unit(inst)
-		
+
+func spawn_bomb(cell: Cell):
+	print ("bomb spawning")
+	var chest_path : PackedScene = preload("res://Systems/Unit_System/Unit_Bomb.tscn")
+	var inst = chest_path.instantiate()
+	cell.spawn_unit(inst)
+
 func spawn_hero():
 	
 	var cell_pick = Global.grid.get_empty_cells().pick_random()
@@ -169,6 +175,6 @@ func spawn_round_enemies():
 
 func clear_dead_units():
 	for x in dead_units:
-		x.queue_free()
+		x.call_deferred("queue_free")
 	
 	dead_units.clear()

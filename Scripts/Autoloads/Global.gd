@@ -3,8 +3,12 @@ extends Node
 var game_state : Enums.GameState
 
 var audio_node : Node
+
 var grid : Node
 var world: Node
+var main: Control
+var inventory : Control
+
 var hero_unit : Unit
 
 var projectile_time := .3
@@ -23,6 +27,8 @@ var treasure_unit_count := 1
 
 var current_sum := 0
 
+func _ready() -> void:
+	game_state = Enums.GameState.TITLE
 
 func timer(time : float):
 
