@@ -32,11 +32,10 @@ UnitManager="*res://Scripts/Autoloads/unit_manager.gd"
 ActionManager="*res://Systems/Action System/action_manager.gd"
 ItemManager="*res://Systems/Item System/item_manager.gd"
 EffectManager="*uid://cvpdhrdrd237v"
-DiceManager="*uid://bt2iaunwo888v"
-PlayerStats="*uid://bh0t2fshqgyjc"
 EventManager="*uid://m1owfwi3vv5y"
 StatusManager="*uid://yubtmhhbkl26"
 GearManager="*uid://hblxe6x6u4vm"
+DiceManager="*uid://bt2iaunwo888v"
 
 [display]
 

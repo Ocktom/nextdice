@@ -281,18 +281,6 @@ func enemy_actions(attack_target: Node2D = null):
 	if action_2_name != "":
 		await ActionManager.request_action(action_2_name, action_2_context, current_cell, target_cell)
 	
-func take_damage(amount : int):
-	
-	hp = max(0,hp-amount)
-	
-	if hp < 1:
-		
-		print ("unit has less then 1 hp, calling enemy death on manager")
-		await ActionManager.request_action("enemy_death",{},current_cell)
-	
-	if not dying_this_turn:
-		await update()
-	
 func update():
 	
 	hp_label.text = str(hp)

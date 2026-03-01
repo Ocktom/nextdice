@@ -4,13 +4,32 @@ var skill_data_dictionary : Dictionary
 var skill_data
 var skill_names : Array = []
 
+var dice_path : PackedScene = preload("res://Systems/Dice_System/Dice.tscn")
+
 func _ready() -> void:
+	
+	Global.dice_manager = self
 	
 	var skill_data_script = load("res://Systems/Skill_System/skill_data_dictionary.gd").new()
 	skill_data_dictionary = skill_data_script.data
 	skill_names = skill_data_dictionary.keys()
+
+func create_dice():
+	Global.player_dice = []
 	
+	for x in 3: 
+		print ("adding dice number ")
+		var inst = dice_path.instantiate()
+		Global.world.dice_container.add_child(inst)
+		Global.player_dice.append(inst)
+
+func reset():
+	skill_names = []
+	Global.player_dice = []
+
 func setup_dice():
+	print ("setting up dice, Global.player_dice is ", Global.player_dice)
+	
 	for x in Global.player_dice:
 		var ind = Global.player_dice.find(x)
 		var dice_set = GearManager.skill_sets[ind]

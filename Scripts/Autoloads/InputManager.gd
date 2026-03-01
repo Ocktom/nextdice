@@ -118,7 +118,7 @@ func _input(event):
 				if hovered_cell != null:
 					if hovered_cell.is_empty():
 						var distance = Global.grid.get_distance(Global.hero_unit.current_cell,hovered_cell)
-						if PlayerStats.move_points >= distance:
+						if Global.player_stats.move_points >= distance:
 							print ("moving hero")
 							ActionManager.request_action("hero_movement",{},Global.hero_unit.current_cell,hovered_cell)
 						else:
@@ -132,6 +132,7 @@ func _input(event):
 			# Dice drag start
 			if hovered_dice is Dice:
 				if hovered_dice.used_this_turn:
+					
 					Global.float_text("cooldown!",hovered_dice.global_position,Color.WHITE)
 					return
 				
@@ -186,7 +187,13 @@ func _input(event):
 					gear_original_position = hovered_gear.gear_texture.global_position
 					dragging_gear = hovered_gear
 					drag_offset = dragging_gear.gear_texture.global_position - event.position
-		
+	
+	if Global.game_state == Enums.GameState.FIND_GEAR:
+		if event.is_action_pressed("right_mouse"):
+			if hovered_gear is GearSlot:
+				await GearManager.drop_gear(hovered_gear.gear_name)
+				
+	
 	if Global.game_state == Enums.GameState.SELECT_TARGET_UNIT:
 		if event.is_action_pressed("left_mouse"):
 			if hovered_cell != null:

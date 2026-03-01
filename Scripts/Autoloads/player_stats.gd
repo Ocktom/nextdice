@@ -38,7 +38,6 @@ var attack_damage := {"base" : 1, " game_bonus" : 0, "round_bonus" : 0, "turn_bo
 var magic_damage := {"base" : 1, " game_bonus" : 0, "round_bonus" : 0, "turn_bonus" : 0}
 var physical_damage := {"base" : 1, " game_bonus" : 0, "round_bonus" : 0, "turn_bonus" : 0}
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

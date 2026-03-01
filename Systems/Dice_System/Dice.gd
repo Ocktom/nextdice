@@ -29,8 +29,6 @@ var current_face : Face
 
 func _ready() -> void:
 	
-	Global.player_dice.append(self)
-	
 	dice_area.connect("mouse_entered",_on_mouse_entered)
 	dice_area.connect("mouse_exited",_on_mouse_exited)
 	

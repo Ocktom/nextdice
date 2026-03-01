@@ -13,8 +13,8 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 		
 		print ("heal target is player")
 		
-		if PlayerStats.player_hp < PlayerStats.max_hp:
-			PlayerStats.player_hp = min(PlayerStats.max_hp, PlayerStats.player_hp + context["amount"])
+		if Global.player_stats.player_hp < Global.player_stats.max_hp:
+			Global.player_stats.player_hp = min(Global.player_stats.max_hp, Global.player_stats.player_hp + context["amount"])
 			Global.animate(target,Enums.Anim.FLASH,Color.GREEN)
 			Global.float_text(str("+",context["amount"]),target.global_position,Color.GREEN)
 			target.update()

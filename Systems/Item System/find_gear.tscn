@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://c4moox74wnuml"]
+
+[ext_resource type="Script" uid="uid://b3ydd6stcbpw" path="res://Systems/Item System/find_gear.gd" id="1_vf8ku"]
+[ext_resource type="PackedScene" uid="uid://bmdfh1cvd7lw7" path="res://Systems/Item System/Gear_Item.tscn" id="2_pfwkl"]
+[ext_resource type="PackedScene" uid="uid://cqctoenwbb4tr" path="res://Systems/Inventory/backpack_gear.tscn" id="3_mtofn"]
+[ext_resource type="FontFile" uid="uid://d35kupukt7jqu" path="res://Fonts/LazyFox Pixel Font 1.ttf" id="4_yii0e"]
+
+[node name="FindGear" type="Control" unique_id=266223556]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_vf8ku")
+
+[node name="backpack_gear" parent="." unique_id=1017807794 instance=ExtResource("3_mtofn")]
+layout_mode = 0
+offset_left = 492.0
+offset_top = 859.0
+offset_right = 492.0
+offset_bottom = 859.0
+scale = Vector2(4, 4)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=528293732]
+layout_mode = 0
+offset_left = 772.0
+offset_top = 654.0
+offset_right = 1142.0
+offset_bottom = 752.0
+theme_override_constants/separation = 50
+
+[node name="Take_Button" type="Button" parent="HBoxContainer" unique_id=468471442]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_yii0e")
+theme_override_font_sizes/font_size = 73
+text = "TAKE"
+
+[node name="Skip_Button" type="Button" parent="HBoxContainer" unique_id=1922467683]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_yii0e")
+theme_override_font_sizes/font_size = 73
+text = "SKIP
+"
+
+[node name="Item_Layer" type="Control" parent="." unique_id=2002675329]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="GearItem" parent="Item_Layer" unique_id=1268321851 instance=ExtResource("2_pfwkl")]
+layout_mode = 0
+offset_left = 951.0
+offset_top = 328.0
+offset_right = 951.0
+offset_bottom = 328.0

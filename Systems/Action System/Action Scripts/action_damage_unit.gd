@@ -23,7 +23,7 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	var amount = context["amount"]
 	
 	if action_target is Hero:
-		target_status_effects = PlayerStats.status_effects
+		target_status_effects = Global.player_stats.status_effects
 	else:
 		target_status_effects = action_target.status_effects
 	
@@ -51,25 +51,28 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 		
 		"poison" : 
 			color = Color.GREEN
-			amount += PlayerStats.poison_damage["round_bonus"] 
-			+ PlayerStats.poison_damage["turn_bonus"]
+			amount += Global.player_stats.poison_damage["round_bonus"] 
+			+ Global.player_stats.poison_damage["turn_bonus"]
+			
+			if action_target is Object:
+				return
 			
 		"fire"	:
 			audio_path = "res://Audio/Sound_Effects/DSGNMisc_HIT-Fleeting Hit_HY_PC-005.wav"
 			color = Color.ORANGE
-			amount += PlayerStats.fire_damage["round_bonus"] 
-			+ PlayerStats.fire_damage["turn_bonus"]
+			amount += Global.player_stats.fire_damage["round_bonus"] 
+			+ Global.player_stats.fire_damage["turn_bonus"]
 			
 		"physical" :
 			color = Color.RED
-			amount += (PlayerStats.physical_damage["round_bonus"])
-			+ (PlayerStats.physical_damage["turn_bonus"])	
+			amount += (Global.player_stats.physical_damage["round_bonus"])
+			+ (Global.player_stats.physical_damage["turn_bonus"])	
 		
 		"magic" :
 			color = Color.DODGER_BLUE
 			if action_source_cell.occupant is Hero and action_target is Enemy:
-				amount += PlayerStats.magic_damage["round_bonus"] 
-				+ PlayerStats.magic_damage["turn_bonus"]	
+				amount += Global.player_stats.magic_damage["round_bonus"] 
+				+ Global.player_stats.magic_damage["turn_bonus"]	
 	
 	Global.float_text(str(amount),action_target.global_position,color)
 	
@@ -83,6 +86,7 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	Global.animate(action_target,Enums.Anim.FLASH,color)
 	
 	if action_target is Enemy:
+			
 			action_target.hp = max(0,action_target.hp-amount)
 			
 			if action_target.hp < 1:
@@ -94,17 +98,24 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 				await action_target.update()
 	
 	if action_target is Hero:
-		PlayerStats.player_hp = max(0,PlayerStats.player_hp-amount)
+		Global.player_stats.player_hp = max(0,Global.player_stats.player_hp-amount)
 		await action_target.update()
 		
-		if PlayerStats.player_hp < 1:
-			await Global.world.defeat()
-			return
+		if Global.player_stats.player_hp < 1:
+			print ("player died")
+			await ActionManager.request_action("hero_death",{},action_target.current_cell)
 		
 		else:
 			await action_target.update()
 	
-	await EventManager.on_unit_damaged(action_target, amount, context["damage_name"])
-	print ("on_unit_damaged awaited sucsessfully in action_damage_unit_script")
-	
-	print ("unit_damaged action finished, gamestate is ", Global.game_state, " input_paused is ", InputManager.input_paused)
+	if action_target is Object_Unit:
+		action_target.hp = max(0,action_target.hp-amount)
+		print ("object unit damaged")
+		
+		await action_target.update()
+		
+		if action_target.hp < 1:
+			
+			print ("object unit hp is 0")
+			if not action_target.dying_this_turn:
+				await ActionManager.request_action("destroy_object",{},action_source_cell,action_target_cell)

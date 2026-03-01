@@ -29,6 +29,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func drop_gear(gear_name: String):
+	print ("backpackgear pre-drop is ", backpack_gear)
+	print ("dropping gear of ", gear_name)
+	var first_inst = backpack_gear.find(gear_name)
+	backpack_gear.remove_at(first_inst)
+	print ("backpackgear post-drop is ", backpack_gear)
+	await Global.back_gear_node.load_backpack_gear()
+
 func update_skills_from_gear():
 		for gear_set in gear_sets:
 			var ind = gear_sets.find(gear_set)

@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://bmdfh1cvd7lw7"]
+
+[ext_resource type="Script" uid="uid://boi8xvta33bjr" path="res://Systems/Item System/Gear_Item.gd" id="1_dh0mf"]
+[ext_resource type="FontFile" uid="uid://d35kupukt7jqu" path="res://Fonts/LazyFox Pixel Font 1.ttf" id="2_sqrvg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r83xr"]
+font = ExtResource("2_sqrvg")
+font_size = 55
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r83xr"]
+size = Vector2(445, 423)
+
+[node name="GearItem" type="Control" unique_id=1268321851]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_dh0mf")
+
+[node name="Item_Color" type="ColorRect" parent="." unique_id=301064661]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -223.62161
+offset_top = -210.0
+offset_right = 221.49188
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.3871733, 0.3110846, 0.42336905, 1)
+
+[node name="Item_Color2" type="ColorRect" parent="." unique_id=1305704945]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -197.0
+offset_top = -185.0
+offset_right = 197.0
+offset_bottom = 185.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.5183813, 0.42700657, 0.5606931, 1)
+
+[node name="Gear_Name_Label" type="Label" parent="." unique_id=202314050]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -147.0
+offset_right = 72.0
+offset_bottom = -79.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "NAME"
+label_settings = SubResource("LabelSettings_r83xr")
+
+[node name="Control" type="Control" parent="." unique_id=343003179]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 42.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gear_Sprite" type="Sprite2D" parent="Control" unique_id=1058678609]
+scale = Vector2(4, 4)
+
+[node name="Button_Area" type="Area2D" parent="." unique_id=942955727]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Button_Area" unique_id=1540620502]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_r83xr")

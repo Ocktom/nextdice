@@ -14,8 +14,8 @@ func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 		
 		var cleave_cells = Global.grid.get_cleave_targets(Global.hero_unit.current_cell,action_target_cell)
 		var occupied_cleave_cells : Array[Cell] = []
-		var main_amount := PlayerStats.player_str
-		var cleave_amount = PlayerStats.player_str/2
+		var main_amount = Global.player_stats.player_str
+		var cleave_amount = Global.player_stats.player_str/2
 		
 		for x in cleave_cells:
 			if x.occupant != null:

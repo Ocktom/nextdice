@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ftjtt0qa83u7"]
 
 [ext_resource type="Script" uid="uid://cp2heh7xwpfq0" path="res://Systems/Unit_System/Unit_Enemy.gd" id="1_y87hi"]
+[ext_resource type="SpriteFrames" uid="uid://dev16l05fklb1" path="res://Art/Enemy_Sprites/sprite_frames/Zombot_frames.tres" id="2_koxc3"]
 [ext_resource type="Texture2D" uid="uid://bkf6vafdccgdi" path="res://Art/explosion B2 small.png" id="3_fa0x6"]
 [ext_resource type="Texture2D" uid="uid://cil7g43ous00o" path="res://Art/icy_cell.png" id="5_koxc3"]
 [ext_resource type="PackedScene" uid="uid://klesx8yr3cp8" path="res://Systems/Unit_System/status_sprites.tscn" id="7_fa0x6"]
@@ -69,6 +70,7 @@ script = ExtResource("1_y87hi")
 
 [node name="Unit_Sprite" type="AnimatedSprite2D" parent="." unique_id=1905187628]
 scale = Vector2(4, 4)
+sprite_frames = ExtResource("2_koxc3")
 
 [node name="Effects_Sprite" type="AnimatedSprite2D" parent="." unique_id=531974913]
 visible = false

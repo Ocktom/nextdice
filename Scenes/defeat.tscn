@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bnrmxeh3e034w"]
+
+[ext_resource type="Script" uid="uid://21nr5klyvq5w" path="res://Scenes/defeat.gd" id="1_xhb0w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_klwqp"]
+font_size = 174
+
+[sub_resource type="GDScript" id="GDScript_g61i6"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	connect(\"pressed\",_on_replay_pressed)
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func _on_replay_pressed():
+	await Global.main.start_game()
+"
+
+[node name="Defeat" type="Node2D" unique_id=363382371]
+script = ExtResource("1_xhb0w")
+
+[node name="Label" type="Label" parent="." unique_id=1331015756]
+offset_top = -170.0
+offset_right = 1925.0
+offset_bottom = 913.0
+size_flags_horizontal = 4
+text = "DEFEAT"
+label_settings = SubResource("LabelSettings_klwqp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="replay_button" type="Button" parent="." unique_id=1614941198]
+offset_left = 817.0
+offset_top = 633.0
+offset_right = 1129.0
+offset_bottom = 774.0
+theme_override_font_sizes/font_size = 97
+text = "AGAIN"
+script = SubResource("GDScript_g61i6")

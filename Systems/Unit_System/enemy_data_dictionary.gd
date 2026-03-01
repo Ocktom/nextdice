@@ -13,6 +13,20 @@ var data : Dictionary = {
 	"action_2_name": "",
 	"action_2_context": "",
 	"level_set": 1,
+	"status_effects": "",
+	},
+  "Zombot": {
+	"enemy_name": "Zombot",
+	"hp": 3,
+	"atk": 3,
+	"atk_range": 1,
+	"movement": 1,
+	"range_type": "CARDINAL",
+	"action_1_name": "",
+	"action_1_context": "",
+	"action_2_name": "",
+	"action_2_context": "",
+	"level_set": 1,
 	"status_effects": "{\"scavenge\" : {\"amount\":2}}"
   },
   "Batron": {

@@ -7,6 +7,6 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	var bonus_type = context["type"]
 	var bonus_subtype = context["sub_type"]
 
-	PlayerStats[bonus_type][bonus_subtype] += amount
+	Global.player_stats[bonus_type][bonus_subtype] += amount
 	
-	print ("fire_damage round bonus is now", PlayerStats.fire_damage["round_bonus"])
+	print ("fire_damage round bonus is now", Global.player_stats.fire_damage["round_bonus"])

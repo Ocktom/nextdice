@@ -60,7 +60,7 @@ offset_left = -469.0
 offset_top = -371.0
 offset_right = 469.0
 offset_bottom = -247.0
-text = "Replace a skill"
+text = "REWARD"
 label_settings = SubResource("LabelSettings_fo0e3")
 horizontal_alignment = 1
 

@@ -4,7 +4,7 @@ var action_name := "heal_random_enemy"
 
 func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	
-	var user = action_source
+	var user = action_source_cell.occupant
 	
 	var damaged_enemies : Array[Enemy] = []
 	for x in Global.grid.get_all_enemies():

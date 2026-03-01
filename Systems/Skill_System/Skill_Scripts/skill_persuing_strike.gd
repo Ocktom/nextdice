@@ -20,5 +20,5 @@ func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 		if not x is Enemy:
 			continue
 		await Global.timer(.25)
-		ActionManager.request_action("attack",{"target" : x.current_cell, "amount" : PlayerStats.player_str/2, "sound_path" : "res://Audio/Sound_Effects/DSGNTonl_INTERFACE-Tonal Click_HY_PC-006.wav"},unit.current_cell,x.current_cell)
+		ActionManager.request_action("attack",{"target" : x.current_cell, "amount" : Global.player_stats.player_str/2, "sound_path" : "res://Audio/Sound_Effects/DSGNTonl_INTERFACE-Tonal Click_HY_PC-006.wav"},unit.current_cell,x.current_cell)
 		

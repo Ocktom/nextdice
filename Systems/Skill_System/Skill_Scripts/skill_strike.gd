@@ -13,4 +13,4 @@ func _process(delta: float) -> void:
 func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 	print ("strike being used")
 	
-	ActionManager.request_action("attack",{"amount" : PlayerStats.player_str},action_source_cell,action_target_cell)
+	ActionManager.request_action("attack",{"amount" : Global.player_stats.player_str},action_source_cell,action_target_cell)

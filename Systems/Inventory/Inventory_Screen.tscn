@@ -50,8 +50,8 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="backpack_gear" parent="." unique_id=1017807794 instance=ExtResource("3_u0wde")]
-layout_mode = 0
-offset_left = 115.25
-offset_top = 30.5
-offset_right = 115.25
-offset_bottom = 70.5
+layout_mode = 1
+offset_left = -111.5
+offset_top = 50.75
+offset_right = -111.5
+offset_bottom = 90.75

@@ -2,10 +2,15 @@ extends Node
 
 var game_state : Enums.GameState
 
-var audio_node : Node
+#GLOBALLY ACCESSIBLE NODES:
 
+var audio_node : Node
 var grid : Node
 var world: Node
+var player_stats : Node
+var dice_manager : Node
+
+var back_gear_node : Control
 var main: Control
 var inventory : Control
 
@@ -232,3 +237,7 @@ func get_path_cells(start_cell : Cell, target_cell : Cell, max_move : int) -> Ar
 func unhighlight_cells():
 	for x in grid.all_cells:
 		x.highlight = false
+
+func reset():
+	player_dice.clear()
+	all_units.clear()

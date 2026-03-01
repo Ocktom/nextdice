@@ -13,7 +13,7 @@ var extending_slot : GearSlot = null
 func _ready() -> void:
 	gear_area.connect("mouse_entered",_on_mouse_entered)
 	gear_area.connect("mouse_exited",_on_mouse_exited)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta: float) -> void:
 	pass
 

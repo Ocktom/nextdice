@@ -4,7 +4,6 @@ var gear_slots : Array
 var empty_slots := 0
 @onready var backpack_hbox: HBoxContainer = $Backpack_Hbox
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	gear_slots = backpack_hbox.get_children()

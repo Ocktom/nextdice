@@ -1,4 +1,4 @@
-extends Unit
+extends Object_Unit
 class_name Torch
 
 func _ready():

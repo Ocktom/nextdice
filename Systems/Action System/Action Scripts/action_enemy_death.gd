@@ -5,7 +5,7 @@ var action_name := "enemy_death"
 func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	
 	
-	print ("enemy death executed")
+	print (" death executed")
 	var target = action_source_cell.occupant
 	
 	if target.dying_this_turn : 

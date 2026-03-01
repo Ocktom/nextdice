@@ -9,4 +9,4 @@ func _on_triggered(target : Unit, attacker: Unit):
 	
 	print ("spikes triggered")
 	if target == source:
-		ActionManager.request_action("damage_unit",{"damage_name": "physical","amount": passive_value},source,attacker)
+		ActionManager.request_action("damage_unit",{"damage_name": "physical","amount": passive_value},source,attacker.current_cell)
