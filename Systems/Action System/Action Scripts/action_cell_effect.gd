@@ -23,6 +23,4 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	var effect = Enums.CellEffect[context["cell_effect"]]
 	
 	cell_pick.cell_effect = effect
-	if cell_pick.occupant != null:
-		await cell_pick.apply_cell_effects_to_unit()
 	await cell_pick.update()

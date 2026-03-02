@@ -179,7 +179,7 @@ func attempt_attack():
 	turn_bonus = 0
 
 	return target
-
+	
 func attempt_move() -> bool:
 	
 	if status_effects.has("root"):
@@ -235,10 +235,9 @@ func attempt_move() -> bool:
 			if dist == 1:
 				print("enemy ", self, " moving")
 				await Global.timer(wait_time)
-				for c in path:
-					await current_cell.clear_cell()
-					c.fill_with_unit(self)
-					await Global.timer(step_time)
+				var final_cell = path[path.size() - 1]
+				await current_cell.clear_cell()
+				await final_cell.fill_with_unit(self)
 				return true
 
 			if dist < best_distance:
@@ -250,10 +249,9 @@ func attempt_move() -> bool:
 
 	print("enemy ", self, " moving")
 	await Global.timer(wait_time)
-	for c in best_path:
-		await current_cell.clear_cell()
-		await c.fill_with_unit(self)
-		await Global.timer(step_time)
+	var final_cell = best_path[best_path.size() - 1]
+	await current_cell.clear_cell()
+	await final_cell.fill_with_unit(self)
 
 	return true
 	

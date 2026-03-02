@@ -8,8 +8,11 @@ func request_action(action_name: String, context_dictionary : Dictionary, action
 
 func create_action(action_name : String, context_dictionary: Dictionary, action_source_cell : Cell, action_target_cell: Cell):
 	
+	if Global.game_state == Enums.GameState.ROUND_END:
+		return
+	
 	var script_path = str("res://Systems/Action System/Action Scripts/action_", action_name, ".gd")
-	print ("loading path script", script_path)
+	print ("loading path script ", script_path)
 	var action = Action.new()
 	action.set_script(load(script_path))
 	await action.execute(context_dictionary, action_source_cell, action_target_cell)

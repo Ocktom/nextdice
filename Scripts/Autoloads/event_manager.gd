@@ -27,6 +27,13 @@ func on_unit_attacked_before_damage(attacker: Unit, attacked: Unit):
 		{"amount" : attacked.status_effects["spikes"],"damage_name" : "physical"},
 		attacked.current_cell,attacker.current_cell)
 
+func on_end_player_turn():
+	await explode_bombs()
+	await apply_cell_effects()
+
+func on_end_enemy_turn():
+	await apply_cell_effects()
+
 func on_unit_moved(moved_unit: Unit, start_cell: Cell, end_cell: Cell):
 	if moved_unit is Hero:
 		
@@ -77,3 +84,7 @@ func explode_bombs():
 				
 				await ActionManager.request_action("explosion",{},x.current_cell,x.current_cell)
 			
+func apply_cell_effects():
+	for x in Global.grid.all_cells:
+		if x.occupant != null:
+			x.apply_cell_effects_to_unit()

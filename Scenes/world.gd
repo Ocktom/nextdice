@@ -95,7 +95,7 @@ func end_player_turn():
 
 	Global.game_state = Enums.GameState.ENEMY_TURN
 	
-	await EventManager.explode_bombs()
+	await EventManager.on_end_player_turn()
 	
 	if Global.game_state == Enums.GameState.ENEMY_TURN:
 		enemy_turn()

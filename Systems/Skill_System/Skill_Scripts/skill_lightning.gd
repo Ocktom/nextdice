@@ -19,8 +19,8 @@ func execute(action_source: Node, target: Node, context:= {}):
 	var source_cell : Cell = Global.hero_unit.current_cell
 	
 	while current_unit != null and amount > 0:
-		if source_cell.occupant != Global.hero_unit:
-			Global.animate_lightning(source_cell,current_unit.current_cell)
+
+		Global.animate_lightning(source_cell,current_unit.current_cell)
 		await Global.timer(.3)
 		print ("current unit is ", current_unit)
 		Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_MELEE-Bit Sword_HY_PC-001.wav")
