@@ -70,9 +70,10 @@ func explode_bombs():
 		if not is_instance_valid(x):
 			continue
 		if x is Bomb:
-			var cell = x.current_cell
-			x.current_cell.clear_cell()
-			x.queue_free()
-			
-			await ActionManager.request_action("explosion",{},x.current_cell,x.current_cell)
+			if not x.dying_this_turn:
+				var cell = x.current_cell
+				x.current_cell.clear_cell()
+				x.queue_free()
+				
+				await ActionManager.request_action("explosion",{},x.current_cell,x.current_cell)
 			

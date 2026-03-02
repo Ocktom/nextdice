@@ -46,14 +46,13 @@ func fill_with_unit(unit : Unit):
 	unit.current_cell = self
 	unit.global_position = global_position
 	
-	apply_cell_effects_to_unit()
-	unit.update()
+	await apply_cell_effects_to_unit()
+	await unit.update()
 
 func apply_cell_effects_to_unit():
 	
 	if occupant == null:
 		return
-	
 	
 	if cell_effect != Enums.CellEffect.NONE:
 		

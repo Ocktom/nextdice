@@ -31,13 +31,12 @@ func end_turn_effects(unit : Unit):
 	
 	#if not is_instance_valid(unit) : return
 	
-	if unit.current_cell.cell_effect == Enums.CellEffect.FIRE:
-		unit.status_effects["burn"] = 3
-	
 	if not is_instance_valid(unit) : 
 		print ("instance invalid after FIRE, returning")
 		return
 	
+	if unit.dying_this_turn:
+		return
 	
 	if unit.status_effects.has("burn"):
 		print ("unit has burn, applying...")
@@ -52,7 +51,10 @@ func end_turn_effects(unit : Unit):
 		print ("unit has poison, applying...")
 		await ActionManager.request_action("damage_unit",{"damage_name" : "poison", "amount": 1}
 		,unit.current_cell,unit.current_cell)
-	
+		
+	if unit.dying_this_turn:
+		return
+		
 	if not is_instance_valid(unit) : 
 		print ("instance invalid after poison, returning")
 		return

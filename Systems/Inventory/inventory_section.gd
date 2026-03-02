@@ -13,9 +13,10 @@ extends Control
 @onready var skill_texture_4: TextureRect = $Skill_Grid/skill_texture_4
 @onready var skill_texture_6: TextureRect = $Skill_Grid/skill_texture_6
 
-@onready var gear_slot_1: GearSlot = $Gear_Slot_1
-@onready var gear_slot_2: GearSlot = $Gear_Slot2
-@onready var gear_slot_3: GearSlot = $Gear_Slot3
+@onready var gear_slot_1: GearSlot = $HBoxContainer/Gear_Slot_1
+@onready var gear_slot_2: GearSlot = $HBoxContainer/Gear_Slot2
+@onready var gear_slot_3: GearSlot = $HBoxContainer/Gear_Slot3
+
 
 
 var gear_slots : Array[GearSlot]

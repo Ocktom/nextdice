@@ -10,6 +10,10 @@ func execute(context: Dictionary, unit_current_cell: Cell = null, target_cell: C
 	var spaces_moved = Global.grid.get_distance(unit_current_cell,target_cell)
 	Global.player_stats.spaces_moved_this_turn += spaces_moved
 	
+	if target_cell.occupant != null:
+		Global.float_text("ERROR, space full",target_cell.global_position,Color.RED)
+		return
+	
 	Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_MOVEMENT-Retro Jump_HY_PC-001.wav")
 	await target_cell.fill_with_unit(unit_to_move)
 	await EventManager.on_unit_moved(unit_to_move,unit_current_cell,target_cell)

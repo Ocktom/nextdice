@@ -15,20 +15,33 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_vf8ku")
 
-[node name="backpack_gear" parent="." unique_id=1017807794 instance=ExtResource("3_mtofn")]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=880545997]
 layout_mode = 0
-offset_left = 492.0
-offset_top = 859.0
-offset_right = 492.0
-offset_bottom = 859.0
+offset_right = 1927.0
+offset_bottom = 1101.0
+color = Color(0.36425677, 0.30163258, 0.33186463, 1)
+
+[node name="backpack_gear" parent="." unique_id=1017807794 instance=ExtResource("3_mtofn")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -413.0
+offset_top = 308.0
+offset_right = -413.0
+offset_bottom = 308.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(4, 4)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=528293732]
 layout_mode = 0
 offset_left = 772.0
-offset_top = 654.0
+offset_top = 613.0
 offset_right = 1142.0
-offset_bottom = 752.0
+offset_bottom = 711.0
 theme_override_constants/separation = 50
 
 [node name="Take_Button" type="Button" parent="HBoxContainer" unique_id=468471442]

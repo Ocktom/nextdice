@@ -17,7 +17,7 @@ var data : Dictionary = {
 	"gear_name": "Greaves",
 	"gear_size": 2,
 	"gear_type": "MOVEMENT",
-	"skills": "blade_walk,blade_walk, blade_walk, blade_walk, blade_walk, fire_walk,\n"
+	"skills": "blade_walk, blade_walk, fire_walk, fire_walk, fire_walk, fire_walk,\n"
   },
   "Magic_Ring": {
 	"gear_name": "Elemental_Amulet",

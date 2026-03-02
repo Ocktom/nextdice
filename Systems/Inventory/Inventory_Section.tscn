@@ -22,11 +22,12 @@ color = Color(0.2878403, 0.456892, 0.29885015, 1)
 
 [node name="Skill_Grid" type="GridContainer" parent="." unique_id=1324008792]
 layout_mode = 0
-offset_left = 0.5
-offset_top = -8.5
-offset_right = 83.5
-offset_bottom = 44.5
-theme_override_constants/v_separation = 0
+offset_left = 6.0
+offset_top = -5.25
+offset_right = 89.0
+offset_bottom = 47.75
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = -2
 columns = 3
 
 [node name="skill_texture_1" type="TextureRect" parent="Skill_Grid" unique_id=1939314561]
@@ -59,23 +60,24 @@ texture_filter = 1
 layout_mode = 2
 texture = ExtResource("1_ri4sp")
 
-[node name="Gear_Slot_1" parent="." unique_id=688289814 instance=ExtResource("4_3rdjd")]
-layout_mode = 0
-offset_left = 1.5
-offset_top = 48.25
-offset_right = 1.5
-offset_bottom = 48.25
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1277749761]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 46.75
+offset_right = 69.0
+offset_bottom = 46.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
 
-[node name="Gear_Slot2" parent="." unique_id=1506724202 instance=ExtResource("4_3rdjd")]
-layout_mode = 0
-offset_left = 31.0
-offset_top = 48.25
-offset_right = 31.0
-offset_bottom = 48.25
+[node name="Gear_Slot_1" parent="HBoxContainer" unique_id=688289814 instance=ExtResource("4_3rdjd")]
+layout_mode = 2
 
-[node name="Gear_Slot3" parent="." unique_id=2116910068 instance=ExtResource("4_3rdjd")]
-layout_mode = 0
-offset_left = 59.75
-offset_top = 48.25
-offset_right = 59.75
-offset_bottom = 48.25
+[node name="Gear_Slot2" parent="HBoxContainer" unique_id=1506724202 instance=ExtResource("4_3rdjd")]
+layout_mode = 2
+
+[node name="Gear_Slot3" parent="HBoxContainer" unique_id=2116910068 instance=ExtResource("4_3rdjd")]
+layout_mode = 2

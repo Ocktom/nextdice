@@ -13,7 +13,7 @@ script = ExtResource("1_wguhy")
 layout_mode = 1
 offset_right = 238.0
 offset_bottom = 27.0
-theme_override_constants/separation = 30
+theme_override_constants/separation = 25
 
 [node name="Gear_Slot" parent="Backpack_Hbox" unique_id=688289814 instance=ExtResource("2_yog7v")]
 layout_mode = 2

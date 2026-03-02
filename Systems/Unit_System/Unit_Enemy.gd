@@ -134,7 +134,7 @@ func plan_action():
 		Global.float_text("rooted", global_position)
 	
 	var attack_target = await attempt_attack()
-
+	print ("unit ", unit_name, " attempt_attack called")
 	if attack_target:
 		await enemy_actions(attack_target)
 		return
@@ -152,7 +152,7 @@ func plan_action():
 	await enemy_actions()
 	
 func attempt_attack():
-	
+	print ("unit ", unit_name, " attempt_attack called")
 	if atk < 1:
 		return null
 	
