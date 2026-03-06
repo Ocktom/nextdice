@@ -25,4 +25,4 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	for x in adjacent_cells:
 		if not x.is_empty():
 			if not Global.game_state == Enums.GameState.ROUND_END:
-				await ActionManager.request_action("damage_unit",{"amount" : 3,"damage_name" : "physical"},action_source_cell,x)
+				await Global.action_manager.request_action("damage_unit",{"amount" : 3,"damage_name" : "physical"},action_source_cell,x)

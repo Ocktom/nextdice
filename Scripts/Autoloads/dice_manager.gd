@@ -9,10 +9,6 @@ var dice_path : PackedScene = preload("res://Systems/Dice_System/Dice.tscn")
 func _ready() -> void:
 	
 	Global.dice_manager = self
-	
-	var skill_data_script = load("res://Systems/Skill_System/skill_data_dictionary.gd").new()
-	skill_data_dictionary = skill_data_script.data
-	skill_names = skill_data_dictionary.keys()
 
 func create_dice():
 	Global.player_dice = []
@@ -49,7 +45,7 @@ func insert_skill_to_face(skill_name : String, face: Face):
 	
 	print("loading skill_name of ", skill_name, " skill is ", skill)
 	
-	var skill_data = skill_data_dictionary.get(skill_name, {})
+	var skill_data = GameData.skill_data_dictionary.get(skill_name, {})
 	
 	skill.skill_name = skill_name
 	skill.face = face
@@ -66,14 +62,14 @@ func highlight_useable_cells(dragging_dice: Dice):
 	
 	for x in Global.grid.all_cells:
 		
-		x.highlight = false
+		x.set_highlight(false)
 			
 		if x.is_empty():
 		
 			if InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.STRAIGHT_EMPTY_CELL \
 			or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.STRAIGHT_ANY_CELL:
 				if Global.grid.has_straight_path(Global.hero_unit.current_cell,x):
-					x.highlight = true
+					x.set_highlight(true,Global.red_highlight)
 					continue
 			
 			if InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_EMPTY_CELL \
@@ -100,7 +96,7 @@ func highlight_useable_cells(dragging_dice: Dice):
 			
 				var path_cells = Global.grid.get_cells_in_path(Global.hero_unit.current_cell,x)
 				for y in path_cells:
-					y.highlight = true
+					y.set_highlight(true,Global.red_highlight)
 			
 func is_useable(dragging_dice: Dice, hovered_cell : Cell, float_text : bool = true) -> bool:
 							

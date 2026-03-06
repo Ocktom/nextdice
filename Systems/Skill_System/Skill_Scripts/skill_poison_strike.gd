@@ -11,8 +11,8 @@ func _process(delta: float) -> void:
 func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 	print ("strike being used")
 	
-	await ActionManager.request_action("attack",{"amount" : Global.player_stats.player_str},action_source_cell,action_target_cell)
+	await Global.action_manager.request_action("attack",{"amount" : Global.player_stats.player_str},action_source_cell,action_target_cell)
 	if action_target_cell.occupant != null:
 		if not action_target_cell.occupant.dying_this_turn:
 			await Global.timer(.3)
-			await ActionManager.request_action("status_effect",{"amount" : 2,"status_name" : "POISON", "color" : Color.LIME_GREEN},action_source_cell,action_target_cell)
+			await Global.action_manager.request_action("status_effect",{"amount" : 2,"status_name" : "POISON", "color" : Color.LIME_GREEN},action_source_cell,action_target_cell)

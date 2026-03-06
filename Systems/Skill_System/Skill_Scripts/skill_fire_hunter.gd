@@ -24,8 +24,8 @@ func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 		if x.dying_this_turn:
 			continue
 		
-		ActionManager.request_action("projectile_attack",{"projectile_name" : "purple_ball", "amount" : Global.player_stats.player_int},action_source_cell,x.current_cell)
+		Global.action_manager.request_action("projectile_attack",{"projectile_name" : "purple_ball", "amount" : Global.player_stats.player_int},action_source_cell,x.current_cell)
 		Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_SKILL RELEASE-Mecha Laser Release_HY_PC-004.wav")
 		await Global.timer(Global.projectile_time)
 		
-		ActionManager.request_action("damage_unit",{"amount" : Global.player_stats.player_int-1,"damage_name" : "magic"},action_source_cell,x.current_cell)
+		Global.action_manager.request_action("damage_unit",{"amount" : Global.player_stats.player_int-1,"damage_name" : "magic"},action_source_cell,x.current_cell)

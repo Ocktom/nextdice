@@ -1,7 +1,6 @@
 extends Control
 class_name Dice
 
-
 @export var dice_icons_node : Node2D
 
 var dice_icons : Array[Node]
@@ -89,7 +88,7 @@ func _on_mouse_entered():
 	InputManager.hovered_dice = self
 	Global.world.hover_dice(self)
 	
-	#Global.animate(self,Enums.Anim.POP)
+	Global.animate(self,Enums.Anim.POP)
 	#Global.animate(self,Enums.Anim.FLASH,Color.GREEN)
 	
 func _on_mouse_exited():

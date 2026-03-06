@@ -22,7 +22,7 @@ func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 				print ("appending ", x.occupant, " to cleave_units")
 				occupied_cleave_cells.append(x)
 		
-		await ActionManager.request_action("attack",{"amount" : main_amount, "target" : action_target_cell},action_source_cell,action_target_cell)
+		await Global.action_manager.request_action("attack",{"amount" : main_amount, "target" : action_target_cell},action_source_cell,action_target_cell)
 		
 		for x in occupied_cleave_cells:
-			await ActionManager.request_action("damage_unit",{"target" : x, "amount" : cleave_amount, "damage_name" : "physical"},action_source_cell,x)
+			await Global.action_manager.request_action("damage_unit",{"target" : x, "amount" : cleave_amount, "damage_name" : "physical"},action_source_cell,x)

@@ -45,7 +45,7 @@ func load_gear(gear_name_array: Array[String]) -> Array[String]:
 	var sorted_gear = sort_gear_by_size(gear_name_array)
 
 	for gear_name in sorted_gear:
-		var gear_skills_string : String = ItemManager.gear_data_dictionary[gear_name]["skills"]
+		var gear_skills_string : String = GameData.gear_data_dictionary[gear_name]["skills"]
 		var gear_skills = parse_string_to_array(gear_skills_string)
 
 		for skill in gear_skills:
@@ -85,7 +85,7 @@ func fill_gear_slots(sorted_gear: Array[String]) -> void:
 		if slot_index >= gear_slots.size():
 			break
 
-		var gear_size : int = ItemManager.gear_data_dictionary[gear_name]["gear_size"]
+		var gear_size : int = GameData.gear_data_dictionary[gear_name]["gear_size"]
 		var tex = load("res://Art/Gear_Sprites/" + gear_name + ".png")
 
 		# primary slot
@@ -111,8 +111,8 @@ func fill_gear_slots(sorted_gear: Array[String]) -> void:
 func sort_gear_by_size(gear_array: Array[String]) -> Array[String]:
 	var sorted = gear_array.duplicate()
 	sorted.sort_custom(func(a, b):
-		var size_a = ItemManager.gear_data_dictionary[a]["gear_size"]
-		var size_b = ItemManager.gear_data_dictionary[b]["gear_size"]
+		var size_a = GameData.gear_data_dictionary[a]["gear_size"]
+		var size_b = GameData.gear_data_dictionary[b]["gear_size"]
 		return size_a > size_b
 	)
 	return sorted

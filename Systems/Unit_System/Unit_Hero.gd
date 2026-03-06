@@ -3,7 +3,6 @@ class_name Hero
 
 @onready var hp_label: Label = $Right_Stats/HBoxContainer/HP_Label
 @onready var shield_label: Label = $Right_Stats/HBoxContainer/Shield_Label
-@onready var unit_sprite: AnimatedSprite2D = $Unit_Sprite
 @onready var right_stats: VBoxContainer = $Right_Stats
 
 
@@ -16,7 +15,7 @@ func end_turn_effects():
 	#ENACT EFFECTS HERE:
 	
 	if Global.player_stats.status_effects.has("poison"):
-		await ActionManager.create_action("damage_unit",{"damage_name" : "poison","amount":status_effects["poison"]},null,current_cell)
+		await Global.action_manager.create_action("damage_unit",{"damage_name" : "poison","amount":status_effects["poison"]},null,current_cell)
 	
 	#DECREASE OR ERASE EFFECTS HERE:
 	

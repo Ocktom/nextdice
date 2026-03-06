@@ -13,11 +13,11 @@ func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 	var amount := Global.player_stats.player_str
 	var impale_cell = Global.grid.get_impale_target(Global.hero_unit.current_cell,action_target_cell)
 	
-	await ActionManager.request_action("attack",{"amount" : amount, "target" : action_target_cell},action_source_cell,action_target_cell)
+	await Global.action_manager.request_action("attack",{"amount" : amount, "target" : action_target_cell},action_source_cell,action_target_cell)
 	
 	if impale_cell != null:
 		if impale_cell.occupant != null:
 			await Global.timer(.3)
-			await ActionManager.request_action("damage_unit",
+			await Global.action_manager.request_action("damage_unit",
 			{"target" : impale_cell, "amount" : amount, "damage_name" : "physical", "audio_path" : "res://Audio/Sound_Effects/DSGNMisc_HIT-Zap Metal_HY_PC-001.wav"},\
 			action_source_cell,impale_cell)

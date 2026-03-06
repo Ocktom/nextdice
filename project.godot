@@ -28,14 +28,9 @@ buses/default_bus_layout="uid://dmqx8qe4t11qy"
 Global="*res://Scripts/Autoloads/Global.gd"
 Enums="*res://Scripts/Autoloads/Enums.gd"
 InputManager="*res://Scripts/Autoloads/InputManager.gd"
-UnitManager="*res://Scripts/Autoloads/unit_manager.gd"
-ActionManager="*res://Systems/Action System/action_manager.gd"
-ItemManager="*res://Systems/Item System/item_manager.gd"
-EffectManager="*uid://cvpdhrdrd237v"
-EventManager="*uid://m1owfwi3vv5y"
-StatusManager="*uid://yubtmhhbkl26"
 GearManager="*uid://hblxe6x6u4vm"
 DiceManager="*uid://bt2iaunwo888v"
+GameData="*uid://ckvy5n50sglay"
 
 [display]
 

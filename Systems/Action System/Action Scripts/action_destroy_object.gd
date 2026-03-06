@@ -14,7 +14,7 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	
 	target.dying_this_turn = true
 	
-	UnitManager.dead_units.append(target)
+	Global.unit_manager.dead_units.append(target)
 	
 	target.effects_sprite.visible = true
 	target.effects_sprite.play()
@@ -30,8 +30,8 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	await target.current_cell.clear_cell()
 	
 	if target is Bomb:
-		await ActionManager.request_action("explosion",{},action_source_cell,action_target_cell)
+		await Global.action_manager.request_action("explosion",{},action_source_cell,action_target_cell)
 	
-	await UnitManager.clear_dead_units()
+	await Global.unit_manager.clear_dead_units()
 	
 		

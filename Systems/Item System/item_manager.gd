@@ -14,6 +14,7 @@ func _ready() -> void:
 	item_names = item_data_dictionary.keys()
 
 func get_new_item(item_name : String):
+	
 	print("inserting item")
 
 	var item_data = item_data_dictionary[item_name]

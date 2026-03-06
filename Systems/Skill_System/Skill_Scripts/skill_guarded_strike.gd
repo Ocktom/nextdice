@@ -10,6 +10,6 @@ func _process(delta: float) -> void:
 
 func execute(action_source_cell: Cell, action_target_cell: Cell, context_dict : Dictionary = {}):
 	
-	await ActionManager.request_action("attack",{"amount" : Global.player_stats.player_str/2},action_source_cell,action_target_cell)
+	await Global.action_manager.request_action("attack",{"amount" : Global.player_stats.player_str/2},action_source_cell,action_target_cell)
 	await Global.timer(.3)
-	await ActionManager.request_action("shield_unit",{"amount" : Global.player_stats.player_str/2},action_source_cell,action_source_cell)
+	await Global.action_manager.request_action("shield_unit",{"amount" : Global.player_stats.player_str/2},action_source_cell,action_source_cell)

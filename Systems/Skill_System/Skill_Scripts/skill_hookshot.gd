@@ -17,8 +17,8 @@ func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 		var cells_ahead = Global.grid.get_cells_in_direction(action_source_cell,direction,1)
 		var closest_cell = cells_ahead[0]
 		if unit_hit.current_cell != closest_cell:
-			ActionManager.request_action("move_unit",{},unit_hit.current_cell,closest_cell)
+			Global.action_manager.request_action("move_unit",{},unit_hit.current_cell,closest_cell)
 	else:
 		if action_source_cell != action_target_cell:
-			await ActionManager.request_action("move_unit",{},action_source_cell,action_target_cell)
+			await Global.action_manager.request_action("move_unit",{},action_source_cell,action_target_cell)
 		

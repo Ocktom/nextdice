@@ -36,8 +36,8 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 			if amount <= shield:
 				print ("damage was shielded")
 				target_status_effects["shield"] -= amount
-				Global.animate(action_target,Enums.Anim.SHAKE)
-				Global.animate(action_target,Enums.Anim.FLASH)
+				#action_target.play_sprite_anim(Enums.Anim.SHAKE)
+				#action_target.play_sprite_anim(Enums.Anim.FLASH)
 				Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_HIT-Spell Hit_HY_PC-001.wav")
 				Global.float_text("SHIELDED",action_target_cell.global_position,Color.GAINSBORO)
 				await action_target_cell.occupant.update()
@@ -82,8 +82,8 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	if audio_path != "":
 		Global.audio_node.play_sfx(audio_path)
 	
-	Global.animate(action_target,Enums.Anim.SHAKE)
-	Global.animate(action_target,Enums.Anim.FLASH,color)
+	action_target.flash_sprite(color)
+	action_target.shake_sprite()
 	
 	if action_target is Enemy:
 			
@@ -92,7 +92,7 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 			if action_target.hp < 1:
 				
 				print ("unit has less then 1 hp, calling enemy death on manager")
-				await ActionManager.request_action("enemy_death",{},action_target.current_cell)
+				await Global.action_manager.request_action("enemy_death",{},action_target.current_cell)
 			
 			if not action_target.dying_this_turn:
 				await action_target.update()
@@ -103,7 +103,7 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 		
 		if Global.player_stats.player_hp < 1:
 			print ("player died")
-			await ActionManager.request_action("hero_death",{},action_target.current_cell)
+			await Global.action_manager.request_action("hero_death",{},action_target.current_cell)
 		
 		else:
 			await action_target.update()
@@ -118,4 +118,4 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 			
 			print ("object unit hp is 0")
 			if not action_target.dying_this_turn:
-				await ActionManager.request_action("destroy_object",{},action_source_cell,action_target_cell)
+				await Global.action_manager.request_action("destroy_object",{},action_source_cell,action_target_cell)

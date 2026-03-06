@@ -19,5 +19,5 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 				target_cells.append(x.current_cell)
 		
 		for x in target_cells:
-			await ActionManager.request_action("status_effect",{"status_name": status_name,"amount" : context["amount"]},
+			await Global.action_manager.request_action("status_effect",{"status_name": status_name,"amount" : context["amount"]},
 			action_source_cell,x)

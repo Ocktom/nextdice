@@ -3,28 +3,15 @@ extends Node
 var enemy_data_dictionary : Dictionary
 var enemy_data
 var starting_enemy_count := 4
-var enemy_names : Array
 
 var dead_units : Array[Unit]
 
 func _ready() -> void:
 	
+	Global.unit_manager = self
 	var unit_data_script = load("res://Systems/Unit_System/enemy_data_dictionary.gd").new()
 	enemy_data_dictionary = unit_data_script.data
-	enemy_names = enemy_data_dictionary.keys()
-	
-func deal_unit_to_cell(name_string : String, cell : Cell):
-	
-	print ("dealing unit ", name_string)
-	
-	var unit_path : PackedScene = preload("res://Systems/Unit_System/Unit.tscn")
-	var new_unit = unit_path.instantiate()
-	
-	Global.main_scene.unit_layer.add_child(new_unit)
-	
-	await cell.fill_with_unit(new_unit)
-	await Global.animate(new_unit,Enums.Anim.POP)
-	
+		
 func spawn_new_enemy(name_string: String, cell : Cell):
 	
 	print ("spawning enemy with name ", name_string)
@@ -62,14 +49,13 @@ func spawn_new_enemy(name_string: String, cell : Cell):
 		Enums.RangeType.ALL:
 			unit.attack_diag = true
 			unit.attack_cardinal = true
-
-	unit.action_1_name = data["action_1_name"]
-	if not unit.action_1_name == "":
-		unit.action_1_context = data["action_1_context"]
-		
-	if not unit.action_2_name == "":
-		unit.action_2_context = data["action_2_context"]
 	
+	if data["enemy_actions"] != "":
+		unit.enemy_actions = JSON.parse_string(data["enemy_actions"])
+	
+	else:
+		unit.enemy_actions = {"enemy_move" : {}, "enemy_attack" : {}}
+		
 	#APPLY ROUND DIFFICULTY STATS
 	
 	if Global.round_number > 1: 
@@ -125,7 +111,7 @@ func spawn_bomb(cell: Cell):
 	print ("bomb spawning")
 	var chest_path : PackedScene = preload("res://Systems/Unit_System/Unit_Bomb.tscn")
 	var inst = chest_path.instantiate()
-	cell.spawn_unit(inst)
+	await cell.spawn_unit(inst)
 
 func spawn_hero():
 	
@@ -142,15 +128,15 @@ func spawn_round_enemies():
 	var enemy_names : Array
 	
 	if Global.round_number <= 3:
-		enemy_set = UnitManager.enemy_sets_easy.pick_random()
+		enemy_set = enemy_sets_easy.pick_random()
 	if (Global.round_number > 3 && Global.round_number <= 6):
-		print ("picking enemy set from ", UnitManager.enemy_sets_medium)
-		enemy_set = UnitManager.enemy_sets_medium.pick_random()
+		print ("picking enemy set from ", enemy_sets_medium)
+		enemy_set = enemy_sets_medium.pick_random()
 	if (Global.round_number > 6):
-		enemy_set = UnitManager.enemy_sets_difficult.pick_random()
+		enemy_set = enemy_sets_difficult.pick_random()
 	
 	print ("enemy_set is ", enemy_set)
-	enemy_names = UnitManager.enemy_sets[enemy_set]
+	enemy_names = enemy_sets[enemy_set]
 	
 	var hero_cell = Global.hero_unit.current_cell
 	var forbidden_cells = Global.grid.get_adjacent_cells(hero_cell)
@@ -171,7 +157,7 @@ func spawn_round_enemies():
 
 		var cell_pick = valid_cells.pick_random()
 		
-		UnitManager.spawn_new_enemy(x,cell_pick)
+		spawn_new_enemy(x,cell_pick)
 
 func clear_dead_units():
 	for x in dead_units:

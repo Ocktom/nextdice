@@ -37,12 +37,6 @@ func get_new_level_ups():
 		item.stat_amount = level_up_stats[stat]
 		x.fill_with_item(item)
 		
-func get_new_items():
-	
-	for x in all_slots:
-		var item_pick = ItemManager.item_names.pick_random()
-		var item_inst = ItemManager.get_new_item(item_pick)
-		x.fill_with_item(item_inst)
 
 func buy_item(item_slot: Item_Slot):
 	print ("item purchased of ", item_slot.occupant.item_name)

@@ -1,11 +1,13 @@
 extends Unit
 class_name Enemy
 
-@onready var unit_sprite: AnimatedSprite2D = $Unit_Sprite
 @onready var hp_label: Label = $Right_Stats/HBoxContainer/HP_Label
 @onready var shield_label: Label = $Right_Stats/HBoxContainer/SHIELD_Label
 @onready var atk_label: Label = $Right_Stats/ATK_Label
 @onready var sprite_ov: Sprite2D = $Sprite_OV
+
+@onready var right_stats: VBoxContainer = $Right_Stats
+
 
 var hp : int
 var max_hp : int
@@ -29,9 +31,6 @@ var attack_cardinal : bool
 var turn_bonus := 0
 var round_bonus := 0
 
-var action_1_name : String
-var action_1_context : Dictionary
-
 var passive_1_name : String
 var passive_1 : Passive
 var passive_1_trigger : Enums.Trigger
@@ -39,8 +38,7 @@ var passive_1_trigger : Enums.Trigger
 var passive_2_name : String
 var passive_2 : Passive
 
-var action_2_name : String
-var action_2_context : Dictionary
+var enemy_actions: Dictionary
 
 var projectile := false
 var movement := 2
@@ -68,220 +66,9 @@ func set_passives():
 		passive_1.source = self
 		passive_2.set_trigger()
 
-func get_attack_cells() -> Array[Cell]:
-	
-	print (unit_name, " getting attack cells, attack_diag is", attack_diag, " and attack_caridnal is ", attack_cardinal)
-	
-	var cells : Array[Cell] = []
-	var origin = current_cell.cell_vector
-
-	var directions = []
-
-	if attack_cardinal:
-		directions.append(Vector2i(0, -1))
-		directions.append(Vector2i(0, 1))
-		directions.append(Vector2i(-1, 0))
-		directions.append(Vector2i(1, 0))
-
-	if attack_diag:
-		directions.append(Vector2i(-1, -1))
-		directions.append(Vector2i(1, -1))
-		directions.append(Vector2i(-1, 1))
-		directions.append(Vector2i(1, 1))
-
-	for dir in directions:
-		for i in range(1, atk_range + 1):
-			var p = origin + dir * i
-
-			if not Global.grid.is_in_bounds(p):
-				break
-
-			var cell = Global.grid.grid[p.x][p.y]
-			cells.append(cell)
-
-			# LOS BLOCKER
-			if not cell.is_empty():
-				break
-
-	return cells
-
-func get_attack_targets() -> Array[Unit]:
-	var targets : Array[Unit] = []
-
-	for cell in get_attack_cells():
-		if cell.occupant == null:
-			continue
-
-		if cell.occupant is Torch:
-			targets.append(cell.occupant)
-		
-		if cell.occupant is Hero:
-			targets.append(cell.occupant)
-		
-	return targets
-
-func plan_action():
-
-	if status_effects.has("stun"):
-		Global.float_text("stunned", global_position)
-		return
-	
-	if status_effects.has("freeze"):
-		Global.float_text("FROZEN", global_position, Color.AQUA)
-		return
-	
-	if status_effects.has("root"):
-		Global.float_text("rooted", global_position)
-	
-	var attack_target = await attempt_attack()
-	print ("unit ", unit_name, " attempt_attack called")
-	if attack_target:
-		await enemy_actions(attack_target)
-		return
-
-	var moved = await attempt_move()
-
-	if moved:
-		Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_HIT-Zap Metal_HY_PC-002.wav")
-
-		# 🔥 try attacking AGAIN after movement (old behavior)
-		attack_target = await attempt_attack()
-		await enemy_actions(attack_target)
-		return
-	
-	await enemy_actions()
-	
-func attempt_attack():
-	print ("unit ", unit_name, " attempt_attack called")
-	if atk < 1:
-		return null
-	
-	var targets = get_attack_targets()
-
-	if targets.is_empty():
-		return null
-
-	var target : Unit = targets.pick_random()
-
-	print("enemy ", unit_name, " attacking ", target.unit_name)
-
-	await Global.timer(wait_time)
-
-	await ActionManager.request_action(
-		"attack",
-		{
-			"amount": atk
-		},
-		self.current_cell,
-		target.current_cell
-	)
-	
-	turn_bonus = 0
-
-	return target
-	
-func attempt_move() -> bool:
-	
-	if status_effects.has("root"):
-		return false
-	
-	if movement < 1:
-		return false
-	
-	var hero_cell = Global.hero_unit.current_cell
-	var my_cell = current_cell
-
-	var dx = abs(hero_cell.cell_vector.x - my_cell.cell_vector.x)
-	var dy = abs(hero_cell.cell_vector.y - my_cell.cell_vector.y)
-
-	var directions = [
-		Vector2i(0, -1),
-		Vector2i(0, 1),
-		Vector2i(-1, 0),
-		Vector2i(1, 0),
-		Vector2i(-1, -1),
-		Vector2i(1, -1),
-		Vector2i(-1, 1),
-		Vector2i(1, 1)
-	]
-
-	var best_path = []
-	var best_distance = max(dx, dy)
-
-	for dir in directions:
-		var step_cell = my_cell
-		var path = []
-		var remaining = movement
-
-		while remaining > 0:
-			var next_pos = step_cell.cell_vector + dir
-
-			if not Global.grid.is_in_bounds(next_pos):
-				break
-
-			var next_cell = Global.grid.grid[next_pos.x][next_pos.y]
-			if not next_cell.is_empty():
-				break
-
-			step_cell = next_cell
-			path.append(step_cell)
-			remaining -= 1
-
-			var dist = max(
-				abs(hero_cell.cell_vector.x - step_cell.cell_vector.x),
-				abs(hero_cell.cell_vector.y - step_cell.cell_vector.y)
-			)
-
-			if dist == 1:
-				print("enemy ", self, " moving")
-				await Global.timer(wait_time)
-				var final_cell = path[path.size() - 1]
-				await current_cell.clear_cell()
-				await final_cell.fill_with_unit(self)
-				return true
-
-			if dist < best_distance:
-				best_distance = dist
-				best_path = path.duplicate()
-
-	if best_path.size() == 0:
-		return false
-
-	print("enemy ", self, " moving")
-	await Global.timer(wait_time)
-	var final_cell = best_path[best_path.size() - 1]
-	await current_cell.clear_cell()
-	await final_cell.fill_with_unit(self)
-
-	return true
-	
-func enemy_actions(attack_target: Node2D = null):
-	var target_cell: Cell
-	
-	if attack_target == null:
-		target_cell = null
-	else:
-		target_cell = attack_target.current_cell
-	
-	if action_1_name == "transform_unit":
-		if status_effects.keys().has("regrowing"):
-			if status_effects["regrowing"] > 0:
-				return
-				
-		target_cell = current_cell
-	
-	if action_1_name == "spawn_unit":
-		target_cell = Global.grid.get_empty_cells().pick_random()
-		
-	if action_1_name != "":
-		await ActionManager.request_action(action_1_name, action_1_context, current_cell, target_cell)
-	
-	if action_2_name != "":
-		await ActionManager.request_action(action_2_name, action_2_context, current_cell, target_cell)
-	
 func update():
 	
 	hp_label.text = str(hp)
 	atk_label.text = str(atk)
 	
-	await StatusManager.update_status_effects(self)
+	await Global.status_manager.update_status_effects(self)

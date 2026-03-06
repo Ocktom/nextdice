@@ -14,7 +14,7 @@ func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 	var unit = action_source_cell.occupant
 	
 	var units_passed = Global.grid.get_units_in_path(Global.hero_unit.current_cell,action_target_cell)
-	await ActionManager.request_action("move_unit",{},Global.hero_unit.current_cell,action_target_cell)
+	await Global.action_manager.request_action("move_unit",{},Global.hero_unit.current_cell,action_target_cell)
 	
 	for x in units_passed:
 		
@@ -23,6 +23,6 @@ func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 		if x.dying_this_turn:
 			continue
 		
-		await ActionManager.request_action("damage_unit",
+		await Global.action_manager.request_action("damage_unit",
 		{"damage_name" : "physical","amount" : Global.player_stats.player_dex/2, "audio_path" : "res://Audio/Sound_Effects/DSGNMisc_HIT-Zap Metal_HY_PC-002.wav"},
 		unit.current_cell,x.current_cell)

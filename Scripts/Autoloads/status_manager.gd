@@ -4,7 +4,7 @@ var numbered_status_effects: Array[String] = [
 		"burn","frost","poison","spikes"
 		]
 var decreasing_status_effects: Array[String] = [
-	"frost","poison","burn","regrow"
+	"frost","poison","burn"
 ]
 var auto_remove_status_effects: Array[String] = [
 		"frost","poison","burn","shield"]
@@ -13,12 +13,7 @@ var no_icon_status_effects : Array[String] = ["shield"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	Global.status_manager = self
 
 func start_turn_effects(unit: Unit):
 		
@@ -40,7 +35,7 @@ func end_turn_effects(unit : Unit):
 	
 	if unit.status_effects.has("burn"):
 		print ("unit has burn, applying...")
-		await ActionManager.request_action("damage_unit",{"damage_name" : "fire", "amount": 1}
+		await Global.action_manager.request_action("damage_unit",{"damage_name" : "fire", "amount": 1}
 		,unit.current_cell,unit.current_cell)
 	
 	if not is_instance_valid(unit) : 
@@ -49,7 +44,7 @@ func end_turn_effects(unit : Unit):
 	
 	if unit.status_effects.has("poison"):
 		print ("unit has poison, applying...")
-		await ActionManager.request_action("damage_unit",{"damage_name" : "poison", "amount": 1}
+		await Global.action_manager.request_action("damage_unit",{"damage_name" : "poison", "amount": 1}
 		,unit.current_cell,unit.current_cell)
 		
 	if unit.dying_this_turn:
@@ -61,10 +56,8 @@ func end_turn_effects(unit : Unit):
 	
 	if unit.status_effects.keys().has("regrow"):
 		print ("unit has regrow, with a value of ", unit.status_effects["regrow"] )
-		if unit.status_effects["regrow"] < 1:
-			print ("REGROWING")
-			var cell_pick = unit.current_cell
-			await ActionManager.request_action("transform_unit",{"unit_name": "Skeltron"},cell_pick,cell_pick)
+		var cell_pick = unit.current_cell
+		await Global.action_manager.request_action("transform_unit",{"unit_name": "Skeltron"},cell_pick,cell_pick)
 	
 	if not is_instance_valid(unit) : 
 		print ("instance invalid after regrow, returning")
@@ -96,7 +89,7 @@ func update_status_effects(unit : Unit):
 	if unit.status_effects.keys().has("frost"):
 		if unit.status_effects["frost"] >= 3:
 			unit.status_effects.erase("frost")
-			ActionManager.request_action("status_effect",{"status_name" : "FREEZE", "amount" : 1},unit.current_cell,unit.current_cell)
+			Global.action_manager.request_action("status_effect",{"status_name" : "FREEZE", "amount" : 1},unit.current_cell,unit.current_cell)
 	
 	if not is_instance_valid(unit) : return
 	

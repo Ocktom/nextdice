@@ -14,11 +14,11 @@ func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 	
 	var unit : Unit = action_source_cell.occupant
 	
-	await ActionManager.request_action("move_unit",{},action_source_cell,action_target_cell)
+	await Global.action_manager.request_action("move_unit",{},action_source_cell,action_target_cell)
 	var adjacent_units = Global.grid.get_adjacent_units(unit.current_cell)
 	for x in adjacent_units:
 		if not x is Enemy:
 			continue
 		await Global.timer(.25)
-		ActionManager.request_action("attack",{"target" : x.current_cell, "amount" : Global.player_stats.player_str/2, "sound_path" : "res://Audio/Sound_Effects/DSGNTonl_INTERFACE-Tonal Click_HY_PC-006.wav"},unit.current_cell,x.current_cell)
+		Global.action_manager.request_action("attack",{"target" : x.current_cell, "amount" : Global.player_stats.player_str/2, "sound_path" : "res://Audio/Sound_Effects/DSGNTonl_INTERFACE-Tonal Click_HY_PC-006.wav"},unit.current_cell,x.current_cell)
 		

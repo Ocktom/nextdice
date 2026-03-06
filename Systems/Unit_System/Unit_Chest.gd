@@ -1,7 +1,6 @@
 extends Object_Unit
 class_name Chest
 
-@onready var unit_sprite: AnimatedSprite2D = $Unit_Sprite
 @onready var hp_label: Label = $Right_Stats/HBoxContainer/HP_Label
 @onready var shield_label: Label = $Right_Stats/HBoxContainer/SHIELD_Label
 
@@ -19,7 +18,7 @@ func open_chest():
 	Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_MOVEMENT-Retro Jump_HY_PC-005.wav"
 )
 	await Global.timer(1)
-	await ActionManager.request_action("remove_unit",{},current_cell,current_cell)
+	await Global.action_manager.request_action("remove_unit",{},current_cell,current_cell)
 	Global.world.find_gear()
 
 func take_damage(amount : int):

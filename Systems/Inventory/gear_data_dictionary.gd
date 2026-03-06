@@ -11,7 +11,7 @@ var data : Dictionary = {
 	"gear_name": "Broadsword",
 	"gear_size": 2,
 	"gear_type": "ATTACK",
-	"skills": "strike,strike,cleaving_strike,cleaving_strike"
+	"skills": "poison_strike,poison_strike,poison_strike,cleaving_strike"
   },
   "Greaves": {
 	"gear_name": "Greaves",

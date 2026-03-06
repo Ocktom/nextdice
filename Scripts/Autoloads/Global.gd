@@ -2,6 +2,10 @@ extends Node
 
 var game_state : Enums.GameState
 
+const red_highlight : Color = Color(1.0, 0.329, 0.2, 0.235)
+const green_highlight : Color = Color(0.338, 0.875, 0.248, 0.235)
+const white_highlight := Color(1.0, 1.0, 1.0, 0.235)
+
 #GLOBALLY ACCESSIBLE NODES:
 
 var audio_node : Node
@@ -9,6 +13,12 @@ var grid : Node
 var world: Node
 var player_stats : Node
 var dice_manager : Node
+var unit_manager : Node
+var event_manager : Node
+var status_manager : Node
+var enemy_manager : Node
+
+var action_manager : Node
 
 var back_gear_node : Control
 var main: Control
@@ -52,6 +62,8 @@ func float_text(message: String, position: Vector2, color := Color.WHITE):
 	await timer(.4)
 
 func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE, target_node: Node = null):
+	
+	return
 	
 	if not is_instance_valid(node):
 		print ("invalid instance in global.animate, retuning")
@@ -110,7 +122,7 @@ func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE, target_no
 			var original_scale = Vector2(1,1)
 			var squish_scale = original_scale * 0.85
 			tween.tween_property(node, "scale", squish_scale, 0.1)
-			tween.tween_property(self, "scale", original_scale, 0.15)
+			tween.tween_property(node, "scale", original_scale, 0.15)
 		
 		Enums.Anim.DART:
 
@@ -178,8 +190,117 @@ func animate(node: Node, anim : Enums.Anim, flash_color = Color.WHITE, target_no
 			)
 	
 	if node is Unit:
-		node.update()
+		node.global_position = node.current_cell.global_position
 
+func animate_unit(unit: Unit, anim: Enums.Anim, flash_color = Color.WHITE, target_node: Node = null):
+	if not is_instance_valid(unit):
+		return
+
+	# Kill previous tween if you store one
+	if unit.has_meta("active_tween"):
+		var old_tween = unit.get_meta("active_tween")
+		if is_instance_valid(old_tween):
+			old_tween.kill()
+
+	var tween = unit.create_tween()
+	unit.set_meta("active_tween", tween)
+
+	match anim:
+
+		Enums.Anim.FLASH:
+
+			tween.set_ease(Tween.EASE_OUT)
+			tween.set_trans(Tween.TRANS_SINE)
+
+			var original_modulate = Color(1,1,1,1)
+			var bright_flash = flash_color * 3
+			bright_flash.a = 1.0
+
+			tween.tween_property(unit, "modulate", bright_flash, 0.1)
+			tween.tween_property(unit, "modulate", original_modulate, 0.1)
+
+
+		Enums.Anim.SHAKE:
+
+			var strength = 7
+			var shakes = 4
+			var duration = 0.25
+
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.set_ease(Tween.EASE_IN_OUT)
+
+			for i in range(shakes):
+				var direction = 1 if i % 2 == 0 else -1
+				var offset = Vector2(0, strength * direction)
+				tween.tween_property(unit, "position", offset, duration / shakes)
+
+			tween.tween_property(unit, "position", Vector2.ZERO, 0.1)
+
+
+		Enums.Anim.POP:
+
+			tween.set_ease(Tween.EASE_OUT)
+			tween.set_trans(Tween.TRANS_BACK)
+
+			var original_scale = Vector2(1,1)
+			var pop_scale = original_scale * 1.15
+
+			tween.tween_property(unit, "scale", pop_scale, 0.1)
+			tween.tween_property(unit, "scale", original_scale, 0.15)
+
+
+		Enums.Anim.SQUISH:
+
+			tween.set_ease(Tween.EASE_OUT)
+			tween.set_trans(Tween.TRANS_BACK)
+
+			var original_scale = Vector2(1,1)
+			var squish_scale = Vector2(1.15, 0.8)
+
+			tween.tween_property(unit, "scale", squish_scale, 0.1)
+			tween.tween_property(unit, "scale", original_scale, 0.15)
+
+
+		Enums.Anim.DART:
+
+			if target_node == null:
+				return
+
+			var distance = 16
+			var duration_out = 0.06
+			var duration_back = 0.08
+
+			var dir = (target_node.global_position - unit.global_position).normalized()
+			var offset = dir * distance
+
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.set_ease(Tween.EASE_OUT)
+
+			tween.tween_property(unit, "position", offset, duration_out)
+
+			tween.set_ease(Tween.EASE_IN)
+			tween.tween_property(unit, "position", Vector2.ZERO, duration_back)
+
+
+		Enums.Anim.LUNGE:
+
+			if target_node == null:
+				return
+
+			var duration_out = 0.12
+			var duration_back = 0.12
+
+			var dir = (target_node.global_position - unit.global_position).normalized()
+			var offset = dir * 24
+
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.set_ease(Tween.EASE_OUT)
+
+			tween.tween_property(unit, "position", offset, duration_out)
+
+			tween.set_ease(Tween.EASE_IN)
+			tween.tween_property(unit, "position", Vector2.ZERO, duration_back)
+	
 func animate_projectile(start_pos : Vector2, end_pos: Vector2, sprite_path: String, rotate : bool = false):
 	var sprite := Sprite2D.new(); sprite.texture = load(sprite_path); sprite.global_position = start_pos; Global.world.unit_layer.add_child(sprite)
 	sprite.scale = Vector2(6,6)
@@ -235,8 +356,9 @@ func get_path_cells(start_cell : Cell, target_cell : Cell, max_move : int) -> Ar
 	return path
 
 func unhighlight_cells():
+
 	for x in grid.all_cells:
-		x.highlight = false
+		x.set_highlight(false)
 
 func reset():
 	player_dice.clear()

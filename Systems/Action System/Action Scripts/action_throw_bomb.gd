@@ -28,4 +28,4 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 		if action_target_cell == null:
 			action_target_cell = Global.grid.get_empty_cells().pick_random()
 	
-		UnitManager.spawn_bomb(action_target_cell)
+		await Global.unit_manager.spawn_bomb(action_target_cell)

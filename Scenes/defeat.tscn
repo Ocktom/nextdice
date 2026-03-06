@@ -23,6 +23,11 @@ func _on_replay_pressed():
 [node name="Defeat" type="Node2D" unique_id=363382371]
 script = ExtResource("1_xhb0w")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1628213758]
+offset_right = 1923.0
+offset_bottom = 1091.0
+color = Color(0.24349892, 0.17605346, 0.2022059, 1)
+
 [node name="Label" type="Label" parent="." unique_id=1331015756]
 offset_top = -170.0
 offset_right = 1925.0

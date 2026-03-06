@@ -120,7 +120,7 @@ func _input(event):
 						var distance = Global.grid.get_distance(Global.hero_unit.current_cell,hovered_cell)
 						if Global.player_stats.move_points >= distance:
 							print ("moving hero")
-							ActionManager.request_action("hero_movement",{},Global.hero_unit.current_cell,hovered_cell)
+							Global.action_manager.request_action("hero_movement",{},Global.hero_unit.current_cell,hovered_cell)
 						else:
 							Global.float_text("NOT ENOUGH MOVE POINTS",hovered_cell.global_position)
 					
@@ -130,6 +130,7 @@ func _input(event):
 		elif event.is_action_pressed("left_mouse"):
 
 			# Dice drag start
+			
 			if hovered_dice is Dice:
 				if hovered_dice.used_this_turn:
 					

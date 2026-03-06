@@ -2,7 +2,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	Global.event_manager = self
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -20,10 +20,9 @@ func on_unit_damaged(unit_damaged: Unit, amount: int, damage_name: String):
 	
 func on_unit_attacked_before_damage(attacker: Unit, attacked: Unit):
 	
-	
 	if attacked.status_effects.has("spikes"):
 		print ("unit has spikes of ", attacked.status_effects["spikes"])
-		ActionManager.request_action("damage_unit",
+		Global.action_manager.request_action("damage_unit",
 		{"amount" : attacked.status_effects["spikes"],"damage_name" : "physical"},
 		attacked.current_cell,attacker.current_cell)
 
@@ -33,6 +32,7 @@ func on_end_player_turn():
 
 func on_end_enemy_turn():
 	await apply_cell_effects()
+	await progress_regrow()
 
 func on_unit_moved(moved_unit: Unit, start_cell: Cell, end_cell: Cell):
 	if moved_unit is Hero:
@@ -44,7 +44,7 @@ func on_unit_moved(moved_unit: Unit, start_cell: Cell, end_cell: Cell):
 				
 				if Global.grid.get_distance(x.current_cell,end_cell) <= x.atk_range:
 					if Global.grid.has_clear_path(x.current_cell,end_cell):
-						await ActionManager.request_action("attack",{"amount" : x.atk},x.current_cell,end_cell)
+						await Global.action_manager.request_action("attack",{"amount" : x.atk},x.current_cell,end_cell)
 
 func on_enemy_death(enemy_dying: Enemy):
 	
@@ -52,12 +52,12 @@ func on_enemy_death(enemy_dying: Enemy):
 		var cell = enemy_dying.current_cell
 		cell.clear_cell()
 		enemy_dying.visible = false
-		await ActionManager.request_action("spawn_unit",{"unit_name" : "ScrapPile"},cell,cell)
+		await Global.action_manager.request_action("spawn_unit",{"unit_name" : "ScrapPile"},cell,cell)
 	
 	if enemy_dying.unit_name == "Roblob":
 		for x in 2:
 			var cell_pick = Global.grid.get_empty_cells().pick_random()
-			await ActionManager.request_action("spawn_unit",{"unit_name" : "Roblobito"},cell_pick,cell_pick)
+			await Global.action_manager.request_action("spawn_unit",{"unit_name" : "Roblobito"},cell_pick,cell_pick)
 	
 	for x in Global.grid.get_all_units():
 		
@@ -69,9 +69,14 @@ func on_enemy_death(enemy_dying: Enemy):
 		
 		if x.status_effects.keys().has("scavenge"):
 			print ("the unit ", x.unit_name, " has scavange!")
-			await ActionManager.request_action("increase_attack",{"amount" : 2},x.current_cell,x.current_cell)
-			await ActionManager.request_action("increase_hp",{"amount" : 2},x.current_cell,x.current_cell)
-		
+			await Global.action_manager.request_action("increase_attack",{"amount" : 2},x.current_cell,x.current_cell)
+			await Global.action_manager.request_action("increase_hp",{"amount" : 2},x.current_cell,x.current_cell)
+
+func progress_regrow():
+	for x in Global.grid.get_all_enemies():
+		if x.unit_name == "ScrapPile":
+			await Global.action_manager.request_action("status_effect",{"status_name" : "REGROW","amount" : 1},x.current_cell,x.current_cell)
+
 func explode_bombs():
 	for x in Global.grid.get_all_units():
 		if not is_instance_valid(x):
@@ -82,7 +87,7 @@ func explode_bombs():
 				x.current_cell.clear_cell()
 				x.queue_free()
 				
-				await ActionManager.request_action("explosion",{},x.current_cell,x.current_cell)
+				await Global.action_manager.request_action("explosion",{},cell,cell)
 			
 func apply_cell_effects():
 	for x in Global.grid.all_cells:

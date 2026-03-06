@@ -9,4 +9,4 @@ func _process(delta: float) -> void:
 	pass
 
 func execute(action_source_cell: Cell, action_target_cell: Cell, context_dict : Dictionary = {}):
-	ActionManager.request_action("add_bonus",{"type" : "poison_damage", "sub_type" : "round_bonus", "amount" : Global.player_stats.player_int/2})
+	Global.action_manager.request_action("add_bonus",{"type" : "poison_damage", "sub_type" : "round_bonus", "amount" : Global.player_stats.player_int/2})

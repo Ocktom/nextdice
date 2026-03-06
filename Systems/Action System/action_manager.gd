@@ -1,5 +1,8 @@
 extends Node
 
+func _ready() -> void:
+	Global.action_manager = self
+
 func request_action(action_name: String, context_dictionary : Dictionary, action_source_cell: Cell = null, action_target_cell : Cell = null):
 	
 	if Global.game_state == Enums.GameState.PLAYER_TURN:
@@ -19,4 +22,3 @@ func create_action(action_name : String, context_dictionary: Dictionary, action_
 	
 	if Global.game_state == Enums.GameState.PLAYER_TURN:
 		InputManager.input_paused = false
-	

@@ -5,8 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://d013w2ydl1xat" path="res://Systems/Grid/Grid.tscn" id="3_5a7ea"]
 [ext_resource type="PackedScene" uid="uid://bgc3x1l871e0" path="res://Systems/Player_UI/Player_UI.tscn" id="5_fo5ed"]
 [ext_resource type="Script" uid="uid://bh0t2fshqgyjc" path="res://Scripts/Autoloads/player_stats.gd" id="7_o06y3"]
+[ext_resource type="Script" uid="uid://b2chq0bvndeeq" path="res://Scripts/Autoloads/unit_manager.gd" id="8_5v1tr"]
 [ext_resource type="PackedScene" uid="uid://dr1kdty3xqiul" path="res://Systems/Item System/Shop_Screen.tscn" id="8_k7acu"]
+[ext_resource type="Script" uid="uid://crbsa4qu65b3j" path="res://Systems/Action System/action_manager.gd" id="9_5v1tr"]
 [ext_resource type="Texture2D" uid="uid://d1i4ktdbjkhhf" path="res://Art/big grid.png" id="10_0fj1v"]
+[ext_resource type="Script" uid="uid://m1owfwi3vv5y" path="res://Scripts/Autoloads/event_manager.gd" id="10_ikia7"]
+[ext_resource type="Script" uid="uid://yubtmhhbkl26" path="res://Scripts/Autoloads/status_manager.gd" id="11_ikia7"]
+[ext_resource type="Script" uid="uid://ctby4s41sp0hh" path="res://Scenes/enemy_manager.gd" id="12_7yui6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_k7acu"]
 font_size = 106
@@ -100,3 +105,18 @@ visible = false
 
 [node name="Player_Stats" type="Node" parent="Services" unique_id=1402373398]
 script = ExtResource("7_o06y3")
+
+[node name="Unit_Manager" type="Node" parent="Services" unique_id=1845693913]
+script = ExtResource("8_5v1tr")
+
+[node name="Action_Manager" type="Node" parent="Services" unique_id=2023313807]
+script = ExtResource("9_5v1tr")
+
+[node name="Event_Manager" type="Node" parent="Services" unique_id=1242768568]
+script = ExtResource("10_ikia7")
+
+[node name="Status_Manager" type="Node" parent="Services" unique_id=783739376]
+script = ExtResource("11_ikia7")
+
+[node name="Enemy_Manager" type="Node" parent="Services" unique_id=366734996]
+script = ExtResource("12_7yui6")

@@ -8,15 +8,6 @@ class_name Cell
 
 var cell_effect : Enums.CellEffect
 
-var highlight : bool :
-	set(new_value):
-		if highlight != new_value:
-			highlight = new_value
-		if highlight:
-			cell_highlight.visible = true
-		else:
-			cell_highlight.visible = false
-
 var poison := false : 
 	set(new_value):
 		poison = new_value
@@ -27,6 +18,13 @@ var cell_vector: Vector2i   # Position in grid coordinates (x,y)
 func _ready() -> void:
 	cell_area.connect("mouse_entered", _on_mouse_entered)
 	cell_area.connect("mouse_exited", _on_mouse_exited)
+
+func set_highlight(on : bool = true, color: Color = Global.white_highlight):
+	
+	if on:
+		cell_highlight.modulate = color
+	
+	cell_highlight.visible = on
 	
 func spawn_unit(new_unit : Unit):
 	var spawn_layer : Node2D
@@ -41,13 +39,11 @@ func clear_cell():
 	Global.unhighlight_cells()
 
 func fill_with_unit(unit : Unit):
-	print ("fill_with_unit called", unit.unit_name)
+	
+	print ("cell of, ", self, " at vec ", cell_vector, " fill_with_unit called ", unit.unit_name)
 	occupant = unit
 	unit.current_cell = self
-	unit.global_position = global_position
-	
-	await apply_cell_effects_to_unit()
-	await unit.update()
+	occupant.global_position = global_position
 
 func apply_cell_effects_to_unit():
 	
@@ -65,24 +61,18 @@ func apply_cell_effects_to_unit():
 			Enums.CellEffect.WEB:
 				
 				if occupant != null:
-					ActionManager.create_action("status_effect",{"status_name" : "ROOT", "amount" : 1 },self,self)
+					Global.action_manager.create_action("status_effect",{"status_name" : "ROOT", "amount" : 1 },self,self)
 					cell_effect = Enums.CellEffect.NONE
 					
 			Enums.CellEffect.FIRE:
 				
-				ActionManager.create_action("status_effect",{"status_name" : "BURN", "amount" : 1 },self,self)
+				Global.action_manager.create_action("status_effect",{"status_name" : "BURN", "amount" : 1 },self,self)
 			
 			Enums.CellEffect.SNOW:
 				
-				ActionManager.create_action("status_effect",{"status_name" : "FROST", "amount" : 2 },self,self)
+				Global.action_manager.create_action("status_effect",{"status_name" : "FROST", "amount" : 2 },self,self)
 		
 		occupant.update()
-	
-func move_hero(dice : Dice):
-	
-	Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_MOVEMENT-Retro Jump_HY_PC-001.wav")
-	Global.hero_unit.current_cell.clear_cell()
-	fill_with_unit(Global.hero_unit)
 
 func _on_mouse_entered():
 
@@ -90,8 +80,6 @@ func _on_mouse_entered():
 				
 		print("cell hovered, occupant is ", occupant)
 		InputManager.hovered_cell = self
-		
-		return
 		
 		Global.unhighlight_cells()
 		
@@ -124,11 +112,13 @@ func _on_mouse_entered():
 				
 					var path_cells = Global.grid.get_cells_in_path(Global.hero_unit.current_cell,self)
 					for x in path_cells:
-						highlight = true
+						set_highlight(true,Global.red_highlight)
 				
 		elif occupant is Enemy:
-			for x in occupant.get_attack_cells():
-				x.highlight = true
+			print ("revealing movement")
+			Global.enemy_manager.reveal_movement(occupant)
+			if occupant.atk > 0:
+				Global.enemy_manager.reveal_attack_after_movement(occupant)
 			
 func _on_mouse_exited():
 	if Global.game_state == Enums.GameState.PLAYER_TURN:
@@ -136,9 +126,9 @@ func _on_mouse_exited():
 		if InputManager.hovered_cell == self:
 			InputManager.hovered_cell = null
 		
-		#if InputManager.hovered_cell == null:
-			#for x in Global.grid.all_cells:
-				#x.highlight = false
+		if InputManager.hovered_cell == null:
+			for x in Global.grid.all_cells:
+				Global.unhighlight_cells()
 			
 func is_empty() -> bool:
 	
@@ -171,7 +161,7 @@ func update():
 		
 		for x in Global.grid.get_adjacent_cells(self):
 			if x.cell_effect == Enums.CellEffect.GRASS:
-				ActionManager.request_action("cell_effect",{"cell_effect" : "FIRE"},self,x)
+				Global.action_manager.request_action("cell_effect",{"cell_effect" : "FIRE"},self,x)
 	else:
 		cell_animation.visible = false
 	

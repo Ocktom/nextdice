@@ -25,11 +25,12 @@ func _ready() -> void:
 	
 func game_start():
 	
+	await GearManager.update_skills_from_gear()
 	await DiceManager.create_dice()
 	await DiceManager.setup_dice()
-	await UnitManager.spawn_torches()
-	await UnitManager.spawn_starting_chests()
-	await UnitManager.spawn_hero()
+	await Global.unit_manager.spawn_torches()
+	await Global.unit_manager.spawn_starting_chests()
+	await Global.unit_manager.spawn_hero()
 	await new_round()
 	await Global.audio_node.play_music("res://Audio/First Fruits3.ogg")
 	
@@ -39,9 +40,9 @@ func new_round():
 	print ("new round started, round number is ", Global.round_number)
 	await make_new_grid()
 	await clear_all_units()
-	await UnitManager.spawn_round_enemies()
-	await UnitManager.spawn_starting_chests()
-	await UnitManager.spawn_hero()
+	await Global.unit_manager.spawn_round_enemies()
+	await Global.unit_manager.spawn_starting_chests()
+	await Global.unit_manager.spawn_hero()
 	
 	start_player_turn()
 
@@ -95,11 +96,11 @@ func end_player_turn():
 
 	Global.game_state = Enums.GameState.ENEMY_TURN
 	
-	await EventManager.on_end_player_turn()
+	await Global.event_manager.on_end_player_turn()
 	
 	if Global.game_state == Enums.GameState.ENEMY_TURN:
 		enemy_turn()
-
+	
 func enemy_turn():
 	
 	print ("enemy turn started")
@@ -115,7 +116,7 @@ func enemy_turn():
 		if x == null:
 			print ("enemy instance null, continuing")
 			continue
-		await StatusManager.start_turn_effects(x)
+		await Global.status_manager.start_turn_effects(x)
 	
 	for x in enemies:
 		print ("checking enemy ", x, " for taking turn...")
@@ -126,7 +127,7 @@ func enemy_turn():
 			print ("enemy instance null, continuing")
 			continue
 		
-		await x.plan_action()
+		await Global.enemy_manager.plan_action(x)
 		
 	await end_enemy_turn()
 
@@ -141,14 +142,18 @@ func end_enemy_turn():
 		if not is_instance_valid(x):
 			continue
 		
-		await StatusManager.end_turn_effects(x)
+		await Global.status_manager.end_turn_effects(x)
 	
 	print ("end_turn_effects complete in world node for enemies")
 	
 	if Global.game_state == Enums.GameState.ENEMY_TURN:
-	
+		
 		await Global.hero_unit.end_turn_effects()
-		start_player_turn()
+	
+	if Global.game_state == Enums.GameState.ENEMY_TURN:
+		await Global.event_manager.on_end_enemy_turn()
+	
+	start_player_turn()
 
 func victory_check():
 	
@@ -219,4 +224,4 @@ func kill_all_enemies():
 	for x in Global.grid.all_cells:
 		if x.occupant != null:
 			if x.occupant is Enemy:
-				ActionManager.request_action("enemy_death",{},x,x)
+				Global.action_manager.request_action("enemy_death",{},x,x)

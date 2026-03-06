@@ -19,12 +19,16 @@ func execute(action_source: Node, target: Node, context:= {}):
 	var source_cell : Cell = Global.hero_unit.current_cell
 	
 	while current_unit != null and amount > 0:
-
+		
+		if Global.game_state != Enums.GameState.PLAYER_TURN:
+			print ("lightning returning out cuz its not playerturn")
+			return
+		
 		Global.animate_lightning(source_cell,current_unit.current_cell)
 		await Global.timer(.3)
 		print ("current unit is ", current_unit)
 		Global.audio_node.play_sfx("res://Audio/Sound_Effects/DSGNMisc_MELEE-Bit Sword_HY_PC-001.wav")
-		await ActionManager.request_action("damage_unit",{"amount" : amount,"damage_name" : "lightning"},action_source,current_unit.current_cell)
+		await Global.action_manager.request_action("damage_unit",{"amount" : amount,"damage_name" : "lightning"},action_source,current_unit.current_cell)
 		hit_units.append(current_unit)
 		amount -= 1
 

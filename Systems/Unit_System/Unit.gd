@@ -1,6 +1,8 @@
 extends Node2D
 class_name Unit
 
+@onready var unit_sprite: AnimatedSprite2D = $Unit_Sprite
+
 var current_cell: Cell
 var unit_name : String = "Unit"
 @onready var status_bar: GridContainer = $Status_Bar
@@ -56,7 +58,7 @@ func assign_to_cell(cell: Cell) -> void:
 
 func update():
 	
-	unit_name_label.text = str(unit_name)
+	pass
 
 func get_grid_position() -> Vector2i:
 	
@@ -67,25 +69,76 @@ func get_grid_position() -> Vector2i:
 func _on_mouse_entered():
 	
 	InputManager.hovered_unit = self
-	if not InputManager.dragging_dice == null:
-		toggle_highlight()
 
 func _on_mouse_exited():
 	if InputManager.hovered_unit == self:
 		InputManager.hovered_unit = null
-	
-	if highlight:
-		toggle_highlight()
-	
-func toggle_highlight():
-	if highlight:
-		highlight = false
-	else:
-		highlight = true
 
-func is_adjacent(cell: Cell)-> bool:
-	var adjacent_cells = Global.grid.get_adjacent_cells(cell)
-	if adjacent_cells.has(cell):
-		return true
-	else:
-		return false
+func shake_sprite():
+	if not is_instance_valid(unit_sprite):
+		return
+
+	unit_sprite.position = Vector2.ZERO
+
+	var tween = unit_sprite.create_tween()
+	var strength = 10
+	var shakes = 3
+	var time = 0.2
+
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN_OUT)
+
+	for i in range(shakes):
+		var dir = -1 if i % 2 == 0 else 1
+		tween.tween_property(
+			unit_sprite,
+			"position",
+			Vector2(strength * dir, 0),
+			time / shakes
+		)
+
+	tween.tween_property(unit_sprite, "position", Vector2.ZERO, 0.05)
+	
+func flash_sprite(flash_color: Color):
+	if not is_instance_valid(unit_sprite):
+		return
+
+	unit_sprite.modulate = Color(1,1,1,1)
+
+	var tween = unit_sprite.create_tween()
+	var flash = flash_color * 2.0
+	flash.a = 1.0
+
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(unit_sprite, "modulate", flash, 0.08)
+	tween.set_ease(Tween.EASE_IN)
+	tween.tween_property(unit_sprite, "modulate", Color(1,1,1,1), 0.12)
+
+func dart_sprite_to_global(global_target: Vector2):
+	if not is_instance_valid(unit_sprite):
+		return
+
+	unit_sprite.position = Vector2.ZERO
+
+	# Convert global target into the sprite’s parent local space
+	var local_target = unit_sprite.get_parent().to_local(global_target)
+
+	# Offset relative to unit's own origin
+	var offset = local_target - unit_sprite.get_parent().to_local(global_position)
+
+	# Clamp distance if you only want a short dart
+	var max_distance = 100
+	if offset.length() > max_distance:
+		offset = offset.normalized() * max_distance
+
+	var tween = unit_sprite.create_tween()
+
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(unit_sprite, "position", offset, 0.08)
+
+	tween.set_ease(Tween.EASE_IN)
+	tween.tween_property(unit_sprite, "position", Vector2.ZERO, 0.1)

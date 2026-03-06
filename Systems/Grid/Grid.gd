@@ -338,6 +338,78 @@ func get_cells_in_path(cell_1: Cell, cell_2: Cell) -> Array[Cell]:
 
 	return path
 
+func get_path_to_cell(start_cell: Cell, end_cell: Cell, range: int, allow_diag: bool = true, unobstructed: bool = true, ) -> Array[Cell]:
+	if start_cell == null or end_cell == null:
+		return []
+
+	if start_cell == end_cell:
+		return []
+
+	var directions = []
+	
+	if allow_diag:
+		directions = [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1), Vector2i(0,-1),
+					  Vector2i(1,1), Vector2i(1,-1), Vector2i(-1,1), Vector2i(-1,-1)]
+	else:
+		directions = [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1), Vector2i(0,-1)]
+
+	var queue: Array = []
+	var came_from = {}
+	var visited = {}
+
+	queue.append(start_cell)
+	visited[start_cell] = 0
+
+	var closest_cell = start_cell
+	var closest_distance = get_distance(start_cell, end_cell)
+
+	while queue.size() > 0:
+		var current: Cell = queue.pop_front()
+		var current_steps: int = visited[current]
+
+		if current == end_cell:
+			closest_cell = current
+			break
+
+		if current_steps >= range:
+			continue
+
+		for dir in directions:
+			var next_pos = current.cell_vector + dir
+
+			if not is_in_bounds(next_pos):
+				continue
+
+			var next_cell: Cell = grid[next_pos.x][next_pos.y]
+
+			if visited.has(next_cell):
+				continue
+
+			if unobstructed and not next_cell.is_empty() and next_cell != end_cell:
+				continue
+
+			visited[next_cell] = current_steps + 1
+			came_from[next_cell] = current
+			queue.append(next_cell)
+
+			var dist = get_distance(next_cell, end_cell)
+			if dist < closest_distance:
+				closest_distance = dist
+				closest_cell = next_cell
+
+	# Reconstruct path
+	var path: Array[Cell] = []
+
+	if closest_cell == start_cell:
+		return []
+
+	var current: Cell = closest_cell
+	while current != start_cell:
+		path.insert(0, current)
+		current = came_from[current]
+
+	return path
+
 func get_units_in_path(cell_1: Cell, cell_2: Cell) -> Array[Unit]:
 	var units : Array[Unit] = []
 	for x in get_cells_in_path(cell_1,cell_2):
@@ -345,14 +417,51 @@ func get_units_in_path(cell_1: Cell, cell_2: Cell) -> Array[Unit]:
 			units.append(x.occupant)
 	return units
 
-func has_straight_path(cell_1: Cell, cell_2: Cell) -> bool:
-	var a = cell_1.cell_vector
-	var b = cell_2.cell_vector
-	var dx = abs(b.x - a.x)
-	var dy = abs(b.y - a.y)
+func has_straight_path(cell_1: Cell, cell_2: Cell, range: int = 10, allow_diag: bool = true, unobstructed: bool = false) -> bool:
+	if cell_1 == null or cell_2 == null:
+		return false
 
-	print ("has_straight_path function returning ", dx == 0 or dy == 0 or dx == dy)
-	return dx == 0 or dy == 0 or dx == dy
+	if cell_1 == cell_2:
+		return true
+
+	var delta: Vector2i = cell_2.cell_vector - cell_1.cell_vector
+	var step = Vector2i(0, 0)
+
+	# Horizontal
+	if delta.y == 0 and delta.x != 0:
+		step.x = sign(delta.x)
+
+	# Vertical
+	elif delta.x == 0 and delta.y != 0:
+		step.y = sign(delta.y)
+
+	# Diagonal
+	elif allow_diag and abs(delta.x) == abs(delta.y):
+		step.x = sign(delta.x)
+		step.y = sign(delta.y)
+
+	else:
+		return false
+
+	var distance = max(abs(delta.x), abs(delta.y))
+
+	if distance > range:
+		return false
+
+	var current_pos = cell_1.cell_vector
+
+	for i in range(distance):
+		current_pos += step
+
+		if not is_in_bounds(current_pos):
+			return false
+
+		var current_cell: Cell = grid[current_pos.x][current_pos.y]
+
+		if unobstructed and not current_cell.is_empty() and current_cell != cell_2:
+			return false
+
+	return true
 
 func has_clear_path(cell_1: Cell, cell_2: Cell) -> bool:
 	var dir = get_cell_direction(cell_1, cell_2)

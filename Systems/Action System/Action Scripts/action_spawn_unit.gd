@@ -16,4 +16,4 @@ func execute(context: Dictionary, action_source_cell: Cell = null,action_target_
 		cell_pick = action_target_cell
 	
 	unit_pick = context["unit_name"]
-	await UnitManager.spawn_new_enemy(unit_pick,cell_pick)
+	await Global.unit_manager.spawn_new_enemy(unit_pick,cell_pick)

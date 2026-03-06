@@ -11,4 +11,4 @@ func _process(delta: float) -> void:
 
 func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 	print ("strike being used")
-	await await ActionManager.request_action("status_effect",{"status_name" : "SHIELD", "amount" : Global.player_stats.player_dex-1},Global.hero_unit.current_cell,Global.hero_unit.current_cell)
+	await await Global.action_manager.request_action("status_effect",{"status_name" : "SHIELD", "amount" : Global.player_stats.player_dex-1},Global.hero_unit.current_cell,Global.hero_unit.current_cell)

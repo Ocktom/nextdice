@@ -11,4 +11,4 @@ func _process(delta: float) -> void:
 func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 	print ("kick being used")
 	
-	ActionManager.request_action("push_unit",{},action_source_cell,action_target_cell)
+	Global.action_manager.request_action("push_unit",{},action_source_cell,action_target_cell)

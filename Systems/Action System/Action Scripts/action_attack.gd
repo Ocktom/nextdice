@@ -1,6 +1,8 @@
 extends Action
 
 var action_name := "attack"
+@onready var unit_sprite: AnimatedSprite2D = $Unit_Sprite
+
 
 func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	
@@ -23,7 +25,8 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 		sound_path = "res://Audio/Sound_Effects/FGHTImpt_HIT-Strong Smack_HY_PC-003.wav"
 	
 	Global.audio_node.play_sfx(sound_path)
-	await Global.animate(action_source_cell.occupant,Enums.Anim.LUNGE,Color.WHITE,action_target_cell)
+	
+	action_source_cell.occupant.dart_sprite_to_global(action_target_cell.global_position)
 	
 	if action_source_cell.occupant == Global.hero_unit:
 		await Global.timer(.1)
@@ -32,8 +35,7 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	
 	await Global.timer(.1)
 	
-	await EventManager.on_unit_attacked_before_damage(action_source_cell.occupant,action_target_cell.occupant)
+	await Global.event_manager.on_unit_attacked_before_damage(action_source_cell.occupant,action_target_cell.occupant)
 
-	await ActionManager.request_action("damage_unit",{"amount" : amount, "damage_name" : "physical"},action_source_cell,action_target_cell)
+	await Global.action_manager.request_action("damage_unit",{"amount" : amount, "damage_name" : "physical"},action_source_cell,action_target_cell)
 	#CREATE THE APPROPRIATE TARGET TAKE_ATTACK ANIMTION
-	

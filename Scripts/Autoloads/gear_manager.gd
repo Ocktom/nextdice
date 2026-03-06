@@ -20,10 +20,6 @@ func _ready() -> void:
 	
 	var gear_data_script = load("res://Systems/Inventory/gear_data_dictionary.gd").new()
 	gear_data_dictionary = gear_data_script.data
-	
-	var item_data_script = load("res://Systems/Item System/item_data_dictionary.gd").new()
-
-	update_skills_from_gear()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -42,7 +38,7 @@ func update_skills_from_gear():
 			var ind = gear_sets.find(gear_set)
 			skill_sets[ind] = []
 			for gear in gear_set:
-				var skill_string = ItemManager.gear_data_dictionary[gear]["skills"]
+				var skill_string = GameData.gear_data_dictionary[gear]["skills"]
 				var skill_array = parse_string_to_array(skill_string)
 				for skill in skill_array:
 					skill_sets[ind].append(skill)
