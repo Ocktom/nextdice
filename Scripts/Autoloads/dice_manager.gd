@@ -1,7 +1,5 @@
 extends Node
 
-var skill_data_dictionary : Dictionary
-var skill_data
 var skill_names : Array = []
 
 var dice_path : PackedScene = preload("res://Systems/Dice_System/Dice.tscn")
@@ -81,7 +79,7 @@ func highlight_useable_cells(dragging_dice: Dice):
 			
 			if InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.ANY_CELL \
 			or InputManager.dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.EMPTY_CELL:
-					x.highlight = true
+					x.set_highlight(true,Global.white_highlight)
 					continue
 					
 				
@@ -102,9 +100,17 @@ func is_useable(dragging_dice: Dice, hovered_cell : Cell, float_text : bool = tr
 							
 	var distance = Global.grid.get_distance(Global.hero_unit.current_cell,hovered_cell)
 	var range = dragging_dice.current_face.skill_range
+	var skill_data = GameData.skill_data_dictionary[dragging_dice.current_face.skill.skill_name]
+	var skill_type : Enums.SkillType = Enums.SkillType[skill_data["dice_type"]]
+	print ("looking up skill name ", dragging_dice.current_face.skill.skill_name, " data is ", skill_data)
 	
 	print ("running is_useable check, range is ", range)
 	
+	if Global.hero_unit.status_effects.has("root"):
+		if skill_type == Enums.SkillType.MOVEMENT:
+			print ("cant move, rooted")
+			Global.float_text("ROOTED", Global.hero_unit.global_position)
+			return false
 	if distance > range:
 		print ("out of range")
 		if float_text: Global.float_text("OUT OF RANGE",hovered_cell.global_position,Color.INDIAN_RED)
@@ -113,6 +119,12 @@ func is_useable(dragging_dice: Dice, hovered_cell : Cell, float_text : bool = tr
 	if not hovered_cell.occupant == null:
 		
 		if hovered_cell.occupant is Enemy:
+			
+			print ("hovered_cell.occupant is ", hovered_cell.occupant.unit_name, ", with .status_effects of ", hovered_cell.occupant.status_effects)
+			if hovered_cell.occupant.status_effects.has("invisible"):
+				print ("cell has invisble, cant target")
+				Global.float_text("INVISIBLE",hovered_cell.global_position,Color.GRAY)
+				return false
 			
 			if dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ANY_UNIT \
 			or dragging_dice.current_face.skill.skill_target == Enums.SkillTarget.LOS_ENEMY_UNIT\

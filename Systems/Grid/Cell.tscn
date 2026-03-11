@@ -1,21 +1,21 @@
 [gd_scene format=3 uid="uid://chix8pomfhr04"]
 
 [ext_resource type="Script" uid="uid://de8jygopjlgu0" path="res://Systems/Grid/Cell.gd" id="1_hyvek"]
-[ext_resource type="Texture2D" uid="uid://cc7ia6nupvhui" path="res://Art/cell_grey.png" id="2_r3c2n"]
+[ext_resource type="Texture2D" uid="uid://c55e863mp15du" path="res://Art/cell_42.png" id="2_w1573"]
 [ext_resource type="Texture2D" uid="uid://7r4j6l7pfgm5" path="res://Art/cell_spikes.png" id="3_w1573"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1m28"]
-size = Vector2(171, 169)
+size = Vector2(168, 168)
 
 [node name="GridCell" type="Node2D" unique_id=704447098]
 script = ExtResource("1_hyvek")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=854796418]
-modulate = Color(0.6812332, 0.44849074, 0.4097637, 1)
+modulate = Color(0.81435007, 0.7056889, 0.81197643, 1)
 texture_filter = 1
 position = Vector2(1, 1)
 scale = Vector2(4, 4)
-texture = ExtResource("2_r3c2n")
+texture = ExtResource("2_w1573")
 
 [node name="Cell_Highlight" type="ColorRect" parent="." unique_id=28755570]
 visible = false
@@ -36,7 +36,7 @@ color = Color(1, 1, 1, 0.23529412)
 [node name="Cell_Area" type="Area2D" parent="." unique_id=473789914]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cell_Area" unique_id=1972858220]
-position = Vector2(1.5, -0.5)
+position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_m1m28")
 
 [node name="Cell_Effect_OV" type="TextureRect" parent="." unique_id=2063739821]

@@ -47,6 +47,8 @@ func fill_with_unit(unit : Unit):
 
 func apply_cell_effects_to_unit():
 	
+	print ("Cell is applying cell effects to its occupant: ", occupant)
+	
 	if occupant == null:
 		return
 	
@@ -61,16 +63,17 @@ func apply_cell_effects_to_unit():
 			Enums.CellEffect.WEB:
 				
 				if occupant != null:
-					Global.action_manager.create_action("status_effect",{"status_name" : "ROOT", "amount" : 1 },self,self)
+					Global.action_manager.request_action("status_effect",{"status_name" : "ROOT", "amount" : 1 },self,self)
 					cell_effect = Enums.CellEffect.NONE
+					update()
 					
 			Enums.CellEffect.FIRE:
 				
-				Global.action_manager.create_action("status_effect",{"status_name" : "BURN", "amount" : 1 },self,self)
+				Global.action_manager.request_action("status_effect",{"status_name" : "BURN", "amount" : 1 },self,self)
 			
 			Enums.CellEffect.SNOW:
 				
-				Global.action_manager.create_action("status_effect",{"status_name" : "FROST", "amount" : 2 },self,self)
+				Global.action_manager.request_action("status_effect",{"status_name" : "FROST", "amount" : 2 },self,self)
 		
 		occupant.update()
 
@@ -98,7 +101,7 @@ func _on_mouse_entered():
 				
 					var path_cells = Global.grid.get_cells_in_path(Global.hero_unit.current_cell,self)
 					for x in path_cells:
-						x.highlight = true
+						x.set_highlight(true,Global.white_highlight)
 						
 					
 			elif occupant is Enemy:
@@ -161,7 +164,7 @@ func update():
 		
 		for x in Global.grid.get_adjacent_cells(self):
 			if x.cell_effect == Enums.CellEffect.GRASS:
-				Global.action_manager.request_action("cell_effect",{"cell_effect" : "FIRE"},self,x)
+				Global.action_manager.request_action("cell_effect",{"effect_name" : "FIRE"},self,x)
 	else:
 		cell_animation.visible = false
 	

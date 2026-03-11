@@ -1,4 +1,5 @@
 extends Node
+class_name unitmanager
 
 var enemy_data_dictionary : Dictionary
 var enemy_data
@@ -50,6 +51,8 @@ func spawn_new_enemy(name_string: String, cell : Cell):
 			unit.attack_diag = true
 			unit.attack_cardinal = true
 	
+	print ("data[enemy_actions] is", data["enemy_actions"])
+	
 	if data["enemy_actions"] != "":
 		unit.enemy_actions = JSON.parse_string(data["enemy_actions"])
 	
@@ -78,9 +81,9 @@ func parse_status_effects_string(s: String) -> Dictionary:
 
 var enemy_sets : Dictionary = {
 	
-	"set_1" : ["Armadroid","Bomberbot","Protech","Bomberbot","Zombot"],
-	"set_2" : ["Protech","Protech","Zombot","Bomberbot"],
-	"set_3" : ["Ratron","Bomberbot","Protech","Skeltron"],
+	"set_1" : ["Ribbot","Spectroid","Slitherbyte","Spidroid","Zombot"],
+	"set_2" : ["Zombot","Spectroid","Slitherbyte","Ribbot"],
+	"set_3" : ["Spidroid","Spectroid","Spectroid","Skeltron"],
 	"set_4" : ["Skeltron","Slitherbyte","Batron","Spectroid","Spectroid"],
 	"set_5" : ["Skeltron","Slitherbyte","Slitherbyte","Spectroid","Armadroid"],
 	"set_6" : ["Batron","Batron", "Batron", "Spidroid", "Spidroid","Armadroid"],

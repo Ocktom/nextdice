@@ -1,17 +1,15 @@
-var data : Dictionary = {
- 
- "nothing": {
+var data : Dictionary ={
+	"nothing": {
 	"skill_name": "nothing",
-	"skill_value": 0,
-	"skill_target": "SELF",
-	"dice_type": "ANY",
-	"skill_range": 0
-  },
-
- "blade_walk": {
+	"skill_value": 2,
+	"skill_target": "EMPTY_CELL",
+	"dice_type": "MOVEMENT",
+	"skill_range": 3
+	},
+  "blade_walk": {
 	"skill_name": "blade_walk",
 	"skill_value": 2,
-	"skill_target": "STRAIGHT_EMPTY_CELL",
+	"skill_target": "EMPTY_CELL",
 	"dice_type": "MOVEMENT",
 	"skill_range": 3
   },
@@ -53,7 +51,7 @@ var data : Dictionary = {
   "fire_walk": {
 	"skill_name": "fire_walk",
 	"skill_value": 2,
-	"skill_target": "STRAIGHT_EMPTY_CELL",
+	"skill_target": "EMPTY_CELL",
 	"dice_type": "MOVEMENT",
 	"skill_range": 3
   },
@@ -81,7 +79,7 @@ var data : Dictionary = {
   "frost_walk": {
 	"skill_name": "frost_walk",
 	"skill_value": 2,
-	"skill_target": "STRAIGHT_EMPTY_CELL",
+	"skill_target": "EMPTY_CELL",
 	"dice_type": "MOVEMENT",
 	"skill_range": 3
   },
@@ -109,7 +107,7 @@ var data : Dictionary = {
   "hookshot": {
 	"skill_name": "hookshot",
 	"skill_value": 2,
-	"skill_target": "STRAIGHT_ANY_CELL",
+	"skill_target": "ANY_CELL",
 	"dice_type": "MOVEMENT",
 	"skill_range": 5
   },
@@ -148,8 +146,8 @@ var data : Dictionary = {
 	"dice_type": "MOVEMENT",
 	"skill_range": 4
   },
-  "persuing_strike": {
-	"skill_name": "persuing_strike",
+  "brawl": {
+	"skill_name": "brawl",
 	"skill_value": 3,
 	"skill_target": "EMPTY_CELL",
 	"dice_type": "MOVEMENT",
@@ -194,6 +192,13 @@ var data : Dictionary = {
 	"skill_name": "travel_shield",
 	"skill_value": 2,
 	"skill_target": "SELF",
+	"dice_type": "ATTACK",
+	"skill_range": 1
+  },
+  "quick_strike": {
+	"skill_name": "quick_strike",
+	"skill_value": 2,
+	"skill_target": "AUTO",
 	"dice_type": "ATTACK",
 	"skill_range": 1
   }

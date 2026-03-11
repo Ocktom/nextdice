@@ -15,7 +15,7 @@ func end_turn_effects():
 	#ENACT EFFECTS HERE:
 	
 	if Global.player_stats.status_effects.has("poison"):
-		await Global.action_manager.create_action("damage_unit",{"damage_name" : "poison","amount":status_effects["poison"]},null,current_cell)
+		await Global.action_manager.create_action("damage_unit",{"damage_name" : "poison","amount": Global.player_stats.status_effects["poison"]},null,current_cell)
 	
 	#DECREASE OR ERASE EFFECTS HERE:
 	
@@ -43,7 +43,7 @@ func update():
 	
 	hp_label.text = str(Global.player_stats.player_hp)
 
-	
 	if current_cell != null:
 		global_position = current_cell.global_position
 	
+	await Global.status_manager.update_status_effects(self)

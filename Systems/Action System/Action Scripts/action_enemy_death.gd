@@ -25,7 +25,7 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	var gold_reward = randi_range(1,3)
 	Global.action_manager.request_action("gain_gold",{"amount" : gold_reward},null,null)
 	
-	await Global.timer(.6)
+	await Global.timer(.3)
 	
 	if not is_instance_valid(target):
 		return

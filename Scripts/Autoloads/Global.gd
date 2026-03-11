@@ -9,7 +9,7 @@ const white_highlight := Color(1.0, 1.0, 1.0, 0.235)
 #GLOBALLY ACCESSIBLE NODES:
 
 var audio_node : Node
-var grid : Node
+var grid : game_grid
 var world: Node
 var player_stats : Node
 var dice_manager : Node
@@ -18,7 +18,7 @@ var event_manager : Node
 var status_manager : Node
 var enemy_manager : Node
 
-var action_manager : Node
+var action_manager : actionmanager
 
 var back_gear_node : Control
 var main: Control
@@ -356,9 +356,10 @@ func get_path_cells(start_cell : Cell, target_cell : Cell, max_move : int) -> Ar
 	return path
 
 func unhighlight_cells():
-
-	for x in grid.all_cells:
-		x.set_highlight(false)
+	
+	if is_instance_valid(Global.grid):
+		for x in grid.all_cells:
+			x.set_highlight(false)
 
 func reset():
 	player_dice.clear()

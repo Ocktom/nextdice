@@ -1,4 +1,5 @@
 extends Node
+class_name actionmanager
 
 func _ready() -> void:
 	Global.action_manager = self

@@ -5,7 +5,7 @@ var data : Dictionary = {
 	"gear_name": "Basic_Sword",
 	"gear_size": 1,
 	"gear_type": "ATTACK",
-	"skills": "strike,strike"
+	"skills": "strike,quick_strike"
   },
   "Broadsword": {
 	"gear_name": "Broadsword",

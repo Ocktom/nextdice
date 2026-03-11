@@ -98,6 +98,8 @@ func shake_sprite():
 		)
 
 	tween.tween_property(unit_sprite, "position", Vector2.ZERO, 0.05)
+	await Global.timer(.3)
+	update()
 	
 func flash_sprite(flash_color: Color):
 	if not is_instance_valid(unit_sprite):
@@ -115,7 +117,10 @@ func flash_sprite(flash_color: Color):
 	tween.tween_property(unit_sprite, "modulate", flash, 0.08)
 	tween.set_ease(Tween.EASE_IN)
 	tween.tween_property(unit_sprite, "modulate", Color(1,1,1,1), 0.12)
-
+	
+	await Global.timer(.3)
+	update()
+	
 func dart_sprite_to_global(global_target: Vector2):
 	if not is_instance_valid(unit_sprite):
 		return

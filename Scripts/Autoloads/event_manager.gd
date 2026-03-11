@@ -1,4 +1,5 @@
 extends Node
+class_name eventmanager
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,6 +9,20 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func on_dice_rolled():
+	for x in Global.player_dice:
+		if x.used_this_turn:
+			continue
+		
+		var skill_rolled = x.current_face.skill.skill_name
+		print ("skill rolled is ", skill_rolled)
+		var target_string = GameData.skill_data_dictionary[skill_rolled]["skill_target"]
+		var skill_target = Enums.SkillTarget[target_string]
+		
+		if skill_target == Enums.SkillTarget.AUTO:
+			await x.use(Global.hero_unit.current_cell,Global.hero_unit.current_cell)
+		
+
 func on_unit_damaged(unit_damaged: Unit, amount: int, damage_name: String):
 	
 	print ("on_unit_damage called on unit", unit_damaged.unit_name)
@@ -16,7 +31,13 @@ func on_unit_damaged(unit_damaged: Unit, amount: int, damage_name: String):
 		print (unit_damaged.unit_name, " is ENRAGED")
 		Global.float_text("ENRAGE", unit_damaged.global_position,Color.RED)
 	
+	if unit_damaged.unit_name == "Spectroid":
+		if not unit_damaged.dying_this_turn:
+			await Global.action_manager.request_action("status_effect",{"status_name" : "INVISIBLE", "amount" : 1},unit_damaged.current_cell,unit_damaged.current_cell)
+	
 	print ("on_unit_damage finished running in event_manager")
+	
+	await unit_damaged.update()
 	
 func on_unit_attacked_before_damage(attacker: Unit, attacked: Unit):
 	
@@ -28,13 +49,16 @@ func on_unit_attacked_before_damage(attacker: Unit, attacked: Unit):
 
 func on_end_player_turn():
 	await explode_bombs()
-	await apply_cell_effects()
 
 func on_end_enemy_turn():
-	await apply_cell_effects()
 	await progress_regrow()
 
 func on_unit_moved(moved_unit: Unit, start_cell: Cell, end_cell: Cell):
+	
+	print ("on_unit_moved func called in event_manager, on unit ", moved_unit.unit_name)
+	
+	await apply_cell_effects(moved_unit)
+	
 	if moved_unit is Hero:
 		
 		for x in Global.grid.get_all_units():
@@ -89,7 +113,7 @@ func explode_bombs():
 				
 				await Global.action_manager.request_action("explosion",{},cell,cell)
 			
-func apply_cell_effects():
-	for x in Global.grid.all_cells:
-		if x.occupant != null:
-			x.apply_cell_effects_to_unit()
+func apply_cell_effects(unit: Unit):
+		
+		print ("event manager calling apply_cell_effects on unit ", unit.unit_name)
+		await unit.current_cell.apply_cell_effects_to_unit()

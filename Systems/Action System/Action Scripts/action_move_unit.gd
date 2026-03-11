@@ -21,5 +21,6 @@ func execute(context: Dictionary, unit_current_cell: Cell = null, target_cell: C
 	unit_to_move.global_position = target_cell.global_position
 
 	# --- Then events ---
+	print ("move_unit script calling event_manager.on_unit_moved, with unit of ", unit_to_move.unit_name)
 	await Global.event_manager.on_unit_moved(unit_to_move,unit_current_cell,target_cell)
 	

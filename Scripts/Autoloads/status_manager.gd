@@ -1,4 +1,5 @@
 extends Node
+class_name statusmanager
 
 var numbered_status_effects: Array[String] = [
 		"burn","frost","poison","spikes"
@@ -7,7 +8,7 @@ var decreasing_status_effects: Array[String] = [
 	"frost","poison","burn"
 ]
 var auto_remove_status_effects: Array[String] = [
-		"frost","poison","burn","shield"]
+		"frost","poison","burn","shield","invisible"]
 
 var no_icon_status_effects : Array[String] = ["shield"]
 
@@ -16,42 +17,56 @@ func _ready() -> void:
 	Global.status_manager = self
 
 func start_turn_effects(unit: Unit):
-		
+	
+	print ("start turn effects running for ", unit.unit_name)
+	
 	if unit.status_effects.has("shield"):
 		unit.status_effects["shield"] = 0
+	
+	if unit.status_effects.has("invisible"):
+		print ("unit has invisible, removeing")
+		unit.status_effects.erase("invisible")
+		print ("unit status afer remove is ", unit.status_effects)
+	
+	await unit.update()
 
+	if unit.current_cell.cell_effect == Enums.CellEffect.FIRE:
+		await Global.action_manager.request_action("status_effect",{"status_name" : "BURN", "amount" : 1},unit.current_cell,unit.current_cell)
+	
 func end_turn_effects(unit : Unit):
 	
 	print ("end_turn effects for ", unit.unit_name)
 	
-	#if not is_instance_valid(unit) : return
+	
+	if unit.status_effects.has("root"):
+		print ("unit has root, removeing")
+		unit.status_effects.erase("root")
+	
+	if unit.status_effects.has("burn"):
+		print ("unit has burn, applying...")
+		await Global.action_manager.request_action("damage_unit",{"damage_name" : "fire", "amount": unit.status_effects["burn"]}
+		,unit.current_cell,unit.current_cell)
+	
+	if unit.dying_this_turn:
+		return
 	
 	if not is_instance_valid(unit) : 
 		print ("instance invalid after FIRE, returning")
 		return
 	
-	if unit.dying_this_turn:
-		return
-	
-	if unit.status_effects.has("burn"):
-		print ("unit has burn, applying...")
-		await Global.action_manager.request_action("damage_unit",{"damage_name" : "fire", "amount": 1}
-		,unit.current_cell,unit.current_cell)
-	
-	if not is_instance_valid(unit) : 
-		print ("instance invalid after burn, returning")
-		return
-	
 	if unit.status_effects.has("poison"):
 		print ("unit has poison, applying...")
-		await Global.action_manager.request_action("damage_unit",{"damage_name" : "poison", "amount": 1}
-		,unit.current_cell,unit.current_cell)
+		var amount = unit.status_effects["poison"]
+		print ("poison amount is ", amount)
 		
+		await Global.action_manager.request_action("damage_unit",{"damage_name" : "poison", "amount": amount}
+		,unit.current_cell,unit.current_cell)
+	
 	if unit.dying_this_turn:
 		return
 		
 	if not is_instance_valid(unit) : 
-		print ("instance invalid after poison, returning")
+		print ("instance invalid after POISON, returning")
 		return
 	
 	if unit.status_effects.keys().has("regrow"):
@@ -82,6 +97,8 @@ func end_turn_effects(unit : Unit):
 	
 func update_status_effects(unit : Unit):
 	
+	print ("status manager updating status effects on ", unit.unit_name)
+	
 	if not is_instance_valid(unit) : 
 		print ("instance invalid in update, returning")
 		return
@@ -91,7 +108,9 @@ func update_status_effects(unit : Unit):
 			unit.status_effects.erase("frost")
 			Global.action_manager.request_action("status_effect",{"status_name" : "FREEZE", "amount" : 1},unit.current_cell,unit.current_cell)
 	
-	if not is_instance_valid(unit) : return
+	if not is_instance_valid(unit) :
+		print ("instance invalid, returning")
+		return
 	
 	if unit.status_effects.keys().has("freeze"):
 		
@@ -116,6 +135,8 @@ func update_status_effects(unit : Unit):
 	
 	for x in unit.status_effects.keys():
 		
+		print ("status manager processing ", x, " in status_effects.keys")
+		
 		if not no_icon_status_effects.has(x):
 			
 			var status_icons = unit.status_bar.get_children()
@@ -136,7 +157,7 @@ func update_status_effects(unit : Unit):
 			if numbered_status_effects.has(x):
 				status_icon.value_label.text = str(unit.status_effects[x])
 			
-	if unit.status_effects.keys().has("invisible"):
+	if unit.status_effects.has("invisible"):
 		unit.unit_sprite.modulate = Color(1.0, 1.0, 1.0, 0.424)
 	else:
 		unit.unit_sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
@@ -149,3 +170,11 @@ func update_status_effects(unit : Unit):
 	else:
 		unit.shield_label.visible = false
 		unit.shield_label.text = ""
+		
+	#REMOVE ICONS FOR CLEARES STATUS
+	
+	var status_icons = unit.status_bar.get_children()
+			
+	for x in status_icons:
+		if not unit.status_effects.has(x.status_name):
+			x.queue_free()

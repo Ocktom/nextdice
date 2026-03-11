@@ -1,9 +1,10 @@
 extends Node2D
+class_name game_grid
 
 const GRID_WIDTH = 7
 const GRID_HEIGHT = 5
-const CELL_SIZE = Vector2(170, 170)
-var CELL_SPACING = Vector2(6, 6)
+const CELL_SIZE = Vector2(168, 168)
+var CELL_SPACING = Vector2(0, 0)
 var CellScene = preload("res://Systems/Grid/Cell.tscn")
 
 @onready var units_node: Node2D = $Units
@@ -106,7 +107,17 @@ func get_adjacent_units(cell: Cell):
 				units.append(x.occupant)
 	
 	return units
+
+func get_adjacent_enemies(cell: Cell):
+	var enemies := []
+	var adjacent_units = get_adjacent_units(cell)
+	if adjacent_units.size() > 0:
+		for x in adjacent_units:
+			if x is Enemy:
+				enemies.append(x)
 	
+	return enemies
+
 func get_cleave_targets(attacker_cell: Cell, target_cell: Cell) -> Array[Cell]:
 	var cleave_cells : Array[Cell] = []
 

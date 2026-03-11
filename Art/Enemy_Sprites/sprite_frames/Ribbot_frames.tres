@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://dqbj5yrcuryri"]
 
-[ext_resource type="Texture2D" uid="uid://cxqr0l3hgbnbv" path="res://Art/Enemy_Sprites/ribbot.png" id="1_f6j0q"]
+[ext_resource type="Texture2D" uid="uid://dgegrsnoripvc" path="res://Art/Enemy_Sprites/hooknigh_2.png" id="1_f6j0q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sc75g"]
 atlas = ExtResource("1_f6j0q")
@@ -25,11 +25,8 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pje6l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nquu7")
 }],
 "loop": true,
 "name": &"default",
-"speed": 3.0
+"speed": 2.0
 }]

@@ -12,4 +12,4 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	Global.animate(action_target_cell.occupant,Enums.Anim.POP)
 	Global.float_text(str("+",context["amount"], " HP"),action_target_cell.occupant.global_position,Color.ORANGE_RED)
 	action_target_cell.occupant.update()
-	await Global.timer(.4)
+	await Global.timer(.2)

@@ -17,7 +17,6 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	
 	var target_status_effects : Dictionary
 	
-	var user = action_source_cell.occupant
 	var audio_path : String = ""
 	var color : Color
 	var amount = context["amount"]
@@ -50,11 +49,13 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	match context["damage_name"]:
 		
 		"poison" : 
+			print ("poison damage matched, amount is ", amount)
 			color = Color.GREEN
 			amount += Global.player_stats.poison_damage["round_bonus"] 
 			+ Global.player_stats.poison_damage["turn_bonus"]
 			
-			if action_target is Object:
+			if action_target is Object_Unit:
+				print ("action is object, returning")
 				return
 			
 		"fire"	:
@@ -87,16 +88,15 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	
 	if action_target is Enemy:
 			
+			await Global.event_manager.on_unit_damaged(action_target,amount,context["damage_name"])
+			
 			action_target.hp = max(0,action_target.hp-amount)
 			
 			if action_target.hp < 1:
 				
 				print ("unit has less then 1 hp, calling enemy death on manager")
 				await Global.action_manager.request_action("enemy_death",{},action_target.current_cell)
-			
-			if not action_target.dying_this_turn:
-				await action_target.update()
-	
+		
 	if action_target is Hero:
 		Global.player_stats.player_hp = max(0,Global.player_stats.player_hp-amount)
 		await action_target.update()
@@ -119,3 +119,4 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 			print ("object unit hp is 0")
 			if not action_target.dying_this_turn:
 				await Global.action_manager.request_action("destroy_object",{},action_source_cell,action_target_cell)
+	

@@ -1,6 +1,6 @@
 extends Node
 
-var data : Dictionary = {
+var data : Dictionary ={
   "Ratron": {
 	"enemy_name": "Ratron",
 	"hp": 2,
@@ -8,10 +8,9 @@ var data : Dictionary = {
 	"atk_range": 1,
 	"movement": 1,
 	"range_type": "CARDINAL",
-	"enemy_actions": "",
-	"action_1_context": "",
 	"level_set": 1,
-	"status_effects": ""
+	"status_effects": "",
+	"enemy_actions": ""
   },
   "Batron": {
 	"enemy_name": "Batron",
@@ -20,10 +19,9 @@ var data : Dictionary = {
 	"atk_range": 2,
 	"movement": 3,
 	"range_type": "ALL",
-	"enemy_actions": "",
-	"action_1_context": "",
 	"level_set": 1,
-	"status_effects": "{\"flying\" : {\"amount\" : 0}}"
+	"status_effects": "{\"flying\" : {\"amount\" : 0}}",
+	"enemy_actions": ""
   },
   "Goyletron": {
 	"enemy_name": "Goyletron",
@@ -32,10 +30,9 @@ var data : Dictionary = {
 	"atk_range": 4,
 	"movement": 3,
 	"range_type": "CARDINAL",
-	"enemy_actions": "",
-	"action_1_context": "",
 	"level_set": 2,
-	"status_effects": "{\"enrage\" : {\"amount\" : 0}}"
+	"status_effects": "{\"enrage\" : {\"amount\" : 0}}",
+	"enemy_actions": ""
   },
   "Spectroid": {
 	"enemy_name": "Spectroid",
@@ -44,10 +41,9 @@ var data : Dictionary = {
 	"atk_range": 3,
 	"movement": 3,
 	"range_type": "DIAG",
-	"enemy_actions": "",
-	"action_1_context": "",
 	"level_set": 2,
-	"status_effects": ""
+	"status_effects": "",
+	"enemy_actions": ""
   },
   "Spidroid": {
 	"enemy_name": "Spidroid",
@@ -56,22 +52,20 @@ var data : Dictionary = {
 	"atk_range": 3,
 	"movement": 3,
 	"range_type": "CARDINAL",
-	"enemy_actions": "{\"cell_effect\" : {\"effect_name\" : \"WEB\"}, \"enemy_move\" : {}, \"enemy_attack\" : {}}",
-	"action_1_context": "",
 	"level_set": 2,
-	"status_effects": ""
+	"status_effects": "",
+	"enemy_actions": "{\"throw_web\" : {}, \"enemy_move\" : {}}"
   },
   "Slitherbyte": {
 	"enemy_name": "Slitherbyte",
 	"hp": 5,
 	"atk": 3,
 	"atk_range": 3,
-	"movement": 8,
+	"movement": 3,
 	"range_type": "DIAG",
-	"enemy_actions": "",
-	"action_1_context": "",
 	"level_set": 2,
-	"status_effects": ""
+	"status_effects": "",
+	"enemy_actions": "{ \"enemy_move\" : {},\"status_on_hero\" : {\"status_name\" : \"POISON\", \"amount\" : 1}}"
   },
   "Necrotron": {
 	"enemy_name": "Necrotron",
@@ -80,10 +74,9 @@ var data : Dictionary = {
 	"atk_range": 0,
 	"movement": 3,
 	"range_type": "ALL",
-	"enemy_actions": "{\"spawn_unit\" : {\"unit_name\" : \"Skeltron\"}}",
-	"action_1_context": "",
 	"level_set": 3,
-	"status_effects": ""
+	"status_effects": "",
+	"enemy_actions": "{\"spawn_unit\" : {\"unit_name\" : \"Skeltron\"}}"
   },
   "Skeltron": {
 	"enemy_name": "Skeltron",
@@ -92,10 +85,9 @@ var data : Dictionary = {
 	"atk_range": 3,
 	"movement": 2,
 	"range_type": "CARDINAL",
-	"enemy_actions": "",
-	"action_1_context": "",
 	"level_set": 1,
-	"status_effects": "{\"undying\" : {\"amount\" : 0}}"
+	"status_effects": "{\"undying\" : {\"amount\" : 0}}",
+	"enemy_actions": ""
   },
   "Roblob": {
 	"enemy_name": "Roblob",
@@ -104,10 +96,9 @@ var data : Dictionary = {
 	"atk_range": 2,
 	"movement": 3,
 	"range_type": "ALL",
-	"enemy_actions": "",
-	"action_1_context": "",
 	"level_set": 3,
-	"status_effects": ""
+	"status_effects": "",
+	"enemy_actions": ""
   },
   "Protech": {
 	"enemy_name": "Protech",
@@ -116,10 +107,9 @@ var data : Dictionary = {
 	"atk_range": 1,
 	"movement": 4,
 	"range_type": "CARDINAL",
-	"enemy_actions": "",
-	"action_1_context": "",
 	"level_set": 3,
-	"status_effects": ""
+	"status_effects": "",
+	"enemy_actions": "{ \"status_effect_adjacent_enemies\" : {\"status_name\" : \"SHIELD\", \"amount\" : 3}, \"enemy_move\" : {}, \"enemy_attack\" : {}}"
   },
   "Roblobito": {
 	"enemy_name": "Roblobito",
@@ -128,10 +118,9 @@ var data : Dictionary = {
 	"atk_range": 1,
 	"movement": 2,
 	"range_type": "CARDINAL",
-	"enemy_actions": "",
-	"action_1_context": "",
 	"level_set": 3,
-	"status_effects": ""
+	"status_effects": "",
+	"enemy_actions": ""
   },
   "Armadroid": {
 	"enemy_name": "Armadroid",
@@ -140,10 +129,9 @@ var data : Dictionary = {
 	"atk_range": 1,
 	"movement": 3,
 	"range_type": "CARDINAL",
-	"enemy_actions": "",
-	"action_1_context": "",
 	"level_set": 3,
-	"status_effects": "{\"spikes\" : {\"amount\" : 3}}\n"
+	"status_effects": "{\"spikes\" : {\"amount\" : 3}}\n",
+	"enemy_actions": ""
   },
   "Cacklebot": {
 	"enemy_name": "Cacklebot",
@@ -152,10 +140,9 @@ var data : Dictionary = {
 	"atk_range": 3,
 	"movement": 3,
 	"range_type": "ALL",
-	"enemy_actions": "",
-	"action_1_context": "",
 	"level_set": 3,
-	"status_effects": ""
+	"status_effects": "",
+	"enemy_actions": ""
   },
   "Demodroid": {
 	"enemy_name": "Demodroid",
@@ -164,10 +151,9 @@ var data : Dictionary = {
 	"atk_range": 1,
 	"movement": 4,
 	"range_type": "ALL",
-	"enemy_actions": "",
-	"action_1_context": "",
 	"level_set": 3,
-	"status_effects": "{\"alert\" : {\"amount\" : 0},\"enrage\": {\"amount\" : 0} }\n"
+	"status_effects": "{\"alert\" : {\"amount\" : 0},\"enrage\": {\"amount\" : 0}}\n",
+	"enemy_actions": ""
   },
   "Bomberbot": {
 	"enemy_name": "Bomberbot",
@@ -176,10 +162,9 @@ var data : Dictionary = {
 	"atk_range": 3,
 	"movement": 3,
 	"range_type": "ALL",
-	"enemy_actions": "{\"enemy_move\" : {}, \"enemy_attack\" : {},\"throw_bomb\" : {}}",
-	"action_1_context": "",
 	"level_set": 2,
-	"status_effects": ""
+	"status_effects": "",
+	"enemy_actions": "{\"enemy_move\" : {}, \"enemy_attack\" : {},\"throw_bomb\" : {}}"
   },
   "ScrapPile": {
 	"enemy_name": "ScrapPile",
@@ -188,10 +173,9 @@ var data : Dictionary = {
 	"atk_range": 0,
 	"movement": 0,
 	"range_type": "ALL",
-	"enemy_actions": "{\"transform_unit\" : {\"unit_name\" : \"Skeltron\"}}",
-	"action_1_context": "",
 	"level_set": 99,
-	"status_effects": ""
+	"status_effects": "",
+	"enemy_actions": "{\"transform_unit\" : {\"unit_name\" : \"Skeltron\"}}"
   },
   "Zombot": {
 	"enemy_name": "Zombot",
@@ -200,9 +184,19 @@ var data : Dictionary = {
 	"atk_range": 1,
 	"movement": 2,
 	"range_type": "CARDINAL",
-	"enemy_actions": "",
-	"action_1_context": "",
 	"level_set": "",
-	"status_effects": "{\"scavenge\" : {\"amount\":2}}"
+	"status_effects": "{\"scavenge\" : {\"amount\":2}}",
+	"enemy_actions": ""
+  },
+  "Ribbot": {
+	"enemy_name": "Ribbot",
+	"hp": 3,
+	"atk": 1,
+	"atk_range": 3,
+	"movement": 2,
+	"range_type": "CARDINAL",
+	"level_set": 1,
+	"status_effects": "",
+	"enemy_actions": "{\"enemy_move\" : {},\"enemy_pull_attack\" : {}}"
   }
 }

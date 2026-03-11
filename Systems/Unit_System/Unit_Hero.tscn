@@ -64,5 +64,5 @@ grow_vertical = 2
 [node name="Status_Bar" parent="." unique_id=1393952673 instance=ExtResource("6_8o46l")]
 offset_left = -66.0
 offset_top = -86.0
-offset_right = -33.0
-offset_bottom = -77.0
+offset_right = 5.0
+offset_bottom = -71.0

@@ -4,11 +4,7 @@ var action_name := "status_effect"
 
 func execute(context: Dictionary, action_source_cell: Cell = null, target_cell: Cell = null):
 	
-	var status_effects : Dictionary
-	if target_cell.occupant is Hero:
-		status_effects = Global.player_stats.status_effects
-	else:
-		status_effects = target_cell.occupant.status_effects
+	var status_effects = target_cell.occupant.status_effects
 	
 	var target = target_cell.occupant
 	var color : Color

@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://dy1serwqwfbkw"]
 
-[ext_resource type="Texture2D" uid="uid://cc8mrlw4pfivf" path="res://Art/Enemy_Sprites/gargoyle9.png" id="1_q2j5a"]
+[ext_resource type="Texture2D" uid="uid://dboxdo07mms1t" path="res://Art/Enemy_Sprites/gargoyle9.png" id="1_q2j5a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xs4gn"]
 atlas = ExtResource("1_q2j5a")

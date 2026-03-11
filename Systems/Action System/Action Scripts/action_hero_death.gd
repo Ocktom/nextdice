@@ -1,6 +1,6 @@
 extends Action
 
-var action_name := "enemy_death"
+var action_name := "hero_death"
 
 func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	

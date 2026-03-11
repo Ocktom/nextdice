@@ -28,7 +28,7 @@ var input_paused :
 			if not x.used_this_turn:
 				x.grey_out = input_paused
 		
-		Global.unhighlight_cells()
+		#Global.unhighlight_cells()
 		#reset_all_hovered_variables()
 
 signal unit_selected
@@ -54,8 +54,9 @@ func _input(event):
 				dragging_unit.global_position = event.position + unit_drag_offset
 
 		if event.is_action_released("enter"):
-			await reset_all_hovered_variables()
-			await Global.world.end_player_turn()
+			
+			call_deferred("reset_all_hovered_variables")
+			Global.world.call_deferred("end_player_turn")
 		
 		if event.is_action_released("f"):
 			Global.world.kill_all_enemies()
@@ -237,6 +238,7 @@ func reset_drag():
 	drag_offset = Vector2.ZERO
 	unit_drag_offset = Vector2.ZERO
 	
+	print ("reset drag function calling unhilight cells")
 	Global.unhighlight_cells()
 		
 #region debug controls

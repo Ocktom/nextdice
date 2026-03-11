@@ -41,7 +41,7 @@ func _ready() -> void:
 
 func use(action_source_cell: Node, action_target_cell: Node):
 	
-	print ("current_face.skill_name being used is ", current_face.skill_name)
+	print ("current_face.skill_name being used is ", current_face.skill.skill_name)
 	
 	var skill_script : Skill = load(str("res://Systems/Skill_System/Skill_Scripts/skill_",current_face.skill.skill_name,".gd")).new()
 	await skill_script.execute(action_source_cell,action_target_cell,{})
@@ -56,7 +56,7 @@ func use(action_source_cell: Node, action_target_cell: Node):
 func roll():
 	
 	current_face = faces.pick_random()
-	print ("rolled current_face of ", current_face, " with skill of ", current_face.skill_name)
+	print ("rolled current_face of ", current_face, " with skill of ", current_face.skill.skill_name)
 	await update()
 
 func setup_visuals():

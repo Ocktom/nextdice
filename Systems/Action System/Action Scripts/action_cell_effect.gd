@@ -2,7 +2,7 @@ extends Action
 
 func execute(context: Dictionary, action_source_cell: Cell = null, action_target_cell: Cell = null):
 	
-	print ("setting action effect from action script")
+	print ("running cell_effect script")
 	
 	var cell_pick: Cell
 	
@@ -19,8 +19,12 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 	
 	else:
 		cell_pick = action_target_cell
-		
-	var effect = Enums.CellEffect[context["cell_effect"]]
 	
-	cell_pick.cell_effect = effect
+	print ("cell_pick in cell_effect script is ", cell_pick)
+	print ("action_cell effect context is ", context)
+	
+	cell_pick.cell_effect = Enums.CellEffect[context["effect_name"]]
 	await cell_pick.update()
+	
+	if cell_pick.occupant != null:
+		await Global.event_manager.apply_cell_effects(cell_pick.occupant)

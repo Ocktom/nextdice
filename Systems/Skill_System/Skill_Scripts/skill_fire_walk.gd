@@ -20,6 +20,4 @@ func execute(action_source_cell: Cell, action_target_cell: Cell, context:= {}):
 	
 	for x in cells_passed:
 		
-		await Global.timer(.04)
-		await Global.action_manager.request_action("cell_effect",
-		{"cell_effect" : "FIRE"},unit.current_cell,x)
+		Global.action_manager.request_action("cell_effect",{"effect_name" : "FIRE"},x,x)

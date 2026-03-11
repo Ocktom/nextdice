@@ -74,8 +74,12 @@ func roll_dice():
 	
 	Global.player_stats.rolls -= 1
 	Global.player_ui.update()
-
+	
+	await Global.event_manager.on_dice_rolled()
+	
 func start_player_turn():
+	
+	await Global.status_manager.start_turn_effects(Global.hero_unit)
 	
 	print ("player_turn started in world node")
 	
@@ -93,7 +97,9 @@ func start_player_turn():
 	InputManager.input_paused = false
 	
 func end_player_turn():
-
+	
+	await Global.status_manager.end_turn_effects(Global.hero_unit)
+	
 	Global.game_state = Enums.GameState.ENEMY_TURN
 	
 	await Global.event_manager.on_end_player_turn()
@@ -117,6 +123,9 @@ func enemy_turn():
 			print ("enemy instance null, continuing")
 			continue
 		await Global.status_manager.start_turn_effects(x)
+	
+	enemies.clear()
+	enemies = Global.grid.get_all_enemies().duplicate()
 	
 	for x in enemies:
 		print ("checking enemy ", x, " for taking turn...")
