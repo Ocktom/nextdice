@@ -13,6 +13,11 @@ font = ExtResource("2_m2f3g")
 font_size = 86
 font_color = Color(0.30826202, 0.58521885, 0.4140259, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_e3hly"]
+font = ExtResource("2_m2f3g")
+font_size = 86
+font_color = Color(0, 0.77254903, 1, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_7fohd"]
 font = ExtResource("2_m2f3g")
 font_size = 86
@@ -39,10 +44,11 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 54.0
-offset_top = -387.0
+offset_top = -607.0
 offset_right = 383.0
 offset_bottom = -61.0
 grow_vertical = 0
+scale = Vector2(0.5, 0.5)
 
 [node name="HP_Label" type="Label" parent="VBoxContainer" unique_id=780362404]
 layout_mode = 2
@@ -53,6 +59,11 @@ label_settings = SubResource("LabelSettings_8j60k")
 layout_mode = 2
 text = "HP: 10"
 label_settings = SubResource("LabelSettings_m2f3g")
+
+[node name="Mana_Label" type="Label" parent="VBoxContainer" unique_id=1976386642]
+layout_mode = 2
+text = "MANA: 5"
+label_settings = SubResource("LabelSettings_e3hly")
 
 [node name="Rolls_Label" type="Label" parent="VBoxContainer" unique_id=1058333856]
 layout_mode = 2

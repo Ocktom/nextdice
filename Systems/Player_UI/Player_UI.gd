@@ -4,7 +4,7 @@ extends Control
 @onready var rolls_label: Label = $VBoxContainer/Rolls_Label
 @onready var gold_label: Label = $VBoxContainer/Gold_Label
 @onready var move_label: Label = $VBoxContainer/Move_Label
-
+@onready var mana_label: Label = $VBoxContainer/Mana_Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,7 +15,8 @@ func _process(delta: float) -> void:
 	pass
 
 func update():
-	hp_label.text = str("HP: ", Global.player_stats.player_hp)
-	rolls_label.text = str("Rolls: ", Global.player_stats.rolls)
+	hp_label.text = str("HP: ", Global.player_stats.player_hp,"/", Global.player_stats.max_hp)
+	rolls_label.text = str("Rolls: ", Global.player_stats.rolls,"/", Global.player_stats.max_rolls)
 	gold_label.text = str("Gold: ", Global.player_stats.gold)
-	move_label.text = str("Move:", Global.player_stats.move_points)
+	move_label.text = str("Move: ", Global.player_stats.move_points,"/",Global.player_stats.max_move_points)
+	mana_label.text = str("Mana: ", Global.player_stats.mana, "/", Global.player_stats.max_mana)

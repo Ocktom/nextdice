@@ -1,9 +1,16 @@
 [gd_scene format=3 uid="uid://cx1ojiejwf35o"]
 
 [ext_resource type="Script" uid="uid://cwa4eug0l35fv" path="res://Systems/Dice_System/Dice.gd" id="1_kjc4w"]
+[ext_resource type="Texture2D" uid="uid://coigik64146kf" path="res://Art/Skill_Sprites/poison_strike.png" id="2_15f5d"]
+[ext_resource type="FontFile" uid="uid://bx543rn5x5ecb" path="res://Fonts/m5x7.ttf" id="3_grw17"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2cjt"]
 size = Vector2(72, 74)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y0kar"]
+font = ExtResource("3_grw17")
+font_size = 59
+font_color = Color(0.27551827, 0.80528045, 0.8462825, 1)
 
 [node name="Dice" type="Control" unique_id=686019580]
 layout_mode = 3
@@ -29,6 +36,7 @@ color = Color(0.9556082, 0.95903677, 0.8316656, 1)
 [node name="Face_Sprite" type="Sprite2D" parent="Face_Node" unique_id=690382683]
 texture_filter = 1
 scale = Vector2(4, 4)
+texture = ExtResource("2_15f5d")
 
 [node name="Dice_Area" type="Area2D" parent="." unique_id=1598485104]
 position = Vector2(-1.5, 1)
@@ -46,3 +54,16 @@ offset_right = 40.0
 offset_bottom = 41.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0.45882353)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=631310188]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 30.0
+offset_right = 53.0
+offset_bottom = 78.0
+
+[node name="cost_label" type="Label" parent="HBoxContainer" unique_id=1051798753]
+visible = false
+layout_mode = 2
+text = "3"
+label_settings = SubResource("LabelSettings_y0kar")

@@ -44,11 +44,20 @@ func insert_skill_to_face(skill_name : String, face: Face):
 	print("loading skill_name of ", skill_name, " skill is ", skill)
 	
 	var skill_data = GameData.skill_data_dictionary.get(skill_name, {})
-	
+	skill.skill_value = skill_data["skill_value"]
 	skill.skill_name = skill_name
 	skill.face = face
 	skill.skill_target = Enums.SkillTarget.get(skill_data.get("skill_target", "NONE"))
 	skill.range = skill_data.get("skill_range", 1)
+	skill.skill_type = Enums.SkillType[skill_data["dice_type"]]
+	
+	print ("skill_data[skill_cost] is ", skill_data["skill_cost"])
+	print ("skill_data[skill_value] is ", skill_data["skill_value"], " and skill.value is ", skill.skill_value)
+	
+	if skill_data["skill_cost"]:
+		skill.skill_cost = skill_data["skill_cost"]
+	else:
+		skill.skill_cost = 0
 	
 	face.skill = skill
 	face.update()
@@ -101,10 +110,18 @@ func is_useable(dragging_dice: Dice, hovered_cell : Cell, float_text : bool = tr
 	var distance = Global.grid.get_distance(Global.hero_unit.current_cell,hovered_cell)
 	var range = dragging_dice.current_face.skill_range
 	var skill_data = GameData.skill_data_dictionary[dragging_dice.current_face.skill.skill_name]
-	var skill_type : Enums.SkillType = Enums.SkillType[skill_data["dice_type"]]
+	var skill_type : Enums.SkillType = dragging_dice.current_face.skill.skill_type
+	var skill_cost : int = dragging_dice.current_face.skill.skill_cost
+	
 	print ("looking up skill name ", dragging_dice.current_face.skill.skill_name, " data is ", skill_data)
 	
 	print ("running is_useable check, range is ", range)
+	
+	if skill_type == Enums.SkillType.MAGIC:
+		if skill_cost > 0:
+			if not Global.player_stats.mana >= skill_cost:
+				Global.float_text("NOT ENOUGH MANA", Global.hero_unit.global_position,Color.DEEP_SKY_BLUE)
+				return false
 	
 	if Global.hero_unit.status_effects.has("root"):
 		if skill_type == Enums.SkillType.MOVEMENT:

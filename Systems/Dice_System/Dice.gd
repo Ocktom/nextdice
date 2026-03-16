@@ -2,6 +2,7 @@ extends Control
 class_name Dice
 
 @export var dice_icons_node : Node2D
+@onready var cost_label: Label = $HBoxContainer/cost_label
 
 var dice_icons : Array[Node]
 
@@ -39,16 +40,23 @@ func _ready() -> void:
 	
 	print ("dice faces are", faces)
 
-func use(action_source_cell: Node, action_target_cell: Node):
+func use(action_source_cell: Node, action_target_cell: Node, free_use : bool = false):
 	
 	print ("current_face.skill_name being used is ", current_face.skill.skill_name)
 	
-	var skill_script : Skill = load(str("res://Systems/Skill_System/Skill_Scripts/skill_",current_face.skill.skill_name,".gd")).new()
-	await skill_script.execute(action_source_cell,action_target_cell,{})
+	if current_face.skill.skill_cost > 0 and not free_use:
+		match current_face.skill.skill_type:
+			Enums.SkillType.MAGIC:
+				await Global.action_manager.request_action("spend_mana",{"amount" : current_face.skill.skill_cost},action_source_cell,action_source_cell)
 	
-	used_this_turn = true
-	grey_out = true
+	#var skill_script : Skill = load(str("res://Systems/Skill_System/Skill_Scripts/skill_",current_face.skill.skill_name,".gd")).new()
+	#await skill_script.execute(action_source_cell,action_target_cell,{})
 	
+	await current_face.skill.execute(action_source_cell,action_target_cell,{})
+	
+	if not free_use:
+		used_this_turn = true
+		grey_out = true
 	
 	await Global.hero_unit.update()
 	print ("end of dice use function reached, dice.used is ", used_this_turn)
@@ -58,13 +66,16 @@ func roll():
 	current_face = faces.pick_random()
 	print ("rolled current_face of ", current_face, " with skill of ", current_face.skill.skill_name)
 	await update()
-
-func setup_visuals():
-	pass
 	
 func update():
 
 	face_sprite.texture =  load(str("res://Art/Skill_Sprites/",current_face.skill.skill_name,".png"))
+	
+	if current_face.skill.skill_cost > 0:
+		cost_label.visible = true
+		cost_label.text = str(current_face.skill.skill_cost)
+	else:
+		cost_label.visible = false
 	
 func highlight():
 	face_node.modulate = Color(1.0, 0.663, 1.0)

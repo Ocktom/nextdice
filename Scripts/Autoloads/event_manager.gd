@@ -20,9 +20,8 @@ func on_dice_rolled():
 		var skill_target = Enums.SkillTarget[target_string]
 		
 		if skill_target == Enums.SkillTarget.AUTO:
-			await x.use(Global.hero_unit.current_cell,Global.hero_unit.current_cell)
+			await x.use(Global.hero_unit.current_cell,Global.hero_unit.current_cell,true)
 		
-
 func on_unit_damaged(unit_damaged: Unit, amount: int, damage_name: String):
 	
 	print ("on_unit_damage called on unit", unit_damaged.unit_name)
@@ -47,6 +46,15 @@ func on_unit_attacked_before_damage(attacker: Unit, attacked: Unit):
 		{"amount" : attacked.status_effects["spikes"],"damage_name" : "physical"},
 		attacked.current_cell,attacker.current_cell)
 
+func on_start_player_turn():
+	
+	if Global.player_stats.mana_regen > 0:
+		await Global.action_manager.request_action("gain_mana",{"amount" : Global.player_stats.mana_regen}, Global.hero_unit.current_cell,Global.hero_unit.current_cell)
+	if Global.player_stats.hp_regen > 0:
+		await Global.action_manager.request_action("heal_unit",{"amount" : Global.player_stats.mana_regen}, Global.hero_unit.current_cell,Global.hero_unit.current_cell)
+	if Global.player_stats.shield_regen > 0:
+		await Global.action_manager.request_action("shield_unit",{"amount" : Global.player_stats.mana_regen}, Global.hero_unit.current_cell,Global.hero_unit.current_cell)
+		
 func on_end_player_turn():
 	await explode_bombs()
 

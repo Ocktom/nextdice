@@ -79,6 +79,7 @@ func roll_dice():
 	
 func start_player_turn():
 	
+	await Global.event_manager.on_start_player_turn()
 	await Global.status_manager.start_turn_effects(Global.hero_unit)
 	
 	print ("player_turn started in world node")
@@ -88,7 +89,7 @@ func start_player_turn():
 	for x in Global.player_dice:
 		x.used_this_turn = false
 		x.grey_out = false
-		
+	
 	Global.player_stats.rolls = Global.player_stats.max_rolls
 	Global.player_stats.spaces_moved_this_turn = 0
 	Global.player_stats.move_points = Global.player_stats.max_move_points

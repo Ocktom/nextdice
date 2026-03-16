@@ -33,6 +33,21 @@ func execute(context: Dictionary, action_source_cell: Cell = null, action_target
 		action_source_cell.occupant.unit_sprite.sprite_frames = load("res://Art/warriro_frames.tres")
 		action_source_cell.occupant.unit_sprite.play()
 	
+	var dodge_chance = 0
+	
+	if action_target_cell.occupant == Global.hero_unit:
+		print ("dodge chance is ", Global.player_stats.dodge_chance)
+		dodge_chance += Global.player_stats.dodge_chance
+	
+	var dodgeroll : float = randf()
+	print ("dodgeroll is ", dodgeroll)
+	
+	if dodgeroll <= dodge_chance:
+		print ("player dodged attack")
+		Global.float_text("MISS",action_target_cell.global_position)
+		await Global.timer(.1)
+		return
+	
 	await Global.timer(.1)
 	
 	await Global.event_manager.on_unit_attacked_before_damage(action_source_cell.occupant,action_target_cell.occupant)

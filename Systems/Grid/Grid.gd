@@ -200,8 +200,7 @@ func push_unit(source_cell: Cell, target_cell: Cell):
 
 	if not push_cell.is_empty():
 		if push_cell.occupant is Unit:
-			pushed_unit.take_damage(1)
-			await push_cell.occupant.take_damage(1)
+			await Global.action_manager.request_action("damage_unit",{"amount" : 1, "damage_name" : "physical"},source_cell,target_cell)
 		return
 
 	target_cell.clear_cell()

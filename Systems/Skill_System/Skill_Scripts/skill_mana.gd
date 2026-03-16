@@ -9,4 +9,4 @@ func _process(delta: float) -> void:
 	pass
 
 func execute(action_source: Cell, action_target_cell: Cell, context:= {}):
-	await Global.action_manager.request_action("move_unit",{},Global.hero_unit.current_cell,Global.hero_unit.current_cell)
+	await Global.action_manager.request_action("gain_mana",{"amount" : 2},Global.hero_unit.current_cell,Global.hero_unit.current_cell)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4ccnydnd7laj"
-path="res://.godot/imported/Broadsword_3.png-a0717ff30ffd27a991f58fecbff1f104.ctex"
+uid="uid://djblhivagh0ke"
+path="res://.godot/imported/Mana_Jewel.png-928a3ba747e040ee2a7b9de2799fcaf7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Gear_Sprites/Broadsword_3.png"
-dest_files=["res://.godot/imported/Broadsword_3.png-a0717ff30ffd27a991f58fecbff1f104.ctex"]
+source_file="res://Art/Gear_Sprites/Mana_Jewel.png"
+dest_files=["res://.godot/imported/Mana_Jewel.png-928a3ba747e040ee2a7b9de2799fcaf7.ctex"]
 
 [params]
 

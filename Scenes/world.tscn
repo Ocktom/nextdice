@@ -43,30 +43,6 @@ position = Vector2(571, 184)
 
 [node name="DiceLayer" type="Node2D" parent="." unique_id=763949601]
 
-[node name="ColorRect" type="ColorRect" parent="DiceLayer" unique_id=1719198044]
-offset_left = 69.0
-offset_top = 118.0
-offset_right = 169.0
-offset_bottom = 416.0
-mouse_filter = 2
-color = Color(0.3106152, 0.20645401, 0.31056988, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="DiceLayer" unique_id=1441239665]
-offset_left = 178.0
-offset_top = 121.0
-offset_right = 269.0
-offset_bottom = 414.0
-mouse_filter = 2
-color = Color(0.3106152, 0.20645401, 0.31056988, 1)
-
-[node name="ColorRect3" type="ColorRect" parent="DiceLayer" unique_id=1269811384]
-offset_left = 276.0
-offset_top = 121.0
-offset_right = 367.0
-offset_bottom = 414.0
-mouse_filter = 2
-color = Color(0.3106152, 0.20645401, 0.31056988, 1)
-
 [node name="Dice_Container" type="HBoxContainer" parent="DiceLayer" unique_id=1772261578]
 offset_left = 114.0
 offset_top = 369.0
@@ -86,9 +62,9 @@ label_settings = SubResource("LabelSettings_k7acu")
 [node name="Effects_Layer" type="Node2D" parent="." unique_id=726888367]
 
 [node name="Player_UI" parent="." unique_id=2089692981 instance=ExtResource("5_fo5ed")]
-offset_left = -7.0
+offset_left = 14.0
 offset_top = 1113.0
-offset_right = -7.0
+offset_right = 14.0
 offset_bottom = 1113.0
 mouse_filter = 2
 

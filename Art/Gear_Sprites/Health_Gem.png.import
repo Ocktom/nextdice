@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bboyyeu812w1t"
-path="res://.godot/imported/fb1777.png-6dea4090a4de5c337873d7912aa99c32.ctex"
+uid="uid://cyhsc3sh52bav"
+path="res://.godot/imported/Health_Gem.png-cf3b08ce93d78c69b02c14fb26e35a12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Gear_Sprites/fb1777.png"
-dest_files=["res://.godot/imported/fb1777.png-6dea4090a4de5c337873d7912aa99c32.ctex"]
+source_file="res://Art/Gear_Sprites/Health_Gem.png"
+dest_files=["res://.godot/imported/Health_Gem.png-cf3b08ce93d78c69b02c14fb26e35a12.ctex"]
 
 [params]
 

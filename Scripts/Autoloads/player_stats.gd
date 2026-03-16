@@ -10,9 +10,14 @@ var move_points := 2
 var max_move_points := 2
 
 var mana := 0
-var max_mana := 2
-var max_hp := 5
+var max_mana := 5
+var mana_regen := 1
+
+var max_hp := 10
 var player_hp := 8
+var hp_regen := 0
+
+var shield_regen := 0
 
 var starting_chests:= 2
 
@@ -23,6 +28,8 @@ var fire_bonus := 0
 
 var crit_chance := 0
 var crit_damage := 0
+
+var dodge_chance := .7
 
 var status_effects : Dictionary = {}
 

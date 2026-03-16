@@ -4,7 +4,10 @@ class_name Skill
 var face : Face
 var skill_target : Enums.SkillTarget
 var range := 1
+var skill_value : int
 var skill_name: String
+var skill_cost : int
+var skill_type : Enums.SkillType
 
 func execute(action_source: Cell, action_target_cell: Cell, context_dict : Dictionary = {}):
 	print ("SKILL USED")

@@ -81,9 +81,9 @@ func parse_status_effects_string(s: String) -> Dictionary:
 
 var enemy_sets : Dictionary = {
 	
-	"set_1" : ["Ribbot","Spectroid","Slitherbyte","Spidroid","Zombot"],
-	"set_2" : ["Zombot","Spectroid","Slitherbyte","Ribbot"],
-	"set_3" : ["Spidroid","Spectroid","Spectroid","Skeltron"],
+	"set_1" : ["Ribbot","Spectroid","Batron","Spidroid","Zombot"],
+	"set_2" : ["Zombot","Spectroid","Batron","Ribbot"],
+	"set_3" : ["Spidroid","Batron","Spectroid","Skeltron"],
 	"set_4" : ["Skeltron","Slitherbyte","Batron","Spectroid","Spectroid"],
 	"set_5" : ["Skeltron","Slitherbyte","Slitherbyte","Spectroid","Armadroid"],
 	"set_6" : ["Batron","Batron", "Batron", "Spidroid", "Spidroid","Armadroid"],

@@ -1,10 +1,10 @@
 extends Node
 
-var backpack_gear : Array[String] = ["Dagger","Dagger","Broadsword"]
+var backpack_gear : Array[String] = []
 
-var attack_gear : Array[String] = ["Dagger","Broadsword"]
-var movement_gear : Array[String] = ["Greaves"]
-var magic_gear : Array[String] = ["Magic_Ring"]
+var attack_gear : Array[String] = ["Sword","Halberd","Broadsword"]
+var movement_gear : Array[String] = ["Greaves","Boots","Boots"]
+var magic_gear : Array[String] = ["Mana_Gem","Mana_Jewel","Sceptor"]
 
 var attack_skills : Array[String]
 var movement_skills : Array[String]

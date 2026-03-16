@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b204w21ups8h6"
-path="res://.godot/imported/persuing_strike.png-a5cd2b106061e5149c822e0c35ce08eb.ctex"
+uid="uid://dg2o8xua4f61s"
+path="res://.godot/imported/Mana_Gem.png-30940c3d85e08166f2f13c12bb0d0560.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Skill_Sprites/persuing_strike.png"
-dest_files=["res://.godot/imported/persuing_strike.png-a5cd2b106061e5149c822e0c35ce08eb.ctex"]
+source_file="res://Art/Gear_Sprites/Mana_Gem.png"
+dest_files=["res://.godot/imported/Mana_Gem.png-30940c3d85e08166f2f13c12bb0d0560.ctex"]
 
 [params]
 
