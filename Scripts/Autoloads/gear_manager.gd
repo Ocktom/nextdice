@@ -2,19 +2,17 @@ extends Node
 
 var backpack_gear : Array[String] = []
 
-var attack_gear : Array[String]
-var movement_gear : Array[String]
-var magic_gear : Array[String]
+var starting_attack_gear : Array[String] = ["Sword","Halberd","Broadsword"]
+var starting_movement_gear : Array[String] = ["Greaves","Boots","Boots"]
+var starting_magic_gear : Array[String] = ["Mana_Gem","Frost_Scroll","Sceptor"]
 
 var attack_skills : Array[String]
 var movement_skills : Array[String]
 var magic_skills : Array[String]
 
-#STARTING GEAR & SETS
-
-var starting_attack_gear : Array[String] = ["Sword","Halberd","Broadsword"]
-var starting_movement_gear : Array[String] = ["Greaves","Boots","Boots"]
-var starting_magic_gear : Array[String] = ["Mana_Gem","Frost_Scroll","Sceptor"]
+var attack_gear : Array[String] = ["Sword","Halberd","Broadsword"]
+var movement_gear : Array[String] = ["Greaves","Boots","Boots"]
+var magic_gear : Array[String] = ["Mana_Gem","Mana_Jewel","Sceptor"]
 
 var starting_gear_sets := [starting_attack_gear,starting_movement_gear,starting_magic_gear]
 
