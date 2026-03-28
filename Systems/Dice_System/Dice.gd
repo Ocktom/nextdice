@@ -2,7 +2,10 @@ extends Control
 class_name Dice
 
 @export var dice_icons_node : Node2D
+
 @onready var cost_label: Label = $HBoxContainer/cost_label
+@onready var value_label: Label = $value_label
+
 
 var dice_icons : Array[Node]
 
@@ -77,13 +80,20 @@ func update():
 	else:
 		cost_label.visible = false
 	
+	if current_face.skill.skill_value > 0:
+		value_label.visible = true
+		value_label.text = str(current_face.skill.skill_value)
+	else:
+		value_label.visible = false
+	
+	if used_this_turn:
+		grey_out = true
+	else:
+		grey_out = false
+	
 func highlight():
 	face_node.modulate = Color(1.0, 0.663, 1.0)
 
-func return_dice():
-	
-	pass
-	
 func remove():
 	
 	print ("removing dice")

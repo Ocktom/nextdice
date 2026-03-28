@@ -5,7 +5,6 @@ class_name Hero
 @onready var shield_label: Label = $Right_Stats/HBoxContainer/Shield_Label
 @onready var right_stats: VBoxContainer = $Right_Stats
 
-
 func end_turn_effects():
 	
 	#REMOVE SHIELD AT TURN END

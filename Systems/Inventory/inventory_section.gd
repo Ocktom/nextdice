@@ -17,14 +17,11 @@ extends Control
 @onready var gear_slot_2: GearSlot = $HBoxContainer/Gear_Slot2
 @onready var gear_slot_3: GearSlot = $HBoxContainer/Gear_Slot3
 
-
-
 var gear_slots : Array[GearSlot]
 var skill_textures : Array
 var empty_slots := 0
 
 @onready var bg_color: ColorRect = $BG_color
-
 
 func _ready() -> void:
 	print ("Loading gear")

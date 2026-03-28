@@ -23,7 +23,7 @@ var data : Dictionary = {
 	"gear_name": "Sword",
 	"gear_size": 1,
 	"gear_type": "ATTACK",
-	"skills": "strike,quick_strike"
+	"skills": "strike,strike"
   },
   "Broadsword": {
 	"gear_name": "Broadsword",
@@ -64,7 +64,7 @@ var data : Dictionary = {
   "Chainmail": {
 	"gear_name": "Chainmail",
 	"gear_size": 1,
-	"gear_type": "MOVMENT",
+	"gear_type": "MOVEMENT",
 	"skills": "guarded_move, guarded_move"
   },
   "Mana_Crystal": {
@@ -102,5 +102,41 @@ var data : Dictionary = {
 	"gear_size": 1,
 	"gear_type": "MAGIC",
 	"skills": "fireball,lightning"
+  },
+  "Frost_Scroll": {
+	"gear_name": "Frost_Scroll",
+	"gear_size": 1,
+	"gear_type": "MAGIC",
+	"skills": "frost_cloud,frost_hunter"
+  },
+  "Frost_Gem": {
+	"gear_name": "Frost_Gem",
+	"gear_size": 1,
+	"gear_type": "MAGIC",
+	"skills": "frost_cloud,frost_hunter"
+  },
+  "Snow_Boots": {
+	"gear_name": "Snow_Boots",
+	"gear_size": 1,
+	"gear_type": "MOVEMENT",
+	"skills": "frost_walk, frost_walk"
+  },
+  "Snow_Greaves": {
+	"gear_name": "Snow_Greaves",
+	"gear_size": 1,
+	"gear_type": "MOVEMENT",
+	"skills": "frost_walk, kick"
+  },
+  "Frost_Sword": {
+	"gear_name": "Frost_Sword",
+	"gear_size": 1,
+	"gear_type": "ATTACK",
+	"skills": "frost_strike,frost_strike"
+  },
+  "Frost_Axe": {
+	"gear_name": "Frost_Axe",
+	"gear_size": 1,
+	"gear_type": "ATTACK",
+	"skills": "frost_strike,cleaving_strike"
   }
 }

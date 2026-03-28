@@ -247,5 +247,7 @@ func reset_all_hovered_variables():
 	hovered_cell = null
 	hovered_dice = null
 	hovered_gear = null
+	hovered_item_slot = null
+	mana_area_hovered = false
 	
 	reset_drag()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3xfsrb0asnlq"
-path="res://.godot/imported/Magic_Ring.png-697b6dc5bb0985bccb7772baa6311fcc.ctex"
+uid="uid://ckjx1an1k773e"
+path="res://.godot/imported/Frost_Scroll.png-61ff782b32e74c969176770bd74925aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Gear_Sprites/Magic_Ring.png"
-dest_files=["res://.godot/imported/Magic_Ring.png-697b6dc5bb0985bccb7772baa6311fcc.ctex"]
+source_file="res://Art/Gear_Sprites/Frost_Scroll.png"
+dest_files=["res://.godot/imported/Frost_Scroll.png-61ff782b32e74c969176770bd74925aa.ctex"]
 
 [params]
 

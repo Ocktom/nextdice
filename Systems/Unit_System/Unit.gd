@@ -7,6 +7,8 @@ var current_cell: Cell
 var unit_name : String = "Unit"
 @onready var status_bar: GridContainer = $Status_Bar
 
+var frozen := false
+
 var status_icons : Array[Node]
 
 var highlight := false

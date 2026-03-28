@@ -5,7 +5,6 @@ class_name Enemy
 @onready var shield_label: Label = $Right_Stats/HBoxContainer/SHIELD_Label
 @onready var atk_label: Label = $Right_Stats/ATK_Label
 @onready var sprite_ov: Sprite2D = $Sprite_OV
-
 @onready var right_stats: VBoxContainer = $Right_Stats
 
 
@@ -20,8 +19,6 @@ var invisible : int
 
 var atk := 1
 var atk_range := 1
-
-var frozen := false
 
 var move_diag := false
 

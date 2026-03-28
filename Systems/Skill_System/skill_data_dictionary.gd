@@ -238,5 +238,37 @@ var data : Dictionary ={
 	"dice_type": "ATTACK",
 	"skill_range": 1,
 	"skill_cost": ""
+  },
+  "poison_cloud": {
+	"skill_name": "poison_cloud",
+	"skill_value": 1,
+	"skill_target": "ANY_CELL",
+	"dice_type": "MAGIC",
+	"skill_range": 10,
+	"skill_cost": 3
+  },
+  "frost_cloud": {
+	"skill_name": "frost_cloud",
+	"skill_value": 1,
+	"skill_target": "ANY_CELL",
+	"dice_type": "MAGIC",
+	"skill_range": 10,
+	"skill_cost": 3
+  },
+  "fire_cloud": {
+	"skill_name": "fire_cloud",
+	"skill_value": 1,
+	"skill_target": "ANY_CELL",
+	"dice_type": "MAGIC",
+	"skill_range": 10,
+	"skill_cost": 3
+  },
+  "fog_cloud": {
+	"skill_name": "fog_cloud",
+	"skill_value": 1,
+	"skill_target": "ANY_CELL",
+	"dice_type": "MAGIC",
+	"skill_range": 10,
+	"skill_cost": 3
   }
 }

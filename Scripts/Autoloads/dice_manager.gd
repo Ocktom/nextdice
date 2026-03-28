@@ -1,7 +1,5 @@
 extends Node
 
-var skill_names : Array = []
-
 var dice_path : PackedScene = preload("res://Systems/Dice_System/Dice.tscn")
 
 func _ready() -> void:
@@ -17,12 +15,13 @@ func create_dice():
 		Global.world.dice_container.add_child(inst)
 		Global.player_dice.append(inst)
 
-func reset():
-	skill_names = []
+func reset_arrays():
 	Global.player_dice = []
 
-func setup_dice():
+func update_all_dice():
 	print ("setting up dice, Global.player_dice is ", Global.player_dice)
+	
+	await GearManager.update_skills_from_gear()
 	
 	for x in Global.player_dice:
 		var ind = Global.player_dice.find(x)
@@ -61,6 +60,12 @@ func insert_skill_to_face(skill_name : String, face: Face):
 	
 	face.skill = skill
 	face.update()
+
+func reset_all_dice():
+	
+	await update_all_dice()
+	for x in Global.player_dice:
+		x.used_this_turn = false
 
 func highlight_useable_cells(dragging_dice: Dice):
 	

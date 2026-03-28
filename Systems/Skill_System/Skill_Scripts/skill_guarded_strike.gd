@@ -10,6 +10,8 @@ func _process(delta: float) -> void:
 
 func execute(action_source_cell: Cell, action_target_cell: Cell, context_dict : Dictionary = {}):
 	
-	await Global.action_manager.request_action("attack",{"amount" : Global.player_stats.player_str/2},action_source_cell,action_target_cell)
+	await Global.action_manager.request_action("attack",{"amount" : skill_value},action_source_cell,action_target_cell)
 	await Global.timer(.3)
-	await Global.action_manager.request_action("shield_unit",{"amount" : Global.player_stats.player_str/2},action_source_cell,action_source_cell)
+	
+	if Global.game_state != Enums.GameState.ROUND_END:
+		await Global.action_manager.request_action("shield_unit",{"amount" : skill_value},action_source_cell,action_source_cell)

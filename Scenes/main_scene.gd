@@ -20,8 +20,10 @@ func _process(delta: float) -> void:
 	pass
 
 func start_game():
-	await DiceManager.reset()
+	await DiceManager.reset_arrays()
+	await InputManager.reset_all_hovered_variables()
 	await load_scene(world_path,true)
+	await GearManager.reset_all_gear()
 
 func load_scene(scene: PackedScene, free_old_scene : bool = false):
 	
@@ -47,4 +49,4 @@ func resume_game():
 	match Global.game_state:
 		Enums.GameState.INVENTORY:
 			Global.inventory.queue_free()
-			Global.game_state = Enums.GameState.PLAYER_TURN
+			await Global.world.end_player_turn()

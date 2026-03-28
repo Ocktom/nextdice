@@ -2,13 +2,21 @@ extends Node
 
 var backpack_gear : Array[String] = []
 
-var attack_gear : Array[String] = ["Sword","Halberd","Broadsword"]
-var movement_gear : Array[String] = ["Greaves","Boots","Boots"]
-var magic_gear : Array[String] = ["Mana_Gem","Mana_Jewel","Sceptor"]
+var attack_gear : Array[String]
+var movement_gear : Array[String]
+var magic_gear : Array[String]
 
 var attack_skills : Array[String]
 var movement_skills : Array[String]
 var magic_skills : Array[String]
+
+#STARTING GEAR & SETS
+
+var starting_attack_gear : Array[String] = ["Sword","Halberd","Broadsword"]
+var starting_movement_gear : Array[String] = ["Greaves","Boots","Boots"]
+var starting_magic_gear : Array[String] = ["Mana_Gem","Frost_Scroll","Sceptor"]
+
+var starting_gear_sets := [starting_attack_gear,starting_movement_gear,starting_magic_gear]
 
 var skill_sets := [attack_skills, movement_skills, magic_skills]
 var gear_sets := [attack_gear,movement_gear,magic_gear]
@@ -49,3 +57,9 @@ func parse_string_to_array(input: String) -> Array:
 	for i in range(items.size()):
 		items[i] = items[i].strip_edges()
 	return items
+
+func reset_all_gear():
+	for x in skill_sets:
+		x = []
+	gear_sets = starting_gear_sets.duplicate()
+	await update_skills_from_gear()

@@ -7,9 +7,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2cjt"]
 size = Vector2(72, 74)
 
+[sub_resource type="LabelSettings" id="LabelSettings_15f5d"]
+font = ExtResource("3_grw17")
+font_size = 32
+font_color = Color(0.96716565, 0.6073857, 1.540184e-06, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_y0kar"]
 font = ExtResource("3_grw17")
-font_size = 59
+font_size = 45
 font_color = Color(0.27551827, 0.80528045, 0.8462825, 1)
 
 [node name="Dice" type="Control" unique_id=686019580]
@@ -55,15 +60,23 @@ offset_bottom = 41.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0.45882353)
 
+[node name="value_label" type="Label" parent="." unique_id=1415615774]
+layout_mode = 0
+offset_left = 23.0
+offset_top = -68.0
+offset_right = 45.0
+offset_bottom = -20.0
+text = "3"
+label_settings = SubResource("LabelSettings_15f5d")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=631310188]
 layout_mode = 0
-offset_left = 19.0
-offset_top = 30.0
-offset_right = 53.0
-offset_bottom = 78.0
+offset_left = 23.0
+offset_top = 24.0
+offset_right = 57.0
+offset_bottom = 72.0
 
 [node name="cost_label" type="Label" parent="HBoxContainer" unique_id=1051798753]
-visible = false
 layout_mode = 2
 text = "3"
 label_settings = SubResource("LabelSettings_y0kar")

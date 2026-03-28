@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://w718jh701tvj"]
 
-[ext_resource type="Texture2D" uid="uid://t7fcl4jgrtpq" path="res://Art/Enemy_Sprites/32skelly.png" id="1_iu6nd"]
+[ext_resource type="Texture2D" uid="uid://dwq1o1h22c587" path="res://Art/Enemy_Sprites/skelfighter.png" id="1_iu6nd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bi2oc"]
 atlas = ExtResource("1_iu6nd")
@@ -13,10 +13,6 @@ region = Rect2(32, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_isrx8"]
 atlas = ExtResource("1_iu6nd")
 region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6idy6"]
-atlas = ExtResource("1_iu6nd")
-region = Rect2(96, 0, 32, 32)
 
 [resource]
 animations = [{
@@ -31,7 +27,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_isrx8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6idy6")
+"texture": SubResource("AtlasTexture_uqa4y")
 }],
 "loop": true,
 "name": &"default",

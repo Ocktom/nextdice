@@ -25,9 +25,7 @@ func _ready() -> void:
 	
 func game_start():
 	
-	await GearManager.update_skills_from_gear()
 	await DiceManager.create_dice()
-	await DiceManager.setup_dice()
 	await Global.unit_manager.spawn_torches()
 	await Global.unit_manager.spawn_starting_chests()
 	await Global.unit_manager.spawn_hero()
@@ -40,6 +38,7 @@ func new_round():
 	print ("new round started, round number is ", Global.round_number)
 	await make_new_grid()
 	await clear_all_units()
+	await Global.dice_manager.reset_all_dice()
 	await Global.unit_manager.spawn_round_enemies()
 	await Global.unit_manager.spawn_starting_chests()
 	await Global.unit_manager.spawn_hero()
@@ -81,14 +80,12 @@ func start_player_turn():
 	
 	await Global.event_manager.on_start_player_turn()
 	await Global.status_manager.start_turn_effects(Global.hero_unit)
+	await DiceManager.reset_all_dice()
+	await DiceManager.update_all_dice()
 	
 	print ("player_turn started in world node")
 	
 	Global.game_state = Enums.GameState.PLAYER_TURN
-
-	for x in Global.player_dice:
-		x.used_this_turn = false
-		x.grey_out = false
 	
 	Global.player_stats.rolls = Global.player_stats.max_rolls
 	Global.player_stats.spaces_moved_this_turn = 0
@@ -184,8 +181,8 @@ func defeat():
 	
 	Global.game_state = Enums.GameState.ROUND_END
 	InputManager.input_paused = true
+	await InputManager.reset_all_hovered_variables()
 	await Global.main.load_scene(Global.main.defeat_path,true)
-	print ("GAME OVER, DEFEAT!!!")
 
 func victory():
 	InputManager.input_paused = true
